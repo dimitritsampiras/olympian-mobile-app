@@ -2,7 +2,7 @@
 
 \usepackage{tabularx}
 \usepackage{booktabs}
-
+\setlength\parindent{0pt}
 \title{Problem Statement and Goals\\\progname}
 
 \author{\authname}
@@ -22,7 +22,7 @@
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-Date1 & Name(s) & Description of changes\\
+24/09/22 & Jared Bentvelsen, Yuvraj Randhawa, Bassel Rezkalla & Initial draft of Problem Statement\\
 Date2 & Name(s) & Description of changes\\
 ... & ... & ...\\
 \bottomrule
@@ -31,29 +31,62 @@ Date2 & Name(s) & Description of changes\\
 
 \section{Problem Statement}
 
-\wss{You should check your problem statement with the
-\href{https://github.com/smiths/capTemplate/blob/main/docs/Checklists/ProbState-Checklist.pdf}
-{problem statement checklist}.}
-\wss{You can change the section headings, as long as you include the required information.}
-
 \subsection{Problem}
+
+Working out and exercising is a vital component of any healthy lifestyle, and has been shown to greatly improve both physical and mental well-being. However,
+many individuals feel reluctant to go to a gym or establish any consistent workout routines simply because they aren't sure what to do. 
+Existing exercise content is mostly expensive Excel spreadsheets or brief, hard-to-follow Tik-Tok clips which are inconvenient to use while you're exercising or in the gym.
+There does not yet exist an application to track progress and discover new workout content in an easy and effective manner.
+Workout routines can vary infinitely depending on an athlete's goals and preferences. A workout can be composed of any number of exercises
+and each of these exercises can be done in any number of variations, with different technical adjustments. 
+\\
+The high level goal of this project is to
+make working out highly accessible for beginners and to spread new tips and techniques to even the most experienced athletes in a clean and accessible manner.
 
 \subsection{Inputs and Outputs}
 
-\wss{Characterize the problem in terms of ``high level'' inputs and outputs.  
-Use abstraction so that you can avoid details.}
+\textbf{Inputs}: 
+\begin{enumerate}
+	\item A user's favourite workout routines for accomplishing a specific goal (e.g. build strength on bench press) for others to discover
+	\begin{enumerate}
+		\item General workout description
+		\item A set of exercises
+		\item Sets, reps, and weight where applicable
+		\item Technical comments, pieces of advice
+		\item Self recorded technique demonstration videos
+	\end{enumerate}
+	\item Comments and reviews for other posted workout routines
+	\item Fitness goals that a user wishes to reach in an optional time frame (e.g. Run 5km in under 25 minutes, or lift 225lbs on bench press)
+	\item A user's actions during a workout, or data progressing towards a set goal (e.g. Record weight on the bench press, and `tick off' exercises as they are performed during a session.)
+\end{enumerate}
+
+\textbf{Outputs}:
+\begin{enumerate}
+	\item Searchable workout content for users to discover programs for specific goals.
+	\item A method for users to seamlessly track their own progress through a routine or towards their more general goals.
+	\item Reviews and comments left by other users indicating the quality of a given workout routine.
+\end{enumerate}
+
+% \wss{Characterize the problem in terms of ``high level'' inputs and outputs.  
+% Use abstraction so that you can avoid details.}
 
 \subsection{Stakeholders}
+\begin{enumerate}
+	\item Anyone interested in exercising (both beginner and advanced)
+	\item Personal trainers
+	\item Fitness Advertisers
+\end{enumerate}
 
 \subsection{Environment}
+Supported platforms: iOS/Android mobile application, web application accessible from browser
 
-\wss{Hardware and software}
+% \wss{Hardware and software}
 
 \section{Goals}
 
-	\begin{tabular}{ |p{5cm}|p{8cm}| }
+\begin{tabular}{ |p{5cm}|p{8cm}| }
 	\hline
-	\multicolumn{2}{|c|}{Goal Descriptions} \\
+	\multicolumn{2}{|c|}{Goal Descriptions } \\
 	\hline
 	Goal Name & Explanation \\
 	\hline
@@ -71,6 +104,27 @@ Use abstraction so that you can avoid details.}
 
 \subsection{Stretch Goals}
 
+\begin{tabular}{ |p{5cm}|p{8cm}| }
+	\hline
+	Goals & Explanation \\
+	\hline
+	Diet Planning & Users can track their diets and include diet information in their custom workout plans. Some workouts are
+	designed around bulking or cutting calories and so including diet info will improve utility. \\
+	\hline
+	Recommended Workouts Algorithm & Users can receive new workouts in a "Recommended" tab. These workouts will be selected for the user by analyzing
+	their past plan history and plan tags. Popular and new workouts will be recommended to the user. This will improve discoverability and improve
+	 user experience and keep them on the app for longer.  \\
+	\hline
+	History of growth and projection of potential future growth & tbd \\
+	\hline
+	Social Growth Analytics & Users can view a network of other users who have similar goals and learn from their progress.
+	Users who improved their abilities by following a regimen can act as a guide to others looking to make progress. This feature can improve
+	users' ability to see success with our app. \\
+	\hline
+\end{tabular}
+
+
+
 \section{Inputs and Outputs}
 
 \section {Development Plan}
@@ -81,11 +135,35 @@ Further meetings can be scheduled if needed.
 Meetings will be conducted in person at a McMaster bookable room or library unless specified otherwise.
 
 \subsection{Team communication plan}
-All team communication will be conducted 
-Any online meetings will be conducted on Mircosoft teams in a specified 
+Common team communication and questions will be conducted on \textbf{Mircosoft Teams}.\\
+Any online meetings will be conducted on \textbf{Mircosoft Teams}. \\
 
 \subsection{Workflow plan}
-git
+GitHub will be used for all workflow and version control.
+
+\subsubsection{Task Scheduling}
+The \textbf{Github Kanban} project board will be used to plan and assign upcomming and ongoing tasks to team developers. \\
+If a task is large or general, sub-tasks will be created and assigend accordingly.\\
+Upcomming project delieverables must include deadlines.\\
+
+\subsubsection{Git Branch Usage}
+All features, documents and file changes require a named branch describing the change.
+Branches will follow a similar format to:
+
+\begin{center}
+	$topic\_or\_type/section/branch\_description$
+\end{center}
+
+\subsubsection{Git Commits}
+\textbf{Tags} will be attached to commits as needed to further display the change description.\\
+Commit Squashing may be used prior to creating pull requests to clean up unnecessary commits.
+
+\subsubsection{Git Branch Merging and Pull Requests}
+The main or centered branch will be protected such that new features and addtions will require a pull request in order to be merged. \\
+Pull Requests require a minimum of 2 approvals to be accepted.
+
+\subsubsection{Technial Issues}
+For all technial questions, concerns and issues, the \textbf{Github Issues} feature will be used to open an issue or concern accordingly.
 
 \subsection{Team Roles}
 \begin{tabular}{ |p{5cm}|p{8cm}| }
@@ -94,19 +172,65 @@ git
 	\hline
 	Role & blah blah blah \\
 	\hline
-	Role & blah blah blah \\
+	Front End Expert & Dimitri \\
 	\hline
-	Role & blah blah blah \\
+	Database Expert  & Jared \\
 	\hline
-	Role & blah blah blah \\
+	UX/UI Expert & Matt \\
 	\hline
 	Role & blah blah blah \\
 	\hline
 \end{tabular}
 
 \subsection{Coding Style and Standards}
-lint
+The \textbf{Google Coding Style} will be used as a standard for all code in the project. \\
+The style guide for this can be found \hyperlink{https://google.github.io/styleguide/}{here.}
+A language specific linter will be enforced.
 
-\section {POC Demo Plan}
+\subsection{Testing}
 
+
+\subsection {Risks}
+
+
+	
+	
+	\section{Inputs and Outputs}
+	
+	\section {Development Plan}
+	
+	\subsection{Team meeting plan}
+	Team meetings will be conducted weekly on non-holiday Mondays at 4:30pm.
+	Further meetings can be scheduled if needed.
+	Meetings will be conducted in person at a McMaster bookable room or library unless specified otherwise.
+	
+	\subsection{Team communication plan}
+	All team communication will be conducted 
+	Any online meetings will be conducted on Mircosoft teams in a specified 
+	
+	\subsection{Workflow plan}
+	git
+	
+	\subsection{Team Roles}
+	\begin{tabular}{ |p{5cm}|p{8cm}| }
+		\hline
+		\multicolumn{2}{|c|}{Team Role Descriptions} \\
+		\hline
+		Role & blah blah blah \\
+		\hline
+		Role & blah blah blah \\
+		\hline
+		Role & blah blah blah \\
+		\hline
+		Role & blah blah blah \\
+		\hline
+		Role & blah blah blah \\
+		\hline
+	\end{tabular}
+	
+	\subsection{Coding Style and Standards}
+	lint
+	
+	\section {POC Demo Plan}
+	
 \end{document}
