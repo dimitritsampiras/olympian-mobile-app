@@ -2,7 +2,7 @@
 
 \usepackage{tabularx}
 \usepackage{booktabs}
-
+\setlength\parindent{0pt}
 \title{Problem Statement and Goals\\\progname}
 
 \author{\authname}
@@ -22,7 +22,7 @@
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-Date1 & Name(s) & Description of changes\\
+24/09/22 & Jared Bentvelsen, Yuvraj Randhawa, Bassel Rezkalla & Initial draft of Problem Statement\\
 Date2 & Name(s) & Description of changes\\
 ... & ... & ...\\
 \bottomrule
@@ -31,23 +31,56 @@ Date2 & Name(s) & Description of changes\\
 
 \section{Problem Statement}
 
-\wss{You should check your problem statement with the
-\href{https://github.com/smiths/capTemplate/blob/main/docs/Checklists/ProbState-Checklist.pdf}
-{problem statement checklist}.}
-\wss{You can change the section headings, as long as you include the required information.}
-
 \subsection{Problem}
+
+Working out and exercising is a vital component of any healthy lifestyle, and has been shown to greatly improve both physical and mental well-being. However,
+many individuals feel reluctant to go to a gym or establish any consistent workout routines simply because they aren't sure what to do. 
+Existing exercise content is mostly expensive Excel spreadsheets or brief, hard-to-follow Tik-Tok clips which are inconvenient to use while you're exercising or in the gym.
+There does not yet exist an application to track progress and discover new workout content in an easy and effective manner.
+Workout routines can vary infinitely depending on an athlete's goals and preferences. A workout can be composed of any number of exercises
+and each of these exercises can be done in any number of variations, with different technical adjustments. 
+\\
+The high level goal of this project is to
+make working out highly accessible for beginners and to spread new tips and techniques to even the most experienced athletes in a clean and accessible manner.
 
 \subsection{Inputs and Outputs}
 
-\wss{Characterize the problem in terms of ``high level'' inputs and outputs.  
-Use abstraction so that you can avoid details.}
+\textbf{Inputs}: 
+\begin{enumerate}
+	\item A user's favourite workout routines for accomplishing a specific goal (e.g. build strength on bench press) for others to discover
+	\begin{enumerate}
+		\item General workout description
+		\item A set of exercises
+		\item Sets, reps, and weight where applicable
+		\item Technical comments, pieces of advice
+		\item Self recorded technique demonstration videos
+	\end{enumerate}
+	\item Comments and reviews for other posted workout routines
+	\item Fitness goals that a user wishes to reach in an optional time frame (e.g. Run 5km in under 25 minutes, or lift 225lbs on bench press)
+	\item A user's actions during a workout, or data progressing towards a set goal (e.g. Record weight on the bench press, and `tick off' exercises as they are performed during a session.)
+\end{enumerate}
+
+\textbf{Outputs}:
+\begin{enumerate}
+	\item Searchable workout content for users to discover programs for specific goals.
+	\item A method for users to seamlessly track their own progress through a routine or towards their more general goals.
+	\item Reviews and comments left by other users indicating the quality of a given workout routine.
+\end{enumerate}
+
+% \wss{Characterize the problem in terms of ``high level'' inputs and outputs.  
+% Use abstraction so that you can avoid details.}
 
 \subsection{Stakeholders}
+\begin{enumerate}
+	\item Anyone interested in exercising (both beginner and advanced)
+	\item Personal trainers
+	\item Fitness Advertisers
+\end{enumerate}
 
 \subsection{Environment}
+Supported platforms: iOS/Android mobile application, web application accessible from browser
 
-\wss{Hardware and software}
+% \wss{Hardware and software}
 
 \section{Goals}
 
