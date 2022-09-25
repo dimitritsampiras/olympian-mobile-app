@@ -111,7 +111,7 @@ Supported platforms: iOS/Android mobile application, web application accessible 
 	their past plan history and plan tags. Popular and new workouts will be recommended to the user. This will improve discoverability and improve
 	 user experience and keep them on the app for longer.  \\
 	\hline
-	History of growth and projection of potential future growth & tbd \\
+	History of growth and projection of potential future growth & Users can chart their growth and see an analysis of their future growth if they maintain current trends. This can serve as a motivation to keep up with their regimen. \\
 	\hline
 	Social Growth Analytics & Users can view a network of other users who have similar goals and learn from their progress.
 	Users who improved their abilities by following a regimen can act as a guide to others looking to make progress. This feature can improve
@@ -205,7 +205,26 @@ A language specific linter will be enforced.
 \subsubsection {Simulation / Integration Testing}
 \textbf{\href{https://testcafe.io/}{TestCafe}} will be used for this app's integration testing. TestCafe is a cross-browser integration testing framework that will be used to verify proper integration between the app's various components (back-end, front-end, database, etc). TestCafe also offers end-to-end testing which includes automatic simulation of many common web-app components such as forms and buttons.
 
-\subsection {Risks}
+\subsection {Proof of Concept Demonstration Plan}
+The risks associated with the project are:
+\begin{enumerate}
+	\item Implementing a workflow for users to add workouts and for other users to discover those workouts. If this interaction does not work then our application will not fulfill its goals.
+	\item Building a backend server capable of interfacing with front end clients and storing user information in a secure database. This backend is essential for our application to meet the social networking aspect of our proposed project. 
+	\item Achieving \%70 code test coverage. This is a challenge because unit tests alone will not cover most code. View code will need end to end tests for full coverage and this will involve our team working with testcafe which can be time consuming to learn and write.
+	\item Developing a cohesive UI/UX for our application. All user interactions must be mapped out. We must use group meetings to discuss how each interaction should look and map out user navigation.
+	\item Using git branches for up to 6 people to do simultaneous development and avoiding pushes to main or unsafe merges. Our group has varying levels of git experience and so we must work together to ensure smooth development.
+	\end{enumerate}
+
+During the Proof of Concept Demonstration we will prove that these risks have been overcome by showing:
+\begin{enumerate}
+	\item A working demonstration of a test user creating a workout and another test user discovering the created workout. Viewers will be walked through the process of
+	creating their own workout and can see how these workouts are then displayed to the general userbase.
+	\item A demo of a new user signing up for the application and manipulating their own data. Viewers can then see this new user and their custom data in the Database
+	to prove that the backend and server are cohesive with the frontend.
+	\item End to end tests written in testcafe that simulate the user experience across the application. This will include testing for user sign in, workout creation, and workout discovery.
+	\item Designs created in figma that describe desired user interactions and portray a cohesive application wide theme.
+	\item A conflict free git history with even contributions from all members of the team.
+\end{enumerate}
 
 
 \end{document}
