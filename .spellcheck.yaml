@@ -6,4 +6,6 @@ matrix:
     lang: en
     d: en_US
   sources:
-  - docs/**/*.tex
+  - **/*.tex
+  default_encoding: utf-8
+  expect_match: false
