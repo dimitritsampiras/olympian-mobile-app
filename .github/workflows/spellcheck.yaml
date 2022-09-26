@@ -3,6 +3,7 @@ on: push
 
 jobs:
   build:
+    spellchecker: hunspell
     name: Spellcheck
     runs-on: ubuntu-latest
     steps:
