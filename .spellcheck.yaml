@@ -2,8 +2,7 @@ spellchecker: hunspell
 
 matrix:
 - name: Documents
-  aspell:
-    lang: en
+  hunspell:
     d: en_US
   sources:
   - **/*.tex
