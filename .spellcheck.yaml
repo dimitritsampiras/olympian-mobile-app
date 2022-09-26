@@ -5,6 +5,6 @@ matrix:
   hunspell:
     d: en_US
   sources:
-  - **/*.tex
+  - '**/*.tex'
   default_encoding: utf-8
   expect_match: false
