@@ -1,1 +1,9 @@
 spellchecker: hunspell
+
+matrix:
+- name: Documents
+  aspell:
+    lang: en
+    d: en_US
+  sources:
+    - docs/**/*.tex
