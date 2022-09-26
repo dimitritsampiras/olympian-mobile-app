@@ -3,6 +3,7 @@ matrix:
   aspell:
     lang: en
     d: en_US
+    t: true
   sources:
   - '**/*.tex'
   default_encoding: utf-8
