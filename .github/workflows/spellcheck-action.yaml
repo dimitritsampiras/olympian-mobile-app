@@ -1,12 +1,47 @@
-name: Spellcheck Action
-on: pull-request
+name: Check Latex
+
+on:
+  push:
+  pull_request:
 
 jobs:
   build:
-    name: Spellcheck
-    runs-on: ubuntu-latest
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      max-parallel: 4
+      matrix:
+        os: [ubuntu-latest]
+        python-version: [3.8]
+
     steps:
-    # The checkout step
-    - uses: actions/checkout@master
-    - uses: rojopolis/spellcheck-github-actions@0.27.0
-      name: Spellcheck
+    - uses: actions/checkout@v1
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install python dependencies
+      run: |
+        python -m pip install -U pip
+        python -m pip install -r requirements.txt
+
+    - name: Install aspell (spell checker)
+      run: |
+        sudo apt-get install aspell aspell-en
+
+    - name: Run spell checker
+      run: |
+        inv spellcheck
+
+    - name: Install LaTeX
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y texlive-latex-extra
+        sudo apt-get install -y texlive-xetex
+        sudo apt-get install latexmk
+        sudo apt-get install texlive-science
+
+    - name: Check that document compiles
+      run: |
+        pdflatex tex/main.tex
