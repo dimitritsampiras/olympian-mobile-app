@@ -6,4 +6,4 @@ matrix:
     lang: en
     d: en_US
   sources:
-    - docs/**/*.tex
+  - docs/**/*.tex
