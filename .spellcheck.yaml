@@ -1,7 +1,7 @@
 spellchecker: hunspell
 
 matrix:
-- name: Documents
+- name: Spellcheck
   hunspell:
     d: en_US
   sources:
