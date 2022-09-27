@@ -47,5 +47,6 @@ jobs:
           if [[ extension == ".tex" ]]; then
             # pdflatex $changed_file
             python spellcheck.py $changed_file
+            echo "Spell check result: $?"
           fi
         done
