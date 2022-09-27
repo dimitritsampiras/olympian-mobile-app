@@ -1,5 +1,6 @@
 import subprocess
 import sys
+import pathlib
 import known
 
 """
@@ -9,7 +10,7 @@ Known exceptions are in `known.py`
 """
 exit_code = 0
 
-files_to_check = sys.argv[1:] # Cut off script name
+files_to_check = [pathlib.Path(p) for p in sys.argv[1:]] # Cut off script name
 
 for tex_path in files_to_check:
 
