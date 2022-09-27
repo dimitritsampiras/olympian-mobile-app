@@ -41,8 +41,8 @@ jobs:
 
     - name: Spell and Compile Check
       run: |
-        set -eux
         for changed_file in ${{ steps.files.outputs.all }}; do
+          echo "beans!!"
           filename=$(basename -- "$changed_file")
           extension="${filename##*.}"
           if [[ extension == ".tex" ]]; then
