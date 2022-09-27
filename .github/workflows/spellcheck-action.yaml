@@ -34,7 +34,8 @@ jobs:
     #     sudo apt-get install texlive-science
 
     - id: files
-      uses: jitterbit/get-changed-files@v1
+      uses: jitterbit/get-changed-files@
+      continue-on-error: true
 
     - name: Spell and Compile Check
       run: |
