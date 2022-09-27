@@ -1,0 +1,48 @@
+name: Check Latex Spelling
+
+on:
+  pull_request:
+
+jobs:
+  build:
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      max-parallel: 4
+      matrix:
+        os: [ubuntu-latest]
+        python-version: [3.8]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install aspell (spell checker)
+      run: |
+        sudo apt-get install aspell aspell-en   
+
+    # - name: Install LaTeX
+    #   run: |
+    #     sudo apt-get update
+    #     sudo apt-get install -y texlive-latex-extra
+    #     sudo apt-get install -y texlive-xetex
+    #     sudo apt-get install latexmk
+    #     sudo apt-get install texlive-science
+
+    - id: files
+      uses: jitterbit/get-changed-files@v1
+      continue-on-error: true
+
+    - name: Spell and Compile Check
+      run: |
+        for changed_file in ${{ steps.files.outputs.all }}; do
+          filename=$(basename -- "$changed_file")
+          extension="${filename##*.}"
+          if [[ $extension == "tex" ]]; then
+            # pdflatex $changed_file
+            python spellcheck.py $changed_file
+          fi
+        done
