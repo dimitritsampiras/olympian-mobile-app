@@ -28,15 +28,15 @@ jobs:
       run: |
         sudo apt-get install aspell aspell-en   
 
-    - name: Install LaTeX
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y texlive-latex-extra
-        sudo apt-get install -y texlive-xetex
-        sudo apt-get install latexmk
-        sudo apt-get install texlive-science
+    # - name: Install LaTeX
+    #   run: |
+    #     sudo apt-get update
+    #     sudo apt-get install -y texlive-latex-extra
+    #     sudo apt-get install -y texlive-xetex
+    #     sudo apt-get install latexmk
+    #     sudo apt-get install texlive-science
 
-    - name: Get Changed Files
+    - id: files
       uses: jitterbit/get-changed-files@v1
 
     - name: Spell and Compile Check
@@ -46,7 +46,7 @@ jobs:
           filename=$(basename -- "$changed_file")
           extension="${filename##*.}"
           if [[ extension == ".tex" ]]; then
-            pdflatex $changed_file
+            # pdflatex $changed_file
             python spellcheck.py $changed_file
           fi
         done
