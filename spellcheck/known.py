@@ -1,1 +1,0 @@
-words={"Bentvelsen", "Bassel", "Dimitri","Github", "McMaster", "Randhawa", "Rezkalla", "Yuvraj", "discoverability"}

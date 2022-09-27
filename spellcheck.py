@@ -1,8 +1,8 @@
 import subprocess
 import sys
 import pathlib
-import spellcheck.known as known
 
+words={"Bentvelsen", "Bassel", "Dimitri","Github", "McMaster", "Randhawa", "Rezkalla", "Yuvraj", "discoverability"}
 """
 Run the book through a spell checker.
 
