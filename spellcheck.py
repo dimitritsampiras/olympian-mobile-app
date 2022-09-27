@@ -2,7 +2,7 @@ import subprocess
 import sys
 import pathlib
 
-known_words={"Bentvelsen", "Bassel", "Dimitri","Github", "McMaster", "Randhawa", "Rezkalla", "Yuvraj", "discoverability"}
+known_words={"Bentvelsen", "Bassel", "Dimitri","Github", "McMaster", "Randhawa", "Rezkalla", "Yuvraj", "discoverability", "favourite", "deliverables", "Liason"}
 """
 Run the book through a spell checker.
 
