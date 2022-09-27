@@ -2,7 +2,6 @@ name: Check Latex
 
 on:
   push:
-  pull_request:
 
 jobs:
   build:
@@ -40,7 +39,7 @@ jobs:
 
     - name: Spell and Compile Check
       uses: jitterbit/get-changed-files@v1
-      
+
     - run: |
         for changed_file in ${{ steps.files.outputs.all }}; do
           filename=$(basename -- "$changed_file")
