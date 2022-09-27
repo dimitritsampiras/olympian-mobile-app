@@ -36,10 +36,11 @@ jobs:
         sudo apt-get install latexmk
         sudo apt-get install texlive-science
 
-    - name: Spell and Compile Check
+    - name: Get Changed Files
       uses: jitterbit/get-changed-files@v1
 
-    - run: |
+    - name: Spell and Compile Check
+      run: |
         for changed_file in ${{ steps.files.outputs.all }}; do
           filename=$(basename -- "$changed_file")
           extension="${filename##*.}"
