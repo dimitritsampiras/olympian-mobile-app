@@ -2,7 +2,7 @@ import subprocess
 import sys
 import pathlib
 
-words={"Bentvelsen", "Bassel", "Dimitri","Github", "McMaster", "Randhawa", "Rezkalla", "Yuvraj", "discoverability"}
+known_words={"Bentvelsen", "Bassel", "Dimitri","Github", "McMaster", "Randhawa", "Rezkalla", "Yuvraj", "discoverability"}
 """
 Run the book through a spell checker.
 
@@ -18,7 +18,7 @@ for tex_path in files_to_check:
     aspell_output = subprocess.check_output(
         ["aspell", "-t", "--list", "--lang=en_US"], input=tex, text=True
     )
-    incorrect_words = set(aspell_output.split("\n")) - {""} - known.words
+    incorrect_words = set(aspell_output.split("\n")) - {""} - known_words
     if len(incorrect_words) > 0:
         print(f"In {tex_path} the following words are not known: ")
         for string in sorted(incorrect_words):
