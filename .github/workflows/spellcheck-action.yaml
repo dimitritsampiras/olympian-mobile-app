@@ -41,6 +41,7 @@ jobs:
 
     - name: Spell and Compile Check
       run: |
+        set -eux
         for changed_file in ${{ steps.files.outputs.all }}; do
           filename=$(basename -- "$changed_file")
           extension="${filename##*.}"
