@@ -28,11 +28,7 @@ jobs:
 
     - name: Install aspell (spell checker)
       run: |
-        sudo apt-get install aspell aspell-en
-
-    - name: Run spell checker
-      run: |
-        inv spellcheck
+        sudo apt-get install aspell aspell-en   
 
     - name: Install LaTeX
       run: |
@@ -42,6 +38,12 @@ jobs:
         sudo apt-get install latexmk
         sudo apt-get install texlive-science
 
-    - name: Check that document compiles
+    - name: Spell and Compile Check
+      uses: jitterbit/get-changed-files@v1
       run: |
-        pdflatex tex/main.tex
+        for changed_file in ${{ steps.files.outputs.all }}; do
+          filename=$(basename -- "$changed_file")
+          extension="${filename##*.}"
+          if [[ extension == ".tex" ]]; then
+            pdflatex $changed_file
+            python spellcheck.py $changed_file
