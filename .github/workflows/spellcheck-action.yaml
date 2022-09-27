@@ -45,7 +45,7 @@ jobs:
           filename=$(basename -- "$changed_file")
           extension="${filename##*.}"
           echo $extension
-          if [[ extension == ".tex" ]]; then
+          if [[ extension == "tex" ]]; then
             # pdflatex $changed_file
             python spellcheck.py $changed_file
           fi
