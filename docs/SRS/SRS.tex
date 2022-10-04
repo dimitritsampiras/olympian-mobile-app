@@ -15,7 +15,8 @@
 \usepackage{booktabs}
 \usepackage{caption}
 \usepackage{pdflscape}
-\usepackage{afterpage}
+\usepackage{afterpage}   
+\usepackage{graphicx}
 
 \usepackage[round]{natbib}
 
@@ -360,8 +361,62 @@ be covered in the Verification and Validation document.}
 
 \section{Use cases}
 
-\subsection{Use case Diagram}
+\begin{itemize}
+	\item View posted workout routine 
+	\begin{enumerate}
+		\item View other user's fitness progress
+		\item Add Personal Workout List
+		\item View workout Author
+		\item Review workout
+	\end{enumerate}
+	
+	\item Browse Workout routines
+	\begin{enumerate}
+		\item Filter routines
+	\end{enumerate}
+	
+	\item View Another User's Profile
+	\begin{enumerate}
+		\item View user's created routines
+	\end{enumerate}
+	
+	\item Create User Profile
+	\begin{enumerate}
+		\item setup profile description
+		\item setup attributes
+	\end{enumerate}
+	
+	\item Edit User Profile
+	
+	\item Start workout routine
+	\begin{enumerate}
+		\item Track exercises in-progress
+		\item Track personal quantifiers
+		\item Update current routine
+	\end{enumerate}
+	
+	
+	\item Create workout routine
+	\begin{enumerate}
+		\item Post workout routine
+		\item Catagorize routine
+		\item Add workout length details
+		\item Add exercise 
+		\begin{enumerate}
+			\item Add quanitfier
+			\item Add Workout Descriptions
+		\end{enumerate}
+	\end{enumerate}
+	
+	\item Edit Routine
+	\item Remove Routine
+	\item View Workout List
+\end{itemize}
 
+\subsection{Use case Diagram}
+\includegraphics[scale=0.5]{srs_usecase_diagram_routines}
+\newpage
+\includegraphics[scale=0.5]{srs_usecase_diagram_profiles}
 
 \section{Likely Changes}    
 
