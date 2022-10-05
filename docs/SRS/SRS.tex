@@ -302,9 +302,89 @@ be covered in the Verification and Validation document.}
 \subsection{Performance Requirements}
 \subsection{Operational and Environmental Requirements}
 \subsection{Maintainability and Support Requirements}
+  \subsubsection{Maintenance Requirements}
+    \noindent \begin{itemize}
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        The application must inform users when maintenance is taking place and must warn them at least 1 day in advance.
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        The application must display informative error and warning messages when problems occur.  
+    \end{itemize}
+  \subsubsection{Supportability Requirements}
+    \noindent \begin{itemize}
+      \item N/A
+    \end{itemize}
+  \subsubsection{Adaptability Requirements}
+    \noindent \begin{itemize}
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        The application must run on mobile devices. It will be supported on Android and IOS.
+    \end{itemize}
+
 \subsection{Security Requirements}
+  \subsubsection{Access Requirements}
+    \noindent \begin{itemize}
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        The application must allow users to access the application and their data using private credentials
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        The application must not display other users private details to the user.
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        The application must allow users to securely reset their password when they forget it.
+    \end{itemize}
+  \subsubsection{Integrity Requirements}
+    \noindent \begin{itemize}
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        The application must store data in a secure database.
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        The application must verify the users email address when they first sign up.
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        Passwords must be at least 8 characters, with an uppercase letter, a number, and a symbol.
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+       Passwords must be hashed when stored.
+    \end{itemize}
+
+  \subsubsection{Privacy Requirements}
+    \noindent \begin{itemize}
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        The application must offer the user the option to keep all of their data private from other users.
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        The application must use OAuth protocols to verify communication between the client and server.
+    \end{itemize}
+
+  \subsubsection{Audit Requirements}
+    \noindent \begin{itemize}
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        Data will be stored in a secure database. When data is deleted or edited a record of this data will be kept for up to 30 days.
+    \end{itemize}
+  \subsubsection{Immunity Requirements}
+    \noindent \begin{itemize}
+      \item N/A
+    \end{itemize}
+
+
+
 \subsection{Cultural Requirements}
+  \subsubsection{Cultural Market Requirements}
+    \noindent \begin{itemize}
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        The application will filter out profanities and flag repeat offenders for suspension.
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        The application will allow users to report offensive content and remove it from their feed.
+    \end{itemize}
+  \subsubsection{Cultural Diversity and Inclusion Requirements}
+    \noindent \begin{itemize}
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        Users can optionally specify their gender, age, and race. Gender and age will be used to cater the content for individuals feeds.
+    \end{itemize}
+
 \subsection{Compliance Requirements}
+  \subsubsection{Legal Compliance Requirements}
+    \noindent \begin{itemize}
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        The use of data will comply with the Data Protection Act.
+    \end{itemize}
+  \subsubsection{Standards Compliance Requirements}
+    \noindent \begin{itemize}
+      \item N/A
+    \end{itemize}
 
 \noindent \begin{itemize}
 
