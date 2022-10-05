@@ -23,12 +23,13 @@
 %\usepackage{refcheck}
 
 \hypersetup{
-    bookmarks=true,         % show bookmarks bar?
-      colorlinks=true,       % false: boxed links; true: colored links
-    linkcolor=red,          % color of internal links (change box color with linkbordercolor)
-    citecolor=green,        % color of links to bibliography
-    filecolor=magenta,      % color of file links
-    urlcolor=cyan           % color of external links
+	bookmarks=true,         % show bookmarks bar?
+	colorlinks=true,       % false: boxed links; true: colored links
+	linkcolor=red,          % color of internal links (change box color with
+	%linkbordercolor)
+	citecolor=green,        % color of links to bibliography
+	filecolor=magenta,      % color of file links
+	urlcolor=cyan           % color of external links
 }
 
 \input{../Comments}
@@ -81,629 +82,661 @@
 
 \newcommand{\deftheory}[9][Not Applicable]
 {
-\newpage
-\noindent \rule{\textwidth}{0.5mm}
-
-\paragraph{RefName: } \textbf{#2} \phantomsection 
-\label{#2}
-
-\paragraph{Label:} #3
-
-\noindent \rule{\textwidth}{0.5mm}
-
-\paragraph{Equation:}
-
-#4
-
-\paragraph{Description:}
-
-#5
-
-\paragraph{Notes:}
-
-#6
-
-\paragraph{Source:}
-
-#7
-
-\paragraph{Ref.\ By:}
-
-#8
-
-\paragraph{Preconditions for \hyperref[#2]{#2}:}
-\label{#2_precond}
-
-#9
-
-\paragraph{Derivation for \hyperref[#2]{#2}:}
-\label{#2_deriv}
-
-#1
-
-\noindent \rule{\textwidth}{0.5mm}
-
+	\newpage
+	\noindent \rule{\textwidth}{0.5mm}
+	
+	\paragraph{RefName: } \textbf{#2} \phantomsection 
+	\label{#2}
+	
+	\paragraph{Label:} #3
+	
+	\noindent \rule{\textwidth}{0.5mm}
+	
+	\paragraph{Equation:}
+	
+	#4
+	
+	\paragraph{Description:}
+	
+	#5
+	
+	\paragraph{Notes:}
+	
+	#6
+	
+	\paragraph{Source:}
+	
+	#7
+	
+	\paragraph{Ref.\ By:}
+	
+	#8
+	
+	\paragraph{Preconditions for \hyperref[#2]{#2}:}
+	\label{#2_precond}
+	
+	#9
+	
+	\paragraph{Derivation for \hyperref[#2]{#2}:}
+	\label{#2_deriv}
+	
+	#1
+	
+	\noindent \rule{\textwidth}{0.5mm}
+	
 }
 
 \begin{document}
-
-\title{Software Requirements Specification for \progname: subtitle describing software} 
-\author{\authname}
-\date{\today}
 	
-\maketitle
-
-~\newpage
-
-\pagenumbering{roman}
-
-\tableofcontents
-
-~\newpage
-
-\section*{Revision History}
-
-\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
-\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
-\midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
-\bottomrule
-\end{tabularx}
-
-~\newpage
-
-
-\section{The Purpose of the Project}
-\subsection{The User Business or Background of the Project Effort}
-\subsection{Goals of the Project}
-
-
-\section{Project Drivers}
-\subsection{The Purpose of the Project}
-\subsection{Stakeholders}
-\begin{enumerate}
-	\item Fitness Enthusiasts - Anyone interested in exploring other fitness routines, creating their own routines, and tracking their own personal progression towards goals.
-	\item Personal Trainers - Olympian provides the ideal platform for trainers to share routines and goals with their clients.
-	\item Fitness Advertisers - One avenue of monetization that Olympian could take is running advertisements. Although these advertisements could fall into any category, the largest stakeholders will be Fitness Advertisers,
-	as the users of Olympian will be heavily involved with fitness, and thus most likely to buy fitness products.
-\end{enumerate} 
-
-\section{Project Constraints}
-\subsection{Mandated Constraints} 
-\subsection{Naming Conventions and Terminology}
-\subsection{Relevant Facts and Assumptions}
-
-\section{General System Description}
-
-This section provides general information about the system.  It identifies the
-interfaces between the system and its environment, describes the user
-characteristics and lists the system constraints.  \plt{This text can likely be
-  borrowed verbatim.}
-
-\plt{The purpose of this section is to provide general information about the
-  system so the specific requirements in the next section will be easier to
-  understand. The general system description section is designed to be
-  changeable independent of changes to the functional requirements documented in
-  the specific system description. The general system description provides a
-  context for a family of related models.  The general description can stay the
-  same, while specific details are changed between family members.}
-
-\subsection{System Context}
-
-\plt{Your system context will include a figure that shows the abstract view of
-  the software.  Often in a scientific context, the program can be viewed
-  abstractly following the design pattern of Inputs $\rightarrow$ Calculations
-  $\rightarrow$ Outputs.  The system context will therefore often follow this
-  pattern.  The user provides inputs, the system does the calculations, and then
-  provides the outputs to the user.  The figure should not show all of the
-  inputs, just an abstract view of the main categories of inputs (like material
-  properties, geometry, etc.).  Likewise, the outputs should be presented from
-  an abstract point of view.  In some cases the diagram will show other external
-  entities, besides the user.  For instance, when the software product is a
-  library, the user will be another software program, not an actual end user.
-  If there are system constraints that the software must work with external
-  libraries, these libraries can also be shown on the System Context diagram.
-  They should only be named with a specific library name if this is required by
-  the system constraint.}
-
-\begin{figure}[h!]
-\begin{center}
- \includegraphics[width=0.6\textwidth]{SystemContextFigure}
-\caption{System Context}
-\label{Fig_SystemContext} 
-\end{center}
-\end{figure}
-
-\plt{For each of the entities in the system context diagram its responsibilities
-  should be listed.  Whenever possible the system should check for data quality,
-  but for some cases the user will need to assume that responsibility.  The list
-  of responsibilities should be about the inputs and outputs only, and they
-  should be abstract.  Details should not be presented here.  However, the
-  information should not be so abstract as to just say ``inputs'' and
-  ``outputs''.  A summarizing phrase can be used to characterize the inputs.
-  For instance, saying ``material properties'' provides some information, but it
-  stays away from the detail of listing every required properties.}
-
-\begin{itemize}
-\item User Responsibilities:
-\begin{itemize}
-\item 
-\end{itemize}
-\item \progname{} Responsibilities:
-\begin{itemize}
-\item Detect data type mismatch, such as a string of characters instead of a
-  floating point number
-\item 
-\end{itemize}
-\end{itemize}
-
-\subsection{System Constraints}
-
-\plt{System constraints differ from other type of requirements because they
-	limit the developers' options in the system design and they identify how the
-	eventual system must fit into the world. This is the only place in the SRS
-	where design decisions can be specified.  That is, the quality requirement for
-	abstraction is relaxed here.  However, system constraints should only be
-	included if they are truly required.}
-
-\subsection{System Scope}
-
-
-\section{Functional Requirements}
-\subsection{The Scope of the Work}
-\subsection{Business Data Model and Data Directory}
-\subsection{The Scope of the Product}
-\subsection{Functional Requirements}
-\noindent \begin{itemize}
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-Description: Template
-\\ Rational:
-\\ Fit Criterion
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-Description: The system shall allow the user to create a workout routine.
-\\ Rational: To allow the user to save their own workout routines.
-\\ Fit Criterion: The user created routines are accessable after creation.
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-Description: The system shall record a workout routine created by a user. 
-\\ Rational: To be able to store a routine to potentially share the routine with other users.
-\\ Fit Criterion: On creation of a workout routine, the data for the routine should be accessable by the system.
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-Description: The system shall allow the user to publically post a workout routine.
-\\ Rational: To be able to display their workout routine to other users.
-\\ Fit Criterion: On publication of a routine, another user should be able to access and view the routine.
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-Description: The product shall allow a user to update a workout routine.
-\\ Rational: For users to be able to change quantifiers or routine properties.
-\\ Fit Criterion:
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-Description: The system shall allow a user to track their current workout progress.
-\\ Rational: To allow a user to keep track of their current workout.
-\\ Fit Criterion:
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-Description: The product shall allow a user to browse workout routines.
-\\ Rational: To make publicly posted workout routines discoverable and for users to find routines that cater their fitness goals.
-\\ Fit Criterion:
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-Description: The product should allow a user to save another user's public workout routine.
-\\ Rational: To allow a user to save a workout routine for later use.
-\\ Fit Criterion:
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-Description: The system should allow a user to create a profile.
-\\ Rational: To display social, informational content to other users.
-\\ Fit Criterion
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-Description: The system shall allow a user to edit their profile.
-\\ Rational: To update any information regarding the user profile.
-\\ Fit Criterion
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-Description: The system shall allow a user to view another user's profile.
-\\ Rational: To allow a user to determine if another user has similar fitness goals or similar workout routines.
-\\ Fit Criterion:
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-Description: The product shall record the previous workouts of a user.
-\\ Rational: To store all user input data for future display of fitness progress for the user.
-\\ Fit Criterion:
-
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-Description: The product shall display fitness progress regarding various exercises.
-\\ Rational: To help the user determine progress towards fitness goals.
-\\ Fit Criterion:
-
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-Description: 
-\\ Rational:
-\\ Fit Criterion:
-
-\end{itemize}
-
-\plt{Every IM should map to at least one requirement, but not every requirement
-  has to map to a corresponding IM.}
-
-\section{Nonfunctional Requirements}
-
-\plt{List your nonfunctional requirements.  You may consider using a fit
-  criterion to make them verifiable.}
-\plt{The goal is for the nonfunctional requirements to be unambiguous, abstract
-  and verifiable.  This isn't easy to show succinctly, so a good strategy may be
-to give a ``high level'' view of the requirement, but allow for the details to
-be covered in the Verification and Validation document.}
-\plt{An absolute requirement on a quality of the system is rarely needed.  For
-  instance, an accuracy of 0.0101 \% is likely fine, even if the requirement is
-  for 0.01 \% accuracy.  Therefore, the emphasis will often be more on
-  describing now well the quality is achieved, through experimentation, and
-  possibly theory, rather than meeting some bar that was defined a priori.}
-\plt{You do not need an entry for correctness in your NFRs.  The purpose of the
-  SRS is to record the requirements that need to be satisfied for correctness.
-  Any statement of correctness would just be redundant. Rather than discuss
-  correctness, you can characterize how far away from the correct (true)
-  solution you are allowed to be.  This is discussed under accuracy.}
-\subsection{Look and Feel Requirements}
-\subsection{Usability and Humanity Requirements}
-\subsection{Performance Requirements}
-\subsection{Operational and Environmental Requirements}
-\subsection{Maintainability and Support Requirements}
-\subsection{Security Requirements}
-\subsection{Cultural Requirements}
-\subsection{Compliance Requirements}
-
-\noindent \begin{itemize}
-
-\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Accuracy}:]
-  \textbf{Accuracy} \plt{Characterize the accuracy by giving the context/use for
-    the software.  Maybe something like, ``The accuracy of the computed
-    solutions should meet the level needed for $<$engineering or scientific
-    application$>$.  The level of accuracy achieved by \progname{} shall be
-    described following the procedure given in Section~X of the Verification and
-    Validation Plan.''  A link to the VnV plan would be a nice extra.}
-
-\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Usability}:] \textbf{Usability}
-  \plt{Characterize the usability by giving the context/use for the software.
-    You should likely reference the user characteristics section.  The level of
-    usability achieved by the software shall be described following the
-    procedure given in Section~X of the Verification and Validation Plan.  A
-    link to the VnV plan would be a nice extra.}
-
-\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Maintainability}:]
-  \textbf{Maintainability} \plt{The effort required to make any of the likely
-    changes listed for \progname{} should be less than FRACTION of the original
-    development time.  FRACTION is then a symbolic constant that can be defined
-    at the end of the report.}
-
-\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Portability}:]
-  \textbf{Portability} \plt{This NFR is easier to write than the others.  The
-    systems that \progname{} should run on should be listed here.  When possible
-    the specific versions of the potential operating environments should be
-    given.  To make the NFR verifiable a statement could be made that the tests
-    from a given section of the VnV plan can be successfully run on all of the
-    possible operating environments.}
-
-\item Other NFRs that might be discussed include verifiability,
-  understandability and reusability.
-
-\end{itemize}
-
-
-\section{Use cases}
-
-\begin{itemize}
-	\item View posted workout routine 
+	\title{Software Requirements Specification for \progname: subtitle describing
+		software} 
+	\author{\authname}
+	\date{\today}
+	
+	\maketitle
+	
+	~\newpage
+	
+	\pagenumbering{roman}
+	
+	\tableofcontents
+	
+	~\newpage
+	
+	\section*{Revision History}
+	
+	\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+		\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+		\midrule
+		Date 1 & 1.0 & Notes\\
+		Date 2 & 1.1 & Notes\\
+		\bottomrule
+	\end{tabularx}
+	
+	~\newpage
+	
+	
+	\section{The Purpose of the Project}
+	\subsection{The User Business or Background of the Project Effort}
+	\subsection{Goals of the Project}
+	
+	
+	\section{Project Drivers}
+	\subsection{The Purpose of the Project}
+	\subsection{Stakeholders}
 	\begin{enumerate}
-		\item View other user's fitness progress
-		\item Add Personal Workout List
-		\item View workout Author
-		\item Review workout
-	\end{enumerate}
+		\item Fitness Enthusiasts - Anyone interested in exploring other fitness
+		routines, creating their own routines, and tracking their own personal
+		progression towards goals.
+		\item Personal Trainers - Olympian provides the ideal platform for trainers to
+		share routines and goals with their clients.
+		\item Fitness Advertisers - One avenue of monetization that Olympian could take
+		is running advertisements. Although these advertisements could fall into any
+		category, the largest stakeholders will be Fitness Advertisers,
+		as the users of Olympian will be heavily involved with fitness, and thus most
+		likely to buy fitness products.
+	\end{enumerate} 
 	
-	\item Browse Workout routines
-	\begin{enumerate}
-		\item Filter routines
-	\end{enumerate}
+	\section{Project Constraints}
+	\subsection{Mandated Constraints} 
+	\subsection{Naming Conventions and Terminology}
+	\subsection{Relevant Facts and Assumptions}
 	
-	\item View Another User's Profile
-	\begin{enumerate}
-		\item View user's created routines
-	\end{enumerate}
+	\section{General System Description}
 	
-	\item Create User Profile
-	\begin{enumerate}
-		\item Setup profile description
-		\item Setup attributes
-	\end{enumerate}
+	This section provides general information about the system.  It identifies the
+	interfaces between the system and its environment, describes the user
+	characteristics and lists the system constraints.  \plt{This text can likely be
+		borrowed verbatim.}
 	
-	\item Edit User Profile
+	\plt{The purpose of this section is to provide general information about the
+		system so the specific requirements in the next section will be easier to
+		understand. The general system description section is designed to be
+		changeable independent of changes to the functional requirements documented in
+		the specific system description. The general system description provides a
+		context for a family of related models.  The general description can stay the
+		same, while specific details are changed between family members.}
 	
-	\item Start workout routine
-	\begin{enumerate}
-		\item Track exercises in-progress
-		\item Track personal Quantifiers
-		\item Update current routine
-	\end{enumerate}
+	\subsection{System Context}
+	
+	\plt{Your system context will include a figure that shows the abstract view of
+		the software.  Often in a scientific context, the program can be viewed
+		abstractly following the design pattern of Inputs $\rightarrow$ Calculations
+		$\rightarrow$ Outputs.  The system context will therefore often follow this
+		pattern.  The user provides inputs, the system does the calculations, and then
+		provides the outputs to the user.  The figure should not show all of the
+		inputs, just an abstract view of the main categories of inputs (like material
+		properties, geometry, etc.).  Likewise, the outputs should be presented from
+		an abstract point of view.  In some cases the diagram will show other external
+		entities, besides the user.  For instance, when the software product is a
+		library, the user will be another software program, not an actual end user.
+		If there are system constraints that the software must work with external
+		libraries, these libraries can also be shown on the System Context diagram.
+		They should only be named with a specific library name if this is required by
+		the system constraint.}
+	
+	\begin{figure}[h!]
+		\begin{center}
+			\includegraphics[width=0.6\textwidth]{SystemContextFigure}
+			\caption{System Context}
+			\label{Fig_SystemContext} 
+		\end{center}
+	\end{figure}
+	
+	\plt{For each of the entities in the system context diagram its responsibilities
+		should be listed.  Whenever possible the system should check for data quality,
+		but for some cases the user will need to assume that responsibility.  The list
+		of responsibilities should be about the inputs and outputs only, and they
+		should be abstract.  Details should not be presented here.  However, the
+		information should not be so abstract as to just say ``inputs'' and
+		``outputs''.  A summarizing phrase can be used to characterize the inputs.
+		For instance, saying ``material properties'' provides some information, but it
+		stays away from the detail of listing every required properties.}
+	
+	\begin{itemize}
+		\item User Responsibilities:
+		\begin{itemize}
+			\item 
+		\end{itemize}
+		\item \progname{} Responsibilities:
+		\begin{itemize}
+			\item Detect data type mismatch, such as a string of characters instead of a
+			floating point number
+			\item 
+		\end{itemize}
+	\end{itemize}
+	
+	\subsection{System Constraints}
+	
+	\plt{System constraints differ from other type of requirements because they
+		limit the developers' options in the system design and they identify how the
+		eventual system must fit into the world. This is the only place in the SRS
+		where design decisions can be specified.  That is, the quality requirement for
+		abstraction is relaxed here.  However, system constraints should only be
+		included if they are truly required.}
+	
+	\subsection{System Scope}
 	
 	
-	\item Create workout routine
-	\begin{enumerate}
-		\item Post workout routine
-		\item Categorize routine
-		\item Add workout length details
-		\item Add exercise 
+	\section{Functional Requirements}
+	\subsection{The Scope of the Work}
+	\subsubsection{The Current Situation}
+	N/A
+	\subsubsection{The Context of the Work}
+	N/A
+	\subsubsection{Work Partitioning}
+	N/A
+	\subsection{The Scope of the Product}
+	\subsubsection{Use cases}
+	
+	\begin{itemize}
+		\item View posted workout routine 
 		\begin{enumerate}
-			\item Add Quantifier
-			\item Add Workout Descriptions
+			\item View other user's fitness progress
+			\item Add Personal Workout List
+			\item View workout Author
+			\item Review workout
 		\end{enumerate}
+		
+		\item Browse Workout routines
+		\begin{enumerate}
+			\item Filter routines
+		\end{enumerate}
+		
+		\item View Another User's Profile
+		\begin{enumerate}
+			\item View user's created routines
+		\end{enumerate}
+		
+		\item Create User Profile
+		\begin{enumerate}
+			\item Setup profile description
+			\item Setup attributes
+		\end{enumerate}
+		
+		\item Edit User Profile
+		
+		\item Start workout routine
+		\begin{enumerate}
+			\item Track exercises in-progress
+			\item Track personal Quantifiers
+			\item Update current routine
+		\end{enumerate}
+		
+		
+		\item Create workout routine
+		\begin{enumerate}
+			\item Post workout routine
+			\item Categorize routine
+			\item Add workout length details
+			\item Add exercise 
+			\begin{enumerate}
+				\item Add Quantifier
+				\item Add Workout Descriptions
+			\end{enumerate}
+		\end{enumerate}
+		
+		\item Edit Routine
+		\item Remove Routine
+		\item View Workout List
+	\end{itemize}
+	
+	\subsubsection{Use case Diagram}
+	\includegraphics[scale=0.5]{srs_usecase_diagram_routines}
+	\newpage
+	\includegraphics[scale=0.5]{srs_usecase_diagram_profiles}
+	
+	\subsection{Functional Requirements}
+	\noindent \begin{itemize}
+		
+		\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
+		Description: Template
+		\\ Rational:
+		\\ Fit Criterion
+		
+		\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
+		Description: The system shall allow the user to create a workout routine.
+		\\ Rational: To allow the user to save their own workout routines.
+		\\ Fit Criterion: The user created routines are accessable after creation.
+		
+		\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
+		Description: The system shall record a workout routine created by a user. 
+		\\ Rational: To be able to store a routine to potentially share the routine with
+		other users.
+		\\ Fit Criterion: On creation of a workout routine, the data for the routine
+		should be accessable by the system.
+		
+		\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
+		Description: The system shall allow the user to publically post a workout
+		routine.
+		\\ Rational: To be able to display their workout routine to other users.
+		\\ Fit Criterion: On publication of a routine, another user should be able to
+		access and view the routine.
+		
+		\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
+		Description: The product shall allow a user to update a workout routine.
+		\\ Rational: For users to be able to change quantifiers or routine properties.
+		\\ Fit Criterion: Workout routine data should be changed to new values after a user updates a workout routine.
+		
+		\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
+		Description: The system shall allow a user to track their current workout progress.
+		\\ Rational: To allow a user to keep track of their current workout.
+		\\ Fit Criterion: Current workout data is updated after a user adds inputted data regarding their exercise.
+		
+		\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
+		Description: The product shall allow a user to browse workout routines.
+		\\ Rational: To make publicly posted workout routines discoverable and for users to find routines that cater their fitness goals.
+		\\ Fit Criterion: Public workout routines should be accessable for user viewing such that users can view posted routines.
+		
+		\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
+		Description: The product should allow a user to save another user's public workout routine.
+		\\ Rational: To allow a user to save a workout routine for later use.
+		\\ Fit Criterion: Upon saving a public workout routine, the user shall be able to access it as their own workout to use.
+		
+		\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
+		Description: The system should allow a user to create a profile.
+		\\ Rational: To display social, informational content to other users.
+		\\ Fit Criterion: On creating a profile, other users should be able to view any publicly displayed data.
+		
+		\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
+		Description: The system shall allow a user to edit their profile.
+		\\ Rational: To update any information regarding the user profile.
+		\\ Fit Criterion: After a user edits their profile any profile data should be changed to the new values set by the user.
+		
+		\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
+		Description: The system shall allow a user to view another user's profile.
+		\\ Rational: To allow a user to determine if another user has similar fitness goals or similar workout routines.
+		\\ Fit Criterion: On selecting a user profile, all publicly displayed data should be accessable by the user.
+		
+		\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
+		Description: The product shall record the previous workouts of a user.
+		\\ Rational: To store all user input data for future display of fitness progress for the user. 
+		\\ Fit Criterion: On completion of a user workout, the data for the workout should be accessable by the system and the user.
+		
+		
+		\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
+		Description: The product shall display fitness progress regarding various exercises.
+		\\ Rational: To help the user determine progress towards fitness goals.
+		\\ Fit Criterion: Previous fitness progress completed by a user should be accessable up to a minimum of the previous 30 days.
+		
+		
+		\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
+		Description: 
+		\\ Rational:
+		\\ Fit Criterion:
+		
+	\end{itemize}
+	
+	\plt{Every IM should map to at least one requirement, but not every requirement
+		has to map to a corresponding IM.}
+	
+	\section{Nonfunctional Requirements}
+	
+	\plt{List your nonfunctional requirements.  You may consider using a fit
+		criterion to make them verifiable.}
+	\plt{The goal is for the nonfunctional requirements to be unambiguous, abstract
+		and verifiable.  This isn't easy to show succinctly, so a good strategy may be
+		to give a ``high level'' view of the requirement, but allow for the details to
+		be covered in the Verification and Validation document.}
+	\plt{An absolute requirement on a quality of the system is rarely needed.  For
+		instance, an accuracy of 0.0101 \% is likely fine, even if the requirement is
+		for 0.01 \% accuracy.  Therefore, the emphasis will often be more on
+		describing now well the quality is achieved, through experimentation, and
+		possibly theory, rather than meeting some bar that was defined a priori.}
+	\plt{You do not need an entry for correctness in your NFRs.  The purpose of the
+		SRS is to record the requirements that need to be satisfied for correctness.
+		Any statement of correctness would just be redundant. Rather than discuss
+		correctness, you can characterize how far away from the correct (true)
+		solution you are allowed to be.  This is discussed under accuracy.}
+	\subsection{Look and Feel Requirements}
+	\subsection{Usability and Humanity Requirements}
+	\subsection{Performance Requirements}
+	\subsection{Operational and Environmental Requirements}
+	\subsection{Maintainability and Support Requirements}
+	\subsection{Security Requirements}
+	\subsection{Cultural Requirements}
+	\subsection{Compliance Requirements}
+	
+	\noindent \begin{itemize}
+		
+		\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Accuracy}:]
+		\textbf{Accuracy} \plt{Characterize the accuracy by giving the context/use for
+			the software.  Maybe something like, ``The accuracy of the computed
+			solutions should meet the level needed for $<$engineering or scientific
+			application$>$.  The level of accuracy achieved by \progname{} shall be
+			described following the procedure given in Section~X of the Verification and
+			Validation Plan.''  A link to the VnV plan would be a nice extra.}
+		
+		\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Usability}:]
+		\textbf{Usability}
+		\plt{Characterize the usability by giving the context/use for the software.
+			You should likely reference the user characteristics section.  The level of
+			usability achieved by the software shall be described following the
+			procedure given in Section~X of the Verification and Validation Plan.  A
+			link to the VnV plan would be a nice extra.}
+		
+		\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Maintainability}:]
+		\textbf{Maintainability} \plt{The effort required to make any of the likely
+			changes listed for \progname{} should be less than FRACTION of the original
+			development time.  FRACTION is then a symbolic constant that can be defined
+			at the end of the report.}
+		
+		\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Portability}:]
+		\textbf{Portability} \plt{This NFR is easier to write than the others.  The
+			systems that \progname{} should run on should be listed here.  When possible
+			the specific versions of the potential operating environments should be
+			given.  To make the NFR verifiable a statement could be made that the tests
+			from a given section of the VnV plan can be successfully run on all of the
+			possible operating environments.}
+		
+		\item Other NFRs that might be discussed include verifiability,
+		understandability and reusability.
+		
+	\end{itemize}
+	
+	
+	\section{Traceability Matrices and Graphs}
+	
+	The purpose of the traceability matrices is to provide easy references on what
+	has to be additionally modified if a certain component is changed.  Every time a
+	component is changed, the items in the column of that component that are marked
+	with an ``X'' may have to be modified as well.  Table~\ref{Table:trace} shows
+	the
+	dependencies of theoretical models, general definitions, data definitions, and
+	instance models with each other. Table~\ref{Table:R_trace} shows the
+	dependencies of instance models, requirements, and data constraints on each
+	other. Table~\ref{Table:A_trace} shows the dependencies of theoretical models,
+	general definitions, data definitions, instance models, and likely changes on
+	the assumptions.
+	
+	\plt{You will have to modify these tables for your problem.}
+	
+	\plt{The traceability matrix is not generally symmetric.  If GD1 uses A1, that
+		means that GD1's derivation or presentation requires invocation of A1.  A1
+		does not use GD1.  A1 is ``used by'' GD1.}
+	
+	\plt{The traceability matrix is challenging to maintain manually.  Please do
+		your best.  In the future tools (like Drasil) will make this much easier.}
+	
+	\afterpage{
+		\begin{landscape}
+			\begin{table}[h!]
+				\centering
+				\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+					\hline
+					& \aref{A_OnlyThermalEnergy}& \aref{A_hcoeff}& \aref{A_mixed}& \aref{A_tpcm}&
+					\aref{A_const_density}& \aref{A_const_C}& \aref{A_Newt_coil}& \aref{A_tcoil}&
+					\aref{A_tlcoil}& \aref{A_Newt_pcm}& \aref{A_charge}& \aref{A_InitTemp}&
+					\aref{A_OpRangePCM}& \aref{A_OpRange}& \aref{A_htank}& \aref{A_int_heat}&
+					\aref{A_vpcm}& \aref{A_PCM_state}& \aref{A_Pressure} \\
+					\hline
+					\tref{T_COE}        & X& & & & & & & & & & & & & & & & & & \\ \hline
+					\tref{T_SHE}        & & & & & & & & & & & & & & & & & & & \\ \hline
+					\tref{T_LHE}        & & & & & & & & & & & & & & & & & & & \\ \hline
+					\dref{NL}           & & X& & & & & & & & & & & & & & & & & \\ \hline
+					\dref{ROCT}         & & & X& X& X& X& & & & & & & & & & & & & \\ \hline
+					\ddref{FluxCoil}    & & & & & & & X& X& X& & & & & & & & & & \\ \hline
+					\ddref{FluxPCM}     & & & X& X& & & & & & X& & & & & & & & & \\ \hline
+					\ddref{D_HOF}       & & & & & & & & & & & & & & & & & & & \\ \hline
+					\ddref{D_MF}        & & & & & & & & & & & & & & & & & & & \\ \hline
+					\iref{ewat}         & & & & & & & & & & & X& X& & X& X& X& & & X \\ \hline
+					\iref{epcm}         & & & & & & & & & & & & X& X& & & X& X& X& \\ \hline
+					\iref{I_HWAT}       & & & & & & & & & & & & & & X& & & & & X \\ \hline
+					\iref{I_HPCM}       & & & & & & & & & & & & & X& & & & & X & \\ \hline
+					\lcref{LC_tpcm}     & & & & X& & & & & & & & & & & & & & & \\ \hline
+					\lcref{LC_tcoil}    & & & & & & & & X& & & & & & & & & & & \\ \hline
+					\lcref{LC_tlcoil}   & & & & & & & & & X& & & & & & & & & & \\ \hline
+					\lcref{LC_charge}   & & & & & & & & & & & X& & & & & & & & \\ \hline
+					\lcref{LC_InitTemp} & & & & & & & & & & & & X& & & & & & & \\ \hline
+					\lcref{LC_htank}    & & & & & & & & & & & & & & & X& & & & \\
+					\hline
+				\end{tabular}
+				\caption{Traceability Matrix Showing the Connections Between Assumptions and
+					Other Items}
+				\label{Table:A_trace}
+			\end{table}
+		\end{landscape}
+	}
+	
+	\begin{table}[h!]
+		\centering
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+			\hline        
+			& \tref{T_COE}& \tref{T_SHE}& \tref{T_LHE}& \dref{NL}& \dref{ROCT} &
+			\ddref{FluxCoil}& \ddref{FluxPCM} & \ddref{D_HOF}& \ddref{D_MF}& \iref{ewat}&
+			\iref{epcm}& \iref{I_HWAT}& \iref{I_HPCM} \\
+			\hline
+			\tref{T_COE}     & & & & & & & & & & & & & \\ \hline
+			\tref{T_SHE}     & & & X& & & & & & & & & & \\ \hline
+			\tref{T_LHE}     & & & & & & & & & & & & & \\ \hline
+			\dref{NL}        & & & & & & & & & & & & & \\ \hline
+			\dref{ROCT}      & X& & & & & & & & & & & & \\ \hline
+			\ddref{FluxCoil} & & & & X& & & & & & & & & \\ \hline
+			\ddref{FluxPCM}  & & & & X& & & & & & & & & \\ \hline
+			\ddref{D_HOF}    & & & & & & & & & & & & & \\ \hline
+			\ddref{D_MF}     & & & & & & & & X& & & & & \\ \hline
+			\iref{ewat}      & & & & & X& X& X& & & & X& & \\ \hline
+			\iref{epcm}      & & & & & X& & X& & X& X& & & X \\ \hline
+			\iref{I_HWAT}    & & X& & & & & & & & & & & \\ \hline
+			\iref{I_HPCM}    & & X& X& & & & X& X& X& & X& & \\
+			\hline
+		\end{tabular}
+		\caption{Traceability Matrix Showing the Connections Between Items of Different
+			Sections}
+		\label{Table:trace}
+	\end{table}
+	
+	\begin{table}[h!]
+		\centering
+		\begin{tabular}{|c|c|c|c|c|c|c|c|}
+			\hline
+			& \iref{ewat}& \iref{epcm}& \iref{I_HWAT}& \iref{I_HPCM}&
+			\ref{sec_DataConstraints}& \rref{R_RawInputs}& \rref{R_MassInputs} \\
+			\hline
+			\iref{ewat}            & & X& & & & X& X \\ \hline
+			\iref{epcm}            & X& & & X& & X& X \\ \hline
+			\iref{I_HWAT}          & & & & & & X& X \\ \hline
+			\iref{I_HPCM}          & & X& & & & X& X \\ \hline
+			\rref{R_RawInputs}     & & & & & & & \\ \hline
+			\rref{R_MassInputs}    & & & & & & X& \\ \hline
+			\rref{R_CheckInputs}   & & & & & X& & \\ \hline
+			\rref{R_OutputInputs}  & X& X& & & & X& X \\ \hline
+			\rref{R_TempWater}     & X& & & & & & \\ \hline 
+			\rref{R_TempPCM}       & & X& & & & & \\ \hline
+			\rref{R_EnergyWater}   & & & X& & & & \\ \hline
+			\rref{R_EnergyPCM}     & & & & X& & & \\ \hline
+			\rref{R_VerifyOutput}  & & & X& X& & & \\ \hline
+			\rref{R_timeMeltBegin} & & X& & & & & \\ \hline
+			\rref{R_timeMeltEnd}   & & X& & & & & \\ 
+			\hline
+		\end{tabular}
+		\caption{Traceability Matrix Showing the Connections Between Requirements and
+			Instance Models}
+		\label{Table:R_trace}
+	\end{table}
+	
+	The purpose of the traceability graphs is also to provide easy references on
+	what has to be additionally modified if a certain component is changed.  The
+	arrows in the graphs represent dependencies. The component at the tail of an
+	arrow is depended on by the component at the head of that arrow. Therefore, if a
+	component is changed, the components that it points to should also be
+	changed. Figure~\ref{Fig_ATrace} shows the dependencies of theoretical models,
+	general definitions, data definitions, instance models, likely changes, and
+	assumptions on each other. Figure~\ref{Fig_RTrace} shows the dependencies of
+	instance models, requirements, and data constraints on each other.
+	
+	\section{Project Issues}
+	\subsection{Open Issues}
+	\subsection{Off the Shelf Solutions}
+	\subsection{New Problems}
+	\subsection{Tasks}
+	\subsection{Migration to the New Product}
+	\subsection{Risks}
+	\subsection{Costs}
+	\subsection{User Documentation and Training}
+	\subsection{Waiting Room}
+	\subsection{Ideas for Solutions}
+	
+	
+	
+	\section{Reference Material}
+	
+	This section records information for easy reference.
+	
+	
+	\subsection{Abbreviations and Acronyms}
+	
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{l l} 
+		\toprule		
+		\textbf{symbol} & \textbf{description}\\
+		\midrule 
+		A & Assumption\\
+		DD & Data Definition\\
+		GD & General Definition\\
+		GS & Goal Statement\\
+		IM & Instance Model\\
+		LC & Likely Change\\
+		PS & Physical System Description\\
+		R & Requirement\\
+		SRS & Software Requirements Specification\\
+		\progname{} & \plt{put an expanded version of your program name here (as
+			appropriate)}\\
+		T & Theoretical Model\\
+		\bottomrule
+	\end{tabular}\\
+	
+	\plt{Add any other abbreviations or acronyms that you add}
+	
+	% \begin{figure}[h!]
+		% 	\begin{center}
+			% 		%\rotatebox{-90}
+			% 		{
+				% 			\includegraphics[width=\textwidth]{ATrace.png}
+				% 		}
+			% 		\caption{\label{Fig_ATrace} Traceability Matrix Showing the Connections
+				%Between Items of Different Sections}
+			% 	\end{center}
+		% \end{figure}
+	
+	
+	% \begin{figure}[h!]
+		% 	\begin{center}
+			% 		%\rotatebox{-90}
+			% 		{
+				% 			\includegraphics[width=0.7\textwidth]{RTrace.png}
+				% 		}
+			% 		\caption{\label{Fig_RTrace} Traceability Matrix Showing the Connections
+				%Between Requirements, Instance Models, and Data Constraints}
+			% 	\end{center}
+		% \end{figure}
+	
+	\newpage
+	
+	\bibliographystyle {plainnat}
+	\bibliography {../../refs/References}
+	
+	\newpage
+	
+	\noindent \plt{The following is not part of the template, just some things to
+		consider
+		when filing in the template.}
+	
+	\noindent \plt{Grammar, flow and \LaTeX advice:
+		\begin{itemize}
+			\item For Mac users \texttt{*.DS\_Store} should be in \texttt{.gitignore}
+			\item \LaTeX{} and formatting rules
+			\begin{itemize}
+				\item Variables are italic, everything else not, includes subscripts (link to
+				document)
+				\begin{itemize}
+					\item \href{https://physics.nist.gov/cuu/pdf/typefaces.pdf}{Conventions}
+					\item Watch out for implied multiplication
+				\end{itemize}
+				\item Use BibTeX
+				\item Use cross-referencing
+			\end{itemize}
+			\item Grammar and writing rules
+			\begin{itemize}
+				\item Acronyms expanded on first usage (not just in table of acronyms)
+				\item ``In order to'' should be ``to''
+			\end{itemize}
+	\end{itemize}}
+	
+	\noindent \plt{Advice on using the template:
+		\begin{itemize}
+			\item Difference between physical and software constraints
+			\item Properties of a correct solution means \emph{additional} properties, not
+			a restating of the requirements (may be ``not applicable'' for your problem).
+			If you have a table of output constraints, then these are properties of a
+			correct solution.
+			\item Assumptions have to be invoked somewhere
+			\item ``Referenced by'' implies that there is an explicit reference
+			\item Think of traceability matrix, list of assumption invocations and list of
+			reference by fields as automatically generatable
+			\item If you say the format of the output (plot, table etc), then your
+			requirement could be more abstract
+		\end{itemize}
+	}
+	
+	\newpage{}
+	\section*{Appendix --- Reflection}
+	
+	The information in this section will be used to evaluate the team members on the
+	graduate attribute of Lifelong Learning.  Please answer the following questions:
+	
+	\begin{enumerate}
+		\item What knowledge and skills will the team collectively need to acquire to
+		successfully complete this capstone project?  Examples of possible knowledge
+		to acquire include domain specific knowledge from the domain of your
+		application, or software engineering knowledge, mechatronics knowledge or
+		computer science knowledge.  Skills may be related to technology, or writing,
+		or presentation, or team management, etc.  You should look to identify at
+		least one item for each team member.
+		\item For each of the knowledge areas and skills identified in the previous
+		question, what are at least two approaches to acquiring the knowledge or
+		mastering the skill?  Of the identified approaches, which will each team
+		member pursue, and why did they make this choice?
 	\end{enumerate}
 	
-	\item Edit Routine
-	\item Remove Routine
-	\item View Workout List
-\end{itemize}
-
-\subsection{Use case Diagram}
-\includegraphics[scale=0.5]{srs_usecase_diagram_routines}
-\newpage
-\includegraphics[scale=0.5]{srs_usecase_diagram_profiles}
-
-\section{Traceability Matrices and Graphs}
-
-The purpose of the traceability matrices is to provide easy references on what
-has to be additionally modified if a certain component is changed.  Every time a
-component is changed, the items in the column of that component that are marked
-with an ``X'' may have to be modified as well.  Table~\ref{Table:trace} shows the
-dependencies of theoretical models, general definitions, data definitions, and
-instance models with each other. Table~\ref{Table:R_trace} shows the
-dependencies of instance models, requirements, and data constraints on each
-other. Table~\ref{Table:A_trace} shows the dependencies of theoretical models,
-general definitions, data definitions, instance models, and likely changes on
-the assumptions.
-
-\plt{You will have to modify these tables for your problem.}
-
-\plt{The traceability matrix is not generally symmetric.  If GD1 uses A1, that
-  means that GD1's derivation or presentation requires invocation of A1.  A1
-  does not use GD1.  A1 is ``used by'' GD1.}
-
-\plt{The traceability matrix is challenging to maintain manually.  Please do
-  your best.  In the future tools (like Drasil) will make this much easier.}
-
-\afterpage{
-\begin{landscape}
-\begin{table}[h!]
-\centering
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
-\hline
-	& \aref{A_OnlyThermalEnergy}& \aref{A_hcoeff}& \aref{A_mixed}& \aref{A_tpcm}& \aref{A_const_density}& \aref{A_const_C}& \aref{A_Newt_coil}& \aref{A_tcoil}& \aref{A_tlcoil}& \aref{A_Newt_pcm}& \aref{A_charge}& \aref{A_InitTemp}& \aref{A_OpRangePCM}& \aref{A_OpRange}& \aref{A_htank}& \aref{A_int_heat}& \aref{A_vpcm}& \aref{A_PCM_state}& \aref{A_Pressure} \\
-\hline
-\tref{T_COE}        & X& & & & & & & & & & & & & & & & & & \\ \hline
-\tref{T_SHE}        & & & & & & & & & & & & & & & & & & & \\ \hline
-\tref{T_LHE}        & & & & & & & & & & & & & & & & & & & \\ \hline
-\dref{NL}           & & X& & & & & & & & & & & & & & & & & \\ \hline
-\dref{ROCT}         & & & X& X& X& X& & & & & & & & & & & & & \\ \hline
-\ddref{FluxCoil}    & & & & & & & X& X& X& & & & & & & & & & \\ \hline
-\ddref{FluxPCM}     & & & X& X& & & & & & X& & & & & & & & & \\ \hline
-\ddref{D_HOF}       & & & & & & & & & & & & & & & & & & & \\ \hline
-\ddref{D_MF}        & & & & & & & & & & & & & & & & & & & \\ \hline
-\iref{ewat}         & & & & & & & & & & & X& X& & X& X& X& & & X \\ \hline
-\iref{epcm}         & & & & & & & & & & & & X& X& & & X& X& X& \\ \hline
-\iref{I_HWAT}       & & & & & & & & & & & & & & X& & & & & X \\ \hline
-\iref{I_HPCM}       & & & & & & & & & & & & & X& & & & & X & \\ \hline
-\lcref{LC_tpcm}     & & & & X& & & & & & & & & & & & & & & \\ \hline
-\lcref{LC_tcoil}    & & & & & & & & X& & & & & & & & & & & \\ \hline
-\lcref{LC_tlcoil}   & & & & & & & & & X& & & & & & & & & & \\ \hline
-\lcref{LC_charge}   & & & & & & & & & & & X& & & & & & & & \\ \hline
-\lcref{LC_InitTemp} & & & & & & & & & & & & X& & & & & & & \\ \hline
-\lcref{LC_htank}    & & & & & & & & & & & & & & & X& & & & \\
-\hline
-\end{tabular}
-\caption{Traceability Matrix Showing the Connections Between Assumptions and Other Items}
-\label{Table:A_trace}
-\end{table}
-\end{landscape}
-}
-
-\begin{table}[h!]
-\centering
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
-\hline        
-	& \tref{T_COE}& \tref{T_SHE}& \tref{T_LHE}& \dref{NL}& \dref{ROCT} & \ddref{FluxCoil}& \ddref{FluxPCM} & \ddref{D_HOF}& \ddref{D_MF}& \iref{ewat}& \iref{epcm}& \iref{I_HWAT}& \iref{I_HPCM} \\
-\hline
-\tref{T_COE}     & & & & & & & & & & & & & \\ \hline
-\tref{T_SHE}     & & & X& & & & & & & & & & \\ \hline
-\tref{T_LHE}     & & & & & & & & & & & & & \\ \hline
-\dref{NL}        & & & & & & & & & & & & & \\ \hline
-\dref{ROCT}      & X& & & & & & & & & & & & \\ \hline
-\ddref{FluxCoil} & & & & X& & & & & & & & & \\ \hline
-\ddref{FluxPCM}  & & & & X& & & & & & & & & \\ \hline
-\ddref{D_HOF}    & & & & & & & & & & & & & \\ \hline
-\ddref{D_MF}     & & & & & & & & X& & & & & \\ \hline
-\iref{ewat}      & & & & & X& X& X& & & & X& & \\ \hline
-\iref{epcm}      & & & & & X& & X& & X& X& & & X \\ \hline
-\iref{I_HWAT}    & & X& & & & & & & & & & & \\ \hline
-\iref{I_HPCM}    & & X& X& & & & X& X& X& & X& & \\
-\hline
-\end{tabular}
-\caption{Traceability Matrix Showing the Connections Between Items of Different Sections}
-\label{Table:trace}
-\end{table}
-
-\begin{table}[h!]
-\centering
-\begin{tabular}{|c|c|c|c|c|c|c|c|}
-\hline
-	& \iref{ewat}& \iref{epcm}& \iref{I_HWAT}& \iref{I_HPCM}& \ref{sec_DataConstraints}& \rref{R_RawInputs}& \rref{R_MassInputs} \\
-\hline
-\iref{ewat}            & & X& & & & X& X \\ \hline
-\iref{epcm}            & X& & & X& & X& X \\ \hline
-\iref{I_HWAT}          & & & & & & X& X \\ \hline
-\iref{I_HPCM}          & & X& & & & X& X \\ \hline
-\rref{R_RawInputs}     & & & & & & & \\ \hline
-\rref{R_MassInputs}    & & & & & & X& \\ \hline
-\rref{R_CheckInputs}   & & & & & X& & \\ \hline
-\rref{R_OutputInputs}  & X& X& & & & X& X \\ \hline
-\rref{R_TempWater}     & X& & & & & & \\ \hline 
-\rref{R_TempPCM}       & & X& & & & & \\ \hline
-\rref{R_EnergyWater}   & & & X& & & & \\ \hline
-\rref{R_EnergyPCM}     & & & & X& & & \\ \hline
-\rref{R_VerifyOutput}  & & & X& X& & & \\ \hline
-\rref{R_timeMeltBegin} & & X& & & & & \\ \hline
-\rref{R_timeMeltEnd}   & & X& & & & & \\ 
-\hline
-\end{tabular}
-\caption{Traceability Matrix Showing the Connections Between Requirements and Instance Models}
-\label{Table:R_trace}
-\end{table}
-
-The purpose of the traceability graphs is also to provide easy references on
-what has to be additionally modified if a certain component is changed.  The
-arrows in the graphs represent dependencies. The component at the tail of an
-arrow is depended on by the component at the head of that arrow. Therefore, if a
-component is changed, the components that it points to should also be
-changed. Figure~\ref{Fig_ATrace} shows the dependencies of theoretical models,
-general definitions, data definitions, instance models, likely changes, and
-assumptions on each other. Figure~\ref{Fig_RTrace} shows the dependencies of
-instance models, requirements, and data constraints on each other.
-
-\section{Project Issues}
-\subsection{Open Issues}
-\subsection{Off the Shelf Solutions}
-\subsection{New Problems}
-\subsection{Tasks}
-\subsection{Migration to the New Product}
-\subsection{Risks}
-\subsection{Costs}
-\subsection{User Documentation and Training}
-\subsection{Waiting Room}
-\subsection{Ideas for Solutions}
-
-
-
-\section{Reference Material}
-
-This section records information for easy reference.
-
-
-\subsection{Abbreviations and Acronyms}
-
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{l l} 
-	\toprule		
-	\textbf{symbol} & \textbf{description}\\
-	\midrule 
-	A & Assumption\\
-	DD & Data Definition\\
-	GD & General Definition\\
-	GS & Goal Statement\\
-	IM & Instance Model\\
-	LC & Likely Change\\
-	PS & Physical System Description\\
-	R & Requirement\\
-	SRS & Software Requirements Specification\\
-	\progname{} & \plt{put an expanded version of your program name here (as appropriate)}\\
-	T & Theoretical Model\\
-	\bottomrule
-\end{tabular}\\
-
-\plt{Add any other abbreviations or acronyms that you add}
-
-% \begin{figure}[h!]
-% 	\begin{center}
-% 		%\rotatebox{-90}
-% 		{
-% 			\includegraphics[width=\textwidth]{ATrace.png}
-% 		}
-% 		\caption{\label{Fig_ATrace} Traceability Matrix Showing the Connections Between Items of Different Sections}
-% 	\end{center}
-% \end{figure}
-
-
-% \begin{figure}[h!]
-% 	\begin{center}
-% 		%\rotatebox{-90}
-% 		{
-% 			\includegraphics[width=0.7\textwidth]{RTrace.png}
-% 		}
-% 		\caption{\label{Fig_RTrace} Traceability Matrix Showing the Connections Between Requirements, Instance Models, and Data Constraints}
-% 	\end{center}
-% \end{figure}
-
-\newpage
-
-\bibliographystyle {plainnat}
-\bibliography {../../refs/References}
-
-\newpage
-
-\noindent \plt{The following is not part of the template, just some things to consider
-  when filing in the template.}
-
-\noindent \plt{Grammar, flow and \LaTeX advice:
-\begin{itemize}
-\item For Mac users \texttt{*.DS\_Store} should be in \texttt{.gitignore}
-\item \LaTeX{} and formatting rules
-\begin{itemize}
-\item Variables are italic, everything else not, includes subscripts (link to
-  document)
-\begin{itemize}
-\item \href{https://physics.nist.gov/cuu/pdf/typefaces.pdf}{Conventions}
-\item Watch out for implied multiplication
-\end{itemize}
-\item Use BibTeX
-\item Use cross-referencing
-\end{itemize}
-\item Grammar and writing rules
-\begin{itemize}
-\item Acronyms expanded on first usage (not just in table of acronyms)
-\item ``In order to'' should be ``to''
-\end{itemize}
-\end{itemize}}
-
-\noindent \plt{Advice on using the template:
-\begin{itemize}
-\item Difference between physical and software constraints
-\item Properties of a correct solution means \emph{additional} properties, not
-  a restating of the requirements (may be ``not applicable'' for your problem).
-  If you have a table of output constraints, then these are properties of a
-  correct solution.
-\item Assumptions have to be invoked somewhere
-\item ``Referenced by'' implies that there is an explicit reference
-\item Think of traceability matrix, list of assumption invocations and list of
-  reference by fields as automatically generatable
-\item If you say the format of the output (plot, table etc), then your
-  requirement could be more abstract
-\end{itemize}
-}
-
-\newpage{}
-\section*{Appendix --- Reflection}
-
-The information in this section will be used to evaluate the team members on the
-graduate attribute of Lifelong Learning.  Please answer the following questions:
-
-\begin{enumerate}
-  \item What knowledge and skills will the team collectively need to acquire to
-  successfully complete this capstone project?  Examples of possible knowledge
-  to acquire include domain specific knowledge from the domain of your
-  application, or software engineering knowledge, mechatronics knowledge or
-  computer science knowledge.  Skills may be related to technology, or writing,
-  or presentation, or team management, etc.  You should look to identify at
-  least one item for each team member.
-  \item For each of the knowledge areas and skills identified in the previous
-  question, what are at least two approaches to acquiring the knowledge or
-  mastering the skill?  Of the identified approaches, which will each team
-  member pursue, and why did they make this choice?
-\end{enumerate}
-
 \end{document}
