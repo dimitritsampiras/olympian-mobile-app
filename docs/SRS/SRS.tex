@@ -174,9 +174,12 @@ Date 2 & 1.1 & Notes\\
 \subsubsection{Solution Constraints}
 \begin{enumerate}
 	\item
-	\textbf{Description: } The product shall operate its back-end server with Node.js. \\
-	\textbf{Rationale: } The product depends on the functionality provided by many libraries unique to Node.js. \\
-	\textbf{Fit Criterion: } All back-end server libraries used are Node.js libraries, with a Node.js back-end. \\
+	\textbf{Description: } The product shall operate its back-end server with Node.js.
+	Body \\
+	\textbf{Rationale: } The product depends on the functionality provided by many libraries unique to Node.js.
+	Body \\
+	\textbf{Fit Criterion: } All back-end server libraries used are Node.js libraries, with a Node.js back-end.
+	Body \\
 \end{enumerate}
 \subsubsection{Implementation Environment of the Current System}
 The product will be launched as a web-app on the internet, and as a mobile app. There is no hardware or otherwise physical integration of the product.
@@ -187,9 +190,8 @@ N/A
 \subsubsection{Anticipated Workplace Environment}
 N/A
 \subsubsection{Schedule Constraints}
-The product timeline will follow the schedule as laid out in the course outline by Dr. Smith. \\
-\newline
-\begin{tabular}{ p{9.7cm} l r}
+The product timeline will follow the schedule as laid out in the course outline by Dr. Smith (dates listed for 2022):
+\noindent \begin{tabular}{ p{9.7cm} l r}
 	
 	Team Formed, Project Selected & September 19 & 0\% \\
 	
@@ -288,55 +290,93 @@ be covered in the Verification and Validation document.}
   correctness, you can characterize how far away from the correct (true)
   solution you are allowed to be.  This is discussed under accuracy.}
 \subsection{Look and Feel Requirements}
-\subsubsection{Appearance Requirements}
-\noindent \begin{itemize}
-	\item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-	The product shall be attractive to a young audience (teenagers, adults in their 20s and 30s).
-\end{itemize}
-\subsubsection{Style Requirements}
-\noindent \begin{itemize}
-	\item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-	The product shall be appear minimal and straightforward.
-\end{itemize}
 \subsection{Usability and Humanity Requirements}
-\subsubsection{Ease of Use Requirements}
-\noindent \begin{itemize}
-	\item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-	The product shall be easy for teenagers to use.
-	\item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-	The product shall be unintrusive and nondisruptive to use while exercising.
-\end{itemize}
-\subsubsection{Personalization and Internationalization Requirements}
-\noindent \begin{itemize}
-	\item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-	The product shall allow the user to select a chosen language.
-	\item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-	The product shall retain the user's selected exercise preferences.
-\end{itemize}
-\subsubsection{Learning Requirements}
-\noindent \begin{itemize}
-	\item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-	The product shall be able to be used by untrained fitness enthusiasts and amateurs alike, who receive no training before using it.
-\end{itemize}
-\subsubsection{Understandability and Politeness Requirements}
-\noindent \begin{itemize}
-	\item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-	The product shall use symbols and pictures to provide users with an intuitive and efficient experience.
-\end{itemize}
-\subsubsection{Accessibility Requirements}
-\noindent \begin{itemize}
-	\item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-	The product shall be usable by users with hearing loss or partial blindness.
-\noindent \begin{itemize}
-	\item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-	The product shall make use of sufficiently contrasting colours.
-\end{itemize}
 \subsection{Performance Requirements}
 \subsection{Operational and Environmental Requirements}
 \subsection{Maintainability and Support Requirements}
+  \subsubsection{Maintenance Requirements}
+    \noindent \begin{itemize}
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        The application must inform users when maintenance is taking place and must warn them at least 1 day in advance.
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        The application must display informative error and warning messages when problems occur.  
+    \end{itemize}
+  \subsubsection{Supportability Requirements}
+    \noindent \begin{itemize}
+      \item N/A
+    \end{itemize}
+  \subsubsection{Adaptability Requirements}
+    \noindent \begin{itemize}
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        The application must run on mobile devices. It will be supported on Android and IOS.
+    \end{itemize}
+
 \subsection{Security Requirements}
+  \subsubsection{Access Requirements}
+    \noindent \begin{itemize}
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        The application must allow users to access the application and their data using private credentials
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        The application must not display other users private details to the user.
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        The application must allow users to securely reset their password when they forget it.
+    \end{itemize}
+  \subsubsection{Integrity Requirements}
+    \noindent \begin{itemize}
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        The application must store data in a secure database.
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        The application must verify the users email address when they first sign up.
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        Passwords must be at least 8 characters, with an uppercase letter, a number, and a symbol.
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+       Passwords must be hashed when stored.
+    \end{itemize}
+
+  \subsubsection{Privacy Requirements}
+    \noindent \begin{itemize}
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        The application must offer the user the option to keep all of their data private from other users.
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        The application must use OAuth protocols to verify communication between the client and server.
+    \end{itemize}
+
+  \subsubsection{Audit Requirements}
+    \noindent \begin{itemize}
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        Data will be stored in a secure database. When data is deleted or edited a record of this data will be kept for up to 30 days.
+    \end{itemize}
+  \subsubsection{Immunity Requirements}
+    \noindent \begin{itemize}
+      \item N/A
+    \end{itemize}
+
+
+
 \subsection{Cultural Requirements}
+  \subsubsection{Cultural Market Requirements}
+    \noindent \begin{itemize}
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        The application will filter out profanities and flag repeat offenders for suspension.
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        The application will allow users to report offensive content and remove it from their feed.
+    \end{itemize}
+  \subsubsection{Cultural Diversity and Inclusion Requirements}
+    \noindent \begin{itemize}
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        Users can optionally specify their gender, age, and race. Gender and age will be used to cater the content for individuals feeds.
+    \end{itemize}
+
 \subsection{Compliance Requirements}
+  \subsubsection{Legal Compliance Requirements}
+    \noindent \begin{itemize}
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        The use of data will comply with the Data Protection Act.
+    \end{itemize}
+  \subsubsection{Standards Compliance Requirements}
+    \noindent \begin{itemize}
+      \item N/A
+    \end{itemize}
 
 \noindent \begin{itemize}
 
