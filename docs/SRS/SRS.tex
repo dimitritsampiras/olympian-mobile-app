@@ -161,6 +161,9 @@ Date 2 & 1.1 & Notes\\
 
 \section{Project Drivers}
 \subsection{The Purpose of the Project}
+  \subsubsection{The User Business or Background of the Project Effort}
+  \noindent
+  With the increase in media consumption across the world, there has been a greater focus on several previously underrepresented or inaccessable niches, such as health and fitness. Despite the growth and presence of fitness in social media, there are still large barriers to entry that make it intimidating to get started or get accurate information that would aid individuals in their fitness journeys. A lot of the media available online is either behind a paywall, or structured in undigestible video and written formats. The lack of a free, centralized system that contains media generated and verified by fitness enthusiasts alike spurred the idea for this application. This application aims to bridge the gap that exists in the online fitness world by allowing individuals to create and track workouts of their own, search and share workouts created by others, and review and discuss what they find personally works and doesn't work for them. Creating a collaborative online fitness environment allows individuals to start or expand their fitness journey without looking in numerous locations or paying money for programs that may not work for them. 
 \subsection{Stakeholders}
 \begin{enumerate}
 	\item Fitness Enthusiasts - Anyone interested in exploring other fitness routines, creating their own routines, and tracking their own personal progression towards goals.
@@ -333,7 +336,78 @@ be covered in the Verification and Validation document.}
 	The product shall make use of sufficiently contrasting colours.
 \end{itemize}
 \subsection{Performance Requirements}
+  \subsubsection{Speed and Latency Requirements}
+    \noident\begin{itemize}
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
+        Search results shall be displayed within 10 seconds.
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
+        User login shall support 100 users per hour providing a response time of less than 10 seconds.
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
+        Application pages shall support 100 users providing a response time of less than 10 seconds.
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
+        Users shall be able to input or update a program within 10 seconds.
+    \end{itemize}
+  \subsubsection{Safety-Critical Requirements}
+    \noident\begin{itemize}
+      \item NA
+    \end{itemize}
+  \subsubsection{Precision or Accuracy Requirements}
+    \noident\begin{itemize}
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
+        The average of the ratings per post shall be accurate to 2 decimal places.
+    \end{itemize}
+  \subsubsection{Reliability and Availability Requirements}
+    \noident\begin{itemize}
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
+        The application shall achieve a 95 percent uptime.
+    \end{itemize}
+  \subsubsection{Robustness or Fault-Tolerance Requirements}
+    \noident\begin{itemize}
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
+        The application shall operate offline and online.
+    \end{itemize}
+  \subsubsection{Capacity Requirements}
+    \noident\begin{itemize}
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
+        The application shall support 100 simultaneous users per hour. 
+    \end{itemize}
+  \subsubsection{Scalability or Extensibility Requirements}
+    \noident\begin{itemize}
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
+        The application should be able to support 1000 users per hour within a year of its creation.
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
+        The application should not lose any functionality or efficiency as it grows.
+    \end{itemize}
+  \subsubsection{Longevity Requirements}
+    \noident\begin{itemize}
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
+        The application should be able to operate without maintenance for a minimum of six months.
+    \end{itemize}
+
 \subsection{Operational and Environmental Requirements}
+  \subsubsection{Expected Physical Environment}
+    \noident\begin{itemize}
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
+        The application shall operate on a computer and phone.  
+    \end{itemize}
+  \subsubsection{Requirements for Interfacing with Adjacent Systems}
+    \noident\begin{itemize}
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
+        The application shall operate on iOS devices, Android devices, and web browsers.
+    \end{itemize}  
+  \subsubsection{Productization Requirements}
+    \noident\begin{itemize}
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
+        The application shall be distributed on the corresponding iOS and Android stores, as well as on the web.
+    \end{itemize} 
+  \subsubsection{Release Requirements}
+    \noident\begin{itemize}
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
+        The application will have maintenance releases every six months.
+      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
+        The maintenance releases will improve features and cause no previous features to fail.
+    \end{itemize}  
+
 \subsection{Maintainability and Support Requirements}
   \subsubsection{Maintenance Requirements}
     \noindent \begin{itemize}
