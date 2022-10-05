@@ -255,11 +255,6 @@ characteristics and lists the system constraints.  \plt{This text can likely be
 \noindent \begin{itemize}
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-Description: Template
-\\ Rational:
-\\ Fit Criterion
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
 Description: The system shall allow the user to create a workout routine.
 \\ Rational: To allow the user to save their own workout routines.
 \\ Fit Criterion: The user created routines are accessible after creation.
@@ -290,9 +285,9 @@ Description: The system shall allow the user to publicly post a workout routine.
 \\ Fit Criterion: On publication of a routine, another user should be able to access and view the routine.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-Description: The product shall allow a user to update a workout routine.
-\\ Rational: For users to be able to change quantifiers or routine properties.
-\\ Fit Criterion:
+Description: The product shall allow a user to update a workout routine capable as making the same changes as during routine creation.
+\\ Rational: For users to be able to change quantifiers or routine properties after the creation time. Users may change their mind or make mistakes, so making updates to existing routines is an important requirement.
+\\ Fit Criterion: The user is able to update pre-existing workout routines.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
 Description: The system shall allow a user to save and view a performed workout.
@@ -301,46 +296,50 @@ This is especially helpful for ensuring progressive overload. That is, doing a l
 \\ Fit Criterion: The user is able to save a performed workout and review that data in the future.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-Description: The product shall allow a user to browse workout routines.
+Description: The product shall allow a user to browse and search for workout routines.
 \\ Rational: To make publicly posted workout routines discoverable and for users to find routines that cater their fitness goals.
-\\ Fit Criterion:
+\\ Fit Criterion: The user is able to browse and search for workout routines. The returned routines contain words that the user searched for.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-Description: The product should allow a user to save another user's public workout routine.
+Description: The product should allow a user to save another user's public workout routine, such that the other user's routine is accessible from the saving user's profile.
 \\ Rational: To allow a user to save a workout routine for later use.
-\\ Fit Criterion:
+\\ Fit Criterion: The user is able to save another user's workout routine to their profile.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-Description: The system should allow a user to create a profile.
+Description: The system should allow a user to create a profile, with a username between 1 and 25 characters.
 \\ Rational: To display social, informational content to other users.
-\\ Fit Criterion:
+\\ Fit Criterion: The user is able to create a profile.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
 Description: The system shall allow a user to edit their profile.
 \\ Rational: To update any information regarding the user profile.
-\\ Fit Criterion
+\\ Fit Criterion: The user is able to make changes to their profile after it has been created. 
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-Description: The system shall allow a user to view another user's profile.
+Description: The system shall allow a user to search for and view another user's profile.
 \\ Rational: To allow a user to determine if another user has similar fitness goals or similar workout routines.
-\\ Fit Criterion:
+\\ Fit Criterion: The user is able to view the profile of another user after searching for the target profile username.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-Description: The product shall record the previous workouts of a user.
-\\ Rational: To store all user input data for future display of fitness progress for the user.
-\\ Fit Criterion:
-
+Description: The system shall allow the user to create and view a goal in the form of an exercise and a metric pair. For example, "Bench press - 100kg".
+\\ Rational: This allows the user to set and witness progression towards their fitness goals
+\\ Fit Criterion: If the user is able to create and view goals.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-Description: The product shall display fitness progress regarding various exercises.
+Description: The system shall allow the user to create progress points towards a specific goal.
+\\ Rational: Being able to track progress towards set goals can help encourage more progression until the goal is reached.
+\\ Fit Criterion: The user is able to create progress points towards affiliated with a specific goal.
+
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
+Description: A progress point must be associated with a one specific goal, and must exist as a date metric pair. For example, "09/04/22 - 96kg" under a "Bench Press - 100kg" goal. The metric type must match the goal metric type, for example kg.
+\\ Rational: Progress points must be simple to enter so that the resultant data can be easily visualized.
+\\ Fit Criterion: Progress points can only exist as a date-metric pair with the metric type matching the associated goal metric type.
+
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
+Description: The product shall be able to visually display fitness progress towards set fitness goals.
 \\ Rational: To help the user determine progress towards fitness goals.
-\\ Fit Criterion:
+\\ Fit Criterion: The user is able to view progress points toward a set fitness goal.
 
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-Description: 
-\\ Rational:
-\\ Fit Criterion:
 
 \end{itemize}
 
