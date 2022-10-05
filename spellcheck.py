@@ -2,7 +2,7 @@ import subprocess
 import sys
 import pathlib
 
-known_words=open('dictionary.txt', 'r').readlines()
+known_words=set(open('dictionary.txt', 'r').readlines())
 """
 Run the book through a spell checker.
 
