@@ -265,11 +265,7 @@ Description: The system shall allow the user to create a workout routine.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
 Description: The system shall allow the user to add and remove individual exercises in order to a created workout routine, with a maximum of 20 exercises per workout routine.
-<<<<<<< HEAD
-\\ Rational: A workout routine is composed of a sequence of exercises performed in order, which the user should be able to add and remove as they wish to create the desired routine.
-=======
-\\ Rationale: A workout routine is composed of a sequence of exercises performed in order, which the user should able to add and remove as they wish to create the desired routine.
->>>>>>> 67fe881 (Sentence fix, rational -> rationale)
+\\ Rationale: A workout routine is composed of a sequence of exercises performed in order, which the user should be able to add and remove as they wish to create the desired routine.
 \\ Fit Criterion: The user is able to add and remove exercises from a created workout routine.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
@@ -278,13 +274,8 @@ Description: The system shall allow the user to add or remove quantifiers to a g
 \\ Fit Criterion: The user is able to add quantifiers to a given exercise.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-<<<<<<< HEAD
 Description: The system shall allow the user to add a ``hint'' section to a given exercise. A ``hint'' is strictly text less than 500 characters.
-\\ Rational: The user should be able to add hints, tips, tricks, and finer workout descriptions to a given exercise.
-=======
-Description: The system shall allow the user to add a ``hint'' section to a given exercise. A ``hint'' is a strictly text less than 500 characters.
 \\ Rationale: The user should be able to add hints, tips, tricks, and finer workout descriptions to a given exercise.
->>>>>>> 67fe881 (Sentence fix, rational -> rationale)
 \\ Fit Criterion: The user is able to attach a hint to each exercise in a workout routine.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
@@ -310,11 +301,7 @@ This is especially helpful for ensuring progressive overload. That is, doing a l
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
 Description: The product shall allow a user to browse and search for workout routines.
-<<<<<<< HEAD
-\\ Rational: To make publicly posted workout routines discoverable and for users to find routines that cater to their fitness goals.
-=======
 \\ Rationale: To make publicly posted workout routines discoverable and for users to find routines that cater their fitness goals.
->>>>>>> 67fe881 (Sentence fix, rational -> rationale)
 \\ Fit Criterion: The user is able to browse and search for workout routines. The returned routines contain words that the user searched for.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
@@ -339,12 +326,12 @@ Description: The system shall allow a user to search for and view another user's
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
 Description: The system shall allow the user to create and view a goal in the form of an exercise and a metric pair. For example, ``Bench press - 100kg".
-\\ Rational: This allows the user to set and witness progression towards their fitness goals.
+\\ Rationale: This allows the user to set and witness progression towards their fitness goals.
 \\ Fit Criterion: The user is able to create and view goals.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
 Description: The system shall allow the user to create progress points towards a specific goal.
-\\ Rational: Being able to track progress towards set goals can help encourage more progression until the goal is reached.
+\\ Rationale: Being able to track progress towards set goals can help encourage more progression until the goal is reached.
 \\ Fit Criterion: The user is able to create progress points towards specific goals.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
@@ -592,148 +579,6 @@ be covered in the Verification and Validation document.}
 	\includegraphics[scale=0.5]{srs_usecase_diagram_routines}
 	\newpage
 	\includegraphics[scale=0.5]{srs_usecase_diagram_profiles}
-	
-	\subsection{Functional Requirements}
-	\noindent \begin{itemize}
-		
-		\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-		Description: Template
-		\\ Rational:
-		\\ Fit Criterion
-		
-		\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-		Description: The system shall allow the user to create a workout routine.
-		\\ Rational: To allow the user to save their own workout routines.
-		\\ Fit Criterion: The user created routines are accessable after creation.
-		
-		\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-		Description: The system shall record a workout routine created by a user. 
-		\\ Rational: To be able to store a routine to potentially share the routine with
-		other users.
-		\\ Fit Criterion: On creation of a workout routine, the data for the routine
-		should be accessable by the system.
-		
-		\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-		Description: The system shall allow the user to publically post a workout
-		routine.
-		\\ Rational: To be able to display their workout routine to other users.
-		\\ Fit Criterion: On publication of a routine, another user should be able to
-		access and view the routine.
-		
-		\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-		Description: The product shall allow a user to update a workout routine.
-		\\ Rational: For users to be able to change quantifiers or routine properties.
-		\\ Fit Criterion: Workout routine data should be changed to new values after a user updates a workout routine.
-		
-		\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-		Description: The system shall allow a user to track their current workout progress.
-		\\ Rational: To allow a user to keep track of their current workout.
-		\\ Fit Criterion: Current workout data is updated after a user adds inputted data regarding their exercise.
-		
-		\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-		Description: The product shall allow a user to browse workout routines.
-		\\ Rational: To make publicly posted workout routines discoverable and for users to find routines that cater their fitness goals.
-		\\ Fit Criterion: Public workout routines should be accessible for user viewing such that users can view posted routines.
-		
-		\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-		Description: The product should allow a user to save another user's public workout routine.
-		\\ Rational: To allow a user to save a workout routine for later use.
-		\\ Fit Criterion: Upon saving a public workout routine, the user shall be able to access it as their own workout to use.
-		
-		\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-		Description: The system should allow a user to create a profile.
-		\\ Rational: To display social, informational content to other users.
-		\\ Fit Criterion: On creating a profile, other users should be able to view any publicly displayed data.
-		
-		\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-		Description: The system shall allow a user to edit their profile.
-		\\ Rational: To update any information regarding the user profile.
-		\\ Fit Criterion: After a user edits their profile any profile data should be changed to the new values set by the user.
-		
-		\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-		Description: The system shall allow a user to view another user's profile.
-		\\ Rational: To allow a user to determine if another user has similar fitness goals or similar workout routines.
-		\\ Fit Criterion: On selecting a user profile, all publicly displayed data should be accessible by the user.
-		
-		\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-		Description: The product shall record the previous workouts of a user.
-		\\ Rational: To store all user input data for future display of fitness progress for the user. 
-		\\ Fit Criterion: On completion of a user workout, the data for the workout should be accessible by the system and the user.
-		
-		\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-		Description: The product shall display fitness progress regarding various exercises.
-		\\ Rational: To help the user determine progress towards fitness goals.
-		\\ Fit Criterion: Previous fitness progress completed by a user should be accessible up to a minimum of the previous 30 days.
-		
-		
-	\end{itemize}
-	
-	\plt{Every IM should map to at least one requirement, but not every requirement
-		has to map to a corresponding IM.}
-	
-	\section{Nonfunctional Requirements}
-	
-	\plt{List your nonfunctional requirements.  You may consider using a fit
-		criterion to make them verifiable.}
-	\plt{The goal is for the nonfunctional requirements to be unambiguous, abstract
-		and verifiable.  This isn't easy to show succinctly, so a good strategy may be
-		to give a ``high level'' view of the requirement, but allow for the details to
-		be covered in the Verification and Validation document.}
-	\plt{An absolute requirement on a quality of the system is rarely needed.  For
-		instance, an accuracy of 0.0101 \% is likely fine, even if the requirement is
-		for 0.01 \% accuracy.  Therefore, the emphasis will often be more on
-		describing now well the quality is achieved, through experimentation, and
-		possibly theory, rather than meeting some bar that was defined a priori.}
-	\plt{You do not need an entry for correctness in your NFRs.  The purpose of the
-		SRS is to record the requirements that need to be satisfied for correctness.
-		Any statement of correctness would just be redundant. Rather than discuss
-		correctness, you can characterize how far away from the correct (true)
-		solution you are allowed to be.  This is discussed under accuracy.}
-	\subsection{Look and Feel Requirements}
-	\subsection{Usability and Humanity Requirements}
-	\subsection{Performance Requirements}
-	\subsection{Operational and Environmental Requirements}
-	\subsection{Maintainability and Support Requirements}
-	\subsection{Security Requirements}
-	\subsection{Cultural Requirements}
-	\subsection{Compliance Requirements}
-	
-	\noindent \begin{itemize}
-		
-		\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Accuracy}:]
-		\textbf{Accuracy} \plt{Characterize the accuracy by giving the context/use for
-			the software.  Maybe something like, ``The accuracy of the computed
-			solutions should meet the level needed for $<$engineering or scientific
-			application$>$.  The level of accuracy achieved by \progname{} shall be
-			described following the procedure given in Section~X of the Verification and
-			Validation Plan.''  A link to the VnV plan would be a nice extra.}
-		
-		\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Usability}:]
-		\textbf{Usability}
-		\plt{Characterize the usability by giving the context/use for the software.
-			You should likely reference the user characteristics section.  The level of
-			usability achieved by the software shall be described following the
-			procedure given in Section~X of the Verification and Validation Plan.  A
-			link to the VnV plan would be a nice extra.}
-		
-		\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Maintainability}:]
-		\textbf{Maintainability} \plt{The effort required to make any of the likely
-			changes listed for \progname{} should be less than FRACTION of the original
-			development time.  FRACTION is then a symbolic constant that can be defined
-			at the end of the report.}
-		
-		\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Portability}:]
-		\textbf{Portability} \plt{This NFR is easier to write than the others.  The
-			systems that \progname{} should run on should be listed here.  When possible
-			the specific versions of the potential operating environments should be
-			given.  To make the NFR verifiable a statement could be made that the tests
-			from a given section of the VnV plan can be successfully run on all of the
-			possible operating environments.}
-		
-		\item Other NFRs that might be discussed include verifiability,
-		understandability and reusability.
-		
-	\end{itemize}
 	
 	
 	\section{Traceability Matrices and Graphs}
