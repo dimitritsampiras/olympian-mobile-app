@@ -345,24 +345,10 @@ Description: The system shall allow the user to add or remove quantifiers to a g
 \\ Fit Criterion: The user is able to add quantifiers to a given exercise.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-Description: The system shall allow the user to add a ``hint'' section to a given exercise. A ``hint'' is strictly text less than 500 characters.
-\\ Rationale: The user should be able to add hints, tips, tricks, and finer workout descriptions to a given exercise.
-\\ Fit Criterion: The user is able to attach a hint to each exercise in a workout routine.
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-Description: The system shall store a workout routine created by a user. 
-\\ Rationale: To be able to store a routine to potentially share the routine with other users.
-\\ Fit Criterion: On creation of a workout routine, the data for the routine should be accessible by the system.
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
 Description: The system shall allow the user to publicly post a workout routine.
 \\ Rationale: To be able to display their workout routine to other users.
 \\ Fit Criterion: On publication of a routine, another user should be able to access and view the routine.
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-Description: The product shall allow a user to update a workout routine with the same capabilities granted during workout routine
-\\ Rationale: For users to be able to change quantifiers or routine properties after the creation time. Users may change their mind or make mistakes, so making updates to existing routines is an important requirement.
-\\ Fit Criterion: The user is able to update pre-existing workout routines.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
 Description: The system shall allow a user to save and view a performed workout.
@@ -376,19 +362,10 @@ Description: The product shall allow a user to browse and search for workout rou
 \\ Fit Criterion: The user is able to browse and search for workout routines. The returned routines contain words that the user searched for.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-Description: The product should allow a user to save another user's public workout routine, such that the other user's routine is accessible from the saving user's profile.
-\\ Rationale: To allow a user to save a workout routine for later use.
-\\ Fit Criterion: The user is able to save another user's workout routine to their profile.
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
 Description: The system should allow a user to create a profile, with a username between 1 and 25 characters.
 \\ Rationale: To display social, informational content to other users.
 \\ Fit Criterion: The user is able to create a profile.
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-Description: The system shall allow a user to edit their profile.
-\\ Rationale: To update any information regarding the user profile.
-\\ Fit Criterion: The user is able to make changes to their profile after it has been created. 
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
 Description: The system shall allow a user to search for and view another user's profile.
@@ -402,13 +379,9 @@ Description: The system shall allow the user to create and view a goal in the fo
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
 Description: The system shall allow the user to create progress points towards a specific goal.
+A progress point must be associated with a one specific goal, and must exist as a date metric pair. For example, ``09/04/22 - 96kg" under a ``Bench Press - 100kg" goal. The metric type must match the goal metric type, for example kg.
 \\ Rationale: Being able to track progress towards set goals can help encourage more progression until the goal is reached.
 \\ Fit Criterion: The user is able to create progress points towards specific goals.
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
-Description: A progress point must be associated with a one specific goal, and must exist as a date metric pair. For example, ``09/04/22 - 96kg" under a ``Bench Press - 100kg" goal. The metric type must match the goal metric type, for example kg.
-\\ Rationale: Progress points must be simple to enter so that the resultant data can be easily visualized.
-\\ Fit Criterion: Progress points can only exist as a date-metric pair with the metric type matching the associated goal metric type.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
 Description: The product shall be able to visually display fitness progress towards set fitness goals.
@@ -442,8 +415,7 @@ be covered in the Verification and Validation document.}
 \subsection{Look and Feel Requirements}
 \subsubsection{Appearance Requirements}
 \noindent \begin{itemize}
-	\item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-	The product shall be attractive to a young audience (teenagers, adults in their 20s and 30s).
+	\item N/A
 \end{itemize}
 \subsubsection{Style Requirements}
 \noindent \begin{itemize}
@@ -454,16 +426,12 @@ be covered in the Verification and Validation document.}
 \subsubsection{Ease of Use Requirements}
 \noindent \begin{itemize}
 	\item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-	The product shall be easy for teenagers to use.
-	\item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-	The product shall be unintrusive and nondisruptive to use while exercising.
+	The product shall use fonts of readable size.
 \end{itemize}
 \subsubsection{Personalization and Internationalization Requirements}
 \noindent \begin{itemize}
 	\item[NFR\refstepcounter{nfrnum}\thenfrnum:]
 	The product shall allow the user to select a chosen language.
-	\item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-	The product shall retain the user's selected exercise preferences.
 \end{itemize}
 \subsubsection{Learning Requirements}
 \noindent \begin{itemize}
@@ -488,12 +456,6 @@ be covered in the Verification and Validation document.}
   \subsubsection{Speed and Latency Requirements}
     \noindent\begin{itemize}
       \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
-        Search results shall be displayed within 10 seconds.
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
-        User login shall support 100 users per hour providing a response time of less than 10 seconds.
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
-        Application pages shall support 100 users providing a response time of less than 10 seconds.
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
         Users shall be able to input or update a program within 10 seconds.
     \end{itemize}
   \subsubsection{Safety-Critical Requirements}
@@ -512,8 +474,7 @@ be covered in the Verification and Validation document.}
     \end{itemize}
   \subsubsection{Robustness or Fault-Tolerance Requirements}
     \noindent\begin{itemize}
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
-        The application shall operate offline and online.
+		\item N/A
     \end{itemize}
   \subsubsection{Capacity Requirements}
     \noindent\begin{itemize}
@@ -524,46 +485,36 @@ be covered in the Verification and Validation document.}
     \noindent\begin{itemize}
       \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
         The application should be able to support 1000 users per hour within a year of its creation.
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
-        The application should not lose any functionality or efficiency as it grows.
     \end{itemize}
   \subsubsection{Longevity Requirements}
     \noindent\begin{itemize}
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
-        The application should be able to operate without maintenance for a minimum of six months.
+		\item N/A
     \end{itemize}
 
 \subsection{Operational and Environmental Requirements}
   \subsubsection{Expected Physical Environment}
     \noindent\begin{itemize}
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
-        The application shall operate on a computer and phone.  
+		\item N/A
     \end{itemize}
   \subsubsection{Requirements for Interfacing with Adjacent Systems}
     \noindent\begin{itemize}
       \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
-        The application shall operate on iOS devices, Android devices, and web browsers.
+        The application shall operate on iOS devices and Android devices.
     \end{itemize}  
   \subsubsection{Productization Requirements}
     \noindent\begin{itemize}
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
-        The application shall be distributed on the corresponding iOS and Android stores, as well as on the web.
+		\item N/A
     \end{itemize} 
   \subsubsection{Release Requirements}
     \noindent\begin{itemize}
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
-        The application will have maintenance releases every six months.
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
-        The maintenance releases will improve features and cause no previous features to fail.
+		\item N/A
     \end{itemize}  
 
 \subsection{Maintainability and Support Requirements}
   \subsubsection{Maintenance Requirements}
     \noindent \begin{itemize}
       \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-        The application must inform users when maintenance is taking place and must warn them at least 1 day in advance.
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-        The application must display informative error and warning messages when problems occur.  
+        The application must inform users when maintenance is taking place and must warn them at least 1 day in advance. 
     \end{itemize}
   \subsubsection{Supportability Requirements}
     \noindent \begin{itemize}
@@ -571,36 +522,23 @@ be covered in the Verification and Validation document.}
     \end{itemize}
   \subsubsection{Adaptability Requirements}
     \noindent \begin{itemize}
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-        The application must run on mobile devices. It will be supported on Android and IOS.
+		\item N/A
     \end{itemize}
 
 \subsection{Security Requirements}
   \subsubsection{Access Requirements}
     \noindent \begin{itemize}
       \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-        The application must allow users to access the application and their data using private credentials
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
         The application must not display other users private details to the user.
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-        The application must allow users to securely reset their password when they forget it.
     \end{itemize}
   \subsubsection{Integrity Requirements}
     \noindent \begin{itemize}
       \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-        The application must store data in a secure database.
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-        The application must verify the users email address when they first sign up.
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-        Passwords must be at least 8 characters, with an uppercase letter, a number, and a symbol.
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-       Passwords must be encrypted when stored.
+       Passwords must be encrypted with SHA-256 when stored.
     \end{itemize}
 
   \subsubsection{Privacy Requirements}
     \noindent \begin{itemize}
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-        The application must offer the user the option to keep all of their data private from other users.
       \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
         The application must use OAuth protocols to verify communication between the client and server.
     \end{itemize}
@@ -641,172 +579,27 @@ be covered in the Verification and Validation document.}
     \noindent \begin{itemize}
       \item N/A
     \end{itemize}
-
-\noindent \begin{itemize}
-
-\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Accuracy}:]
-  \textbf{Accuracy} \plt{Characterize the accuracy by giving the context/use for
-    the software.  Maybe something like, ``The accuracy of the computed
-    solutions should meet the level needed for $<$engineering or scientific
-    application$>$.  The level of accuracy achieved by \progname{} shall be
-    described following the procedure given in Section~X of the Verification and
-    Validation Plan.''  A link to the VnV plan would be a nice extra.}
-
-\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Usability}:] \textbf{Usability}
-  \plt{Characterize the usability by giving the context/use for the software.
-    You should likely reference the user characteristics section.  The level of
-    usability achieved by the software shall be described following the
-    procedure given in Section~X of the Verification and Validation Plan.  A
-    link to the VnV plan would be a nice extra.}
-
-\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Maintainability}:]
-  \textbf{Maintainability} \plt{The effort required to make any of the likely
-    changes listed for \progname{} should be less than FRACTION of the original
-    development time.  FRACTION is then a symbolic constant that can be defined
-    at the end of the report.}
-
-\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Portability}:]
-  \textbf{Portability} \plt{This NFR is easier to write than the others.  The
-    systems that \progname{} should run on should be listed here.  When possible
-    the specific versions of the potential operating environments should be
-    given.  To make the NFR verifiable a statement could be made that the tests
-    from a given section of the VnV plan can be successfully run on all of the
-    possible operating environments.}
-
-\item Other NFRs that might be discussed include verifiability,
-  understandability and reusability.
-
-\end{itemize}
-
 	\section{Traceability Matrices and Graphs}
 	
-	The purpose of the traceability matrices is to provide easy references on what
-	has to be additionally modified if a certain component is changed.  Every time a
-	component is changed, the items in the column of that component that are marked
-	with an ``X'' may have to be modified as well.  Table~\ref{Table:trace} shows
-	the
-	dependencies of theoretical models, general definitions, data definitions, and
-	instance models with each other. Table~\ref{Table:R_trace} shows the
-	dependencies of instance models, requirements, and data constraints on each
-	other. Table~\ref{Table:A_trace} shows the dependencies of theoretical models,
-	general definitions, data definitions, instance models, and likely changes on
-	the assumptions.
-	
-	\plt{You will have to modify these tables for your problem.}
-	
-	\plt{The traceability matrix is not generally symmetric.  If GD1 uses A1, that
-		means that GD1's derivation or presentation requires invocation of A1.  A1
-		does not use GD1.  A1 is ``used by'' GD1.}
-	
-	\plt{The traceability matrix is challenging to maintain manually.  Please do
-		your best.  In the future tools (like Drasil) will make this much easier.}
-	
-	\afterpage{
-		\begin{landscape}
-			\begin{table}[h!]
-				\centering
-				\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
-					\hline
-					& \aref{A_OnlyThermalEnergy}& \aref{A_hcoeff}& \aref{A_mixed}& \aref{A_tpcm}&
-					\aref{A_const_density}& \aref{A_const_C}& \aref{A_Newt_coil}& \aref{A_tcoil}&
-					\aref{A_tlcoil}& \aref{A_Newt_pcm}& \aref{A_charge}& \aref{A_InitTemp}&
-					\aref{A_OpRangePCM}& \aref{A_OpRange}& \aref{A_htank}& \aref{A_int_heat}&
-					\aref{A_vpcm}& \aref{A_PCM_state}& \aref{A_Pressure} \\
-					\hline
-					\tref{T_COE}        & X& & & & & & & & & & & & & & & & & & \\ \hline
-					\tref{T_SHE}        & & & & & & & & & & & & & & & & & & & \\ \hline
-					\tref{T_LHE}        & & & & & & & & & & & & & & & & & & & \\ \hline
-					\dref{NL}           & & X& & & & & & & & & & & & & & & & & \\ \hline
-					\dref{ROCT}         & & & X& X& X& X& & & & & & & & & & & & & \\ \hline
-					\ddref{FluxCoil}    & & & & & & & X& X& X& & & & & & & & & & \\ \hline
-					\ddref{FluxPCM}     & & & X& X& & & & & & X& & & & & & & & & \\ \hline
-					\ddref{D_HOF}       & & & & & & & & & & & & & & & & & & & \\ \hline
-					\ddref{D_MF}        & & & & & & & & & & & & & & & & & & & \\ \hline
-					\iref{ewat}         & & & & & & & & & & & X& X& & X& X& X& & & X \\ \hline
-					\iref{epcm}         & & & & & & & & & & & & X& X& & & X& X& X& \\ \hline
-					\iref{I_HWAT}       & & & & & & & & & & & & & & X& & & & & X \\ \hline
-					\iref{I_HPCM}       & & & & & & & & & & & & & X& & & & & X & \\ \hline
-					\lcref{LC_tpcm}     & & & & X& & & & & & & & & & & & & & & \\ \hline
-					\lcref{LC_tcoil}    & & & & & & & & X& & & & & & & & & & & \\ \hline
-					\lcref{LC_tlcoil}   & & & & & & & & & X& & & & & & & & & & \\ \hline
-					\lcref{LC_charge}   & & & & & & & & & & & X& & & & & & & & \\ \hline
-					\lcref{LC_InitTemp} & & & & & & & & & & & & X& & & & & & & \\ \hline
-					\lcref{LC_htank}    & & & & & & & & & & & & & & & X& & & & \\
-					\hline
-				\end{tabular}
-				\caption{Traceability Matrix Showing the Connections Between Assumptions and
-					Other Items}
-				\label{Table:A_trace}
-			\end{table}
-		\end{landscape}
-	}
-	
 	\begin{table}[h!]
 		\centering
-		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
-			\hline        
-			& \tref{T_COE}& \tref{T_SHE}& \tref{T_LHE}& \dref{NL}& \dref{ROCT} &
-			\ddref{FluxCoil}& \ddref{FluxPCM} & \ddref{D_HOF}& \ddref{D_MF}& \iref{ewat}&
-			\iref{epcm}& \iref{I_HWAT}& \iref{I_HPCM} \\
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
 			\hline
-			\tref{T_COE}     & & & & & & & & & & & & & \\ \hline
-			\tref{T_SHE}     & & & X& & & & & & & & & & \\ \hline
-			\tref{T_LHE}     & & & & & & & & & & & & & \\ \hline
-			\dref{NL}        & & & & & & & & & & & & & \\ \hline
-			\dref{ROCT}      & X& & & & & & & & & & & & \\ \hline
-			\ddref{FluxCoil} & & & & X& & & & & & & & & \\ \hline
-			\ddref{FluxPCM}  & & & & X& & & & & & & & & \\ \hline
-			\ddref{D_HOF}    & & & & & & & & & & & & & \\ \hline
-			\ddref{D_MF}     & & & & & & & & X& & & & & \\ \hline
-			\iref{ewat}      & & & & & X& X& X& & & & X& & \\ \hline
-			\iref{epcm}      & & & & & X& & X& & X& X& & & X \\ \hline
-			\iref{I_HWAT}    & & X& & & & & & & & & & & \\ \hline
-			\iref{I_HPCM}    & & X& X& & & & X& X& X& & X& & \\
-			\hline
+			& R1 & R2 & R3 & R4 & R5 & R6 & R7 & R8 & R9 & R10 & R11 \\ \hline
+			NFR4 &X & & & & & & & & & & \\ \hline
+			NFR8 &X &X &X & & & & & & & & \\ \hline
+			NFR9 & & & & & & &X & & & & \\ \hline % 6
+			NFR10 & & & & & & &X &X & & & \\ \hline % 7,8
+			NFR11 & & & & & & &X &X & & &\\ \hline % 7,8
+			NFR12 & & & & & & &X &X & & & \\ \hline % 7,8
+			NFR13 &X & & & & &X &X & & & & \\ \hline % 1,7,8
+			NFR18 &X & & & &X & &X & &X &X &X \\ \hline % 11,10,9,7,5,1
+			NFR20 & & & & & &X & &X & & & \\ \hline % 6,8
+			NFR22 &X & & & &X & &X & &X &X &X \\ \hline % 11,10,9,7,5,1	
 		\end{tabular}
-		\caption{Traceability Matrix Showing the Connections Between Items of Different
-			Sections}
-		\label{Table:trace}
-	\end{table}
-	
-	\begin{table}[h!]
-		\centering
-		\begin{tabular}{|c|c|c|c|c|c|c|c|}
-			\hline
-			& \iref{ewat}& \iref{epcm}& \iref{I_HWAT}& \iref{I_HPCM}&
-			\ref{sec_DataConstraints}& \rref{R_RawInputs}& \rref{R_MassInputs} \\
-			\hline
-			\iref{ewat}            & & X& & & & X& X \\ \hline
-			\iref{epcm}            & X& & & X& & X& X \\ \hline
-			\iref{I_HWAT}          & & & & & & X& X \\ \hline
-			\iref{I_HPCM}          & & X& & & & X& X \\ \hline
-			\rref{R_RawInputs}     & & & & & & & \\ \hline
-			\rref{R_MassInputs}    & & & & & & X& \\ \hline
-			\rref{R_CheckInputs}   & & & & & X& & \\ \hline
-			\rref{R_OutputInputs}  & X& X& & & & X& X \\ \hline
-			\rref{R_TempWater}     & X& & & & & & \\ \hline 
-			\rref{R_TempPCM}       & & X& & & & & \\ \hline
-			\rref{R_EnergyWater}   & & & X& & & & \\ \hline
-			\rref{R_EnergyPCM}     & & & & X& & & \\ \hline
-			\rref{R_VerifyOutput}  & & & X& X& & & \\ \hline
-			\rref{R_timeMeltBegin} & & X& & & & & \\ \hline
-			\rref{R_timeMeltEnd}   & & X& & & & & \\ 
-			\hline
-		\end{tabular}
-		\caption{Traceability Matrix Showing the Connections Between Requirements and
-			Instance Models}
+		\caption{NonFunctional to Functional Requirement Dependency Matrix}
 		\label{Table:R_trace}
 	\end{table}
-	
-	The purpose of the traceability graphs is also to provide easy references on
-	what has to be additionally modified if a certain component is changed.  The
-	arrows in the graphs represent dependencies. The component at the tail of an
-	arrow is depended on by the component at the head of that arrow. Therefore, if a
-	component is changed, the components that it points to should also be
-	changed. Figure~\ref{Fig_ATrace} shows the dependencies of theoretical models,
-	general definitions, data definitions, instance models, likely changes, and
-	assumptions on each other. Figure~\ref{Fig_RTrace} shows the dependencies of
-	instance models, requirements, and data constraints on each other.
 
 	\newpage
 	
