@@ -22,6 +22,22 @@
 
 \input{../Comments}
 \input{../Common}
+\newcounter{ACRnum}
+\newcommand{\rtheACRnum}{ACR\theACRnum}
+\newcommand{\ACRref}[1]{ACR\ref{#1}}
+\newcounter{IRnum} 
+\newcommand{\rtheIRnum}{IR\theIRnum}
+\newcommand{\IRref}[1]{IR\ref{#1}}
+\newcounter{PRRnum}
+\newcommand{\rthePRRnum}{PRR\thePRRnum}
+\newcommand{\PRRref}[1]{PRR\ref{#1}}
+\newcounter{ADRnum}
+\newcommand{\rtheADRnum}{ADR\theADRnum}
+\newcommand{\ADRref}[1]{ADR\ref{#1}}
+\newcounter{IMnum} 
+\newcommand{\rtheIMnum}{IM\theIMnum}
+\newcommand{\IMref}[1]{IM\ref{#1}}
+
 
 \begin{document}
 	
@@ -82,10 +98,34 @@
 		rationale design process how and why to fake it.)}
 	
 	\subsection{Access Requirements}
+	\noindent 
+	\begin{itemize}
+		\item[ACR\refstepcounter{ACRnum}\theACRnum:]
+		The application must not display other users private details to the user.
+	\end{itemize}
 	\subsection{Integrity Requirements}
+	\noindent 
+	\begin{itemize}
+		\item[IR\refstepcounter{IRnum}\theIRnum:]
+		Passwords must be encrypted with SHA-256 when stored.
+	\end{itemize}
 	\subsection{Privacy Requirements}
+	\noindent 
+	\begin{itemize}
+		\item[PRR\refstepcounter{PRRnum}\thePRRnum:]
+		The application must use OAuth protocols to verify communication between the client and server.
+	\end{itemize}
 	\subsection{Audit Requirements}
+	\noindent
+	\begin{itemize}
+		\item[ADR\refstepcounter{ADRnum}\theADRnum:]
+		Data will be stored in a secure database. When data is deleted or edited a record of this data will be kept for up to 30 days.
+	\end{itemize}
 	\subsection{Immunity Requirements}
+	\noindent 
+	\begin{itemize}
+		\item N/A
+	\end{itemize}
 	
 	
 	\section{Roadmap}
@@ -93,4 +133,20 @@
 	\wss{Which safety requirements will be implemented as part of the capstone timeline?
 		Which requirements will be implemented in the future?}
 	
+	Based on the safety requirements listed above, the table below displays which of the requirements are planned for the current timeline of the project and those that planned implementations for the future.
+	
+	\begin{center}
+		\begin{tabular}{ |c|c| } 
+			\hline
+			Planned & Future \\
+			\hline 
+			\hline
+			ACR1 & ADR1 \\ 
+			\hline
+			IR1 & \\
+			\hline 
+			PRR1 & \\ 
+			\hline
+		\end{tabular}
+	\end{center}
 \end{document}
