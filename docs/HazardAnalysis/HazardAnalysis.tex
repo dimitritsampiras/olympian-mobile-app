@@ -102,18 +102,30 @@
 	\begin{itemize}
 		\item[ACR\refstepcounter{ACRnum}\theACRnum:]
 		The application must not display other users private details to the user.
+		\item[ACR\refstepcounter{ACRnum}\theACRnum:]
+		Only the developers and system administrators will be able to access all user details except their passwords.
 	\end{itemize}
 	\subsection{Integrity Requirements}
 	\noindent 
 	\begin{itemize}
 		\item[IR\refstepcounter{IRnum}\theIRnum:]
 		Passwords must be encrypted with SHA-256 when stored.
+		\item[IR\refstepcounter{IRnum}\theIRnum:]
+		User data will not be modified void of user permission.
+		\item[IR\refstepcounter{IRnum}\theIRnum:]
+		User data will be automatically backed up to the database upon connection to the internet.
+		\item[IR\refstepcounter{IRnum}\theIRnum:]
+		User data will be stored locally.
 	\end{itemize}
 	\subsection{Privacy Requirements}
 	\noindent 
 	\begin{itemize}
 		\item[PRR\refstepcounter{PRRnum}\thePRRnum:]
 		The application must use OAuth protocols to verify communication between the client and server.
+		\item[PRR\refstepcounter{PRRnum}\thePRRnum:]
+		The application will ensure uers are aware of data collection practices before collecting any data from them.
+		\item[PRR\refstepcounter{PRRnum}\thePRRnum:]
+		The application will communicate any changes to the privacy policy with the users.	
 	\end{itemize}
 	\subsection{Audit Requirements}
 	\noindent
@@ -143,9 +155,21 @@
 			\hline
 			ACR1 & ADR1 \\ 
 			\hline
+			ACR2 & \\
+			\hline
 			IR1 & \\
+			\hline
+			IR2 & \\
+			\hline
+			IR3 & \\
+			\hline
+			IR4 & \\
 			\hline 
 			PRR1 & \\ 
+			\hline
+			PR2 & \\
+			\hline
+			PR3 & \\
 			\hline
 		\end{tabular}
 	\end{center}
