@@ -134,11 +134,24 @@
 		\hline
 		Component & Failure Modes & Effects Of Failure & Causes Of Failure & Recommended Action & SR & Ref.\\
 		\hline
-		User Login \& Authentication& & & & & &\\
+		User Login \& Authentication& User cannot log in to application & User cannot utilize site functionality & 
+			a. User uses incorrect login credentials.
+			& 
+			Reset user's credentials.
+			& &\\
 		\hline
-		User Private Data Access& & & & & &\\
+		User Private Data Access & Data that is meant to be kept private is displayed publicly & 
+			Users privacy is breached and sensitive data is released & 
+				a. Users privacy settings are incorrectly stored.
+				\newline
+				b. Malicious third party gains access to user data.
+			& 
+			\begin{itemize}
+				User data will be backed up daily to avoid error. Utilize stringent AWS admin permissions.
+			\end{itemize}
+			& &\\
 		\hline
-		User Visual Interface& & & & & &\\
+		User Visual Interface &  & & & & &\\
 		\hline
 		Workout Suggestion Algorithm& & & & & &\\
 		\hline
