@@ -5,6 +5,7 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
+\usepackage{changepage}
 
 \hypersetup{
 	colorlinks=true,       % false: boxed links; true: colored links
@@ -124,8 +125,44 @@
 	\section{Failure Mode and Effect Analysis}
 	\subsection{Hazards Out of Scope}
 	\subsection{Failure Modes \& Effects Analysis Table}
-	\wss{Include your FMEA table here}
 	
+	\begin{adjustwidth}{-3cm}{-1cm}
+	\centering
+	\noindent\begin{tabular}{ |p{3.3cm}||p{2.5cm}|p{3.2cm}|p{2cm}|p{3.3cm}|p{0.7cm}|p{0.7cm}| @{} }
+		\hline
+		\multicolumn{7}{|c|}{Failure Modes \& Effect Analysis} \\
+		\hline
+		Component & Failure Modes & Effects Of Failure & Causes Of Failure & Recommended Action & SR & Ref.\\
+		\hline
+		User Login \& Authentication& User cannot log in to application & User cannot utilize site functionality & 
+			a. User uses incorrect login credentials.
+			& 
+			Reset user credentials.
+			& &\\
+		\hline
+		User Private Data Access & Data that is meant to be kept private is displayed publicly & 
+			User privacy is breached and sensitive data is released & 
+				a. User privacy settings are incorrectly stored.
+				\newline
+				b. Malicious third party gains access to user data.
+			& 
+				User data will be backed up daily to avoid error. Utilize stringent AWS admin permissions.
+			& &\\
+		\hline
+		User Visual Interface &  & & & & &\\
+		\hline
+		Workout Suggestion Algorithm& Workouts are incorrectly or illegally accessed by users& Users are able to access unavailable, restricted or un-catered routines & a. Database failure \newline b. Privacy system failure \newline c. Suggestion algorithm failure & Display detailed message to user on attempt to access restricted routine & &\\
+		\hline
+		Application Server& Application Server terminates unexpectedly & Current data transactions and communication will cease& a. Host failure \newline b. server exceeds data limit& Communicate server issues to users and store unsaved data locally on the user device & & \\
+		\hline
+		Database& Data is deleted unintentionally& Collected data will not be available for user display or system analysis& a. Database failure & Regularly and automatically backup database and allow admin permissions to rollback & &\\
+		\cline{2-7}
+		& Database is unavailable & Data transactions will be unavailable & a. Database failure \newline b. Host failure& Refer to \_\_ & &\\
+		\cline{2-7}
+		& Required data is not accessible &  Data transactions will be unavailable to certain users. & a. Database failure \newline b. Host failure & Refer to \_\_ & &\\
+		\hline
+	\end{tabular}
+	\end{adjustwidth}
 	\section{Safety and Security Requirements}
 	
 	\wss{Newly discovered requirements.  These should also be added to the SRS.  (A
