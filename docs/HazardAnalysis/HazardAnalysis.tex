@@ -5,6 +5,7 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
+\usepackage{changepage}
 
 \hypersetup{
 	colorlinks=true,       % false: boxed links; true: colored links
@@ -123,8 +124,29 @@
 	\section{Failure Mode and Effect Analysis}
 	\subsection{Hazards Out of Scope}
 	\subsection{Failure Modes \& Effects Analysis Table}
-	\wss{Include your FMEA table here}
 	
+	\begin{adjustwidth}{-1cm}{-1cm}
+	\centering
+	\noindent\begin{tabular}{ |p{1.7cm}||p{2.5cm}|p{3cm}|p{2cm}|p{3cm}|p{0.7cm}|p{0.7cm}| @{} }
+		\hline
+		\multicolumn{7}{|c|}{Failure Modes \& Analysis} \\
+		\hline
+		Component & Failure Modes & Effects Of Failure & Causes Of Failure & Recommended Action & SR & Ref.\\
+		\hline
+		& & & & & &\\
+		\hline
+		& & & & & &\\
+		\hline
+		& & & & & &\\
+		\hline
+		& & & & & &\\
+		\hline
+		& & & & & &\\
+		\hline
+		& & & & & &\\
+		\hline
+	\end{tabular}
+	\end{adjustwidth}
 	\section{Safety and Security Requirements}
 	
 	\wss{Newly discovered requirements.  These should also be added to the SRS.  (A
