@@ -47,6 +47,12 @@
 	~\newpage
 	
 	\pagenumbering{roman}
+
+	\tableofcontents
+
+	\newpage
+
+	\section{Revision History}
 	
 	\begin{table}[hp]
 		\caption{Revision History} \label{TblRevisionHistory}
@@ -63,10 +69,6 @@
 	
 	~\newpage
 	
-	\tableofcontents
-	
-	~\newpage
-	
 	\pagenumbering{arabic}
 	
 	\section{Introduction}
@@ -79,6 +81,27 @@
 	\section{Scope and Purpose of Hazard Analysis}
 	
 	\section{System Boundaries and Components}
+
+	The system upon which the Hazard Analysis will be performed on consists of the following components:
+
+	\begin{enumerate}
+		\item The Olympian mobile application, which is composed of a front-end interface served by a back-end server, supports the following major functionalities: 
+		\begin{enumerate}
+			\item Profile Creation
+			\item Workout Routine Creation
+			\item Workout Routine Discovery and Browsing
+			\item Workout Routine Reviewing
+			\item Goal Progress Tracking
+		\end{enumerate}
+
+		\item The physical Android or iOS mobile device.
+
+		\item The AWS Redshift Database where relational user information is stored.
+
+	\end{enumerate}
+	Although integral to the system, the physical mobile device and Redshift Database availability are not under the control of Parnas' Pals.
+    The physical phone is manufactured by a third party company, and operated by the user. 
+	The Redshift Database is operated by Amazon Web Services, making them responsible for database availability.
 	
 	\section{Critical Assumptions}
 
