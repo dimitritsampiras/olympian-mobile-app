@@ -150,13 +150,15 @@
 		\hline
 		User Visual Interface &  & & & & &\\
 		\hline
-		Workout Suggestion Algorithm& & & & & &\\
+		Workout Suggestion Algorithm& Workouts are incorrectly or illegally accessed by users& Users are able to access unavailable, restricted or un-catered routines & a. Database failure \newline b. Privacy system failure \newline c. Suggestion algorithm failure & Display detailed message to user on attempt to access restricted routine & &\\
 		\hline
-		Application Server& & & & & &\\
+		Application Server& Application Server terminates unexpectedly & Current data transactions and communication will cease& a. Host failure \newline b. server exceeds data limit& Communicate server issues to users and store unsaved data locally on the user device & & \\
 		\hline
-		Database& & & & & &\\
-		\hline
-		& & & & & &\\
+		Database& Data is deleted unintentionally& Collected data will not be available for user display or system analysis& a. Database failure & Regularly and automatically backup database and allow admin permissions to rollback & &\\
+		\cline{2-7}
+		& Database is unavailable & Data transactions will be unavailable & a. Database failure \newline b. Host failure& Refer to \_\_ & &\\
+		\cline{2-7}
+		& Required data is not accessible &  Data transactions will be unavailable to certain users. & a. Database failure \newline b. Host failure & Refer to \_\_ & &\\
 		\hline
 	\end{tabular}
 	\end{adjustwidth}
