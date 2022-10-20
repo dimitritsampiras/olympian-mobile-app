@@ -61,9 +61,7 @@
 			\toprule
 			\textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 			\midrule
-			Date1 & Name(s) & Description of changes\\
-			Date2 & Name(s) & Description of changes\\
-			... & ... & ...\\
+			19/10/22 & All & Initial Draft\\
 			\bottomrule
 		\end{tabularx}
 	\end{table}
@@ -80,7 +78,11 @@
 	For Olympian's purposes (and throughout this document), a hazard will be defined as any condition or event which can lead to a state that is likely to negatively affect Olympian's stakeholders.
 	
 	\section{Scope and Purpose of Hazard Analysis}
-	
+
+	This document aims to provide an in-depth analysis to potential system hazards of the
+	Olympian app. These hazards encompass categories including security, authorization,
+	input correctness and error handling.
+
 	\section{System Boundaries and Components}
 
 	The system upon which the Hazard Analysis will be performed on consists of the following components:
@@ -117,20 +119,23 @@
 		
 	\end{itemize}
 
-	\wss{These assumptions that are made about the software or system.  You should
-		minimize the number of assumptions that remove potential hazards.  For instance,
-		you could assume a part will never fail, but it is generally better to include
-		this potential failure mode.}
-	
 	\section{Failure Mode and Effect Analysis}
 	\subsection{Hazards Out of Scope}
+	\begin{enumerate}
+		\item Native Mobile Device Software Failures: Because this is a mobile application, many native features will be used to provide application functionality.
+		These features can include haptic feedback, notifications, accessibility controls, etc. It is possible that some of these
+		features may fail on the mobile device, which would create a hazard for the application, but is outside the control of the application developers. Additionally, the application
+		will only function on iOS 10 / Android 5.0 and above (React Native is unsupported). The version of software used by the user mobile device is not within the control of the application developers, and therefore
+		the application will not be available to devices with operating system software older than iOS 10 or Android 5.0.
+		
+		\item Database and Cloud Hosting Service Failures: The application relies on external services such as AWS Redshift to store and retrieve data, and process user requests.
+		The availability of these services is not under the control of the developers of the application, and interruptions in their availability present a hazard for the application.
+	\end{enumerate}
+	These hazards cannot be prevented by the application developers but will be mitigated to the fullest possible extent.
 	\subsection{Failure Modes \& Effects Analysis Table}
-	
 	\begin{adjustwidth}{-3cm}{-1cm}
 	\centering
-	\noindent\begin{tabular}{ |p{3.3cm}||p{2.5cm}|p{3.2cm}|p{2cm}|p{3.3cm}|p{0.7cm}|p{0.7cm}| @{} }
-		\hline
-		\multicolumn{7}{|c|}{Failure Modes \& Effect Analysis} \\
+	\noindent\begin{tabular}{ |p{3.3cm}|p{2.5cm}|p{3.2cm}|p{2cm}|p{2.5cm}|p{1cm}|p{1cm}| @{} }
 		\hline
 		Component & Failure Modes & Effects Of Failure & Causes Of Failure & Recommended Action & SR & Ref.\\
 		\hline
@@ -138,7 +143,7 @@
 			a. User uses incorrect login credentials.
 			& 
 			Reset user credentials.
-			& &\\
+			& PRR1 & H1-1\\
 		\hline
 		User Private Data Access & Data that is meant to be kept private is displayed publicly & 
 			User privacy is breached and sensitive data is released & 
@@ -147,26 +152,31 @@
 				b. Malicious third party gains access to user data.
 			& 
 				User data will be backed up daily to avoid error. Utilize stringent AWS admin permissions.
-			& &\\
+			& ACR1, ACR2, IR1, ADR1 & H2-1\\
 		\hline
-		User Visual Interface &  & & & & &\\
+		Workout Suggestion Algorithm& Workouts are incorrectly or illegally accessed by users& Users are able to access unavailable, restricted or un-catered routines & a. Database failure \newline b. Privacy system failure \newline c. Suggestion algorithm failure & Display detailed message to user on attempt to access restricted routine & PRR1 &H3-1\\
 		\hline
-		Workout Suggestion Algorithm& Workouts are incorrectly or illegally accessed by users& Users are able to access unavailable, restricted or un-catered routines & a. Database failure \newline b. Privacy system failure \newline c. Suggestion algorithm failure & Display detailed message to user on attempt to access restricted routine & &\\
+		Application Server& Application Server terminates unexpectedly & Current data transactions and communication will cease& a. Host failure \newline b. server exceeds data limit& Communicate server issues to users and store unsaved data locally on the user device & IR3, IR4, IR5 & H4-1 \\
 		\hline
-		Application Server& Application Server terminates unexpectedly & Current data transactions and communication will cease& a. Host failure \newline b. server exceeds data limit& Communicate server issues to users and store unsaved data locally on the user device & & \\
-		\hline
-		Database& Data is deleted unintentionally& Collected data will not be available for user display or system analysis& a. Database failure & Regularly and automatically backup database and allow admin permissions to rollback & &\\
-		\cline{2-7}
-		& Database is unavailable & Data transactions will be unavailable & a. Database failure \newline b. Host failure& Refer to \_\_ & &\\
-		\cline{2-7}
-		& Required data is not accessible &  Data transactions will be unavailable to certain users. & a. Database failure \newline b. Host failure & Refer to \_\_ & &\\
-		\hline
+
+ 	\end{tabular}
+
+	 \noindent\begin{tabular}{ |p{3.3cm}|p{2.5cm}|p{3.2cm}|p{2cm}|p{2.5cm}|p{1cm}|p{1cm}| @{} }
+	\hline
+	Database& Data is deleted unintentionally& Collected data will not be available for user display or system analysis& a. Database failure & Regularly and automatically backup database and allow admin permissions to rollback & IR5, ADR1& H5-1\\
+	\cline{2-7}
+	& Database is unavailable & Data transactions will be unavailable & a. Database failure \newline b. Host failure& Refer to H5-1 & IR3, IR4 & H5-2\\
+	\cline{2-7}
+	& Required data is not accessible &  Data transactions will be unavailable to certain users. & a. Database failure \newline b. Host failure & Refer to H5-1 & IR3, IR4 &H5-3\\
+	\hline
+	User Interface & Components and component data does not successfully render onto to UI component & User will miss vital cues, prompts, and information required to operate
+	the app & Native libraries, components, and properties used on incompatible operating systems & The system should accommodate various operating systems and
+	their versions. Animated components using native drivers need to be disabled on devices and OS versions that do not support them. 
+	The system should frequently check which OS platform the app is running on to ensure the use of OS specific UI elements. & PRR2, PRR3 & H6-1\\
+	\hline
 	\end{tabular}
 	\end{adjustwidth}
 	\section{Safety and Security Requirements}
-	
-	\wss{Newly discovered requirements.  These should also be added to the SRS.  (A
-		rationale design process how and why to fake it.)}
 	
 	\subsection{Access Requirements}
 	\noindent 
@@ -211,12 +221,10 @@
 	\begin{itemize}
 		\item N/A
 	\end{itemize}
-	
+	\newpage
 	
 	\section{Roadmap}
 	
-	\wss{Which safety requirements will be implemented as part of the capstone timeline?
-		Which requirements will be implemented in the future?}
 	
 	Based on the safety requirements listed above, the table below displays which of the requirements are planned for the current timeline of the project and those that planned implementations for the future.
 	
