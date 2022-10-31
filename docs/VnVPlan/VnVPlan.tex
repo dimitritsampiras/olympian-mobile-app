@@ -189,7 +189,7 @@
 	
 	\begin{enumerate}
 		
-		\item{test-id1\\}
+		\item{\textbf{test-id1}}: TEMPLATE
 		
 		Control: Manual versus Automatic
 		
@@ -201,21 +201,185 @@
 		
 		Test Case Derivation: \wss{Justify the expected value given in the Output field}
 		
-		How test will be performed: 
+		How test will be performed:
 		
-		\item{test-id2\\}
+		Requirement(s): 
 		
-		Control: Manual versus Automatic
+		\item{\textbf{test-id1}}: A workout routine can be created.
 		
-		Initial State: 
+		Control: Manual
 		
-		Input: 
+		Initial State: Application is running
 		
-		Output: \wss{The expected result for the given inputs}
+		Input: User inputs required data for a workout routine.
 		
-		Test Case Derivation: \wss{Justify the expected value given in the Output field}
+		Output: A workout routine is stored in the database and is accessible to the user that created it. If the user determined that the workout to be public then it should be publicly visible.
 		
-		How test will be performed: 
+		Test Case Derivation: On a successful creation, the workout routine should be placed into the database.
+		
+		How test will be performed: This test can be preformed with a manual insertion of creating a workout routine under a test user. These results can be determined by viewing the database and scope of visibility of the created routine.
+		
+		Requirement(s): R1
+		
+		\item{\textbf{test-id1}}: A workout routine can be edited.
+		
+		Control: Manual
+		
+		Initial State: Application is running with an existing workout routine.
+		
+		Input: User edits a workout routine with new values.
+		
+		Output: A workout routine is updated with new values in the database and new values are visible to accessible users.
+		
+		Test Case Derivation: On a successful edit, the workout routine should be updated with new values database.
+		
+		How test will be performed: This test can be preformed with a manual edit of a workout routine under a test user.
+		
+		Requirement(s): R1
+		
+		\item{\textbf{test-id1}}: Adding an exercise to a workout routine
+
+		Control: Manual
+		
+		Initial State: Application is running and a workout routine is in the process of being created or edited.
+		
+		Input: a user created exercise with the parameters required for the exercise.
+		
+		Output: The workout routine should include the added exercise.
+		
+		Test Case Derivation: Because exercises are bounded to a specific workout routine, the routine that the exercise was created under should include the new exercise.
+		
+		How test will be performed: Given a workout routine, an exercise will be manually added to determine if it is linked and added to the workout routine.
+		
+		Requirement(s): R2
+		
+		\item{\textbf{test-id1}}: Removing an exercise to a workout routine
+		
+		Control: Manual
+		
+		Initial State: Application is running and a workout routine is in the process of being created or edited.
+		
+		Input: The user chooses to remove an exercise.
+		
+		Output: Some feedback indicating that an exercise has been removed. The workout routine no longer contains the removed exercise.
+		
+		Test Case Derivation: On removal of an exercise, there should be an indication towards the user notifying them of the removal. The exercise should also be deleted from the workout routine.
+		
+		How test will be performed: Given a workout routine, an exercise will be manually removed and checked to ensure that it no longer exists within the given workout routine.
+		
+		Requirement(s): R2
+		
+		\item{\textbf{test-id1}}: Limiting exercises to a workout routine
+		
+		Control: Manual
+		
+		Initial State: Application is running and a workout routine is in the process of being created or edited.
+		
+		Input: The number of exercises required to reach the limit of exercises per workout routine. 
+		
+		Output: A notification to the user, before the limiting exercise notifying them of the limit, and preventing them from adding another exercise.
+		
+		Test Case Derivation: The user should be aware of the exercise limit per workout routine and should not be able to exceed it.
+		
+		How test will be performed: The test will be preformed by manually added exercises to a workout routine until the limit. Then upon adding the limiting input, a notification should be expected.
+		
+		Requirement(s): R2
+		
+		\item{\textbf{test-id1}}: Adding quantifiers to an exercise
+		
+		Control: Manual
+		
+		Initial State: The application is running and an exercise is in the process of being created or edited.
+		
+		Input: A number and unit of measurement describing an exercise.
+		
+		Output: The exercise now holds the given quantifier and is displayed to the user.
+		
+		Test Case Derivation: On adding a quantifier to an exercise, there should be a unit of measurement and value associated with it.
+		
+		How test will be performed: This test will be executed by adding a quantifier to various types of exercises to ensure they correctly measure the exercise.
+		
+		Requirement(s): R3
+		
+		\item{\textbf{test-id1}}: Removing quantifiers from an exercise
+		
+		Control: Manual
+		
+		Initial State: The application is running and an exercise is in the process of being created or edited.
+		
+		Input: Removal of a quantifier.
+		
+		Output: The exercise no longer holds a quantifier and is not displayed to the user.
+		
+		Test Case Derivation: On removing a quantifier to an exercise, it should no longer be visible to the user.
+		
+		How test will be performed: This test will be executed by removing a quantifier from an exercises to ensure it does not display any quantifying information.
+		
+		Requirement(s): R3
+		
+		\item{\textbf{test-id1}}: Editing quantifiers to an exercise
+		
+		Control: Manual
+		
+		Initial State: The application is running and an exercise is in the process of being created or edited.
+		
+		Input: A number and unit of measurement describing an exercise.
+		
+		Output: The exercise now holds the updated quantifier.
+		
+		Test Case Derivation: On updating a quantifier to an exercise, there should be a new unit of measurement and/or value associated with it.
+		
+		How test will be performed: This test will be executed by editing a quantifier and ensuring the values are updated on completion of the edit.
+		
+		Requirement(s): R3
+		
+		\item{\textbf{test-id1}}: Publicizing a workout routine
+		
+		Control: Manual
+		
+		Initial State: The application is running and a private workout routine is created.
+		
+		Input: An edit or addition to a workout routine to make is public.
+		
+		Output: The workout routine is declared public in the database and is now visible to all users.
+		
+		Test Case Derivation: This is the expected output because if the workout routine was not public before this action then it should not be visible to users. Once updating the publicity, the database should be updated and the routine should be publicly available 
+		
+		How test will be performed: This test will be done by manually changing the state of a workout routine and checking for a database update and viewing the routine under a different test-user.
+		
+		Requirement(s): R4
+		
+		\item{\textbf{test-id1}}: Privatizing a workout routine
+		
+		Control: Manual
+		
+		Initial State: The application is running and a public workout routine is created.
+		
+		Input: An edit or addition to a workout routine to make is private.
+		
+		Output: The workout routine is declared private in the database and is no longer visible to any user except the creator.
+		
+		Test Case Derivation: By privatizing a routine, it should no longer be accessible to any other user than the creator. There should also be a database update to signify this.
+		
+		How test will be performed: This test will be done by manually changing the state of a workout routine and checking for a database update and viewing the routine under a different test-user.
+		
+		Requirement(s): R4
+		
+		\item{\textbf{test-id1}}: Saving a public workout
+		
+		Control: Manual
+		
+		Initial State: The application is running and there is a public workout routine created by another user.
+		
+		Input: The other user workout routine is saved.
+		
+		Output: The workout routine is now visible and accessible under the saved workout routines.
+		
+		Test Case Derivation: On saving a workout routine, it should be stored somewhere the user can access it for later use.
+		
+		How test will be performed: This test will be done by creating a public workout routine on one test-user. On a different test user this routine will be saved. The saved workout routines should then include the newly saved one.
+		
+		Requirement(s): R5
 		
 	\end{enumerate}
 	
