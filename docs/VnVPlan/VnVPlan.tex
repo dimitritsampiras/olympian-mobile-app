@@ -209,7 +209,7 @@
 		
 		Control: Manual
 		
-		Initial State: Application is running
+		Initial State: Application is running.
 		
 		Input: User inputs required data for a workout routine.
 		
@@ -237,7 +237,7 @@
 		
 		Requirement(s): R1
 		
-		\item{\textbf{test-id1}}: Adding an exercise to a workout routine
+		\item{\textbf{test-id1}}: Adding an exercise to a workout routine.
 
 		Control: Manual
 		
@@ -253,7 +253,7 @@
 		
 		Requirement(s): R2
 		
-		\item{\textbf{test-id1}}: Removing an exercise to a workout routine
+		\item{\textbf{test-id1}}: Removing an exercise to a workout routine.
 		
 		Control: Manual
 		
@@ -269,7 +269,7 @@
 		
 		Requirement(s): R2
 		
-		\item{\textbf{test-id1}}: Limiting exercises to a workout routine
+		\item{\textbf{test-id1}}: Limiting exercises to a workout routine.
 		
 		Control: Manual
 		
@@ -285,7 +285,7 @@
 		
 		Requirement(s): R2
 		
-		\item{\textbf{test-id1}}: Adding quantifiers to an exercise
+		\item{\textbf{test-id1}}: Adding quantifiers to an exercise.
 		
 		Control: Manual
 		
@@ -301,7 +301,7 @@
 		
 		Requirement(s): R3
 		
-		\item{\textbf{test-id1}}: Removing quantifiers from an exercise
+		\item{\textbf{test-id1}}: Removing quantifiers from an exercise.
 		
 		Control: Manual
 		
@@ -317,7 +317,7 @@
 		
 		Requirement(s): R3
 		
-		\item{\textbf{test-id1}}: Editing quantifiers to an exercise
+		\item{\textbf{test-id1}}: Editing quantifiers to an exercise.
 		
 		Control: Manual
 		
@@ -333,7 +333,7 @@
 		
 		Requirement(s): R3
 		
-		\item{\textbf{test-id1}}: Publicizing a workout routine
+		\item{\textbf{test-id1}}: Publicizing a workout routine.
 		
 		Control: Manual
 		
@@ -349,7 +349,7 @@
 		
 		Requirement(s): R4
 		
-		\item{\textbf{test-id1}}: Privatizing a workout routine
+		\item{\textbf{test-id1}}: Privatizing a workout routine.
 		
 		Control: Manual
 		
@@ -365,7 +365,7 @@
 		
 		Requirement(s): R4
 		
-		\item{\textbf{test-id1}}: Saving a public workout
+		\item{\textbf{test-id1}}: Saving a public workout.
 		
 		Control: Manual
 		
@@ -380,6 +380,103 @@
 		How test will be performed: This test will be done by creating a public workout routine on one test-user. On a different test user this routine will be saved. The saved workout routines should then include the newly saved one.
 		
 		Requirement(s): R5
+		
+		\item{\textbf{test-id1}}: Browsing workout routines.
+		
+		Control: Manual
+		
+		Initial State: The application is running and multiple workout routines are created.
+		
+		Input: navigation movements to view the public workout routines.
+		
+		Output: Multiple public workout routines should be displayed. 
+		
+		Test Case Derivation: On making a routine public, it should be available to all users and also the browsing page.
+		
+		How test will be performed: By first adding multiple public test routines, then checking the public workout routines by browsing. There should exist routines to access and view.
+		
+		Requirement(s): R6
+		
+		\item{\textbf{test-id1}}: Search workout routines.
+		
+		Control: Manual
+		
+		Initial State: The application is running and multiple workout routines are created.
+		
+		Input: Search string inputs to view the public workout routines.
+		
+		Output: Public workout routines that match the search criteria should be displayed. 
+		
+		Test Case Derivation: All workout routine that follow match a search, should be display.
+		
+		How test will be performed: By first adding multiple public test routines, then preforming a search, the routines that match the search criteria should be displayed.
+		
+		Requirement(s): R6
+		
+		\item{\textbf{test-id1}}: Creating a user profile.
+		
+		Control: Manual
+		
+		Initial State: The application is running.
+		
+		Input: The required parameters for creating a profile.
+		
+		Output: The created profile is stored in a user database and the user should be logged into their profile.
+		
+		Test Case Derivation: On creating a profile the database must store the information. To go along with this the user must maintain the login status of the created profile.
+		
+		How test will be performed: On launching the application without a created profile a profile will be created. The database will then be checked to ensure the proper data matches.
+		
+		Requirement(s): R7
+		
+		\item{\textbf{test-id1}}: Viewing another user profile
+		
+		Control: Manual
+		
+		Initial State: The application is running and there exists another user profile.
+		
+		Input: Search criteria for the searched user profile.
+		
+		Output: A user profile is displayed with their public routines, fitness goals, and other public profile data.
+		
+		Test Case Derivation: On searching for another user the data shown should only be what is made public.
+		
+		How test will be performed: By creating a test-user profile then searching for it. The profile should display all public information and hide non-public information. 
+		
+		Requirement(s): R8
+		
+		\item{\textbf{test-id1}}: Creating a fitness goal.
+		
+		Control: Manual
+		
+		Initial State: The application is running and a profile has been created or is in the process of creation.
+		
+		Input: A string parameter for a fitness goal and publicity options for the goal.
+		
+		Output: The fitness goal for the user is now updated in the database and is saved under their profile.
+		
+		Test Case Derivation: The fitness goals are specific to a given user so the data for fitness goals are stored under their profile data.
+		
+		How test will be performed: A test user will add a fitness goal and check if it is displayed on their profile.
+		
+		Requirement(s): R9
+		
+		\item{\textbf{test-id1}}: Progressing a fitness goal.
+		
+		Control: Manual
+		
+		Initial State: The application is running and a fitness goal is created.
+		
+		Input: Progress points towards a given fitness goal at a given date.
+		
+		Output: The progress displayed towards a fitness goal should be visually updated and numerically updated in the database with a date.
+		
+		Test Case Derivation: The data for a fitness goal must be updated in the database for storage. To follow this, to goal must also be visually updated accordingly to signify progress towards the goal at the given date.
+		
+		How test will be performed: A test-user will create a fitness goal and add progress points towards the goal. There should be a database update and visual update to signify this change.
+		
+		Requirement(s): R10, R11
+		
 		
 	\end{enumerate}
 	
