@@ -4,6 +4,7 @@
 \usepackage{tabularx}
 \usepackage{hyperref}
 \usepackage{enumitem, amssymb}
+\usepackage{changepage}
 \newlist{todolist}{itemize}{2}
 \setlist[todolist]{label=$\square$}
 \hypersetup{
@@ -467,7 +468,7 @@
 		Requirement(s): R6
 		
 		\subsubsection{User Profile Tests}
-		\item{\textbf{test-UR-1}}:Creating a User Profile
+		\item{\textbf{test-UP-1}}:Creating a User Profile
 		
 		Control: Manual
 		
@@ -572,7 +573,7 @@
 		
 		Requirement(s):
 			
-		\item{\textbf{test-id-1}}: Style
+		\item{\textbf{test-LF-1}}: Style
 
 		Type: Manual.
 		
@@ -590,7 +591,7 @@
 
 	
 	\subsubsection{Usability and Humanity Tests}
-		\item{\textbf{test-id-1}}: Text Sizing and Visibility.
+		\item{\textbf{test-UH-1}}: Text Sizing and Visibility.
 		
 		Type: Manual
 		
@@ -604,7 +605,7 @@
 		
 		Requirement(s): NFR2
 		
-		\item{\textbf{test-id-1}}: Text Language.
+		\item{\textbf{test-UH-2}}: Text Language.
 		
 		Type: Manual
 		
@@ -618,7 +619,7 @@
 		
 		Requirement(s): NFR3
 		
-		\item{\textbf{test-id-1}}: Learnability.
+		\item{\textbf{test-UH-3}}: Learnability.
 		
 		Type: Manual
 		
@@ -632,7 +633,7 @@
 		
 		Requirement(s): NFR4
 		
-		\item{\textbf{test-id-1}}: Understandability.
+		\item{\textbf{test-UH-4}}: Understandability.
 		
 		Type: Manual
 
@@ -646,7 +647,7 @@
 		
 		Requirement(s): NFR5
 		
-		\item{\textbf{test-id-1}}: Hearing and Audio considerations.
+		\item{\textbf{test-UH-5}}: Hearing and Audio considerations.
 		
 		Type: Manual
 		
@@ -660,7 +661,7 @@
 		
 		Requirement(s): NFR6
 		
-		\item{\textbf{test-id-1}}: Use of Colour and Contrast.
+		\item{\textbf{test-UH-6}}: Use of Colour and Contrast.
 		
 		Type: Functional, Dynamic, Manual, Static etc.
 		
@@ -674,7 +675,7 @@
 		
 		Requirement(s): NFR7
 	\subsubsection{Performance Tests}
-		\item{\textbf{test-id-1}}: Speed and Latency.
+		\item{\textbf{test-PF-1}}: Speed and Latency.
 		
 		Type: Dynamic
 		
@@ -688,7 +689,7 @@
 		
 		Requirement(s): NFR8
 		
-		\item{\textbf{test-id-1}}: Accuracy and Precision of Quantifiers.
+		\item{\textbf{test-PF-2}}: Accuracy and Precision of Quantifiers.
 		
 		Type: Manual
 		
@@ -702,7 +703,7 @@
 		
 		Requirement(s): NFR9
 		
-		\item{\textbf{test-id-1}}: Availability and Uptime
+		\item{\textbf{test-PF-3}}: Availability and Uptime
 		
 		Type: Functional, Dynamic, Manual, Static etc.
 		
@@ -716,7 +717,7 @@
 		
 		Requirement(s): NFR10
 		
-		\item{\textbf{test-id-1}}: User Capacity.
+		\item{\textbf{test-PF-4}}: User Capacity.
 		
 		Type: Functional, Dynamic, Manual, Static etc.
 		
@@ -730,7 +731,7 @@
 		
 		Requirement(s): NFR11
 		
-		\item{\textbf{test-id-1}}: Scalability of User Capacity.
+		\item{\textbf{test-PF-5}}: Scalability of User Capacity.
 		
 		Type: Functional, Dynamic, Manual, Static etc.
 		
@@ -744,7 +745,7 @@
 		
 		Requirement(s): NFR12
 	\subsubsection{Operational and Environment Tests}
-		\item{\textbf{test-id-1}}: Supported Systems.
+		\item{\textbf{test-OE-1}}: Supported Systems.
 		
 		Type: Manual
 		
@@ -758,7 +759,7 @@
 		
 		Requirement(s): NFR13
 	\subsubsection{Maintainability and Support Tests}
-		\item{\textbf{test-id-1}}: Maintenance.
+		\item{\textbf{test-MS-1}}: Maintenance.
 		
 		Type: Functional, Dynamic, Manual, Static etc.
 		
@@ -772,7 +773,7 @@
 		
 		Requirement(s): NFR14
 	\subsubsection{Security Tests}
-		\item{\textbf{test-id-1}}: Private and Public Details.
+		\item{\textbf{test-SEC-1}}: Private and Public Details.
 		
 		Type: Manual
 		
@@ -786,7 +787,7 @@
 		
 		Requirement(s): NFR15
 		
-		\item{\textbf{test-id-1}}: Passwords.
+		\item{\textbf{test-SEC-2}}: Passwords.
 		
 		Type: Functional, Dynamic, Manual, Static etc.
 		
@@ -800,7 +801,7 @@
 		
 		Requirement(s): NFR16
 		
-		\item{\textbf{test-id-1}}: Client Server Privacy.
+		\item{\textbf{test-SEC-3}}: Client Server Privacy.
 		
 		Type: Functional, Dynamic, Manual, Static etc.
 		
@@ -811,10 +812,10 @@
 		Output/Result: 
 		
 		How test will be performed: 
-		
+	
 		Requirement(s): NFR17
 		
-		\item{\textbf{test-id-1}}: Data storage and logging.
+		\item{\textbf{test-SEC-4}}: Data storage and logging.
 		
 		Type: Functional
 		
@@ -828,7 +829,7 @@
 		
 		Requirement(s): NFR18
 		
-		\item{\textbf{test-id-1}}: Data Backups.
+		\item{\textbf{test-SEC-5}}: Data Backups.
 		
 		Type: Functional, Manual
 		
@@ -842,7 +843,7 @@
 		
 		Requirement(s): NFR18
 	\subsubsection{Cultural Requirements Tests}
-		\item{\textbf{test-id-1}}: Profanity and Inappropriate Language.
+		\item{\textbf{test-CR-1}}: Profanity and Inappropriate Language.
 		
 		Type: Functional, Dynamic, Manual, Static etc.
 		
@@ -856,7 +857,7 @@
 		
 		Requirement(s): NFR19
 		
-		\item{\textbf{test-id-1}}: Reporting Offensive Language.
+		\item{\textbf{test-CR-2}}: Reporting Offensive Language.
 		
 		Type: Functional, Dynamic, Manual, Static etc.
 		
@@ -870,7 +871,7 @@
 		
 		Requirement(s): NFR20
 	\subsubsection{Legal Requirements Tests}
-		\item{\textbf{test-id-1}}: Age and Gender Use.
+		\item{\textbf{test-LR-1}}: Age and Gender Use.
 		
 		Type: Functional, Dynamic, Manual, Static etc.
 		
@@ -883,7 +884,7 @@
 		How test will be performed: 
 		
 		Requirement(s):NFR21
-		\item{\textbf{test-id-1}}: Data Protection.
+		\item{\textbf{test-LR-2}}: Data Protection.
 		
 		Type: Functional, Dynamic, Manual, Static etc.
 		
@@ -901,7 +902,76 @@
 	
 	\wss{Provide a table that shows which test cases are supporting which
 		requirements.}
+	\newpage
+		\section{Traceability Matrices and Graphs}
 	
+	\begin{table}[h!]
+		\centering
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+			\hline
+			& R1 & R2 & R3 & R4 & R5 & R6 & R7 & R8 & R9 & R10 & R11 \\ \hline
+			WR1 &X & & & & & & & & & & \\ \hline
+			WR2 &X & & & & & & & & & & \\ \hline
+			EX1 & &X & & & & & & & & & \\ \hline 
+			EX2 & &X & & & & & & & & & \\ \hline
+			EX3 & &X & & & & & & & & &\\ \hline 
+			QT1 & & &X & & & & & & & & \\ \hline 
+			QT2 & & &X & & & & & & & & \\ \hline 
+			QT3 & & &X & & & & & & & & \\ \hline 
+			PB1 & & & &X & & & & & & & \\ \hline 
+			PB2 & & & &X & & & & & & & \\ \hline 
+			WS1 & & & & &X & & & & & & \\ \hline 
+			BS1 & & & & & &X & & & & & \\ \hline 
+			BS2 & & & & & &X & & & & & \\ \hline 
+			UP1 & & & & & & &X & & & & \\ \hline 
+			UP2 & & & & & & & &X & & & \\ \hline 
+			FG1 & & & & & & & & &X & & \\ \hline 
+			FG2 & & & & & & & & & &X &X \\ \hline 	
+		\end{tabular}
+		\caption{Functional System Tests to Functional Requirement Matrix}
+		\label{Table:R_trace}
+	\end{table}
+
+\begin{table}[h!]
+	\begin{adjustwidth}{-3cm}{-5cm}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+			\hline
+			& NFR1 & NFR2 & NFR3 & NFR4 & NFR5 & NFR6 & NFR7 & NFR8 & NFR9 & NFR10 & NFR11 \\ \hline
+			LF1 &X & & & & & & & & & & \\ \hline
+			UH1 & &X & & & & & & & & & \\ \hline
+			UH2 & & &X & & & & & & & & \\ \hline
+			UH3 & & & &X & & & & & & & \\ \hline 
+			UH4 & & & & &X & & & & & & \\ \hline 
+			UH5 & & & & & &X & & & & & \\ \hline 
+			UH6 & & & & & & &X & & & & \\ \hline 
+			PF1 & & & & & & & &X & & & \\ \hline 
+			PF2 & & & & & & & & &X & & \\ \hline 
+			PF3 & & & & & & & & & &X & \\ \hline
+			PF4 & & & & & & & & & & &X \\ \hline  
+		\end{tabular}
+		\caption{Non-Functional System Tests to Non-Functional Requirement Matrix}
+		\label{Table:R_trace}
+		
+				\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+			\hline
+			& NFR12 & NFR13 & NFR14 & NFR15 & NFR16 & NFR17 & NFR18 & NFR19 & NFR20 & NFR21 & NFR22 \\ \hline
+			PF5 &X & & & & & & & & & & \\ \hline
+			OE1 & &X & & & & & & & & & \\ \hline
+			MS1 & & &X & & & & & & & & \\ \hline
+			SEC1 & & & &X & & & & & & & \\ \hline 
+			SEC2 & & & & &X & & & & & & \\ \hline 
+			SEC3 & & & & & &X & & & & & \\ \hline 
+			SEC4 & & & & & &X & & & & & \\ \hline 
+			SEC5 & & & & & & &X & & & & \\ \hline 
+			CR1 & & & & & & & &X & & & \\ \hline 
+			CR2 & & & & & & & & &X & & \\ \hline 
+			LR1 & & & & & & & & & &X & \\ \hline 
+			LR2 & & & & & & & & & & &X \\ \hline 
+		\end{tabular}
+		\caption{Non-Functional System Tests to Non-Functional Requirement Matrix}
+		\label{Table:R_trace}
+	\end{adjustwidth}
+	\end{table}
 	\section{Unit Test Description}
 	
 	\wss{Reference your MIS (detailed design document) and explain your overall
