@@ -844,58 +844,58 @@
 	\subsubsection{Cultural Requirements Tests}
 		\item{\textbf{test-id-1}}: Profanity and Inappropriate Language.
 		
-		Type: Functional, Dynamic, Manual, Static etc.
+		Type: Functional
 		
-		Initial State: 
+		Initial State: The application is running.
 		
-		Input/Condition: 
+		Input/Condition: A user posts content which contains profanities.
 		
-		Output/Result: 
+		Output/Result: The profanity is filtered out by the system, and the user is suspended from the application if they are a repeat offender.
 		
-		How test will be performed: 
+		How test will be performed: The action of posting a piece of content will be manually simulated, and content will be posted containing profanities. The content will be checked to verify filtering of profane words, and the user's account status will be checked to verify suspension on a repeat offense.
 		
 		Requirement(s): NFR19
 		
 		\item{\textbf{test-id-1}}: Reporting Offensive Language.
 		
-		Type: Functional, Dynamic, Manual, Static etc.
+		Type: Manual
 		
-		Initial State: 
+		Initial State: The application is running.
 		
-		Input/Condition: 
+		Input/Condition: A user is viewing the context options for interacting with a piece of recommended content on their feed (which they may find offensive).
 		
-		Output/Result: 
+		Output/Result: The user is able to report the piece of offensive content, removing it from their feed. The content should no longer be visible on the user's feed.
 		
-		How test will be performed: 
+		How test will be performed: The action of interacting with context options for a piece of recommended content will be manually simulated, and an attempt will be made to report the content, making it no longer visible on the user's feed.
 		
 		Requirement(s): NFR20
-	\subsubsection{Legal Requirements Tests}
+		\subsubsection{Legal Requirements Tests}
 		\item{\textbf{test-id-1}}: Age and Gender Use.
 		
-		Type: Functional, Dynamic, Manual, Static etc.
+		Type: Manual
 		
-		Initial State: 
+		Initial State: The application is running.
 		
-		Input/Condition: 
+		Input/Condition: The user is personalizing their profile.
 		
-		Output/Result: 
+		Output/Result: The user has the ability to specify their gender, age, and race.
 		
-		How test will be performed: 
+		How test will be performed: The profile personalization process will be manually simulated, and an attempt will be made to specify a sample gender, age, and race.
 		
-		Requirement(s):NFR21
+		Requirement(s): NFR21
 		\item{\textbf{test-id-1}}: Data Protection.
 		
-		Type: Functional, Dynamic, Manual, Static etc.
+		Type: Static
 		
-		Initial State: 
+		Initial State: The application database contains sensitive user data.
 		
-		Input/Condition: 
+		Input/Condition: N/A
 		
-		Output/Result: 
+		Output/Result: All usage and storage of user data is compliant with the Data Protection Act.
 		
-		How test will be performed: 
+		How test will be performed: The logic used to store data will be analyzed to ensure that no user data is stored unlawfully or unfairly, data will be kept only as long as the user consents, and that no sensitive data is transferred across networks in an unencrypted state.
 		
-		Requirement(s):NFR22
+		Requirement(s): NFR22
 	\end{enumerate}
 	\subsection{Traceability Between Test Cases and Requirements}
 	
