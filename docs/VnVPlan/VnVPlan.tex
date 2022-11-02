@@ -704,43 +704,43 @@
 		
 		\item{\textbf{test-id-1}}: Availability and Uptime
 		
-		Type: Functional, Dynamic, Manual, Static etc.
+		Type: Manual
 		
-		Initial State: 
+		Initial State: A server will be running and hosting our app to mobile clients.
 		
-		Input/Condition: 
+		Input/Condition: Apache JMeter will perform a variety of tasks across multiple clients.
 		
-		Output/Result: 
+		Output/Result: The application will remain live for \%95+ of the duration of the testing.
 		
-		How test will be performed: 
+		How test will be performed: Apache JMeter will perform a variety of tasks across multiple users to simulate strain for an extended duration. Uptime.com will be used to check the uptime of the application over the test period.
 		
 		Requirement(s): NFR10
 		
 		\item{\textbf{test-id-1}}: User Capacity.
 		
-		Type: Functional, Dynamic, Manual, Static etc.
+		Type: Automatic
 		
-		Initial State: 
+		Initial State: A server will be running and hosting our app to mobile clients.
 		
-		Input/Condition: 
+		Input/Condition: Apache JMeter will begin running 100 clients and send each client an update.
 		
-		Output/Result: 
+		Output/Result: The server will receive all responses within 5 seconds.
 		
-		How test will be performed: 
+		How test will be performed: JMeter will perform capacity testing to test if the server can handle up to 100 clients. It will attempt to send an update to each client and receive a response.
 		
 		Requirement(s): NFR11
 		
 		\item{\textbf{test-id-1}}: Scalability of User Capacity.
 		
-		Type: Functional, Dynamic, Manual, Static etc.
+		Type: Automatic
 		
-		Initial State: 
+		Initial State: A server will be running and hosting our app to mobile clients a year after our release.
 		
-		Input/Condition: 
+		Input/Condition: Apache JMeter will begin running 100 clients.
 		
-		Output/Result: 
+		Output/Result: All client updates will be successfully performed.
 		
-		How test will be performed: 
+		How test will be performed: JMeter will have all 1000 clients perform simultaneous user updates and tasks and expect task completion within 10 seconds.
 		
 		Requirement(s): NFR12
 	\subsubsection{Operational and Environment Tests}
@@ -760,15 +760,15 @@
 	\subsubsection{Maintainability and Support Tests}
 		\item{\textbf{test-id-1}}: Maintenance.
 		
-		Type: Functional, Dynamic, Manual, Static etc.
+		Type: Manual
 		
-		Initial State: 
+		Initial State: The application is running. 
 		
-		Input/Condition: 
+		Input/Condition: The server will be set to activate maintenance mode at a set date (within 24 hours).
 		
-		Output/Result: 
+		Output/Result: Users currently in the application will see a maintenance alert.
 		
-		How test will be performed: 
+		How test will be performed: A simulated maintenance event will be triggered and application users will verify that a maintenance banner is shown to clients.
 		
 		Requirement(s): NFR14
 	\subsubsection{Security Tests}
