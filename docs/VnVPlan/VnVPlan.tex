@@ -3,6 +3,9 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
+\usepackage{enumitem, amssymb}
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=$\square$}
 \hypersetup{
 	colorlinks,
 	citecolor=blue,
@@ -95,78 +98,120 @@
 	\citet{SRS}
 	
 	\section{Plan}
+
+	This section contains the criteria for reviewing and verifying the various artifacts involved with the project.
 	
-	\wss{Introduce this section.   You can provide a roadmap of the sections to
-		come.}
+	% \wss{Introduce this section.   You can provide a roadmap of the sections to
+	% 	come.}
 	
 	\subsection{Verification and Validation Team}
-	
-	\wss{Your teammates.  Maybe your supervisor.
-		You shoud do more than list names.  You should say what each person's role is
-		for the project's verification.  A table is a good way to summarize this information.}
+
+	% \wss{Your teammates.  Maybe your supervisor.
+	% 	You shoud do more than list names.  You should say what each person's role is
+	% 	for the project's verification.  A table is a good way to summarize this information.}
+
+	\begin{center}
+		\begin{tabular}{ |c|c| } 
+			\hline
+			\textbf{Team Member} & \textbf{Role} \\
+			\hline
+			Jared Bentvelsen & Integration Testing \\
+			\hline 
+			Yuvraj Randhawa & Integration Testing \\
+			\hline
+			Bassel Rezkalla & Functional Unit Testing \\
+			\hline
+			Matthew McCracken & Non Functional Unit Testing \\
+			\hline
+			Dimitri Tsampiras & UI/UX Verification Testing \\
+			\hline 
+			William Lee & Code Quality and Optimization Verification\\
+			\hline
+		\end{tabular}
+	\end{center}
 	
 	\subsection{SRS Verification Plan}
-	
-	\wss{List any approaches you intend to use for SRS verification.  This may include
-		ad hoc feedback from reviewers, like your classmates, or you may plan for 
-		something more rigorous/systematic.}
-	
-	\wss{Maybe create an SRS checklist?}
+	% \wss{List any approaches you intend to use for SRS verification.  This may include
+	% 	ad hoc feedback from reviewers, like your classmates, or you may plan for 
+	% 	something more rigorous/systematic.}
+	% \wss{Maybe create an SRS checklist?}
+
+	The SRS will be evaluated by team members and classmates as the project progresses. It will also be verified through testing with a traceability matrix.
+	GitHub issues left by other groups will be carefully considered and addressed.
+	The following checklist will be used:
+	\begin{todolist}
+		\item Can the system clearly demonstrate each requirement?
+		\item Can the system demonstrate each requirement outside of a testing or debugging environment?
+		\item Does each requirement map to one or more tests?
+	\end{todolist}
 	
 	\subsection{Design Verification Plan}
-	
-	\wss{Plans for design verification}
-	
-	\wss{The review will include reviews by your classmates}
-	
-	\wss{Create a checklists?}
+	% \wss{Plans for design verification}
+	% \wss{The review will include reviews by your classmates}
+	% \wss{Create a checklists?}
+
+	The project design will be manually reviewed by each team member and classmates. The following checklist will be used:
+	\begin{todolist}
+		\item Does the system design allow for each functional and non functional requirement to be met?
+		\item Does the chosen architecture(s) make sense for the given use cases? Does it allow for easy scalability?
+		\item Does the design follow appropriate design principles (e.g. low coupling, high cohesion, separation of concerns)?
+	\end{todolist}
 	
 	\subsection{Verification and Validation Plan Verification Plan}
-	
-	\wss{The verification and validation plan is an artifact that should also be verified.}
-	
-	\wss{The review will include reviews by your classmates}
-	
-	\wss{Create a checklists?}
+	% \wss{The verification and validation plan is an artifact that should also be verified.}
+	% \wss{The review will include reviews by your classmates}
+	% \wss{Create a checklists?}
+
+	The Verification and Validation Plan artifact will be read and reviewed by each team member according to the following checklist:
+	\begin{todolist}
+		\item Are there any missing or empty sections?
+		\item Is each section complete with sufficient detail?
+		\item Are there any contradictions between sections?
+		\item Is the table of contents present and reflective of the document's sections?
+		\item Is the revision history up to date?
+		\item Are there any typos in the document?
+	\end{todolist}
+	GitHub issues left by other groups will be carefully considered and addressed.
 	
 	\subsection{Implementation Verification Plan}
 	
-	\wss{You should at least point to the tests listed in this document and the unit
-		testing plan.}
+	% \wss{You should at least point to the tests listed in this document and the unit
+	% 	testing plan.}
 	
-	\wss{In this section you would also give any details of any plans for static verification of
-		the implementation.  Potential techniques include code walkthroughs, code
-		inspection, static analyzers, etc.}
+	% \wss{In this section you would also give any details of any plans for static verification of
+	% 	the implementation.  Potential techniques include code walkthroughs, code
+	% 	inspection, static analyzers, etc.}
+
+	Implementation Verification will be done according to the functional and non-functional tests listed in this document.
+	Code additions will be thoroughly reviewed by team members in feature branches before merging with the main branch.
+	Linters and formatters will be utilized to ensure code consistency.
 	
 	\subsection{Automated Testing and Verification Tools}
 	
-	\wss{What tools are you using for automated testing.  Likely a unit testing
-		framework and maybe a profiling tool, like ValGrind.  Other possible tools
-		include a static analyzer, make, continuous integration tools, test coverage
-		tools, etc.  Explain your plans for summarizing code coverage metrics.
-		Linters are another important class of tools.  For the programming language
-		you select, you should look at the available linters.  There may also be tools
-		that verify that coding standards have been respected, like flake9 for
-		Python.}
-	
-	\wss{If you have already done this in the development plan, you can point to
-		that document.}
-	
-	\wss{The details of this section will likely evolve as you get closer to the
-		implementation.}
+	See Section 3.5 of Problem Statement.
+	% \wss{What tools are you using for automated testing.  Likely a unit testing
+	% 	framework and maybe a profiling tool, like ValGrind.  Other possible tools
+	% 	include a static analyzer, make, continuous integration tools, test coverage
+	% 	tools, etc.  Explain your plans for summarizing code coverage metrics.
+	% 	Linters are another important class of tools.  For the programming language
+	% 	you select, you should look at the available linters.  There may also be tools
+	% 	that verify that coding standards have been respected, like flake9 for
+	% 	Python.}
+	% \wss{If you have already done this in the development plan, you can point to
+	% 	that document.}
+	% \wss{The details of this section will likely evolve as you get closer to the
+	% 	implementation.}
 	
 	\subsection{Software Validation Plan}
-	
-	\wss{If there is any external data that can be used for validation, you should
-		point to it here.  If there are no plans for validation, you should state that
-		here.}
-	
-	\wss{You might want to use review sessions with the stakeholder to check that
-		the requirements document captures the right requirements.  Maybe task based
-		inspection?}
-	
-	\wss{This section might reference back to the SRS verification section.}
-	
+	% \wss{If there is any external data that can be used for validation, you should
+	% 	point to it here.  If there are no plans for validation, you should state that
+	% 	here.}
+	% \wss{You might want to use review sessions with the stakeholder to check that
+	% 	the requirements document captures the right requirements.  Maybe task based
+	% 	inspection?}
+	% \wss{This section might reference back to the SRS verification section.}
+	No external data will be used for validation. In addition to the SRS verification checklist, meetings will be held with stakeholders to ensure
+	requirements cover all desired tests.
 	\section{System Test Description}
 	
 	\subsection{Tests for Functional Requirements}
