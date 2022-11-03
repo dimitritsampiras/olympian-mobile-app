@@ -769,29 +769,33 @@
 		
 		\item{\textbf{test-SEC-2}}: Passwords.
 		
-		Type: Functional, Dynamic, Manual, Static etc.
+		Type: Manual 
 		
-		Initial State: 
+		Initial State: User is logged out (i.e. not authenticated and is forbidden from accessing account).
 		
-		Input/Condition: 
+		Input: String parameter as password alongside corresponding account.
 		
-		Output/Result: 
+		Output: Assuming username exists - inputted password is tested against hashed version of actual user password. If verification is successful, user is logged in. 
 		
-		How test will be performed: 
+		Test Case Derivation: The user is redirected to indicate a successful login. User is notified in the case of an unsuccessful login (e.g. wrong password).
+		
+		How test will be performed: Test whether or not username exists. Test inputted password against account password. Test if correct error message is presented.
 		
 		Requirement(s): NFR16
 		
 		\item{\textbf{test-SEC-3}}: Client Server Privacy.
 		
-		Type: Functional, Dynamic, Manual, Static etc.
+		Type: Manual 
 		
-		Initial State: 
+		Initial State: User request is made.
 		
-		Input/Condition: 
+		Input: User request has authorization token in request header .
 		
-		Output/Result: 
+		Output: Server process authorization token. If authorized, server request will continue. If not, server returns 403 server error (forbidden).
 		
-		How test will be performed: 
+		Test Case Derivation: Test authencation token against server token secret. 
+		
+		How test will be performed: Extract authorization token from header. If header exists, run token verification function.
 	
 		Requirement(s): NFR17
 		
