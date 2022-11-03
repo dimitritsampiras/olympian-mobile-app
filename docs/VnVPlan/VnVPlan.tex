@@ -34,8 +34,7 @@
 	\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 		\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 		\midrule
-		Date 1 & 1.0 & Notes\\
-		Date 2 & 1.1 & Notes\\
+		02-11-2022 & 1.0 & Initial Draft\\
 		\bottomrule
 	\end{tabularx}
 	
@@ -44,35 +43,14 @@
 	\tableofcontents
 	
 	\listoftables
-	\wss{Remove this section if it isn't needed}
-	
-	\listoffigures
-	\wss{Remove this section if it isn't needed}
 	
 	\newpage
-	
-	\section{Symbols, Abbreviations and Acronyms}
-	
-	\renewcommand{\arraystretch}{1.2}
-	\begin{tabular}{l l} 
-		\toprule		
-		\textbf{symbol} & \textbf{description}\\
-		\midrule 
-		T & Test\\
-		\bottomrule
-	\end{tabular}\\
-	
-	\wss{symbols, abbreviations or acronyms --- you can simply reference the SRS
-		\citep{SRS} tables, if appropriate}
-	
-	\wss{Remove this section if it isn't needed}
 	
 	\newpage
 	
 	\pagenumbering{arabic}
 	
-	This document ... \wss{provide an introductory blurb and roadmap of the
-		Verification and Validation plan}
+	This document serves to document the plan place to verify and validate the development of the Olympian Application.
 	
 	\section{General Information}
 	
@@ -106,17 +84,17 @@
 		\end{itemize}
 
 	\subsection{Relevant Documentation}
+
+	\begin{enumerate}
+		\item SRS
+		\item MG
+		\item MIS
+	\end{enumerate}
 	
 	%\wss{Reference relevant documentation.  This will definitely include your SRS
 	%	and your other project documents (design documents, like MG, MIS, etc).  You
 	%	can include these even before they are written, since by the time the project
 	%	is done, they will be written.}
-	
-	\citet{SRS}
-	\newline
-	\citet{MIS}
-	\newline
-	\citet{MG}
 	
 	\section{Plan}
 
@@ -131,25 +109,28 @@
 	% 	You shoud do more than list names.  You should say what each person's role is
 	% 	for the project's verification.  A table is a good way to summarize this information.}
 
-	\begin{center}
-		\begin{tabular}{ |c|c| } 
-			\hline
-			\textbf{Team Member} & \textbf{Role} \\
-			\hline
-			Jared Bentvelsen & Integration Testing \\
-			\hline 
-			Yuvraj Randhawa & Integration Testing \\
-			\hline
-			Bassel Rezkalla & Functional Unit Testing \\
-			\hline
-			Matthew McCracken & Non Functional Unit Testing \\
-			\hline
-			Dimitri Tsampiras & UI/UX Verification Testing \\
-			\hline 
-			William Lee & Code Quality and Optimization Verification\\
-			\hline
-		\end{tabular}
-	\end{center}
+	\begin{table}
+		\begin{center}
+			\begin{tabular}{ |c|c| } 
+				\hline
+				\textbf{Team Member} & \textbf{Role} \\
+				\hline
+				Jared Bentvelsen & Integration Testing \\
+				\hline 
+				Yuvraj Randhawa & Integration Testing \\
+				\hline
+				Bassel Rezkalla & Functional Unit Testing \\
+				\hline
+				Matthew McCracken & Non Functional Unit Testing \\
+				\hline
+				Dimitri Tsampiras & UI/UX Verification Testing \\
+				\hline 
+				William Lee & Code Quality and Optimization Verification\\
+				\hline
+			\end{tabular}
+			\caption{Team Member Roles}
+		\end{center}
+	\end{table}
 	
 	\subsection{SRS Verification Plan}
 	% \wss{List any approaches you intend to use for SRS verification.  This may include
@@ -237,17 +218,19 @@
 	
 	\subsection{Tests for Functional Requirements}
 	
-	\wss{Subsets of the tests may be in related, so this section is divided into
-		different areas.  If there are no identifiable subsets for the tests, this
-		level of document structure can be removed.}
+	% \wss{Subsets of the tests may be in related, so this section is divided into
+	% 	different areas.  If there are no identifiable subsets for the tests, this
+	% 	level of document structure can be removed.}
 	
-	\wss{Include a blurb here to explain why the subsections below
-		cover the requirements.  References to the SRS would be good here.}
+	% \wss{Include a blurb here to explain why the subsections below
+	% 	cover the requirements.  References to the SRS would be good here.}
+
+	The following tests correspond to functional requirements outlined in the SRS.
 	
-	\wss{It would be nice to have a blurb here to explain why the subsections below
-		cover the requirements.  References to the SRS would be good here.  If a section
-		covers tests for input constraints, you should reference the data constraints
-		table in the SRS.}
+	% \wss{It would be nice to have a blurb here to explain why the subsections below
+	% 	cover the requirements.  References to the SRS would be good here.  If a section
+	% 	covers tests for input constraints, you should reference the data constraints
+	% 	table in the SRS.}
 	
 	\begin{enumerate}
 		
@@ -536,42 +519,39 @@
 		
 		
 	\end{enumerate}
-	
-	\subsubsection{Area of Testing2}
-	
-	...
+
 	
 	\subsection{Tests for Nonfunctional Requirements}
 	
-	\wss{The nonfunctional requirements for accuracy will likely just reference the
-		appropriate functional tests from above.  The test cases should mention
-		reporting the relative error for these tests.  Not all projects will
-		necessarily have nonfunctional requirements related to accuracy}
+	% \wss{The nonfunctional requirements for accuracy will likely just reference the
+	% 	appropriate functional tests from above.  The test cases should mention
+	% 	reporting the relative error for these tests.  Not all projects will
+	% 	necessarily have nonfunctional requirements related to accuracy}
 	
-	\wss{Tests related to usability could include conducting a usability test and
-		survey.  The survey will be in the Appendix.}
+	% \wss{Tests related to usability could include conducting a usability test and
+	% 	survey.  The survey will be in the Appendix.}
 	
-	\wss{Static tests, review, inspections, and walkthroughs, will not follow the
-		format for the tests given below.}
+	% \wss{Static tests, review, inspections, and walkthroughs, will not follow the
+	% 	format for the tests given below.}
 	
 	\subsubsection{Look and Feel Testing}
 	
 	
 	\begin{enumerate}
 		
-		\item{\textbf{test-id-1}}: TEMPLATE
+		% \item{\textbf{test-id-1}}: TEMPLATE
 		
-		Type: Functional, Dynamic, Manual, Static etc.
+		% Type: Functional, Dynamic, Manual, Static etc.
 		
-		Initial State: 
+		% Initial State: 
 		
-		Input/Condition: 
+		% Input/Condition: 
 		
-		Output/Result: 
+		% Output/Result: 
 		
-		How test will be performed: 
+		% How test will be performed: 
 		
-		Requirement(s):
+		% Requirement(s):
 			
 		\item{\textbf{test-LF-1}}: Style
 
@@ -901,8 +881,8 @@
 	\end{enumerate}
 	\subsection{Traceability Between Test Cases and Requirements}
 	
-	\wss{Provide a table that shows which test cases are supporting which
-		requirements.}
+	% \wss{Provide a table that shows which test cases are supporting which
+	% 	requirements.}
 	\newpage
 		\section{Traceability Matrices and Graphs}
 	
@@ -1139,6 +1119,14 @@
 			\item Skill: \textbf{Integration Testing}
 			\\ Rationale: Integration testing is a quintessential process in any software application. Integration testing tests the interaction between components in a system as they are actually deployed. These tests will be especially important for testing user requests and database transactions.
 			\\ Team member: Jared Bentvelsen
+      
+			\item Skill: \textbf{Dynamic Testing}
+			\\ Rationale: Dynamic testing is vital to the verification and validation plan. Dynamic testing is executing test cases to determine and analyze how the system and variables that are not constant and change with time react.
+			\\ Team member: Yuvraj Randhawa
+
+			\item Skill: \textbf{Automated Load Testing}
+			\\ Rationale: Setting up automated tests to load/capacity test the mobile application is crucial in achieving verification and validation because it is needed for meeting capacity requirements.
+			\\ Team member: Matthew McCracken
 		\end{itemize}
 		\item For each of the knowledge areas and skills identified in the previous
 		question, what are at least two approaches to acquiring the knowledge or
@@ -1165,6 +1153,12 @@
 			\\Approach 1: Review and practice integration testing from SWFRENG 3S03: Software Testing.
 			\\Approach 2: Read online articles on integration testing and consult integration tests in well known open source products.
 			\\Verdict: Jared will use Approach 2 to learn about integration testing since SFWRENG 3S03 did not cover it in sufficient detail to expand his skills.
+
+			\item Skill: \textbf{Automated Load Testing Knowledge}
+			\\Approach 1: Consult former co-workers who worked on mobile application load testing to gather best practices and tips.
+			\\Approach 2: Engage with online articles and forums that discuss using the specific load testing tools that we will use.
+			\\Verdict: Matthew will use Approach 2 to learn about load testing because this will give a broad range of knowledge to complete many different types of mobile tests.
+			
 		\end{itemize}
 
 	\end{enumerate}
