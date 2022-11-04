@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String    @id @default(cuid())
+  name            String
+  email           String
+  username        String    @unique
+  password        String
+  createdPrograms Program[]
+}
+
+model Program {
+  id   String @id @default(cuid())
+  name String
+
+  // complimentary to other programs. for searching purposes
+  // i.e. stretch routine etc. 
+  complimentary Boolean?
+
+  // type of training for searching purposes
+  specificity Specifity[]
+
+  // optionally provide training level recommended for program
+  trainingLevel TrainingLevel?
+
+  // stats 
+  stats String
+
+  author User   @relation(fields: [userId], references: [id])
+  userId String
+}
+
+enum Specifity {
+  general
+  strength
+  hypertrophy
+  athletic
+  cardio
+}
+
+enum TrainingLevel {
+  beginner
+  intermediate
+  advanced
+}
