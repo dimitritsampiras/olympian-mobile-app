@@ -1,5 +1,7 @@
 {
   "material-icon-theme.folders.associations": {
-    "navigation": "routes"
+    "navigation": "routes",
+    "athena": "client",
+    "hermes": "apollo"
   }
 }

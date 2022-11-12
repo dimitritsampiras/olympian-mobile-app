@@ -1,0 +1,137 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator nexusPrisma {
+  provider = "nexus-prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String         @id @default(cuid())
+  name        String
+  email       String
+  username    String         @unique
+  password    String
+  dateOfBirth DateTime
+  gender      Gender
+  weight      Int?
+  height      Int?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  trainingAge TrainingLevel?
+  goals       Specifity[]
+}
+
+model Program {
+  id            String         @id @default(cuid())
+  name          String
+  // complimentary to other programs. for searching purposes
+  // i.e. stretch routine etc. 
+  complimentary Boolean?
+  // type of training for searching purposes
+  specificity   Specifity[]
+  // optionally provide training level recommended for program
+  trainingLevel TrainingLevel?
+  // list of tags for search purposes
+  tags          String[]
+  publicity     Publicity
+}
+
+model Workout {
+  id            String        @id @default(cuid())
+  name          String
+  specificity   Specifity[]
+  trainingLevel TrainingLevel
+  tags          String[]
+  duration      DateTime
+}
+
+model Exercise {
+  id               String         @id @default(cuid())
+  sets             Int?
+  reps             Int?
+  duration         Int?
+  rpe              Int?
+  description      String
+  staticExercise   StaticExercise @relation(fields: [staticExerciseId], references: [id])
+  staticExerciseId String
+}
+
+model StaticExercise {
+  id            String     @id @default(cuid())
+  name          String
+  movement      Movement
+  targetMuscles Muscle[]
+  equipment     Equipment?
+  Exercise      Exercise[]
+}
+
+model Muscle {
+  id               String          @id @default(cuid())
+  name             String
+  rank             MuscleRank
+  staticExercise   StaticExercise? @relation(fields: [staticExerciseId], references: [id])
+  staticExerciseId String?
+}
+
+enum Specifity {
+  general
+  strength
+  hypertrophy
+  athletic
+  cardio
+}
+
+enum Gender {
+  male
+  female
+}
+
+enum TrainingLevel {
+  beginner
+  intermediate
+  advanced
+}
+
+enum Publicity {
+  private
+  public
+  friends
+}
+
+enum MuscleRank {
+  primary
+  secondary
+}
+
+enum Movement {
+  vertical_push
+  horizontal_push
+  vertical_pull
+  horizontal_pull
+  knee_dominant
+  hip_dominant
+  carry
+  isolation
+  flexion
+  extension
+  internal_rotation
+  external_rotation
+  elavation
+}
+
+enum Equipment {
+  barbell
+  dumbell
+  machine
+  band
+  ball
+}

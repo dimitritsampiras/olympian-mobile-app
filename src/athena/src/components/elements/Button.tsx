@@ -1,19 +1,29 @@
 import * as Haptics from 'expo-haptics';
 import React, { ReactNode, useEffect, useRef } from 'react';
-import { StyleSheet, Pressable, Text, Animated, Easing, ViewStyle } from 'react-native';
+import {
+  StyleSheet,
+  Pressable,
+  Text,
+  Animated,
+  Easing,
+  ViewStyle,
+  PressableProps
+} from 'react-native';
 import theme from '../../theme';
 
 // constants
 const BUTTON_SCALE_TO = 0.99; // will effect the size of button
-const BUTTON_SCALE_IN_DURATION = 80; // will effect the speed of pressing in
+const BUTTON_SCALE_IN_DURATION = 40; // will effect the speed of pressing in
 const BUTTON_SCALE_OUT_DURATION = 220; // will effect the speed of end animated
 const BUTTON_ELASTICITY = 2.2;
 
-interface ButtonProps {
+interface ButtonProps extends PressableProps {
   // button can't be pressed
   disabled?: boolean;
   // fit-content instead of full width
   auto?: boolean;
+  // is button loading
+  loading?: boolean;
   // disable button animations or now
   animated?: boolean;
   // show shadow
@@ -34,8 +44,9 @@ export const Button: React.FC<ButtonProps> = ({
   style,
   disabled,
   animated = true,
-  shadow = true,
-  children
+  shadow = false,
+  children,
+  ...props
 }) => {
   // animated value for scale of the button
   const animatedScale = useRef(new Animated.Value(1)).current;
@@ -64,9 +75,10 @@ export const Button: React.FC<ButtonProps> = ({
 
   return (
     <Pressable
-      style={{ ...style }}
+      style={{ ...style, width: '100%' }}
       onPressIn={handleOnPressIn}
       onPressOut={handleOnPressOut}
+      {...props}
     >
       {({ pressed }) => (
         <Animated.View
@@ -100,9 +112,9 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#fff',
-    fontSize: 21,
+    fontSize: 17,
     fontWeight: '400',
-    letterSpacing: 0.5
+    letterSpacing: 0.1
   },
   disabled: {
     backgroundColor: theme.gray[200]

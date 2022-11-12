@@ -2,15 +2,18 @@ import React, { useRef } from 'react';
 import {
   Animated,
   Easing,
+  NativeSyntheticEvent,
   Pressable,
   StyleSheet,
   TextInput,
+  TextInputChangeEventData,
+  TextInputProps,
   TextStyle
 } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import theme from '../../theme';
 
-interface InputProps {
+interface InputProps extends TextInputProps {
   style?: TextStyle;
   placeholder?: string;
   label?: string;
@@ -18,7 +21,7 @@ interface InputProps {
   state?: string;
 }
 
-export const Input: React.FC<InputProps> = ({ style }) => {
+export const Input: React.FC<InputProps> = ({ style, placeholder, ...props }) => {
   const animatedTranslationX = useRef(new Animated.Value(1)).current;
 
   const handleOnPressIn = () => {
@@ -49,13 +52,15 @@ export const Input: React.FC<InputProps> = ({ style }) => {
       }}
     >
       <TextInput
+        {...props}
         style={{ ...styles.input }}
         selectionColor={theme.gray[900]}
         onPressIn={handleOnPressIn}
         onSubmitEditing={handleUnFocus}
-        placeholder="Username"
+        placeholder={placeholder}
         placeholderTextColor={theme.gray[400]}
-      ></TextInput>
+        // autoCapitalize={'none'}
+      />
     </Animated.View>
   );
 };
@@ -66,6 +71,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     borderRadius: 18,
     backgroundColor: theme.gray[100],
+    width: '100%',
     zIndex: 1
   },
   input: {
