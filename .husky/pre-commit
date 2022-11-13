@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npx pretty-quick --staged
-npx eslint src/hermes/src
-npx eslint src/athena/src
-
+echo "Linting athena..."
+cd src/athena/ && npx lint-staged
+echo "Linting hermes..."
+cd ../../src/hermes && npx lint-staged

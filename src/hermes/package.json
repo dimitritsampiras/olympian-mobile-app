@@ -12,7 +12,8 @@
     "generate:prisma": "prisma generate",
     "generate:nexus": "ts-node --transpile-only src/server/schema",
     "migrate": "npx prisma migrate dev --name init",
-    "studio": "npx prisma studio"
+    "studio": "npx prisma studio",
+    "prepare": "cd ../../ && husky install .husky"
   },
   "author": "Dimitri Tsampiras",
   "license": "ISC",
@@ -41,6 +42,8 @@
     "@typescript-eslint/parser": "^5.42.1",
     "eslint": "^8.27.0",
     "eslint-plugin-react": "^7.31.10",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "typescript": "^4.8.4"
   }
