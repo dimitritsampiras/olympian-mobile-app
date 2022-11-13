@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Home } from '../components/screens';
-import { Settings } from '../components/screens/Settings';
+import { Home } from '../screens';
+import { Settings } from '../screens/Settings';
 
 export type TabParamList = {
   Home: undefined;

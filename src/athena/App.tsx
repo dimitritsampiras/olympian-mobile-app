@@ -11,13 +11,14 @@ import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { AuthProvider, retrieveToken } from './src/components/providers';
 
-import { AuthNavigator } from './src/navigation';
+import { AuthNavigator } from './src/components/navigation';
 
 // api link
 const httpLink = createHttpLink({
-  uri: 'http://10.4.50.135:4000/graphql'
+  uri: 'http://localhost:4000/graphql'
 });
 
+ 
 // apply token to authorization header
 const authLink = setContext(async (req, { headers }) => {
   const token = await retrieveToken();

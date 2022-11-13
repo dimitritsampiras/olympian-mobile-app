@@ -1,9 +1,9 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useContext, useEffect } from 'react';
-import { UserContext } from '../components/providers';
-import { LandingPage } from '../components/screens/auth/LandingPage';
-import { Login } from '../components/screens/auth/Login';
-import theme from '../theme';
+import { UserContext } from '../providers';
+import { LandingPage } from '../screens/auth/LandingPage';
+import { Login } from '../screens/auth/Login';
+import theme from '../../theme';
 import { RootStackNavigator } from './RootNavigator';
 
 export type AuthParamList = {

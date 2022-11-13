@@ -1,7 +1,8 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Text, View } from 'react-native';
-import { Home } from '../components/screens';
-import { CreateProgram } from '../components/screens/CreateProgram';
+import { globalstyles } from '../../theme/globalStyles';
+import { Home } from '../screens';
+import { CreateProgram } from '../screens/createProgram/CreateProgram';
 import { TabNavigator } from './TabNavigator';
 
 export type RootParamList = {

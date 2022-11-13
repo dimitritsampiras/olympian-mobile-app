@@ -11,7 +11,7 @@ import {
   View
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { AuthParamList } from '../../../navigation';
+import { AuthParamList } from '../../navigation';
 import { LoginInput, useLoginMutation, User } from '../../../lib/graphql';
 import { AUTH_TOKEN } from '../../../lib/constants';
 import { Input } from '../../elements/Input';
@@ -28,7 +28,7 @@ const initialValues: LoginInput = {
 
 export const Login: React.FC<LoginProps> = ({ navigation }) => {
   // context
-  const { user, refetch } = useContext(UserContext);
+  const { refetch } = useContext(UserContext);
 
   // graphql
   const [login] = useLoginMutation();

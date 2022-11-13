@@ -4,8 +4,8 @@ import { Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Button } from '../elements/Button';
-import { RootParamList } from '../../navigation/RootNavigator';
-import { TabParamList } from '../../navigation';
+import { RootParamList } from '../navigation/RootNavigator';
+import { TabParamList } from '../navigation';
 
 interface HomeProps
   extends NativeStackScreenProps<TabParamList & RootParamList, 'Home'> {}
