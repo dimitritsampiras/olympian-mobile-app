@@ -19,15 +19,22 @@ export const Exercise: React.FC<ExerciseProps> = ({ muscles, exerciseName }) => 
           height: 45,
           borderRadius: 999,
           overflow: 'hidden',
-          position: 'relative',
-        }}>
+          position: 'relative'
+        }}
+      >
         <View
           style={{
             position: 'absolute',
             right: -8,
-            top: 0,
-          }}>
-          <Body scale={0.6} data={muscles} frontOnly colors={[theme.blue[600], theme.blue[300]]} />
+            top: 0
+          }}
+        >
+          <Body
+            scale={0.6}
+            data={muscles}
+            frontOnly
+            colors={[theme.blue[600], theme.blue[300]]}
+          />
         </View>
       </View>
 
@@ -45,8 +52,9 @@ export const Exercise: React.FC<ExerciseProps> = ({ muscles, exerciseName }) => 
                 paddingLeft: 5,
                 paddingRight: 5,
                 borderRadius: 4,
-                marginRight: 4,
-              }}>
+                marginRight: 4
+              }}
+            >
               <Text style={{ color: 'gray', fontSize: 10 }}>{muscle.slug}</Text>
             </View>
           ))}
