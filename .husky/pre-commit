@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npx pretty-quick --staged
+npx eslint src/hermes/src
+npx eslint src/athena/src
+
