@@ -10,7 +10,8 @@
     "postinstall": "rm -rf node_modules/react-native-body-highlighter/node_modules/react-native-svg",
     "gen": "graphql-codegen",
     "prestart": "npm run gen",
-    "predev": "npm run gen"
+    "predev": "npm run gen",
+    "prepare": "cd ../../ && husky install .husky"
   },
   "dependencies": {
     "@apollo/client": "^3.7.1",
@@ -25,6 +26,7 @@
     "expo-status-bar": "~1.4.0",
     "formik": "^2.2.9",
     "graphql": "^15.8.0",
+    "prettier": "^2.7.1",
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "react-native": "0.69.6",
@@ -42,6 +44,13 @@
     "@graphql-codegen/cli": "^2.13.11",
     "@types/react": "~18.0.14",
     "@types/react-native": "~0.69.1",
+    "@typescript-eslint/eslint-plugin": "^5.42.1",
+    "@typescript-eslint/parser": "^5.42.1",
+    "eslint": "^8.27.0",
+    "eslint-plugin-react": "^7.31.10",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.0.3",
+    "pretty-quick": "^3.1.3",
     "typescript": "~4.3.5"
   },
   "private": true

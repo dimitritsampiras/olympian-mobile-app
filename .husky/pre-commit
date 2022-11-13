@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "Linting athena..."
+cd src/athena/ && npx lint-staged
+echo "Linting hermes..."
+cd ../../src/hermes && npx lint-staged
