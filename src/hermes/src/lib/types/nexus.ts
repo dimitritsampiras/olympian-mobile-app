@@ -42,7 +42,6 @@ export interface NexusGenObjects {
   User: { // root type
     email: string; // String!
     id: string; // ID!
-    password: string; // String!
     token?: string | null; // String
     username: string; // String!
   }
@@ -77,7 +76,6 @@ export interface NexusGenFieldTypes {
   User: { // field return type
     email: string; // String!
     id: string; // ID!
-    password: string; // String!
     token: string | null; // String
     username: string; // String!
   }
@@ -102,7 +100,6 @@ export interface NexusGenFieldTypeNames {
   User: { // field return type name
     email: 'String'
     id: 'ID'
-    password: 'String'
     token: 'String'
     username: 'String'
   }

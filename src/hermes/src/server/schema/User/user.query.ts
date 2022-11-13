@@ -7,8 +7,6 @@ export const UserQuery = extendType({
     t.field('me', {
       type: nullable('User'),
       resolve: async (_root, _args, { user }) => {
-        console.log(user);
-
         return user;
       }
     });

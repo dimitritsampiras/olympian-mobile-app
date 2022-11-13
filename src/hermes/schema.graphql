@@ -24,7 +24,6 @@ type Query {
 type User {
   email: String!
   id: ID!
-  password: String!
   token: String
   username: String!
 }
