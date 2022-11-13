@@ -3,6 +3,6 @@ query Me {
     id
     username
     email
-    password
+    token
   }
 }

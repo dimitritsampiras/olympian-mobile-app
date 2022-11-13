@@ -46,7 +46,6 @@ export type User = {
   __typename?: 'User';
   email: Scalars['String'];
   id: Scalars['ID'];
-  password: Scalars['String'];
   token?: Maybe<Scalars['String']>;
   username: Scalars['String'];
 };
@@ -67,7 +66,7 @@ export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'Us
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: string, username: string, email: string, password: string } | null };
+export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: string, username: string, email: string, token?: string | null } | null };
 
 
 export const LoginDocument = gql`
@@ -116,7 +115,7 @@ export const MeDocument = gql`
     id
     username
     email
-    password
+    token
   }
 }
     `;
