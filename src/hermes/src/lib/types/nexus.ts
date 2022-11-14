@@ -21,6 +21,9 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  Publicity: "friends" | "private" | "public"
+  Specificity: "athletic" | "cardio" | "general" | "hypertrophy" | "strength"
+  TrainingLevel: "advanced" | "beginner" | "intermediate"
 }
 
 export interface NexusGenScalars {
@@ -38,6 +41,15 @@ export interface NexusGenObjects {
     name: string; // String!
   }
   Mutation: {};
+  Program: { // root type
+    complimentary?: boolean | null; // Boolean
+    id: string; // ID!
+    name: string; // String!
+    publicity: NexusGenEnums['Publicity']; // Publicity!
+    specificity: NexusGenEnums['Specificity'][]; // [Specificity!]!
+    tags: string[]; // [String!]!
+    trainingLevel?: NexusGenEnums['TrainingLevel'] | null; // TrainingLevel
+  }
   Query: {};
   User: { // root type
     email: string; // String!
@@ -59,7 +71,7 @@ export interface NexusGenUnions {
 
 export type NexusGenRootTypes = NexusGenObjects
 
-export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
+export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
 export interface NexusGenFieldTypes {
   AppError: { // field return type
@@ -69,6 +81,15 @@ export interface NexusGenFieldTypes {
   }
   Mutation: { // field return type
     login: NexusGenRootTypes['UserResponse']; // UserResponse!
+  }
+  Program: { // field return type
+    complimentary: boolean | null; // Boolean
+    id: string; // ID!
+    name: string; // String!
+    publicity: NexusGenEnums['Publicity']; // Publicity!
+    specificity: NexusGenEnums['Specificity'][]; // [Specificity!]!
+    tags: string[]; // [String!]!
+    trainingLevel: NexusGenEnums['TrainingLevel'] | null; // TrainingLevel
   }
   Query: { // field return type
     me: NexusGenRootTypes['User'] | null; // User
@@ -93,6 +114,15 @@ export interface NexusGenFieldTypeNames {
   }
   Mutation: { // field return type name
     login: 'UserResponse'
+  }
+  Program: { // field return type name
+    complimentary: 'Boolean'
+    id: 'ID'
+    name: 'String'
+    publicity: 'Publicity'
+    specificity: 'Specificity'
+    tags: 'String'
+    trainingLevel: 'TrainingLevel'
   }
   Query: { // field return type name
     me: 'User'
@@ -127,7 +157,7 @@ export type NexusGenObjectNames = keyof NexusGenObjects;
 
 export type NexusGenInputNames = keyof NexusGenInputs;
 
-export type NexusGenEnumNames = never;
+export type NexusGenEnumNames = keyof NexusGenEnums;
 
 export type NexusGenInterfaceNames = never;
 

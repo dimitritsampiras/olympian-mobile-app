@@ -17,8 +17,38 @@ type Mutation {
   login(input: LoginInput!): UserResponse!
 }
 
+type Program {
+  complimentary: Boolean
+  id: ID!
+  name: String!
+  publicity: Publicity!
+  specificity: [Specificity!]!
+  tags: [String!]!
+  trainingLevel: TrainingLevel
+}
+
+enum Publicity {
+  friends
+  private
+  public
+}
+
 type Query {
   me: User
+}
+
+enum Specificity {
+  athletic
+  cardio
+  general
+  hypertrophy
+  strength
+}
+
+enum TrainingLevel {
+  advanced
+  beginner
+  intermediate
 }
 
 type User {

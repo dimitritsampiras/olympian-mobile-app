@@ -3,11 +3,12 @@ import path from 'path';
 
 import * as UserSchema from './User';
 import * as ErrorSchema from './Error';
+import * as ProgramSchema from './Program';
 
 // graphql nexus schema
 export default makeSchema({
   // types and resolvers
-  types: [UserSchema, ErrorSchema],
+  types: [UserSchema, ErrorSchema, ProgramSchema],
   // output paths of schema
   outputs: {
     schema: path.join(__dirname, '../../../schema.graphql'),
