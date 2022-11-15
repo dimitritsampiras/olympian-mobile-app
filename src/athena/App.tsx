@@ -8,7 +8,8 @@ import { AuthProvider, retrieveToken } from './src/components/providers';
 
 import { AuthNavigator } from './src/components/navigation';
 
-import {IP_ADDRESS, PORT} from '@env'
+// @ts-ignore
+import { IP_ADDRESS, PORT } from '@env';
 
 // api link
 const httpLink = createHttpLink({
