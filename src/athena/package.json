@@ -31,6 +31,7 @@
     "react-dom": "18.0.0",
     "react-native": "0.69.6",
     "react-native-body-highlighter": "^2.1.0",
+    "react-native-dotenv": "^3.4.2",
     "react-native-gesture-handler": "~2.5.0",
     "react-native-heroicons": "^3.2.0",
     "react-native-reanimated": "~2.9.1",

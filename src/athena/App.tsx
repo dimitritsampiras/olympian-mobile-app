@@ -8,11 +8,11 @@ import { AuthProvider, retrieveToken } from './src/components/providers';
 
 import { AuthNavigator } from './src/components/navigation';
 
-import config from './src/config';
+import {IP_ADDRESS, PORT} from '@env'
 
 // api link
 const httpLink = createHttpLink({
-  uri: `http://${config.ip_address}:${config.port}/graphql`,
+  uri: `http://${IP_ADDRESS}:${PORT}/graphql`,
 });
 
 // apply token to authorization header
