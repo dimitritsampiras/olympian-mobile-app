@@ -4,4 +4,7 @@
     "athena": "client",
     "hermes": "apollo"
   },
+  "files.exclude": {
+    "package-lock.json": true
+  }
 }

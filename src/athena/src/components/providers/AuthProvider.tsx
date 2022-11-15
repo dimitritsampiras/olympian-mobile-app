@@ -23,6 +23,9 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const { data, refetch } = useMeQuery();
 
+  const user = data?.me?.email
+  
+
   useEffect(() => {
     console.log(data);
   }, [data]);
