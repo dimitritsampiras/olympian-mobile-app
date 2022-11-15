@@ -1,5 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-import { NexusGenObjects } from '../lib/types/nexus';
+import { PrismaClient, User } from '@prisma/client';
 
 /**
  *
@@ -10,5 +9,5 @@ export interface AppContext {
   req: Express.Request;
   res: Express.Response;
   prisma: PrismaClient;
-  user: NexusGenObjects['User'] | null;
+  user: User
 }

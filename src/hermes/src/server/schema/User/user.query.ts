@@ -1,4 +1,4 @@
-import { extendType, nullable } from 'nexus';
+import { extendType, list, nullable } from 'nexus';
 
 // All mutations for User graphql object type
 export const UserQuery = extendType({
@@ -10,5 +10,15 @@ export const UserQuery = extendType({
         return user;
       }
     });
+    t.field('users', {
+      type: list('User'),
+      args: {
+        beans: list('Int')
+      },
+      resolve: async (_root, {beans}, { prisma }) => {
+        const users = await prisma.user.findMany();
+        return users;
+      }
+    })
   }
 });

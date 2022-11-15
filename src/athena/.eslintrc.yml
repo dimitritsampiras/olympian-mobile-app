@@ -13,8 +13,12 @@ parserOptions:
 plugins:
   - react
   - '@typescript-eslint'
-rules: {
-  "react/jsx-uses-react": "off",
-  "react/react-in-jsx-scope": "off",
-  "@typescript-eslint/ban-ts-comment": "off"
-}
+rules:
+  {
+    'react/jsx-uses-react': 'off',
+    'react/react-in-jsx-scope': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/no-empty-interface': 'off',
+    'react/jsx-key': 'warn',
+  }

@@ -1,21 +1,21 @@
 import { extendType, inputObjectType, nullable, objectType } from 'nexus';
 import { loginUser } from './helpers/authentication';
 
+
+// login () -> user 
+// register () -> user
+
 // All mutations for User graphql object type
 export const UserMutation = extendType({
   type: 'Mutation',
   definition(t) {
     // login mutation
     t.field('login', {
-      type: 'UserResponse',
+      type: nullable('String'),
       args: { input: 'LoginInput' },
       resolve: async (_root, { input }, { prisma }) => {
-        console.log('hello from here');
-        
-        const { user, error } = await loginUser(prisma, input);
-        if (error) return { error };
-
-        return { user };
+        const token = await loginUser(prisma, input);
+        return token;
       }
     });
   }

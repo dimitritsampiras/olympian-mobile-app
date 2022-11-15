@@ -3,6 +3,15 @@ query Me {
     id
     username
     email
-    token
+  }
+}
+
+query MeAndUsers($beans: [Int!]!) {
+  users(beans: $beans) {
+    email
+    username
+  }
+  me {
+    email
   }
 }

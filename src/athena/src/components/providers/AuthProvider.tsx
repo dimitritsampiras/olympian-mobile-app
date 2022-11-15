@@ -13,7 +13,7 @@ export const UserContext = createContext({
           }>
         >
       | undefined
-  ) => Promise<ApolloQueryResult<MeQuery>>
+  ) => Promise<ApolloQueryResult<MeQuery>>,
 });
 
 interface AuthProviderProps {
@@ -22,9 +22,6 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const { data, refetch } = useMeQuery();
-
-  const user = data?.me?.email
-  
 
   useEffect(() => {
     console.log(data);

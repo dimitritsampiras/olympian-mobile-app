@@ -5,6 +5,7 @@ import { LandingPage } from '../screens/auth/LandingPage';
 import { Login } from '../screens/auth/Login';
 import theme from '../../theme';
 import { RootStackNavigator } from './RootNavigator';
+import { useMeQuery } from '../../lib/graphql';
 
 export type AuthParamList = {
   LandingPage: undefined;
@@ -26,12 +27,13 @@ interface AuthNavigatorProps {}
  * This renders all 3 auth screens: landing page, login page, register page.
  * @param _ Object with isLoggedIn boolean and isLoggedIn setter
  */
-export const AuthNavigator: React.FC<AuthNavigatorProps> = ({}) => {
-  const { user } = useContext(UserContext);
+export const AuthNavigator: React.FC<AuthNavigatorProps> = () => {
+  // const { user } = useContext(UserContext);
+  const { data, refetch } = useMeQuery();
 
   return (
     <AuthStack.Navigator>
-      {user === null || user === undefined ? (
+      {data?.me === null || data?.me === undefined ? (
         <>
           <AuthStack.Screen name="LandingPage" component={LandingPage} />
           <AuthStack.Screen

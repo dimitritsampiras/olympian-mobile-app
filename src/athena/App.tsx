@@ -2,8 +2,7 @@ import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@ap
 import { setContext } from '@apollo/client/link/context';
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AuthProvider, retrieveToken } from './src/components/providers';
 
 import { AuthNavigator } from './src/components/navigation';
@@ -48,13 +47,3 @@ export default function App() {
     </ApolloProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingLeft: 20,
-    paddingRight: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

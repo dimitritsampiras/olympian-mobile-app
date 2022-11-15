@@ -22,7 +22,7 @@ input LoginInput {
 }
 
 type Mutation {
-  login(input: LoginInput!): UserResponse!
+  login(input: LoginInput!): String
 }
 
 type Program {
@@ -44,6 +44,7 @@ enum Publicity {
 
 type Query {
   me: User
+  users(beans: [Int!]!): [User!]!
 }
 
 enum Specificity {
@@ -63,7 +64,6 @@ enum TrainingLevel {
 type User {
   email: String!
   id: ID!
-  token: String
   username: String!
 }
 

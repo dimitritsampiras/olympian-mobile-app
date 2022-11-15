@@ -38,7 +38,7 @@ export type LoginInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  login: UserResponse;
+  login?: Maybe<Scalars['String']>;
 };
 
 
@@ -67,6 +67,12 @@ export enum Publicity {
 export type Query = {
   __typename?: 'Query';
   me?: Maybe<User>;
+  users: Array<User>;
+};
+
+
+export type QueryUsersArgs = {
+  beans: Array<Scalars['Int']>;
 };
 
 export enum Specificity {
@@ -87,7 +93,6 @@ export type User = {
   __typename?: 'User';
   email: Scalars['String'];
   id: Scalars['ID'];
-  token?: Maybe<Scalars['String']>;
   username: Scalars['String'];
 };
 
@@ -111,26 +116,24 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'UserResponse', user?: { __typename?: 'User', token?: string | null, username: string } | null, error?: { __typename?: 'AppError', name: string, message: string } | null } };
+export type LoginMutation = { __typename?: 'Mutation', login?: string | null };
 
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: string, username: string, email: string, token?: string | null } | null };
+export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: string, username: string, email: string } | null };
+
+export type MeAndUsersQueryVariables = Exact<{
+  beans: Array<Scalars['Int']> | Scalars['Int'];
+}>;
+
+
+export type MeAndUsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', email: string, username: string }>, me?: { __typename?: 'User', email: string } | null };
 
 
 export const LoginDocument = gql`
     mutation Login($input: LoginInput!) {
-  login(input: $input) {
-    user {
-      token
-      username
-    }
-    error {
-      name
-      message
-    }
-  }
+  login(input: $input)
 }
     `;
 export type LoginMutationFn = Apollo.MutationFunction<LoginMutation, LoginMutationVariables>;
@@ -165,7 +168,6 @@ export const MeDocument = gql`
     id
     username
     email
-    token
   }
 }
     `;
@@ -196,3 +198,42 @@ export function useMeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeQuery
 export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
 export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
 export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
+export const MeAndUsersDocument = gql`
+    query MeAndUsers($beans: [Int!]!) {
+  users(beans: $beans) {
+    email
+    username
+  }
+  me {
+    email
+  }
+}
+    `;
+
+/**
+ * __useMeAndUsersQuery__
+ *
+ * To run a query within a React component, call `useMeAndUsersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMeAndUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMeAndUsersQuery({
+ *   variables: {
+ *      beans: // value for 'beans'
+ *   },
+ * });
+ */
+export function useMeAndUsersQuery(baseOptions: Apollo.QueryHookOptions<MeAndUsersQuery, MeAndUsersQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MeAndUsersQuery, MeAndUsersQueryVariables>(MeAndUsersDocument, options);
+      }
+export function useMeAndUsersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeAndUsersQuery, MeAndUsersQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MeAndUsersQuery, MeAndUsersQueryVariables>(MeAndUsersDocument, options);
+        }
+export type MeAndUsersQueryHookResult = ReturnType<typeof useMeAndUsersQuery>;
+export type MeAndUsersLazyQueryHookResult = ReturnType<typeof useMeAndUsersLazyQuery>;
+export type MeAndUsersQueryResult = Apollo.QueryResult<MeAndUsersQuery, MeAndUsersQueryVariables>;

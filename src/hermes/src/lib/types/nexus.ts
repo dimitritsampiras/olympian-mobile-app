@@ -61,7 +61,6 @@ export interface NexusGenObjects {
   User: { // root type
     email: string; // String!
     id: string; // ID!
-    token?: string | null; // String
     username: string; // String!
   }
   UserResponse: { // root type
@@ -101,7 +100,7 @@ export interface NexusGenFieldTypes {
     sets: number | null; // Int
   }
   Mutation: { // field return type
-    login: NexusGenRootTypes['UserResponse']; // UserResponse!
+    login: string | null; // String
   }
   Program: { // field return type
     complimentary: boolean | null; // Boolean
@@ -115,11 +114,11 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     me: NexusGenRootTypes['User'] | null; // User
+    users: NexusGenRootTypes['User'][]; // [User!]!
   }
   User: { // field return type
     email: string; // String!
     id: string; // ID!
-    token: string | null; // String
     username: string; // String!
   }
   UserResponse: { // field return type
@@ -149,7 +148,7 @@ export interface NexusGenFieldTypeNames {
     sets: 'Int'
   }
   Mutation: { // field return type name
-    login: 'UserResponse'
+    login: 'String'
   }
   Program: { // field return type name
     complimentary: 'Boolean'
@@ -163,11 +162,11 @@ export interface NexusGenFieldTypeNames {
   }
   Query: { // field return type name
     me: 'User'
+    users: 'User'
   }
   User: { // field return type name
     email: 'String'
     id: 'ID'
-    token: 'String'
     username: 'String'
   }
   UserResponse: { // field return type name
@@ -187,6 +186,11 @@ export interface NexusGenArgTypes {
   Mutation: {
     login: { // args
       input: NexusGenInputs['LoginInput']; // LoginInput!
+    }
+  }
+  Query: {
+    users: { // args
+      beans: number[]; // [Int!]!
     }
   }
 }

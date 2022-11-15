@@ -37,9 +37,9 @@ export const Login: React.FC<LoginProps> = ({ navigation }) => {
     const { data, errors } = await login({ variables: { input: values } });
 
     // TODO: handle errors
-    if (!data?.login.user?.token) return;
+    if (!data?.login) return;
 
-    await AsyncStorage.setItem(AUTH_TOKEN, data.login.user.token);
+    await AsyncStorage.setItem(AUTH_TOKEN, data.login);
     await refetch();
   };
 
