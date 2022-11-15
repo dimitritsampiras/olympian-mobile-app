@@ -40,6 +40,13 @@ export interface NexusGenObjects {
     message: string; // String!
     name: string; // String!
   }
+  Exercise: { // root type
+    description: string; // String!
+    id: string; // ID!
+    reps?: number | null; // Int
+    rpe?: number | null; // Int
+    sets?: number | null; // Int
+  }
   Mutation: {};
   Program: { // root type
     complimentary?: boolean | null; // Boolean
@@ -61,6 +68,13 @@ export interface NexusGenObjects {
     error?: NexusGenRootTypes['AppError'] | null; // AppError
     user?: NexusGenRootTypes['User'] | null; // User
   }
+  Workout: { // root type
+    id: string; // ID!
+    name: string; // String!
+    specificity: NexusGenEnums['Specificity'][]; // [Specificity!]!
+    tags: string[]; // [String!]!
+    trainingLevel: NexusGenEnums['TrainingLevel']; // TrainingLevel!
+  }
 }
 
 export interface NexusGenInterfaces {
@@ -79,6 +93,13 @@ export interface NexusGenFieldTypes {
     message: string; // String!
     name: string; // String!
   }
+  Exercise: { // field return type
+    description: string; // String!
+    id: string; // ID!
+    reps: number | null; // Int
+    rpe: number | null; // Int
+    sets: number | null; // Int
+  }
   Mutation: { // field return type
     login: NexusGenRootTypes['UserResponse']; // UserResponse!
   }
@@ -90,6 +111,7 @@ export interface NexusGenFieldTypes {
     specificity: NexusGenEnums['Specificity'][]; // [Specificity!]!
     tags: string[]; // [String!]!
     trainingLevel: NexusGenEnums['TrainingLevel'] | null; // TrainingLevel
+    workouts: NexusGenRootTypes['Workout'][]; // [Workout!]!
   }
   Query: { // field return type
     me: NexusGenRootTypes['User'] | null; // User
@@ -104,6 +126,13 @@ export interface NexusGenFieldTypes {
     error: NexusGenRootTypes['AppError'] | null; // AppError
     user: NexusGenRootTypes['User'] | null; // User
   }
+  Workout: { // field return type
+    id: string; // ID!
+    name: string; // String!
+    specificity: NexusGenEnums['Specificity'][]; // [Specificity!]!
+    tags: string[]; // [String!]!
+    trainingLevel: NexusGenEnums['TrainingLevel']; // TrainingLevel!
+  }
 }
 
 export interface NexusGenFieldTypeNames {
@@ -111,6 +140,13 @@ export interface NexusGenFieldTypeNames {
     createdAt: 'String'
     message: 'String'
     name: 'String'
+  }
+  Exercise: { // field return type name
+    description: 'String'
+    id: 'ID'
+    reps: 'Int'
+    rpe: 'Int'
+    sets: 'Int'
   }
   Mutation: { // field return type name
     login: 'UserResponse'
@@ -123,6 +159,7 @@ export interface NexusGenFieldTypeNames {
     specificity: 'Specificity'
     tags: 'String'
     trainingLevel: 'TrainingLevel'
+    workouts: 'Workout'
   }
   Query: { // field return type name
     me: 'User'
@@ -136,6 +173,13 @@ export interface NexusGenFieldTypeNames {
   UserResponse: { // field return type name
     error: 'AppError'
     user: 'User'
+  }
+  Workout: { // field return type name
+    id: 'ID'
+    name: 'String'
+    specificity: 'Specificity'
+    tags: 'String'
+    trainingLevel: 'TrainingLevel'
   }
 }
 

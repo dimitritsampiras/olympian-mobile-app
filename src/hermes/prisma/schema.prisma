@@ -50,6 +50,7 @@ model Program {
   // list of tags for search purposes
   tags          String[]
   publicity     Publicity
+  workouts      Workout[]
 }
 
 model Workout {
@@ -59,6 +60,9 @@ model Workout {
   trainingLevel TrainingLevel
   tags          String[]
   duration      DateTime
+  exercises     Exercise[]
+  Program       Program?      @relation(fields: [programId], references: [id])
+  programId     String?
 }
 
 model Exercise {
@@ -70,6 +74,8 @@ model Exercise {
   description      String
   staticExercise   StaticExercise @relation(fields: [staticExerciseId], references: [id])
   staticExerciseId String
+  Workout          Workout?       @relation(fields: [workoutId], references: [id])
+  workoutId        String?
 }
 
 model StaticExercise {

@@ -22,7 +22,7 @@ const main = async () => {
   await server.start();
 
   server.applyMiddleware({ app });
-
+  
   app.listen({ port: config.port }, () => {
     console.log(
       `🚀 Server ready at port http://localhost:${config.port}${server.graphqlPath}`

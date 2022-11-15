@@ -8,6 +8,14 @@ type AppError {
   name: String!
 }
 
+type Exercise {
+  description: String!
+  id: ID!
+  reps: Int
+  rpe: Int
+  sets: Int
+}
+
 input LoginInput {
   password: String!
   username: String!
@@ -25,6 +33,7 @@ type Program {
   specificity: [Specificity!]!
   tags: [String!]!
   trainingLevel: TrainingLevel
+  workouts: [Workout!]!
 }
 
 enum Publicity {
@@ -61,4 +70,12 @@ type User {
 type UserResponse {
   error: AppError
   user: User
+}
+
+type Workout {
+  id: ID!
+  name: String!
+  specificity: [Specificity!]!
+  tags: [String!]!
+  trainingLevel: TrainingLevel!
 }

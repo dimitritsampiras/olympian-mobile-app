@@ -22,6 +22,15 @@ export type AppError = {
   name: Scalars['String'];
 };
 
+export type Exercise = {
+  __typename?: 'Exercise';
+  description: Scalars['String'];
+  id: Scalars['ID'];
+  reps?: Maybe<Scalars['Int']>;
+  rpe?: Maybe<Scalars['Int']>;
+  sets?: Maybe<Scalars['Int']>;
+};
+
 export type LoginInput = {
   password: Scalars['String'];
   username: Scalars['String'];
@@ -37,10 +46,42 @@ export type MutationLoginArgs = {
   input: LoginInput;
 };
 
+export type Program = {
+  __typename?: 'Program';
+  complimentary?: Maybe<Scalars['Boolean']>;
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  publicity: Publicity;
+  specificity: Array<Specificity>;
+  tags: Array<Scalars['String']>;
+  trainingLevel?: Maybe<TrainingLevel>;
+  workouts: Array<Workout>;
+};
+
+export enum Publicity {
+  Friends = 'friends',
+  Private = 'private',
+  Public = 'public'
+}
+
 export type Query = {
   __typename?: 'Query';
   me?: Maybe<User>;
 };
+
+export enum Specificity {
+  Athletic = 'athletic',
+  Cardio = 'cardio',
+  General = 'general',
+  Hypertrophy = 'hypertrophy',
+  Strength = 'strength'
+}
+
+export enum TrainingLevel {
+  Advanced = 'advanced',
+  Beginner = 'beginner',
+  Intermediate = 'intermediate'
+}
 
 export type User = {
   __typename?: 'User';
@@ -54,6 +95,15 @@ export type UserResponse = {
   __typename?: 'UserResponse';
   error?: Maybe<AppError>;
   user?: Maybe<User>;
+};
+
+export type Workout = {
+  __typename?: 'Workout';
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  specificity: Array<Specificity>;
+  tags: Array<Scalars['String']>;
+  trainingLevel: TrainingLevel;
 };
 
 export type LoginMutationVariables = Exact<{
