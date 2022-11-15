@@ -1,9 +1,4 @@
-import {
-  ApolloClient,
-  ApolloProvider,
-  createHttpLink,
-  InMemoryCache
-} from '@apollo/client';
+import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
@@ -13,12 +8,13 @@ import { AuthProvider, retrieveToken } from './src/components/providers';
 
 import { AuthNavigator } from './src/components/navigation';
 
+import {IP_ADDRESS, PORT} from '@env'
+
 // api link
 const httpLink = createHttpLink({
-  uri: 'http://localhost:4000/graphql'
+  uri: `http://${IP_ADDRESS}:${PORT}/graphql`,
 });
 
- 
 // apply token to authorization header
 const authLink = setContext(async (req, { headers }) => {
   const token = await retrieveToken();
@@ -26,15 +22,15 @@ const authLink = setContext(async (req, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : null
-    }
+      authorization: token ? `Bearer ${token}` : null,
+    },
   };
 });
 
 // export client object
 export const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
 });
 
 export default function App() {
@@ -58,6 +54,6 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     alignItems: 'center',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 });
