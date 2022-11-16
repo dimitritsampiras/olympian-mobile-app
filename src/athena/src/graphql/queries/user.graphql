@@ -5,13 +5,3 @@ query Me {
     email
   }
 }
-
-query MeAndUsers($beans: [Int!]!) {
-  users(beans: $beans) {
-    email
-    username
-  }
-  me {
-    email
-  }
-}

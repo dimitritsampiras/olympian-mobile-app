@@ -28,12 +28,11 @@ interface AuthNavigatorProps {}
  * @param _ Object with isLoggedIn boolean and isLoggedIn setter
  */
 export const AuthNavigator: React.FC<AuthNavigatorProps> = () => {
-  // const { user } = useContext(UserContext);
-  const { data, refetch } = useMeQuery();
+  const { user } = useContext(UserContext);
 
   return (
     <AuthStack.Navigator>
-      {data?.me === null || data?.me === undefined ? (
+      {user === null || user === undefined ? (
         <>
           <AuthStack.Screen name="LandingPage" component={LandingPage} />
           <AuthStack.Screen
