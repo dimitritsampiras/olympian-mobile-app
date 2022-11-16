@@ -6,7 +6,7 @@ import * as ErrorSchema from './Error';
 import * as ProgramSchema from './Program';
 
 // graphql nexus schema
-export default makeSchema({
+export const schema =  makeSchema({
   // types and resolvers
   types: [UserSchema, ErrorSchema, ProgramSchema],
   // output paths of schema

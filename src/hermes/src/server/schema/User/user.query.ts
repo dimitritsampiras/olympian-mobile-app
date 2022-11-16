@@ -1,6 +1,5 @@
 import { extendType, list, nullable } from 'nexus';
 
-// All mutations for User graphql object type
 export const UserQuery = extendType({
   type: 'Query',
   definition(t) {
