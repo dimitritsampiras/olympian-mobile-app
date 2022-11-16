@@ -44,7 +44,6 @@ enum Publicity {
 
 type Query {
   me: User
-  users(beans: [Int!]!): [User!]!
 }
 
 enum Specificity {
