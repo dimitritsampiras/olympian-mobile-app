@@ -1,12 +1,3 @@
 mutation Login($input: LoginInput!) {
-  login(input: $input) {
-    user {
-      token
-      username
-    }
-    error {
-      name
-      message
-    }
-  }
+  login(input: $input)
 }

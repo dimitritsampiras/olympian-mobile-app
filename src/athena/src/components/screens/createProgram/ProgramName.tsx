@@ -7,10 +7,10 @@ import { CreateProgramContext } from './CreateProgram';
 
 interface ProgramNameProps {}
 
-export const ProgramName: React.FC<ProgramNameProps> = ({}) => {
+export const ProgramName: React.FC<ProgramNameProps> = () => {
   const { program, setProgram, step, setStep } = useContext(CreateProgramContext);
 
-  const [programName, setProgramName] = useState('');
+  const [programName, setProgramName] = useState(program.name || '');
 
   const handleOnTextChange = (text: string) => {
     setProgramName(text);
@@ -18,7 +18,7 @@ export const ProgramName: React.FC<ProgramNameProps> = ({}) => {
 
   const handleOnNext = () => {
     if (!programName) return;
-    setProgram((prev: any) => ({ ...prev, name: programName }));
+    setProgram((prev) => ({ ...prev, name: programName }));
     setStep(step + 1 < 9 ? step + 1 : step);
   };
 
@@ -44,6 +44,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 22,
     width: 200,
-    marginBottom: 20
-  }
+    marginBottom: 20,
+  },
 });

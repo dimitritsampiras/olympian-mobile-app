@@ -1,4 +1,4 @@
- .prettierrc or .prettierrc.yaml
+# .prettierrc or .prettierrc.yaml
 trailingComma: 'es5'
 # Dimitri's Preference
 tabWidth: 2

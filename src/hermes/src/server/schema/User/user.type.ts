@@ -8,8 +8,5 @@ export const UserType = objectType({
     t.field(User.id);
     t.field(User.username);
     t.field(User.email);
-
-    // jwt token of user
-    t.nullable.string('token');
   }
 });

@@ -1,4 +1,4 @@
-import { extendType, nullable } from 'nexus';
+import { extendType, list, nullable } from 'nexus';
 
 // All mutations for User graphql object type
 export const UserQuery = extendType({
@@ -8,7 +8,7 @@ export const UserQuery = extendType({
       type: nullable('User'),
       resolve: async (_root, _args, { user }) => {
         return user;
-      }
+      },
     });
-  }
+  },
 });

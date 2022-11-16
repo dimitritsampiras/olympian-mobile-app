@@ -13,3 +13,7 @@ web-build/
 # macOS
 .DS_Store
 .env
+
+
+# generated files 
+src/lib/graphql.ts

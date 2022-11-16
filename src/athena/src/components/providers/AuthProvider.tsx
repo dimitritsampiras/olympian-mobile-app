@@ -13,7 +13,7 @@ export const UserContext = createContext({
           }>
         >
       | undefined
-  ) => Promise<ApolloQueryResult<MeQuery>>
+  ) => Promise<ApolloQueryResult<MeQuery>>,
 });
 
 interface AuthProviderProps {

@@ -3,10 +3,8 @@ import argon2 from 'argon2';
 
 import config from '../../../../config';
 import { NexusGenAllTypes, NexusGenInputs } from '../../../../lib/types/nexus';
-import { PrismaClient } from '@prisma/client';
-import { createAppError } from '../../../../lib/utils/errors';
+import { PrismaClient, User } from '@prisma/client';
 
-type User = NexusGenAllTypes['User'];
 type LoginInput = NexusGenInputs['LoginInput'];
 
 /**
@@ -52,26 +50,22 @@ export const createPassword = async (password: string) => {
 export const loginUser = async (
   prisma: PrismaClient,
   input: LoginInput
-): Promise<NexusGenAllTypes['UserResponse']> => {
+) => {
   const { username, password } = input;
 
   const user = await prisma.user.findUnique({ where: { username } });
 
   // user does not exist guard clause
-  if (!user) return { error: createAppError('username not found') };
+  if (!user) return null;
   const isVerified = await argon2.verify(user.password, password);
   // incorrect password guard clause
-  if (!isVerified) {
-    return { error: createAppError('username or password is incorrect') };
-  }
+  if (!isVerified) return null;
+  
   const token = jwt.sign({ user }, config.jwtSecret, {
     expiresIn: '3 days'
   });
-  const userWithToken = {
-    ...user,
-    token
-  };
-  return { user: userWithToken };
+  
+  return token;
 };
 
 /**
