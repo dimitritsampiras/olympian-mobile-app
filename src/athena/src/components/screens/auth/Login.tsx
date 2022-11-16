@@ -8,7 +8,7 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   StyleSheet,
-  View
+  View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AuthParamList } from '../../navigation';
@@ -23,7 +23,7 @@ interface LoginProps extends ParamList {}
 
 const initialValues: LoginInput = {
   username: '',
-  password: ''
+  password: '',
 };
 
 export const Login: React.FC<LoginProps> = ({ navigation }) => {
@@ -84,7 +84,7 @@ export const Login: React.FC<LoginProps> = ({ navigation }) => {
 const styles = StyleSheet.create({
   screen: {
     height: '100%',
-    width: '100%'
+    width: '100%',
   },
   keyboardView: {
     display: 'flex',
@@ -92,12 +92,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     width: '100%',
-    paddingHorizontal: 24
+    paddingHorizontal: 24,
   },
   heading2: {
     fontSize: 20,
     fontWeight: '600',
     textAlign: 'center',
-    zIndex: 99
-  }
+    zIndex: 99,
+  },
 });

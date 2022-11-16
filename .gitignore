@@ -4,3 +4,4 @@
 *.bbl
 *.synctex.gz
 *.out
+.vscode
