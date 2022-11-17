@@ -9,5 +9,5 @@ export interface AppContext {
   req: Express.Request;
   res: Express.Response;
   prisma: PrismaClient;
-  user: User
+  user: User | null;
 }

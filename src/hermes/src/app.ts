@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client';
 import express from 'express';
 
 import config from './config';
-import { createApolloServer } from './server';
+import { createApolloServer } from './server/createServer';
 
 const prisma = new PrismaClient();
 
