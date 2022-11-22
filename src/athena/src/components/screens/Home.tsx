@@ -16,7 +16,7 @@ export const Home: React.FC<HomeProps> = ({ navigation }) => {
         paddingLeft: 22,
         paddingRight: 22,
       }}>
-      <Button onPress={() => navigation.navigate('CreateProgram')}>Create Program</Button>
+      <Button onPress={() => navigation.navigate('Create Program')}>Create Program</Button>
     </SafeAreaView>
   );
 };

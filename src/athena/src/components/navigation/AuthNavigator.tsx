@@ -1,11 +1,11 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { UserContext } from '../providers';
 import { LandingPage } from '../screens/auth/LandingPage';
 import { Login } from '../screens/auth/Login';
 import theme from '../../theme';
 import { RootStackNavigator } from './RootNavigator';
-import { useMeQuery } from '../../lib/graphql';
+import { isNil } from 'lodash';
 
 export type AuthParamList = {
   LandingPage: undefined;
@@ -17,22 +17,19 @@ export type AuthParamList = {
 // authentication screen stack
 const AuthStack = createNativeStackNavigator<AuthParamList>();
 
-// navigator props
-interface AuthNavigatorProps {}
-
 /**
  * Authentation Navigator FC
- *
- * @description
- * This renders all 3 auth screens: landing page, login page, register page.
- * @param _ Object with isLoggedIn boolean and isLoggedIn setter
+
+ * This renders all auth screens: 
+ * landing page, login page, register page, and main tab navigator 
+ * depending on if user exists from UserContext
  */
-export const AuthNavigator: React.FC<AuthNavigatorProps> = () => {
+export const AuthNavigator: React.FC = () => {
   const { user } = useContext(UserContext);
 
   return (
     <AuthStack.Navigator>
-      {user === null || user === undefined ? (
+      {isNil(user) ? (
         <>
           <AuthStack.Screen name="LandingPage" component={LandingPage} />
           <AuthStack.Screen

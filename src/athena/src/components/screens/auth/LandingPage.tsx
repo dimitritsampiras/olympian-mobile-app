@@ -3,13 +3,17 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button } from '../../elements/Button';
-import { AuthParamList } from '../../navigation/AuthNavigation';
+import { AuthParamList } from '../../navigation/AuthNavigator';
 
 type LandingPageNav = NativeStackScreenProps<AuthParamList, 'LandingPage'>;
 
 interface LandingPageProps extends LandingPageNav {}
 
 export const LandingPage: React.FC<LandingPageProps> = ({ navigation }) => {
+  const navToLogin = () => {
+    // navigation.navigate('Login');
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.innerContainer}>
@@ -20,7 +24,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ navigation }) => {
         </View>
         {/* buttons */}
         <View style={{ width: '100%' }}>
-          <Button onPress={() => navigation.navigate('Login')}>Log In</Button>
+          <Button onPress={navToLogin}>Log In</Button>
         </View>
       </View>
     </SafeAreaView>
@@ -32,24 +36,24 @@ const styles = StyleSheet.create({
     display: 'flex',
     flex: 1,
     justifyContent: 'space-around',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   innerContainer: {
     display: 'flex',
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
-    width: 320
+    width: 320,
   },
   heading1: {
     fontSize: 40,
-    fontWeight: 'bold',
-    textAlign: 'center'
+    fontWeight: '800',
+    textAlign: 'center',
   },
   preHeading: {
     fontSize: 20,
     fontWeight: '500',
     textAlign: 'center',
-    color: '#4B5563'
-  }
+    color: '#4B5563',
+  },
 });

@@ -1,18 +1,19 @@
 import { selectionAsync } from 'expo-haptics';
-import React, { SVGProps, useContext, useState } from 'react';
-import { Pressable, PressableProps, StyleSheet, View, Text, ViewStyle } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { Pressable, PressableProps, StyleSheet, View, Text } from 'react-native';
 import { GlobeAltIcon, UserGroupIcon, UserIcon } from 'react-native-heroicons/solid';
 
 import { Publicity } from '../../../lib/graphql';
 import theme from '../../../theme';
 import { Button } from '../../elements/Button';
+import { CreateProgramContext } from '../../providers/CreateProgramProvider';
 
-import { CreateProgramContext } from './CreateProgram';
+interface ProgramPublicityProps {
+  nextPage: () => void;
+}
 
-interface ProgramPublicityProps {}
-
-export const ProgramPublicity: React.FC<ProgramPublicityProps> = () => {
-  const { program, setProgram, step, setStep } = useContext(CreateProgramContext);
+export const ProgramPublicity: React.FC<ProgramPublicityProps> = ({ nextPage }) => {
+  const { program, setProgram } = useContext(CreateProgramContext);
 
   const [selectedPublicity, setSelectedPublicity] = useState<Publicity | undefined>(
     program.publicity
@@ -21,7 +22,7 @@ export const ProgramPublicity: React.FC<ProgramPublicityProps> = () => {
   const handleOnNext = () => {
     if (!selectedPublicity) return;
     setProgram((prev) => ({ ...prev, publicity: selectedPublicity }));
-    setStep((prev) => prev + 1);
+    nextPage();
   };
 
   return (

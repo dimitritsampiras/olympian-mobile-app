@@ -8,6 +8,14 @@ type AppError {
   name: String!
 }
 
+enum Equipment {
+  ball
+  band
+  barbell
+  dumbell
+  machine
+}
+
 type Exercise {
   description: String!
   id: ID!
@@ -19,6 +27,33 @@ type Exercise {
 input LoginInput {
   password: String!
   username: String!
+}
+
+enum Movement {
+  carry
+  elavation
+  extension
+  external_rotation
+  flexion
+  hip_dominant
+  horizontal_pull
+  horizontal_push
+  internal_rotation
+  isolation
+  knee_dominant
+  vertical_pull
+  vertical_push
+}
+
+type Muscle {
+  id: ID!
+  name: String!
+  rank: MuscleRank!
+}
+
+enum MuscleRank {
+  primary
+  secondary
 }
 
 type Mutation {
@@ -43,6 +78,7 @@ enum Publicity {
 }
 
 type Query {
+  exercises: [StaticExercise!]!
   me: User
 }
 
@@ -52,6 +88,14 @@ enum Specificity {
   general
   hypertrophy
   strength
+}
+
+type StaticExercise {
+  equipment: Equipment
+  id: ID!
+  movement: Movement!
+  name: String!
+  targetMuscles: [Muscle!]!
 }
 
 enum TrainingLevel {

@@ -1,19 +1,25 @@
 import React, { useContext, useState } from 'react';
-import { StyleSheet, View, ViewStyle } from 'react-native';
-import { ChipsInput, Incubator, Text } from 'react-native-ui-lib';
-import theme from '../../../theme';
+import { StyleSheet, View } from 'react-native';
+import { Incubator, Text } from 'react-native-ui-lib';
 import { Button } from '../../elements/Button';
-import { Input } from '../../elements/Input';
-import { CreateProgramContext } from './CreateProgram';
+import { CreateProgramContext } from '../../providers/CreateProgramProvider';
 
-export const ProgramTags: React.FC = () => {
-  const { program, setProgram, step, setStep } = useContext(CreateProgramContext);
+interface ProgramTagsProps {
+  // nextPage: () => void;
+  navtoWorkoutForm: () => void;
+}
 
-  const [chips, setChips] = useState<{ label: string }[]>([]);
+export const ProgramTags: React.FC<ProgramTagsProps> = ({ navtoWorkoutForm }) => {
+  const { program, setProgram } = useContext(CreateProgramContext);
+
+  const [chips, setChips] = useState<{ label: string }[]>(
+    program.tags?.map((tag) => ({ label: tag })) || []
+  );
 
   const handleOnNext = () => {
     setProgram((prev) => ({ ...prev, tags: chips.map(({ label }) => label) }));
-    setStep((prev) => prev + 1);
+    // nextPage();
+    navtoWorkoutForm();
   };
 
   return (
@@ -27,7 +33,7 @@ export const ProgramTags: React.FC = () => {
           onChange={(value) => setChips(value as { label: string }[])}
         />
       </View>
-      <Button shadow={false} onPress={handleOnNext} style={{marginTop: 30}}>
+      <Button shadow={false} onPress={handleOnNext} style={{ marginTop: 30 }}>
         Next
       </Button>
     </>

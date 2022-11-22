@@ -1,3 +1,3 @@
 export * from './TabNavigator';
 export * from './RootNavigator';
-export * from './AuthNavigation';
+export * from './AuthNavigator';

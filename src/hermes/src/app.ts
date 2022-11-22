@@ -12,7 +12,7 @@ const main = async () => {
   const app = express();
 
   const server = createApolloServer({
-    prisma
+    prisma,
   });
 
   // express middleware
@@ -22,11 +22,9 @@ const main = async () => {
   await server.start();
 
   server.applyMiddleware({ app });
-  
+
   app.listen({ port: config.port }, () => {
-    console.log(
-      `🚀 Server ready at port http://localhost:${config.port}${server.graphqlPath}`
-    );
+    console.log(`🚀 Server ready at port http://localhost:${config.port}${server.graphqlPath}`);
   });
 };
 

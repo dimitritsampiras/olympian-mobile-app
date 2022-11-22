@@ -3,12 +3,14 @@ import { StyleSheet } from 'react-native';
 import { Text } from 'react-native-ui-lib';
 import { Button } from '../../elements/Button';
 import { Input } from '../../elements/Input';
-import { CreateProgramContext } from './CreateProgram';
+import { CreateProgramContext } from '../../providers/CreateProgramProvider';
 
-interface ProgramNameProps {}
+interface ProgramNameProps {
+  nextPage: () => void;
+}
 
-export const ProgramName: React.FC<ProgramNameProps> = () => {
-  const { program, setProgram, step, setStep } = useContext(CreateProgramContext);
+export const ProgramName: React.FC<ProgramNameProps> = ({ nextPage }) => {
+  const { program, setProgram } = useContext(CreateProgramContext);
 
   const [programName, setProgramName] = useState(program.name || '');
 
@@ -19,7 +21,7 @@ export const ProgramName: React.FC<ProgramNameProps> = () => {
   const handleOnNext = () => {
     if (!programName) return;
     setProgram((prev) => ({ ...prev, name: programName }));
-    setStep(step + 1 < 9 ? step + 1 : step);
+    nextPage();
   };
 
   return (
