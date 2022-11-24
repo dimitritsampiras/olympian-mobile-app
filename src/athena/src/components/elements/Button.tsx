@@ -50,6 +50,7 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
   // animated value for scale of the button
   const animatedScale = useRef(new Animated.Value(1)).current;
+  // const animatedScale = useRef(new Animated.Value(1)).current;
 
   // handle press in of button
   const handleOnPressIn = () => {
