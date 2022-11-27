@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Form, Formik, FormikHelpers, useFormik } from 'formik';
+import { Formik } from 'formik';
 import React, { useContext, useState } from 'react';
 import {
   Text,
@@ -30,17 +30,39 @@ export const Login: React.FC<LoginProps> = ({ navigation }) => {
   // context
   const { refetch } = useContext(UserContext);
 
+  const [errorMessage, setErrorMessage] = useState('');
+  const [usernameInputStyle, setUsernameInputStyle] = useState(styles.regularInputStyle);
+  const [passwordInputStyle, setPasswordInputStyle] = useState(styles.regularInputStyle);
+
   // graphql
   const [login] = useLoginMutation();
 
   const onSubmit = async (values: LoginInput) => {
-    const { data, errors } = await login({ variables: { input: values } });
+    if (!values.username || !values.password) {
+      setUsernameInputStyle(!values.username ? styles.errorInputStyle : styles.regularInputStyle);
+      setPasswordInputStyle(!values.password ? styles.errorInputStyle : styles.regularInputStyle);
+      setErrorMessage('Please enter both a username and password.');
+      return;
+    }
 
-    // TODO: handle errors
-    if (!data?.login) return;
+    const { data } = await login({ variables: { input: values } });
+
+    if (!data?.login) {
+      setPasswordInputStyle(styles.errorInputStyle);
+      setUsernameInputStyle(styles.errorInputStyle);
+      setErrorMessage('Username and password do not match.');
+      return;
+    }
 
     await AsyncStorage.setItem(AUTH_TOKEN, data.login);
     await refetch();
+  };
+
+  const validate = (values: LoginInput) => {
+    // This isn't really how validate should be used, but we want to clear error messages on change.
+    setErrorMessage('');
+    setPasswordInputStyle(styles.regularInputStyle);
+    setUsernameInputStyle(styles.regularInputStyle);
   };
 
   return (
@@ -49,7 +71,7 @@ export const Login: React.FC<LoginProps> = ({ navigation }) => {
         <View style={styles.screen}>
           <KeyboardAvoidingView style={styles.keyboardView} behavior={'padding'}>
             <Text style={{ ...styles.heading2, marginBottom: 20 }}>Login</Text>
-            <Formik initialValues={initialValues} onSubmit={onSubmit}>
+            <Formik initialValues={initialValues} onSubmit={onSubmit} validate={validate}>
               {({ handleChange, handleSubmit, values }) => (
                 <>
                   <Input
@@ -58,7 +80,7 @@ export const Login: React.FC<LoginProps> = ({ navigation }) => {
                     onChangeText={handleChange('username')}
                     autoCorrect={false}
                     autoCapitalize="none"
-                    style={{ marginBottom: 14 }}
+                    style={usernameInputStyle}
                   />
                   <Input
                     value={values.password}
@@ -68,8 +90,9 @@ export const Login: React.FC<LoginProps> = ({ navigation }) => {
                     autoCorrect={false}
                     autoCapitalize="none"
                     secureTextEntry={true}
-                    style={{ marginBottom: 54 }}
+                    style={passwordInputStyle}
                   />
+                  <Text style={styles.errorMessageStyle}>{errorMessage}</Text>
                   <Button onPress={handleSubmit as () => void}>Login</Button>
                 </>
               )}
@@ -99,5 +122,20 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     textAlign: 'center',
     zIndex: 99,
+  },
+  regularInputStyle: {
+    marginBottom: 14,
+  },
+  errorMessageStyle: {
+    fontSize: 14,
+    color: 'red',
+    marginBottom: 20,
+    marginTop: 20,
+  },
+  errorInputStyle: {
+    marginBottom: 14,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: 'red',
   },
 });
