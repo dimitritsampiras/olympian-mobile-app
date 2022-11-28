@@ -21,12 +21,6 @@ import { UserContext } from '../../providers';
 type ParamList = NativeStackScreenProps<AuthParamList, 'Login'>;
 interface LoginProps extends ParamList {}
 
-interface errorStatus {
-  username: boolean;
-  password: boolean;
-  errorMessage: string;
-}
-
 const initialValues: LoginInput = {
   username: '',
   password: '',
