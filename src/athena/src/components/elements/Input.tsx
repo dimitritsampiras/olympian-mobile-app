@@ -8,7 +8,7 @@ import {
   TextInput,
   TextInputChangeEventData,
   TextInputProps,
-  TextStyle
+  TextStyle,
 } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import theme from '../../theme';
@@ -19,6 +19,7 @@ interface InputProps extends TextInputProps {
   label?: string;
   color?: string;
   state?: string;
+  error?: boolean;
 }
 
 export const Input: React.FC<InputProps> = ({ style, placeholder, ...props }) => {
@@ -30,7 +31,7 @@ export const Input: React.FC<InputProps> = ({ style, placeholder, ...props }) =>
       toValue: 14,
       duration: 3,
       easing: Easing.cubic,
-      useNativeDriver: true
+      useNativeDriver: true,
     }).start();
   };
 
@@ -40,7 +41,7 @@ export const Input: React.FC<InputProps> = ({ style, placeholder, ...props }) =>
       toValue: 1,
       duration: 3,
       easing: Easing.cubic,
-      useNativeDriver: true
+      useNativeDriver: true,
     }).start();
   };
 
@@ -48,9 +49,9 @@ export const Input: React.FC<InputProps> = ({ style, placeholder, ...props }) =>
     <Animated.View
       style={{
         ...styles.container,
-        ...style
-      }}
-    >
+        ...style,
+        ...(props.error ? styles.error : {}),
+      }}>
       <TextInput
         {...props}
         style={{ ...styles.input }}
@@ -72,13 +73,18 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     backgroundColor: theme.gray[100],
     width: '100%',
-    zIndex: 1
+    zIndex: 1,
   },
   input: {
     padding: 13,
     height: '100%',
     borderRadius: 18,
     zIndex: 10,
-    fontWeight: '300'
-  }
+    fontWeight: '300',
+  },
+  error: {
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: 'red',
+  },
 });
