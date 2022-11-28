@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AuthParamList } from '../../navigation';
-import { LoginInput, useLoginMutation, User } from '../../../lib/graphql';
+import { LoginInput, useLoginMutation } from '../../../lib/graphql';
 import { AUTH_TOKEN } from '../../../lib/constants';
 import { Input } from '../../elements/Input';
 import { Button } from '../../elements/Button';
@@ -20,6 +20,12 @@ import { UserContext } from '../../providers';
 
 type ParamList = NativeStackScreenProps<AuthParamList, 'Login'>;
 interface LoginProps extends ParamList {}
+
+interface errorStatus {
+  username: boolean;
+  password: boolean;
+  errorMessage: string;
+}
 
 const initialValues: LoginInput = {
   username: '',
@@ -30,27 +36,37 @@ export const Login: React.FC<LoginProps> = ({ navigation }) => {
   // context
   const { refetch } = useContext(UserContext);
 
-  const [errorMessage, setErrorMessage] = useState('');
-  const [usernameInputStyle, setUsernameInputStyle] = useState(styles.regularInputStyle);
-  const [passwordInputStyle, setPasswordInputStyle] = useState(styles.regularInputStyle);
+  const [errors, setErrorStatus] = useState({
+    username: false,
+    password: false,
+    errorMessage: '',
+  });
 
   // graphql
   const [login] = useLoginMutation();
 
   const onSubmit = async (values: LoginInput) => {
+    // Ensure both fields are present on submit
     if (!values.username || !values.password) {
-      setUsernameInputStyle(!values.username ? styles.errorInputStyle : styles.regularInputStyle);
-      setPasswordInputStyle(!values.password ? styles.errorInputStyle : styles.regularInputStyle);
-      setErrorMessage('Please enter both a username and password.');
+      setErrorStatus({
+        username: !values.username,
+        password: !values.password,
+        errorMessage: 'Please enter both a username and password',
+      });
       return;
     }
 
     const { data } = await login({ variables: { input: values } });
 
     if (!data?.login) {
-      setPasswordInputStyle(styles.errorInputStyle);
-      setUsernameInputStyle(styles.errorInputStyle);
-      setErrorMessage('Username and password do not match.');
+      setErrorStatus({
+        username: true,
+        password: true,
+        errorMessage: 'Username and password do not match.',
+      });
+      console.log(
+        `Failed login with username ${values.username}. Password did not match a database entry.`
+      );
       return;
     }
 
@@ -58,11 +74,24 @@ export const Login: React.FC<LoginProps> = ({ navigation }) => {
     await refetch();
   };
 
-  const validate = (values: LoginInput) => {
-    // This isn't really how validate should be used, but we want to clear error messages on change.
-    setErrorMessage('');
-    setPasswordInputStyle(styles.regularInputStyle);
-    setUsernameInputStyle(styles.regularInputStyle);
+  const clearErrors = () => {
+    /**
+     * Desired UX is to have all error messages clear on ANY field change in the form.
+     * Instead of putting the error-clearing code into each of the Input components onChange,
+     * we put it here because 1) Less repeated code and 2) onSubmit calls onChange (not sure why).
+     * This means that errors set by onSubmit will be immediately wiped by onChange. This does not occur
+     * for Formik's `validate`, which is run on each onChange and right BEFORE onSubmit.
+     */
+
+    // Clear errors on any field change
+    // Guard prevents unnecessary setState calls. Only update if there's an actual change.
+    if (errors.username || errors.password) {
+      setErrorStatus({
+        username: false,
+        password: false,
+        errorMessage: '',
+      });
+    }
   };
 
   return (
@@ -71,7 +100,7 @@ export const Login: React.FC<LoginProps> = ({ navigation }) => {
         <View style={styles.screen}>
           <KeyboardAvoidingView style={styles.keyboardView} behavior={'padding'}>
             <Text style={{ ...styles.heading2, marginBottom: 20 }}>Login</Text>
-            <Formik initialValues={initialValues} onSubmit={onSubmit} validate={validate}>
+            <Formik initialValues={initialValues} onSubmit={onSubmit} validate={clearErrors}>
               {({ handleChange, handleSubmit, values }) => (
                 <>
                   <Input
@@ -80,7 +109,8 @@ export const Login: React.FC<LoginProps> = ({ navigation }) => {
                     onChangeText={handleChange('username')}
                     autoCorrect={false}
                     autoCapitalize="none"
-                    style={usernameInputStyle}
+                    error={!!errors.username}
+                    style={{ marginBottom: 14 }}
                   />
                   <Input
                     value={values.password}
@@ -90,9 +120,12 @@ export const Login: React.FC<LoginProps> = ({ navigation }) => {
                     autoCorrect={false}
                     autoCapitalize="none"
                     secureTextEntry={true}
-                    style={passwordInputStyle}
+                    error={!!errors.password}
+                    style={{ marginBottom: 24 }}
                   />
-                  <Text style={styles.errorMessageStyle}>{errorMessage}</Text>
+                  <View style={{ minHeight: 16, marginBottom: 30 }}>
+                    <Text style={styles.errorMessageStyle}>{errors.errorMessage}</Text>
+                  </View>
                   <Button onPress={handleSubmit as () => void}>Login</Button>
                 </>
               )}
@@ -123,19 +156,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     zIndex: 99,
   },
-  regularInputStyle: {
-    marginBottom: 14,
-  },
   errorMessageStyle: {
     fontSize: 14,
     color: 'red',
-    marginBottom: 20,
-    marginTop: 20,
-  },
-  errorInputStyle: {
-    marginBottom: 14,
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderColor: 'red',
   },
 });
