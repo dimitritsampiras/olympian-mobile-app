@@ -20,6 +20,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ navigation }) => {
         </View>
         {/* buttons */}
         <View style={{ width: '100%' }}>
+          <Button style={{ marginBottom: 17 }} onPress={() => navigation.navigate('SignUp')}>
+            Sign Up
+          </Button>
           <Button onPress={() => navigation.navigate('Login')}>Log In</Button>
         </View>
       </View>
@@ -32,24 +35,24 @@ const styles = StyleSheet.create({
     display: 'flex',
     flex: 1,
     justifyContent: 'space-around',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   innerContainer: {
     display: 'flex',
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
-    width: 320
+    width: 320,
   },
   heading1: {
     fontSize: 40,
     fontWeight: 'bold',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   preHeading: {
     fontSize: 20,
     fontWeight: '500',
     textAlign: 'center',
-    color: '#4B5563'
-  }
+    color: '#4B5563',
+  },
 });

@@ -7,7 +7,7 @@ import {
   Animated,
   Easing,
   ViewStyle,
-  PressableProps
+  PressableProps,
 } from 'react-native';
 import theme from '../../theme';
 
@@ -59,7 +59,7 @@ export const Button: React.FC<ButtonProps> = ({
       toValue: BUTTON_SCALE_TO,
       duration: BUTTON_SCALE_IN_DURATION,
       easing: Easing.cubic,
-      useNativeDriver: true
+      useNativeDriver: true,
     }).start();
   };
 
@@ -69,7 +69,7 @@ export const Button: React.FC<ButtonProps> = ({
       toValue: 1,
       easing: Easing.elastic(BUTTON_ELASTICITY),
       duration: BUTTON_SCALE_OUT_DURATION,
-      useNativeDriver: true
+      useNativeDriver: true,
     }).start();
   };
 
@@ -78,17 +78,15 @@ export const Button: React.FC<ButtonProps> = ({
       style={{ ...style, width: '100%' }}
       onPressIn={handleOnPressIn}
       onPressOut={handleOnPressOut}
-      {...props}
-    >
+      {...props}>
       {({ pressed }) => (
         <Animated.View
           style={[
             styles.button,
             shadow && !disabled && styles.buttonShadowBase,
             animated && !disabled && { transform: [{ scale: animatedScale }] },
-            disabled && styles.disabled
-          ]}
-        >
+            disabled && styles.disabled,
+          ]}>
           <Text style={styles.buttonText}>{children}</Text>
         </Animated.View>
       )}
@@ -102,21 +100,21 @@ const styles = StyleSheet.create({
     height: 52,
     borderRadius: 18,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   buttonShadowBase: {
     shadowColor: theme.blue[600],
     shadowRadius: 6,
     shadowOpacity: 0.35,
-    shadowOffset: { height: 10, width: 0 }
+    shadowOffset: { height: 10, width: 0 },
   },
   buttonText: {
     color: '#fff',
     fontSize: 17,
     fontWeight: '400',
-    letterSpacing: 0.1
+    letterSpacing: 0.1,
   },
   disabled: {
-    backgroundColor: theme.gray[200]
-  }
+    backgroundColor: theme.gray[200],
+  },
 });

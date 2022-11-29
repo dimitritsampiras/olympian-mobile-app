@@ -11,8 +11,17 @@ const main = async () => {
   // express app
   const app = express();
 
+  // prisma.user.create({
+  //   data: {
+  //     username: 'matt',
+  //     password: await createPassword('password'),
+  //     email: 'idont@care',
+  //     name: 'Matt Mcc',
+  //   },
+  // });
+
   const server = createApolloServer({
-    prisma
+    prisma,
   });
 
   // express middleware
@@ -22,11 +31,9 @@ const main = async () => {
   await server.start();
 
   server.applyMiddleware({ app });
-  
+
   app.listen({ port: config.port }, () => {
-    console.log(
-      `🚀 Server ready at port http://localhost:${config.port}${server.graphqlPath}`
-    );
+    console.log(`🚀 Server ready at port http://localhost:${config.port}${server.graphqlPath}`);
   });
 };
 
