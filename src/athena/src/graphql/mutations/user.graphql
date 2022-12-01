@@ -1,3 +1,15 @@
 mutation Login($input: LoginInput!) {
   login(input: $input)
 }
+
+mutation SignUp($input: SignUpInput!) {
+  signup(input: $input)
+}
+
+mutation FindUsername($input: String!) {
+  findusername(input: $input)
+}
+
+mutation FindEmail($input: String!) {
+  findemail(input: $input)
+}

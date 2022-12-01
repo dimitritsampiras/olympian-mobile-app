@@ -1,8 +1,8 @@
 import { extendType, inputObjectType, nullable, objectType } from 'nexus';
-import { loginUser } from './helpers/authentication';
+import { loginUser, signUpUser } from './helpers/authentication';
+import { findEmail, findUsername } from './helpers/findUsers';
 
-
-// login () -> user 
+// login () -> user
 // register () -> user
 
 // All mutations for User graphql object type
@@ -16,9 +16,33 @@ export const UserMutation = extendType({
       resolve: async (_root, { input }, { prisma }) => {
         const token = await loginUser(prisma, input);
         return token;
-      }
+      },
     });
-  }
+    t.field('signup', {
+      type: nullable('Boolean'),
+      args: { input: 'SignUpInput' },
+      resolve: async (_root, { input }, { prisma }) => {
+        const userCreated = await signUpUser(prisma, input);
+        return userCreated;
+      },
+    });
+    t.field('findusername', {
+      type: nullable('Boolean'),
+      args: { input: 'String' },
+      resolve: async (_root, { input }, { prisma }) => {
+        const usernameFound = await findUsername(prisma, input);
+        return usernameFound;
+      },
+    });
+    t.field('findemail', {
+      type: nullable('Boolean'),
+      args: { input: 'String' },
+      resolve: async (_root, { input }, { prisma }) => {
+        const emailFound = await findEmail(prisma, input);
+        return emailFound;
+      },
+    });
+  },
 });
 
 // Login input type for login mutation args
@@ -27,7 +51,17 @@ export const LoginInput = inputObjectType({
   definition(t) {
     t.string('username');
     t.string('password');
-  }
+  },
+});
+
+export const SignUpInput = inputObjectType({
+  name: 'SignUpInput',
+  definition(t) {
+    t.string('username');
+    t.string('password');
+    t.string('email');
+    t.string('name');
+  },
 });
 
 export const UserResponse = objectType({
@@ -35,5 +69,5 @@ export const UserResponse = objectType({
   definition(t) {
     t.field('user', { type: nullable('User') });
     t.field('error', { type: nullable('AppError') });
-  }
+  },
 });

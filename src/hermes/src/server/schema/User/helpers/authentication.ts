@@ -2,10 +2,11 @@ import jwt from 'jsonwebtoken';
 import argon2 from 'argon2';
 
 import config from '../../../../config';
-import { NexusGenAllTypes, NexusGenInputs } from '../../../../lib/types/nexus';
+import { NexusGenInputs } from '../../../../lib/types/nexus';
 import { PrismaClient, User } from '@prisma/client';
 
 type LoginInput = NexusGenInputs['LoginInput'];
+type SignUpInput = NexusGenInputs['SignUpInput'];
 
 /**
  * Function that returns payload fron authorization string.
@@ -47,10 +48,7 @@ export const createPassword = async (password: string) => {
  * Body of log in mutation
  * @returns Either a user object or an error
  */
-export const loginUser = async (
-  prisma: PrismaClient,
-  input: LoginInput
-) => {
+export const loginUser = async (prisma: PrismaClient, input: LoginInput) => {
   const { username, password } = input;
 
   const user = await prisma.user.findUnique({ where: { username } });
@@ -60,12 +58,32 @@ export const loginUser = async (
   const isVerified = await argon2.verify(user.password, password);
   // incorrect password guard clause
   if (!isVerified) return null;
-  
+
   const token = jwt.sign({ user }, config.jwtSecret, {
-    expiresIn: '3 days'
+    expiresIn: '3 days',
   });
-  
+
   return token;
+};
+
+/**
+ *
+ * Body of sign up mutation
+ * @returns Either a user object or an error
+ */
+export const signUpUser = async (prisma: PrismaClient, input: SignUpInput) => {
+  const { username, password, name, email } = input;
+
+  const user = await prisma.user.create({
+    data: {
+      name,
+      username,
+      email,
+      password: await createPassword(password),
+    },
+  });
+
+  return !!user;
 };
 
 /**

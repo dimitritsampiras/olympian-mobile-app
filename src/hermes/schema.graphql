@@ -22,7 +22,10 @@ input LoginInput {
 }
 
 type Mutation {
+  findemail(input: String!): Boolean
+  findusername(input: String!): Boolean
   login(input: LoginInput!): String
+  signup(input: SignUpInput!): Boolean
 }
 
 type Program {
@@ -44,6 +47,13 @@ enum Publicity {
 
 type Query {
   me: User
+}
+
+input SignUpInput {
+  email: String!
+  name: String!
+  password: String!
+  username: String!
 }
 
 enum Specificity {
