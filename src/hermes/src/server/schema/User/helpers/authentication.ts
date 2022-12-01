@@ -74,12 +74,6 @@ export const loginUser = async (prisma: PrismaClient, input: LoginInput) => {
 export const signUpUser = async (prisma: PrismaClient, input: SignUpInput) => {
   const { username, password, name, email } = input;
 
-  //username already exists guard clause
-  const usernameExists = !!(await prisma.user.findUnique({ where: { username } }));
-  if (usernameExists) {
-    return false;
-  }
-
   const user = await prisma.user.create({
     data: {
       name,

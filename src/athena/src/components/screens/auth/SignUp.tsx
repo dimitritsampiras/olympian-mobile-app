@@ -90,7 +90,7 @@ export const SignUp: React.FC<SignUpProps> = ({ navigation }) => {
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.screen}>
           <KeyboardAvoidingView style={styles.keyboardView} behavior={'padding'}>
-            <Text style={{ ...styles.heading2, marginBottom: 20 }}>Sign Up</Text>
+            <Text style={{ ...styles.heading2, marginBottom: 20 }}>Create an Account.</Text>
             <Formik initialValues={initialValues} onSubmit={onSubmit} validate={validate}>
               {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => {
                 return (
@@ -105,7 +105,7 @@ export const SignUp: React.FC<SignUpProps> = ({ navigation }) => {
                       onBlur={handleBlur('name')}
                       style={{ marginBottom: 14 }}
                     />
-                    {touched.name && !!errors.name && (
+                    {touched.name && errors.name && (
                       <Text style={styles.errorMessageStyle}>{errors.name}</Text>
                     )}
                     <Input
@@ -118,7 +118,7 @@ export const SignUp: React.FC<SignUpProps> = ({ navigation }) => {
                       onBlur={handleBlur('username')}
                       style={{ marginBottom: 14 }}
                     />
-                    {touched.username && !!errors.username && (
+                    {touched.username && errors.username && (
                       <Text style={styles.errorMessageStyle}>{errors.username}</Text>
                     )}
                     <Input
@@ -131,7 +131,7 @@ export const SignUp: React.FC<SignUpProps> = ({ navigation }) => {
                       onBlur={handleBlur('email')}
                       style={{ marginBottom: 14 }}
                     />
-                    {touched.email && !!errors.email && (
+                    {touched.email && errors.email && (
                       <Text style={styles.errorMessageStyle}>{errors.email}</Text>
                     )}
                     <Input
@@ -146,7 +146,7 @@ export const SignUp: React.FC<SignUpProps> = ({ navigation }) => {
                       onBlur={handleBlur('password')}
                       style={{ marginBottom: 14 }}
                     />
-                    {touched.password && !!errors.password && (
+                    {touched.password && errors.password && (
                       <Text style={styles.errorMessageStyle}>{errors.password}</Text>
                     )}
                     <View style={{ minHeight: 16, marginBottom: 30 }}></View>

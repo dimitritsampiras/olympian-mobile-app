@@ -11,15 +11,6 @@ const main = async () => {
   // express app
   const app = express();
 
-  // prisma.user.create({
-  //   data: {
-  //     username: 'matt',
-  //     password: await createPassword('password'),
-  //     email: 'idont@care',
-  //     name: 'Matt Mcc',
-  //   },
-  // });
-
   const server = createApolloServer({
     prisma,
   });
