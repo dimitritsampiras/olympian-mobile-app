@@ -38,16 +38,6 @@ const initialValues: SignUpInput = {
 };
 
 export const SignUp: React.FC<SignUpProps> = ({ navigation }) => {
-  const defaultErrorsState = {
-    name: false,
-    username: false,
-    email: false,
-    password: false,
-    errorMessage: '',
-  };
-
-  const [errors, setErrorStatus] = useState(defaultErrorsState);
-
   const [signup] = useSignUpMutation();
   const [findusername] = useFindUsernameMutation();
   const [findemail] = useFindEmailMutation();
@@ -77,45 +67,22 @@ export const SignUp: React.FC<SignUpProps> = ({ navigation }) => {
       ),
   });
 
-  const onSubmit = async (values: SignUpInput) => {
-    const valid = await SignUpSchema.validate(values, { abortEarly: false })
-      .then(() => true)
-      .catch((err: ValidationError) => {
-        const { path, errors: errorMessage } = err.inner[0];
-        if (path) {
-          setErrorStatus({
-            ...errors,
-            [path]: true,
-            errorMessage: errorMessage[0],
-          });
+  const validate = async (values: SignUpInput) => {
+    const errors: Record<string, string> = {};
+    await SignUpSchema.validate(values, { abortEarly: false }).catch((err: ValidationError) => {
+      err.inner.forEach(({ path, errors: errorMessage }) => {
+        if (path && !errors[path]) {
+          errors[path] = errorMessage[0];
         }
-        return false;
       });
-    if (!valid) {
-      return;
-    }
-    // Ensure all fields are valid on submit
-    const { data } = await signup({ variables: { input: values } });
-
-    if (!data?.signup) {
-      //default failure to sign up case. This is never the result of user error.
-      setErrorStatus({
-        ...errors,
-        errorMessage: 'Failed to sign up with selected information.',
-      });
-      console.log(`Failed to sign up with selected information.`);
-      return;
-    }
-
-    navigation.navigate('Login');
+    });
+    return errors;
   };
 
-  const validateInput = () => {
-    // Clear errors on any field change
-    // Guard prevents unnecessary setState calls. Only update if there's an actual change.
-    if (errors.errorMessage !== '') {
-      setErrorStatus(defaultErrorsState);
-    }
+  const onSubmit = async (values: SignUpInput) => {
+    await signup({ variables: { input: values } });
+
+    navigation.navigate('Login');
   };
 
   return (
@@ -124,53 +91,69 @@ export const SignUp: React.FC<SignUpProps> = ({ navigation }) => {
         <View style={styles.screen}>
           <KeyboardAvoidingView style={styles.keyboardView} behavior={'padding'}>
             <Text style={{ ...styles.heading2, marginBottom: 20 }}>Sign Up</Text>
-            <Formik initialValues={initialValues} onSubmit={onSubmit} validate={validateInput}>
-              {({ handleChange, handleSubmit, values }) => (
-                <>
-                  <Input
-                    placeholder="name"
-                    value={values.name}
-                    onChangeText={handleChange('name')}
-                    autoCorrect={false}
-                    autoCapitalize="none"
-                    error={!!errors.name}
-                    style={{ marginBottom: 14 }}
-                  />
-                  <Input
-                    placeholder="username"
-                    value={values.username}
-                    onChangeText={handleChange('username')}
-                    autoCorrect={false}
-                    autoCapitalize="none"
-                    error={!!errors.username}
-                    style={{ marginBottom: 14 }}
-                  />
-                  <Input
-                    placeholder="email"
-                    value={values.email}
-                    onChangeText={handleChange('email')}
-                    autoCorrect={false}
-                    autoCapitalize="none"
-                    error={!!errors.email}
-                    style={{ marginBottom: 14 }}
-                  />
-                  <Input
-                    value={values.password}
-                    onChangeText={handleChange('password')}
-                    placeholder="password"
-                    textContentType="password"
-                    autoCorrect={false}
-                    autoCapitalize="none"
-                    secureTextEntry={true}
-                    error={!!errors.password}
-                    style={{ marginBottom: 24 }}
-                  />
-                  <View style={{ minHeight: 16, marginBottom: 30 }}>
-                    <Text style={styles.errorMessageStyle}>{errors.errorMessage}</Text>
-                  </View>
-                  <Button onPress={handleSubmit as () => void}>Sign Up</Button>
-                </>
-              )}
+            <Formik initialValues={initialValues} onSubmit={onSubmit} validate={validate}>
+              {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => {
+                return (
+                  <>
+                    <Input
+                      placeholder="name"
+                      value={values.name}
+                      onChangeText={handleChange('name')}
+                      autoCorrect={false}
+                      autoCapitalize="none"
+                      error={touched.name && !!errors.name}
+                      onBlur={handleBlur('name')}
+                      style={{ marginBottom: 14 }}
+                    />
+                    {touched.name && !!errors.name && (
+                      <Text style={styles.errorMessageStyle}>{errors.name}</Text>
+                    )}
+                    <Input
+                      placeholder="username"
+                      value={values.username}
+                      onChangeText={handleChange('username')}
+                      autoCorrect={false}
+                      autoCapitalize="none"
+                      error={touched.username && !!errors.username}
+                      onBlur={handleBlur('username')}
+                      style={{ marginBottom: 14 }}
+                    />
+                    {touched.username && !!errors.username && (
+                      <Text style={styles.errorMessageStyle}>{errors.username}</Text>
+                    )}
+                    <Input
+                      placeholder="email"
+                      value={values.email}
+                      onChangeText={handleChange('email')}
+                      autoCorrect={false}
+                      autoCapitalize="none"
+                      error={touched.email && !!errors.email}
+                      onBlur={handleBlur('email')}
+                      style={{ marginBottom: 14 }}
+                    />
+                    {touched.email && !!errors.email && (
+                      <Text style={styles.errorMessageStyle}>{errors.email}</Text>
+                    )}
+                    <Input
+                      value={values.password}
+                      onChangeText={handleChange('password')}
+                      placeholder="password"
+                      textContentType="password"
+                      autoCorrect={false}
+                      autoCapitalize="none"
+                      secureTextEntry={true}
+                      error={touched.password && !!errors.password}
+                      onBlur={handleBlur('password')}
+                      style={{ marginBottom: 14 }}
+                    />
+                    {touched.password && !!errors.password && (
+                      <Text style={styles.errorMessageStyle}>{errors.password}</Text>
+                    )}
+                    <View style={{ minHeight: 16, marginBottom: 30 }}></View>
+                    <Button onPress={handleSubmit as () => void}>Sign Up</Button>
+                  </>
+                );
+              }}
             </Formik>
           </KeyboardAvoidingView>
         </View>
@@ -201,5 +184,7 @@ const styles = StyleSheet.create({
   errorMessageStyle: {
     fontSize: 14,
     color: 'red',
+    marginTop: -8,
+    marginBottom: 6,
   },
 });
