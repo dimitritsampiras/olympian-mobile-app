@@ -1,15 +1,6 @@
 import React, { useRef } from 'react';
-import {
-  Animated,
-  Easing,
-  NativeSyntheticEvent,
-  Pressable,
-  StyleSheet,
-  TextInput,
-  TextInputChangeEventData,
-  TextInputProps,
-  TextStyle,
-} from 'react-native';
+import { View } from 'react-native';
+import { Animated, Easing, StyleSheet, TextInput, TextInputProps, TextStyle } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import theme from '../../theme';
 
@@ -20,9 +11,10 @@ interface InputProps extends TextInputProps {
   color?: string;
   state?: string;
   error?: boolean;
+  Icon?: () => JSX.Element;
 }
 
-export const Input: React.FC<InputProps> = ({ style, placeholder, ...props }) => {
+export const Input: React.FC<InputProps> = ({ style, placeholder, Icon, ...props }) => {
   const animatedTranslationX = useRef(new Animated.Value(1)).current;
 
   const handleOnPressIn = () => {
@@ -52,16 +44,19 @@ export const Input: React.FC<InputProps> = ({ style, placeholder, ...props }) =>
         ...style,
         ...(props.error ? styles.error : {}),
       }}>
-      <TextInput
-        {...props}
-        style={{ ...styles.input }}
-        selectionColor={theme.gray[900]}
-        onPressIn={handleOnPressIn}
-        onSubmitEditing={handleUnFocus}
-        placeholder={placeholder}
-        placeholderTextColor={theme.gray[400]}
-        // autoCapitalize={'none'}
-      />
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        {Icon && <Icon />}
+        <TextInput
+          {...props}
+          style={{ ...styles.input }}
+          selectionColor={theme.gray[900]}
+          onPressIn={handleOnPressIn}
+          onSubmitEditing={handleUnFocus}
+          placeholder={placeholder}
+          placeholderTextColor={theme.gray[400]}
+          // autoCapitalize={'none'}
+        />
+      </View>
     </Animated.View>
   );
 };

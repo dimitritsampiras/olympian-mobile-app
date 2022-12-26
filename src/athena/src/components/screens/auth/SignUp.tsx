@@ -1,6 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Formik } from 'formik';
-import React, { useState } from 'react';
 import {
   Text,
   TouchableWithoutFeedback,
@@ -18,7 +17,16 @@ import {
 } from '../../../lib/graphql';
 import { Input } from '../../elements/Input';
 import { Button } from '../../elements/Button';
-import { object, string, number, date, InferType, ValidationError } from 'yup';
+import { object, string, ValidationError } from 'yup';
+
+import {
+  UserIcon,
+  UserCircleIcon,
+  EnvelopeIcon,
+  AtSymbolIcon,
+  KeyIcon,
+} from 'react-native-heroicons/solid';
+import theme from '../../../theme';
 
 type ParamList = NativeStackScreenProps<AuthParamList, 'SignUp'>;
 interface SignUpProps extends ParamList {}
@@ -36,6 +44,12 @@ const initialValues: SignUpInput = {
   email: '',
   password: '',
 };
+
+// Declare these outside of the SignUp component to avoid re-creating the components upon SingUp re-render
+const nameIcon = () => <UserIcon size="18" {...{ fill: theme.gray[400] }} />;
+const usernameIcon = () => <UserCircleIcon size="18" {...{ fill: theme.gray[400] }} />;
+const emailIcon = () => <AtSymbolIcon size="18" {...{ fill: theme.gray[400] }} />;
+const passwordIcon = () => <KeyIcon size="18" {...{ fill: theme.gray[400] }} />;
 
 export const SignUp: React.FC<SignUpProps> = ({ navigation }) => {
   const [signup] = useSignUpMutation();
@@ -90,7 +104,7 @@ export const SignUp: React.FC<SignUpProps> = ({ navigation }) => {
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.screen}>
           <KeyboardAvoidingView style={styles.keyboardView} behavior={'padding'}>
-            <Text style={{ ...styles.heading2, marginBottom: 20 }}>Create an Account.</Text>
+            <Text style={{ ...styles.heading2, marginBottom: 30 }}>Create an Account</Text>
             <Formik initialValues={initialValues} onSubmit={onSubmit} validate={validate}>
               {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => {
                 return (
@@ -104,6 +118,7 @@ export const SignUp: React.FC<SignUpProps> = ({ navigation }) => {
                       error={touched.name && !!errors.name}
                       onBlur={handleBlur('name')}
                       style={{ marginBottom: 14 }}
+                      Icon={nameIcon}
                     />
                     {touched.name && errors.name && (
                       <Text style={styles.errorMessageStyle}>{errors.name}</Text>
@@ -117,6 +132,7 @@ export const SignUp: React.FC<SignUpProps> = ({ navigation }) => {
                       error={touched.username && !!errors.username}
                       onBlur={handleBlur('username')}
                       style={{ marginBottom: 14 }}
+                      Icon={usernameIcon}
                     />
                     {touched.username && errors.username && (
                       <Text style={styles.errorMessageStyle}>{errors.username}</Text>
@@ -130,6 +146,7 @@ export const SignUp: React.FC<SignUpProps> = ({ navigation }) => {
                       error={touched.email && !!errors.email}
                       onBlur={handleBlur('email')}
                       style={{ marginBottom: 14 }}
+                      Icon={emailIcon}
                     />
                     {touched.email && errors.email && (
                       <Text style={styles.errorMessageStyle}>{errors.email}</Text>
@@ -145,6 +162,7 @@ export const SignUp: React.FC<SignUpProps> = ({ navigation }) => {
                       error={touched.password && !!errors.password}
                       onBlur={handleBlur('password')}
                       style={{ marginBottom: 14 }}
+                      Icon={passwordIcon}
                     />
                     {touched.password && errors.password && (
                       <Text style={styles.errorMessageStyle}>{errors.password}</Text>
