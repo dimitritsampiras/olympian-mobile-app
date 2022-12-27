@@ -45,28 +45,22 @@ const initialValues: SignUpInput = {
   password: '',
 };
 
-// Declare these outside of the SignUp component to avoid re-creating the components upon SingUp re-render
-const nameIcon = () => <UserIcon size="18" {...{ fill: theme.gray[400] }} />;
-const usernameIcon = () => <UserCircleIcon size="18" {...{ fill: theme.gray[400] }} />;
-const emailIcon = () => <AtSymbolIcon size="18" {...{ fill: theme.gray[400] }} />;
-const passwordIcon = () => <KeyIcon size="18" {...{ fill: theme.gray[400] }} />;
-
 export const SignUp: React.FC<SignUpProps> = ({ navigation }) => {
   const [signup] = useSignUpMutation();
   const [findusername] = useFindUsernameMutation();
   const [findemail] = useFindEmailMutation();
 
   const SignUpSchema = object({
-    name: string().required(),
+    name: string().required('Cannot have empty name.'),
     username: string()
-      .required()
+      .required('Cannot have empty username.')
       .test('', 'Username is not available.', async (username) => {
         const { data } = await findusername({ variables: { input: username || '' } });
 
         return !data?.findusername;
       }),
     email: string()
-      .required()
+      .required('Cannot have empty email address.')
       .email('Must provide valid email address.')
       .test('', 'This email is already used on another account.', async (email) => {
         const { data } = await findemail({ variables: { input: email || '' } });
@@ -74,7 +68,7 @@ export const SignUp: React.FC<SignUpProps> = ({ navigation }) => {
         return !data?.findemail;
       }),
     password: string()
-      .required()
+      .required('Cannot have empty password.')
       .matches(
         /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/,
         'Password must be between 6 to 20 characters and contain at least 1 upper case letter, 1 lower case letter and 1 number.'
@@ -118,7 +112,11 @@ export const SignUp: React.FC<SignUpProps> = ({ navigation }) => {
                       error={touched.name && !!errors.name}
                       onBlur={handleBlur('name')}
                       style={{ marginBottom: 14 }}
-                      Icon={nameIcon}
+                      Icon={UserIcon}
+                      iconProps={{
+                        size: '18',
+                        fill: touched.name && errors.name ? 'red' : theme.gray[400],
+                      }}
                     />
                     {touched.name && errors.name && (
                       <Text style={styles.errorMessageStyle}>{errors.name}</Text>
@@ -132,7 +130,11 @@ export const SignUp: React.FC<SignUpProps> = ({ navigation }) => {
                       error={touched.username && !!errors.username}
                       onBlur={handleBlur('username')}
                       style={{ marginBottom: 14 }}
-                      Icon={usernameIcon}
+                      Icon={UserCircleIcon}
+                      iconProps={{
+                        size: '18',
+                        fill: touched.username && errors.username ? 'red' : theme.gray[400],
+                      }}
                     />
                     {touched.username && errors.username && (
                       <Text style={styles.errorMessageStyle}>{errors.username}</Text>
@@ -146,7 +148,11 @@ export const SignUp: React.FC<SignUpProps> = ({ navigation }) => {
                       error={touched.email && !!errors.email}
                       onBlur={handleBlur('email')}
                       style={{ marginBottom: 14 }}
-                      Icon={emailIcon}
+                      Icon={AtSymbolIcon}
+                      iconProps={{
+                        size: '18',
+                        fill: touched.email && errors.email ? 'red' : theme.gray[400],
+                      }}
                     />
                     {touched.email && errors.email && (
                       <Text style={styles.errorMessageStyle}>{errors.email}</Text>
@@ -162,7 +168,11 @@ export const SignUp: React.FC<SignUpProps> = ({ navigation }) => {
                       error={touched.password && !!errors.password}
                       onBlur={handleBlur('password')}
                       style={{ marginBottom: 14 }}
-                      Icon={passwordIcon}
+                      Icon={KeyIcon}
+                      iconProps={{
+                        size: '18',
+                        fill: touched.password && errors.password ? 'red' : theme.gray[400],
+                      }}
                     />
                     {touched.password && errors.password && (
                       <Text style={styles.errorMessageStyle}>{errors.password}</Text>

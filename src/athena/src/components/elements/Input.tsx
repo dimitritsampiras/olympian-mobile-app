@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { Animated, Easing, StyleSheet, TextInput, TextInputProps, TextStyle } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import theme from '../../theme';
+import { HeroIcon } from '../../lib/types';
 
 interface InputProps extends TextInputProps {
   style?: TextStyle;
@@ -11,10 +12,17 @@ interface InputProps extends TextInputProps {
   color?: string;
   state?: string;
   error?: boolean;
-  Icon?: () => JSX.Element;
+  Icon?: HeroIcon;
+  iconProps?: React.ComponentProps<HeroIcon>;
 }
 
-export const Input: React.FC<InputProps> = ({ style, placeholder, Icon, ...props }) => {
+export const Input: React.FC<InputProps> = ({
+  style,
+  placeholder,
+  Icon,
+  iconProps = { size: '18', fill: theme.gray[400] },
+  ...props
+}) => {
   const animatedTranslationX = useRef(new Animated.Value(1)).current;
 
   const handleOnPressIn = () => {
@@ -45,7 +53,7 @@ export const Input: React.FC<InputProps> = ({ style, placeholder, Icon, ...props
         ...(props.error ? styles.error : {}),
       }}>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        {Icon && <Icon />}
+        {Icon && <Icon size={iconProps.size} {...{ fill: iconProps.fill }} />}
         <TextInput
           {...props}
           style={{ ...styles.input }}
