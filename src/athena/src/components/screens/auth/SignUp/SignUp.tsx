@@ -14,9 +14,12 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import theme from '../../../../theme';
 import { ChevronLeftIcon } from 'react-native-heroicons/solid';
-import { PageControl } from 'react-native-ui-lib';
+
 import { SignUpName } from './SignUpName';
+import { SignUpUsername } from './SignUpUsername';
 import { Button } from '../../../elements/Button';
+import { SignUpPassword } from './SignUpPassword';
+import { SignUpEmail } from './SignUpEmail';
 
 type ParamList = NativeStackScreenProps<AuthParamList, 'SignUp'>;
 
@@ -25,12 +28,12 @@ interface SignUpProps extends ParamList {}
 export const SignUpContext = createContext({
   step: 0,
   setStep: (() => {}) as React.Dispatch<React.SetStateAction<number>>,
-  signUpInput: {} as SignUpInput,
-  setSignUpInput: (() => {}) as React.Dispatch<React.SetStateAction<SignUpInput>>,
+  signUpInput: {} as Partial<SignUpInput>,
+  setSignUpInput: (() => {}) as React.Dispatch<React.SetStateAction<Partial<SignUpInput>>>,
 });
 
 export const SignUp: React.FC<SignUpProps> = () => {
-  const [signUpInput, setSignUpInput] = useState<SignUpInput>({
+  const [signUpInput, setSignUpInput] = useState<Partial<SignUpInput>>({
     email: '',
     name: '',
     password: '',
@@ -43,7 +46,7 @@ export const SignUp: React.FC<SignUpProps> = () => {
       <SafeAreaView>
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
           <View style={styles.screen}>
-            <KeyboardAvoidingView style={styles.content} behavior="padding">
+            <KeyboardAvoidingView behavior="padding">
               {/* This header should be a component */}
               <View style={styles.header}>
                 <Pressable onPress={() => setStep((prev) => prev - Number(prev > 0))}>
@@ -51,22 +54,10 @@ export const SignUp: React.FC<SignUpProps> = () => {
                 </Pressable>
               </View>
               {step === 0 && <SignUpName />}
+              {step === 1 && <SignUpEmail />}
+              {step === 2 && <SignUpUsername />}
+              {step === 3 && <SignUpPassword />}
             </KeyboardAvoidingView>
-
-            <View style={styles.footer}>
-              <PageControl
-                color={theme.blue[500]}
-                inactiveColor={theme.gray[200]}
-                currentPage={step}
-                numOfPages={9}
-                limitShownPages
-                spacing={8}
-                size={8}
-              />
-              <Button style={{ padding: 19 }} onPress={() => {}}>
-                Next
-              </Button>
-            </View>
           </View>
         </TouchableWithoutFeedback>
       </SafeAreaView>
@@ -82,23 +73,12 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    padding: 25,
-  },
-  content: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    paddingHorizontal: 25,
   },
   header: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'stretch',
-  },
-  footer: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });

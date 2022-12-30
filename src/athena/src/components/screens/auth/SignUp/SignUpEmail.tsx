@@ -9,53 +9,58 @@ import SampleSvg from '../../../../../assets/caution.svg';
 import { PageControl } from 'react-native-ui-lib';
 import { object, string, ValidationError } from 'yup';
 import { SignUpInput } from '../../../../lib/graphql';
-import { UserIcon } from 'react-native-heroicons/solid';
+import { AtSymbolIcon } from 'react-native-heroicons/solid';
+import { useFindEmailMutation } from '../../../../lib/graphql';
 
-interface SignUpNameProps {}
+interface SignUpEmailProps {}
 
-export const SignUpName: React.FC<SignUpNameProps> = () => {
+export const SignUpEmail: React.FC<SignUpEmailProps> = () => {
   const { signUpInput, setSignUpInput, step, setStep } = useContext(SignUpContext);
-  const maxLength = 16;
-  const nameSchema = object({
-    // We may opt to make this optional in the future.
-    name: string()
-      .required('Cannot have an empty name.')
-      .matches(/^[a-zA-Z]+$/, 'Name must only be composed of letters.')
-      .max(maxLength, `Please enter a maximum of ${maxLength} characters.`),
+  const [findemail] = useFindEmailMutation();
+  const maxLength = 32;
+  const emailSchema = object({
+    email: string()
+      .required('Cannot have an empty email address.')
+      .email('Please enter a valid email address\n(e.g. johndoe@example.com)')
+      .max(maxLength, `Please enter a maximum of ${maxLength} characters.`)
+      .test('', 'Email is already used on another account.', async (email) => {
+        const { data } = await findemail({ variables: { input: email || '' } });
+        return !data?.findemail;
+      }),
   });
 
   const handleOnNext = (values: Partial<SignUpInput>) => {
-    setSignUpInput((previousValues) => ({ ...previousValues, name: values.name }));
-    setStep(step + Number(step < 4));
+    setSignUpInput((previousValues) => ({ ...previousValues, email: values.email }));
+    setStep(step + Number(step + 1 < 4));
   };
 
   return (
     <View style={styles.container}>
       {/* Sample SVG to be replaced with the actual torch once we have it*/}
       <SampleSvg width={56} height={82} fill={'black'}></SampleSvg>
-      <Text style={styles.header}>Sign Up</Text>
+      <Text style={styles.header}>Hello, {signUpInput.name}!</Text>
       <Text style={styles.secondaryText}>
-        Why don't you start by telling us your name? This won't be displayed publicly.
+        Please enter your email address, just in case you forget your password.
       </Text>
-      <Formik initialValues={{ name: '' }} onSubmit={handleOnNext} validationSchema={nameSchema}>
+      <Formik initialValues={{ email: '' }} onSubmit={handleOnNext} validationSchema={emailSchema}>
         {({ handleSubmit, handleChange, values, errors, touched }) => {
           return (
             <>
               <Input
-                placeholder="name"
-                value={values.name}
-                onChangeText={handleChange('name')}
+                placeholder="email"
+                value={values.email}
+                onChangeText={handleChange('email')}
                 autoCorrect={false}
-                autoCapitalize="words"
-                error={touched.name && !!errors.name}
-                style={styles.nameField}
-                Icon={UserIcon}
+                autoCapitalize="none"
+                error={touched.email && !!errors.email}
+                style={styles.emailField}
+                Icon={AtSymbolIcon}
                 iconProps={{
                   size: 20,
-                  fill: touched.name && !!errors.name ? 'red' : theme.gray[400],
+                  fill: touched.email && !!errors.email ? 'red' : theme.gray[400],
                 }}
               />
-              <Text style={styles.errorMessageStyle}>{touched.name && errors.name}</Text>
+              <Text style={styles.errorMessageStyle}>{touched.email && errors.email}</Text>
               <View style={styles.footer}>
                 <PageControl
                   color={theme.blue[500]}
@@ -99,7 +104,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 35,
   },
-  nameField: {
+  emailField: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',

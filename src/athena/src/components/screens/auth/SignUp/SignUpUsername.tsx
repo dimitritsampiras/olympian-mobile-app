@@ -9,53 +9,64 @@ import SampleSvg from '../../../../../assets/caution.svg';
 import { PageControl } from 'react-native-ui-lib';
 import { object, string, ValidationError } from 'yup';
 import { SignUpInput } from '../../../../lib/graphql';
-import { UserIcon } from 'react-native-heroicons/solid';
+import { UserCircleIcon } from 'react-native-heroicons/solid';
+import { useFindUsernameMutation } from '../../../../lib/graphql';
 
-interface SignUpNameProps {}
+interface SignUpUsernameProps {}
 
-export const SignUpName: React.FC<SignUpNameProps> = () => {
+export const SignUpUsername: React.FC<SignUpUsernameProps> = () => {
+  const [findusername] = useFindUsernameMutation();
   const { signUpInput, setSignUpInput, step, setStep } = useContext(SignUpContext);
   const maxLength = 16;
-  const nameSchema = object({
-    // We may opt to make this optional in the future.
-    name: string()
-      .required('Cannot have an empty name.')
-      .matches(/^[a-zA-Z]+$/, 'Name must only be composed of letters.')
-      .max(maxLength, `Please enter a maximum of ${maxLength} characters.`),
+  const usernameSchema = object({
+    username: string()
+      .required('Cannot have an empty username.')
+      .matches(
+        /^[a-zA-Z0-9_]+$/,
+        'Username can only be composed of letters, numbers, and underscores.'
+      )
+      .max(maxLength, `Please enter a maximum of ${maxLength} characters.`)
+      .test('', 'Username is already in use.', async (username) => {
+        const { data } = await findusername({ variables: { input: username || '' } });
+        return !data?.findusername;
+      }),
   });
 
   const handleOnNext = (values: Partial<SignUpInput>) => {
-    setSignUpInput((previousValues) => ({ ...previousValues, name: values.name }));
-    setStep(step + Number(step < 4));
+    setSignUpInput((previousValues) => ({ ...previousValues, username: values.username }));
+    setStep(step + Number(step + 1 < 4));
   };
 
   return (
     <View style={styles.container}>
       {/* Sample SVG to be replaced with the actual torch once we have it*/}
       <SampleSvg width={56} height={82} fill={'black'}></SampleSvg>
-      <Text style={styles.header}>Sign Up</Text>
+      <Text style={styles.header}>Username Time</Text>
       <Text style={styles.secondaryText}>
-        Why don't you start by telling us your name? This won't be displayed publicly.
+        This will be the name you display publicly. Make it uniquely yours!
       </Text>
-      <Formik initialValues={{ name: '' }} onSubmit={handleOnNext} validationSchema={nameSchema}>
+      <Formik
+        initialValues={{ username: '' }}
+        onSubmit={handleOnNext}
+        validationSchema={usernameSchema}>
         {({ handleSubmit, handleChange, values, errors, touched }) => {
           return (
             <>
               <Input
-                placeholder="name"
-                value={values.name}
-                onChangeText={handleChange('name')}
+                placeholder="username"
+                value={values.username}
+                onChangeText={handleChange('username')}
                 autoCorrect={false}
-                autoCapitalize="words"
-                error={touched.name && !!errors.name}
-                style={styles.nameField}
-                Icon={UserIcon}
+                autoCapitalize="none"
+                error={touched.username && !!errors.username}
+                style={styles.usernameField}
+                Icon={UserCircleIcon}
                 iconProps={{
                   size: 20,
-                  fill: touched.name && !!errors.name ? 'red' : theme.gray[400],
+                  fill: touched.username && !!errors.username ? 'red' : theme.gray[400],
                 }}
               />
-              <Text style={styles.errorMessageStyle}>{touched.name && errors.name}</Text>
+              <Text style={styles.errorMessageStyle}>{touched.username && errors.username}</Text>
               <View style={styles.footer}>
                 <PageControl
                   color={theme.blue[500]}
@@ -99,7 +110,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 35,
   },
-  nameField: {
+  usernameField: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
