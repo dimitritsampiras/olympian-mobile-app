@@ -1,3 +1,5 @@
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { AuthParamList } from '../../../navigation';
 import { StyleSheet, Text, View } from 'react-native';
 import { useContext, useState } from 'react';
 import { SignUpContext } from './SignUp';
@@ -10,14 +12,18 @@ import { PageControl } from 'react-native-ui-lib';
 import { object, ref, string, ValidationError } from 'yup';
 import { SignUpInput } from '../../../../lib/graphql';
 import { KeyIcon, ClipboardDocumentCheckIcon, LockClosedIcon } from 'react-native-heroicons/solid';
+import { useSignUpMutation } from '../../../../lib/graphql';
 
-interface SignUpPasswordProps {}
+// This page will be doing navigating
+type ParamList = NativeStackScreenProps<AuthParamList, 'SignUp'>;
+interface SignUpPasswordProps extends ParamList {}
 
 interface SignUpInputConfirmPass extends SignUpInput {
   confirm_password: string;
 }
 
-export const SignUpPassword: React.FC<SignUpPasswordProps> = () => {
+export const SignUpPassword: React.FC<SignUpPasswordProps> = ({ navigation }) => {
+  const [signup] = useSignUpMutation();
   const { signUpInput, setSignUpInput, step, setStep } = useContext(SignUpContext);
   const maxLength = 16;
   const minLength = 4;
@@ -32,9 +38,24 @@ export const SignUpPassword: React.FC<SignUpPasswordProps> = () => {
       .required('Please confirm your password.'),
   });
 
-  const handleOnNext = (values: Partial<SignUpInputConfirmPass>) => {
-    setSignUpInput((previousValues) => ({ ...previousValues, password: values.password }));
-    console.log(signUpInput);
+  const handleOnNext = async (values: Partial<SignUpInputConfirmPass>) => {
+    // Error message better way to go?
+    // Wondering what the best way to enforce that all previous fields will be non-null
+    // They should never be null thanks to previous validations
+    // if (!signUpInput.name || !signUpInput.email || !signUpInput.username || !signUpInput.password){
+    //     console.log(`Attempted to create user failed, one or more fields is undefined.`)
+    // }
+    const signUpCreds = {
+      name: signUpInput.name,
+      email: signUpInput.email,
+      username: signUpInput.username,
+      // No need to update state with password before submission
+      password: values.password,
+    };
+    console.log(`Creating user: ${signUpCreds}`);
+
+    await signup({ variables: { input: signUpCreds as SignUpInput } });
+    navigation.navigate('Login');
   };
 
   return (

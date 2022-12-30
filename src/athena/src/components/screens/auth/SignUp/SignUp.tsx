@@ -32,7 +32,7 @@ export const SignUpContext = createContext({
   setSignUpInput: (() => {}) as React.Dispatch<React.SetStateAction<Partial<SignUpInput>>>,
 });
 
-export const SignUp: React.FC<SignUpProps> = () => {
+export const SignUp: React.FC<SignUpProps> = ({ navigation, route }) => {
   const [signUpInput, setSignUpInput] = useState<Partial<SignUpInput>>({
     email: '',
     name: '',
@@ -56,7 +56,7 @@ export const SignUp: React.FC<SignUpProps> = () => {
               {step === 0 && <SignUpName />}
               {step === 1 && <SignUpEmail />}
               {step === 2 && <SignUpUsername />}
-              {step === 3 && <SignUpPassword />}
+              {step === 3 && <SignUpPassword navigation={navigation} route={route} />}
             </KeyboardAvoidingView>
           </View>
         </TouchableWithoutFeedback>
