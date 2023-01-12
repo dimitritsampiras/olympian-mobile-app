@@ -59,57 +59,61 @@ export const SignUpPassword: React.FC<SignUpPasswordProps> = ({ navigation }) =>
   };
 
   return (
-    <View style={styles.container}>
-      {/* Sample SVG to be replaced with the actual torch once we have it*/}
-      <SampleSvg width={56} height={82} fill={'black'}></SampleSvg>
-      <Text style={styles.header}>Password...Shhh</Text>
-      <Text style={styles.secondaryText}>
-        Enter a strong password. Don't worry, you can recover it if you forget.
-      </Text>
-      <Formik
-        initialValues={{ password: '', confirm_password: '' }}
-        onSubmit={handleOnNext}
-        validationSchema={passwordSchema}>
-        {({ handleSubmit, handleChange, values, errors, touched }) => {
-          return (
-            <>
-              <Input
-                placeholder="password"
-                value={values.password}
-                textContentType="password"
-                secureTextEntry={true}
-                onChangeText={handleChange('password')}
-                autoCorrect={false}
-                autoCapitalize="none"
-                error={touched.password && !!errors.password}
-                style={styles.passwordField}
-                Icon={LockClosedIcon}
-                iconProps={{
-                  size: 20,
-                  fill: touched.password && !!errors.password ? 'red' : theme.gray[400],
-                }}
-              />
-              <Input
-                placeholder="confirm password"
-                value={values.confirm_password}
-                textContentType="password"
-                secureTextEntry={true}
-                onChangeText={handleChange('confirm_password')}
-                autoCorrect={false}
-                autoCapitalize="none"
-                error={touched.confirm_password && !!errors.confirm_password}
-                style={styles.passwordField}
-                Icon={ClipboardDocumentCheckIcon}
-                iconProps={{
-                  size: 20,
-                  fill:
-                    touched.confirm_password && !!errors.confirm_password ? 'red' : theme.gray[400],
-                }}
-              />
-              {/* Password error message takes priority */}
-              <Text style={styles.errorMessageStyle}>
-                {touched.confirm_password && (errors.password || errors.confirm_password)}
-              </Text>
+    <Formik
+      initialValues={{ password: '', confirm_password: '' }}
+      onSubmit={handleOnNext}
+      validationSchema={passwordSchema}>
+      {({ handleSubmit, handleChange, values, errors, touched }) => {
+        return (
+          <>
+            <View style={styles.container}>
+              <View style={styles.innerContainer}>
+                {/* Sample SVG to be replaced with the actual torch once we have it*/}
+                <SampleSvg width={56} height={82} fill={'black'}></SampleSvg>
+                <Text style={styles.header}>Password...Shhh</Text>
+                <Text style={styles.secondaryText}>
+                  Enter a strong password. Don't worry, you can recover it if you forget.
+                </Text>
+                <Input
+                  placeholder="password"
+                  value={values.password}
+                  textContentType="password"
+                  secureTextEntry={true}
+                  onChangeText={handleChange('password')}
+                  autoCorrect={false}
+                  autoCapitalize="none"
+                  error={touched.password && !!errors.password}
+                  style={styles.passwordField}
+                  Icon={LockClosedIcon}
+                  iconProps={{
+                    size: 20,
+                    fill: touched.password && !!errors.password ? 'red' : theme.gray[400],
+                  }}
+                />
+                <Input
+                  placeholder="confirm password"
+                  value={values.confirm_password}
+                  textContentType="password"
+                  secureTextEntry={true}
+                  onChangeText={handleChange('confirm_password')}
+                  autoCorrect={false}
+                  autoCapitalize="none"
+                  error={touched.confirm_password && !!errors.confirm_password}
+                  style={styles.passwordField}
+                  Icon={ClipboardDocumentCheckIcon}
+                  iconProps={{
+                    size: 20,
+                    fill:
+                      touched.confirm_password && !!errors.confirm_password
+                        ? 'red'
+                        : theme.gray[400],
+                  }}
+                />
+                {/* Password error message takes priority */}
+                <Text style={styles.errorMessageStyle}>
+                  {touched.confirm_password && (errors.password || errors.confirm_password)}
+                </Text>
+              </View>
               <View style={styles.footer}>
                 <PageControl
                   color={theme.blue[500]}
@@ -124,11 +128,11 @@ export const SignUpPassword: React.FC<SignUpPasswordProps> = ({ navigation }) =>
                   Create Account
                 </Button>
               </View>
-            </>
-          );
-        }}
-      </Formik>
-    </View>
+            </View>
+          </>
+        );
+      }}
+    </Formik>
   );
 };
 
@@ -139,25 +143,31 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
+    height: '100%',
+  },
+  innerContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: '60%',
+    width: '100%',
   },
   header: {
     fontWeight: '700',
     fontSize: 32,
     textAlign: 'center',
-    marginBottom: 35,
   },
   secondaryText: {
     fontWeight: '500',
     fontSize: 16,
     color: theme.gray[400],
     textAlign: 'center',
-    marginBottom: 35,
   },
   passwordField: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 15,
   },
   footer: {
     display: 'flex',
@@ -171,6 +181,5 @@ const styles = StyleSheet.create({
     color: 'red',
     // Fix the lineHeight to prevent bumping when the text comes in
     lineHeight: 14,
-    marginBottom: 175,
   },
 });

@@ -35,32 +35,34 @@ export const SignUpEmail: React.FC<SignUpEmailProps> = () => {
   };
 
   return (
-    <View style={styles.container}>
-      {/* Sample SVG to be replaced with the actual torch once we have it*/}
-      <SampleSvg width={56} height={82} fill={'black'}></SampleSvg>
-      <Text style={styles.header}>Hello, {signUpInput.name}!</Text>
-      <Text style={styles.secondaryText}>
-        Please enter your email address, just in case you forget your password.
-      </Text>
-      <Formik initialValues={{ email: '' }} onSubmit={handleOnNext} validationSchema={emailSchema}>
-        {({ handleSubmit, handleChange, values, errors, touched }) => {
-          return (
-            <>
-              <Input
-                placeholder="email"
-                value={values.email}
-                onChangeText={handleChange('email')}
-                autoCorrect={false}
-                autoCapitalize="none"
-                error={touched.email && !!errors.email}
-                style={styles.emailField}
-                Icon={AtSymbolIcon}
-                iconProps={{
-                  size: 20,
-                  fill: touched.email && !!errors.email ? 'red' : theme.gray[400],
-                }}
-              />
-              <Text style={styles.errorMessageStyle}>{touched.email && errors.email}</Text>
+    <Formik initialValues={{ email: '' }} onSubmit={handleOnNext} validationSchema={emailSchema}>
+      {({ handleSubmit, handleChange, values, errors, touched }) => {
+        return (
+          <>
+            <View style={styles.container}>
+              <View style={styles.innerContainer}>
+                {/* Sample SVG to be replaced with the actual torch once we have it*/}
+                <SampleSvg width={56} height={82} fill={'black'}></SampleSvg>
+                <Text style={styles.header}>Hello, {signUpInput.name}!</Text>
+                <Text style={styles.secondaryText}>
+                  Please enter your email address, just in case you forget your password.
+                </Text>
+                <Input
+                  placeholder="email"
+                  value={values.email}
+                  onChangeText={handleChange('email')}
+                  autoCorrect={false}
+                  autoCapitalize="none"
+                  error={touched.email && !!errors.email}
+                  style={styles.emailField}
+                  Icon={AtSymbolIcon}
+                  iconProps={{
+                    size: 20,
+                    fill: touched.email && !!errors.email ? 'red' : theme.gray[400],
+                  }}
+                />
+                <Text style={styles.errorMessageStyle}>{touched.email && errors.email}</Text>
+              </View>
               <View style={styles.footer}>
                 <PageControl
                   color={theme.blue[500]}
@@ -75,11 +77,11 @@ export const SignUpEmail: React.FC<SignUpEmailProps> = () => {
                   Next
                 </Button>
               </View>
-            </>
-          );
-        }}
-      </Formik>
-    </View>
+            </View>
+          </>
+        );
+      }}
+    </Formik>
   );
 };
 
@@ -89,6 +91,15 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
+    width: '100%',
+    height: '100%',
+  },
+  innerContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: '60%',
     width: '100%',
   },
   header: {

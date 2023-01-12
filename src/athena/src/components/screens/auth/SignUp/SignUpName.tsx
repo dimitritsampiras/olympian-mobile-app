@@ -30,32 +30,34 @@ export const SignUpName: React.FC<SignUpNameProps> = () => {
   };
 
   return (
-    <View style={styles.container}>
-      {/* Sample SVG to be replaced with the actual torch once we have it*/}
-      <SampleSvg width={56} height={82} fill={'black'}></SampleSvg>
-      <Text style={styles.header}>Sign Up</Text>
-      <Text style={styles.secondaryText}>
-        Why don't you start by telling us your name? This won't be displayed publicly.
-      </Text>
-      <Formik initialValues={{ name: '' }} onSubmit={handleOnNext} validationSchema={nameSchema}>
-        {({ handleSubmit, handleChange, values, errors, touched }) => {
-          return (
-            <>
-              <Input
-                placeholder="name"
-                value={values.name}
-                onChangeText={handleChange('name')}
-                autoCorrect={false}
-                autoCapitalize="words"
-                error={touched.name && !!errors.name}
-                style={styles.nameField}
-                Icon={UserIcon}
-                iconProps={{
-                  size: 20,
-                  fill: touched.name && !!errors.name ? 'red' : theme.gray[400],
-                }}
-              />
-              <Text style={styles.errorMessageStyle}>{touched.name && errors.name}</Text>
+    <Formik initialValues={{ name: '' }} onSubmit={handleOnNext} validationSchema={nameSchema}>
+      {({ handleSubmit, handleChange, values, errors, touched }) => {
+        return (
+          <>
+            <View style={styles.container}>
+              <View style={styles.innerContainer}>
+                {/* Sample SVG to be replaced with the actual torch once we have it*/}
+                <SampleSvg width={56} height={82} fill={'black'}></SampleSvg>
+                <Text style={styles.header}>Sign Up</Text>
+                <Text style={styles.secondaryText}>
+                  Why don't you start by telling us your name? This won't be displayed publicly.
+                </Text>
+                <Input
+                  placeholder="name"
+                  value={values.name}
+                  onChangeText={handleChange('name')}
+                  autoCorrect={false}
+                  autoCapitalize="words"
+                  error={touched.name && !!errors.name}
+                  style={styles.nameField}
+                  Icon={UserIcon}
+                  iconProps={{
+                    size: 20,
+                    fill: touched.name && !!errors.name ? 'red' : theme.gray[400],
+                  }}
+                />
+                <Text style={styles.errorMessageStyle}>{touched.name && errors.name}</Text>
+              </View>
               <View style={styles.footer}>
                 <PageControl
                   color={theme.blue[500]}
@@ -70,11 +72,11 @@ export const SignUpName: React.FC<SignUpNameProps> = () => {
                   Next
                 </Button>
               </View>
-            </>
-          );
-        }}
-      </Formik>
-    </View>
+            </View>
+          </>
+        );
+      }}
+    </Formik>
   );
 };
 
@@ -85,25 +87,31 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
+    height: '100%',
+  },
+  innerContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: '60%',
+    width: '100%',
   },
   header: {
     fontWeight: '700',
     fontSize: 32,
     textAlign: 'center',
-    marginBottom: 35,
   },
   secondaryText: {
     fontWeight: '500',
     fontSize: 16,
     color: theme.gray[400],
     textAlign: 'center',
-    marginBottom: 35,
   },
   nameField: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 15,
   },
   footer: {
     display: 'flex',
@@ -117,6 +125,5 @@ const styles = StyleSheet.create({
     color: 'red',
     // Fix the lineHeight to prevent bumping when the text comes in
     lineHeight: 14,
-    marginBottom: 240,
   },
 });

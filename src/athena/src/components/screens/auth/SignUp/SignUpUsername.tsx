@@ -38,35 +38,37 @@ export const SignUpUsername: React.FC<SignUpUsernameProps> = () => {
   };
 
   return (
-    <View style={styles.container}>
-      {/* Sample SVG to be replaced with the actual torch once we have it*/}
-      <SampleSvg width={56} height={82} fill={'black'}></SampleSvg>
-      <Text style={styles.header}>Username Time</Text>
-      <Text style={styles.secondaryText}>
-        This will be the name you display publicly. Make it uniquely yours!
-      </Text>
-      <Formik
-        initialValues={{ username: '' }}
-        onSubmit={handleOnNext}
-        validationSchema={usernameSchema}>
-        {({ handleSubmit, handleChange, values, errors, touched }) => {
-          return (
-            <>
-              <Input
-                placeholder="username"
-                value={values.username}
-                onChangeText={handleChange('username')}
-                autoCorrect={false}
-                autoCapitalize="none"
-                error={touched.username && !!errors.username}
-                style={styles.usernameField}
-                Icon={UserCircleIcon}
-                iconProps={{
-                  size: 20,
-                  fill: touched.username && !!errors.username ? 'red' : theme.gray[400],
-                }}
-              />
-              <Text style={styles.errorMessageStyle}>{touched.username && errors.username}</Text>
+    <Formik
+      initialValues={{ username: '' }}
+      onSubmit={handleOnNext}
+      validationSchema={usernameSchema}>
+      {({ handleSubmit, handleChange, values, errors, touched }) => {
+        return (
+          <>
+            <View style={styles.container}>
+              <View style={styles.innerContainer}>
+                {/* Sample SVG to be replaced with the actual torch once we have it*/}
+                <SampleSvg width={56} height={82} fill={'black'}></SampleSvg>
+                <Text style={styles.header}>Username Time</Text>
+                <Text style={styles.secondaryText}>
+                  This will be the name you display publicly. Make it uniquely yours!
+                </Text>
+                <Input
+                  placeholder="username"
+                  value={values.username}
+                  onChangeText={handleChange('username')}
+                  autoCorrect={false}
+                  autoCapitalize="none"
+                  error={touched.username && !!errors.username}
+                  style={styles.usernameField}
+                  Icon={UserCircleIcon}
+                  iconProps={{
+                    size: 20,
+                    fill: touched.username && !!errors.username ? 'red' : theme.gray[400],
+                  }}
+                />
+                <Text style={styles.errorMessageStyle}>{touched.username && errors.username}</Text>
+              </View>
               <View style={styles.footer}>
                 <PageControl
                   color={theme.blue[500]}
@@ -81,11 +83,11 @@ export const SignUpUsername: React.FC<SignUpUsernameProps> = () => {
                   Next
                 </Button>
               </View>
-            </>
-          );
-        }}
-      </Formik>
-    </View>
+            </View>
+          </>
+        );
+      }}
+    </Formik>
   );
 };
 
@@ -96,25 +98,31 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
+    height: '100%',
+  },
+  innerContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: '60%',
+    width: '100%',
   },
   header: {
     fontWeight: '700',
     fontSize: 32,
     textAlign: 'center',
-    marginBottom: 35,
   },
   secondaryText: {
     fontWeight: '500',
     fontSize: 16,
     color: theme.gray[400],
     textAlign: 'center',
-    marginBottom: 35,
   },
   usernameField: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 15,
   },
   footer: {
     display: 'flex',
@@ -128,6 +136,5 @@ const styles = StyleSheet.create({
     color: 'red',
     // Fix the lineHeight to prevent bumping when the text comes in
     lineHeight: 14,
-    marginBottom: 240,
   },
 });
