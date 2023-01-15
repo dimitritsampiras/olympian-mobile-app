@@ -157,10 +157,10 @@ adapted here is called design for
 change.
 
 \begin{description}
-\item[\refstepcounter{acnum} \actheacnum :] The layout and order of prompts or screens that are presented during the user registration process.
-\item[\refstepcounter{acnum} \actheacnum :] The process by which users discover new content / other users.
-\item[\refstepcounter{acnum} \actheacnum :] Leverage local storage for exercises and workouts instead of storing all data on database. 
-\item[\refstepcounter{acnum} \actheacnum :] Visual styling and color design choices.
+\item[\refstepcounter{acnum} \actheacnum \label{acLayout}:] The layout and order of prompts or screens that are presented during the user registration process.
+\item[\refstepcounter{acnum} \actheacnum \label{acDiscovery}:] The process by which users discover new content / other users.
+\item[\refstepcounter{acnum} \actheacnum \label{acStorage}:] Leverage local storage for exercises and workouts instead of storing all data on database. 
+\item[\refstepcounter{acnum} \actheacnum \label{acStyling}:] Visual styling and color design choices.
 \end{description}
 
 \subsection{Unlikely Changes} \label{SecUchange}
@@ -173,9 +173,9 @@ will potentially need to be modified. Hence, it is not intended that these
 decisions will be changed.
 
 \begin{description}
-\item[\refstepcounter{ucnum} \uctheucnum :] Security requirements and legal compliance requirements are unlikely to be changed: NFR15, NFR16, NFR17, NFR18, NFR22.
-\item[\refstepcounter{ucnum} \uctheucnum :] To maintain accessibility for all users, the following Usability and Humanity requirements are likely to remain unchanged: NFR2, NFR3, NFR4, NFR5, NFR6, NFR7.
-\item[\refstepcounter{ucnum} \uctheucnum :] The performance requirement specified by NFR8 encapsulates the mission of this application, which is to allow users to quickly update / interact with programs. As such, it is unlikely to change.
+\item[\refstepcounter{ucnum} \uctheucnum \label{ucLegal}:] Security requirements and legal compliance requirements are unlikely to be changed: NFR15, NFR16, NFR17, NFR18, NFR22.
+\item[\refstepcounter{ucnum} \uctheucnum \label{ucUsability}:] To maintain accessibility for all users, the following Usability and Humanity requirements are likely to remain unchanged: NFR2, NFR3, NFR4, NFR5, NFR6, NFR7.
+\item[\refstepcounter{ucnum} \uctheucnum \label{ucPerformance}:] The performance requirement specified by NFR8 encapsulates the mission of this application, which is to allow users to quickly update / interact with programs. As such, it is unlikely to change.
 \end{description}
 
 \section{Module Hierarchy} \label{SecMH}
@@ -457,18 +457,10 @@ R11 & \mref{mOutput}, \mref{mODEs}, \mref{mEnergy}, \mref{mControl}\\
 \toprule
 \textbf{AC} & \textbf{Modules}\\
 \midrule
-\acref{acHardware} & \mref{mHH}\\
-\acref{acInput} & \mref{mInput}\\
-\acref{acParams} & \mref{mParams}\\
-\acref{acVerify} & \mref{mVerify}\\
-\acref{acOutput} & \mref{mOutput}\\
-\acref{acVerifyOut} & \mref{mVerifyOut}\\
-\acref{acODEs} & \mref{mODEs}\\
-\acref{acEnergy} & \mref{mEnergy}\\
-\acref{acControl} & \mref{mControl}\\
-\acref{acSeqDS} & \mref{mSeqDS}\\
-\acref{acSolver} & \mref{mSolver}\\
-\acref{acPlot} & \mref{mPlot}\\
+\acref{acLayout} & \mref{mUR}\\
+\acref{acDiscovery} & \mref{mWB}\\
+\acref{acStorage} & \mref{mHH}\\
+\acref{acStyling} & \mref{mWorkout}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Anticipated Changes and Modules}
