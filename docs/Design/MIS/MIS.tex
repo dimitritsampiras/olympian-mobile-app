@@ -800,7 +800,7 @@ There exists a stored number for maximum attempts.
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
-
+userRegistration = ?
 \subsubsection{Exported Access Programs}
 
 \begin{center}
@@ -819,7 +819,7 @@ There exists a stored number for maximum attempts.
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-userDatabase: $Database$\\
+userDatabase: $Database$
 
 \subsubsection{Environment Variables}
 
@@ -864,7 +864,7 @@ Regex operations are allowed on strings
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
-
+FitnessGoal = ?
 \subsubsection{Exported Access Programs}
 
 \begin{center}
@@ -872,6 +872,12 @@ Regex operations are allowed on strings
 		\hline
 		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 		\hline
+		FitnessGoal & String, Quantifier & FitnessGoal &  \\
+		quantifier &  & Quantifier &  \\
+		description &  & String &  \\
+		currentProgress &  & Quantifier &  \\
+		status &  & $\mathbb{B}$ &  \\
+		progressGoal & Quantifier &  &  \\
 		&  &  &  \\
 		\hline
 	\end{tabular}
@@ -880,6 +886,9 @@ Regex operations are allowed on strings
 \subsection{Semantics}
 
 \subsubsection{State Variables}
+quantifier: $Quantifier$ \\
+description: $String$ \\
+progress: $Quantifier$ \\
 
 \subsubsection{Environment Variables}
 
@@ -887,14 +896,47 @@ Regex operations are allowed on strings
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \wss{accessProg}():
+\newpage
+
+\noindent FitnessGoal(quant, desc):
 \begin{itemize}
-	\item transition:
-	\item output:
-	\item exception:
+	\item transition: $quantifier, description, progression = quant, desc, Quantifier(quant.unit, 0)$
+	\item output: $out := self$
+	\item exception: None
+\end{itemize}
+
+\noindent quantifier():
+\begin{itemize}
+	\item output: $out := quantifier$
+	\item exception: None
+\end{itemize}
+
+\noindent description():
+\begin{itemize}
+	\item output: $out := description$
+	\item exception: None
+\end{itemize}
+
+\noindent currentProgress():
+\begin{itemize}
+	\item output: $out := progress$
+	\item exception: None
+\end{itemize}
+
+\noindent status():
+\begin{itemize}
+	\item output: $out := progress.value < quantifier.value $
+	\item exception: None
+\end{itemize}
+
+\noindent progressGoal(val):
+\begin{itemize}
+	\item transition: $progress.value := val$
+	\item exception: None
 \end{itemize}
 
 \subsubsection{Local Functions}
+
 
 \newpage
 
@@ -905,7 +947,7 @@ Regex operations are allowed on strings
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
-
+Browser = ?
 \subsubsection{Exported Access Programs}
 
 \begin{center}
