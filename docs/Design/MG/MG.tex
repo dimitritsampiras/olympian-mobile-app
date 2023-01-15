@@ -187,7 +187,20 @@ actually be implemented.
 
 \begin{description}
 \item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding Module
-\item ...
+\item [\refstepcounter{mnum} \mthemnum \label{mExercise}:] Exercise Module
+\item [\refstepcounter{mnum} \mthemnum \label{mWorkout}:] Workout Module
+\item [\refstepcounter{mnum} \mthemnum \label{mWR}:] Workout Routine Module
+\item [\refstepcounter{mnum} \mthemnum \label{mUL}:] User Login Module
+\item [\refstepcounter{mnum} \mthemnum \label{mUR}:] User Registration Module
+\item [\refstepcounter{mnum} \mthemnum \label{mUP}:] User Profile Module
+\item [\refstepcounter{mnum} \mthemnum \label{mUFG}:] User Fitness Goal Module
+\item [\refstepcounter{mnum} \mthemnum \label{mWB}:] User Workout Browser Module
+\item [\refstepcounter{mnum} \mthemnum \label{mCreation}:] Creation Module
+\item [\refstepcounter{mnum} \mthemnum \label{mWC}:] Workout Creation Module
+\item [\refstepcounter{mnum} \mthemnum \label{mWRC}:] Workout Routine Creation Module
+\item [\refstepcounter{mnum} \mthemnum \label{mEC}:] Exercise Creation Module
+\item [\refstepcounter{mnum} \mthemnum \label{mTS}:] Timed Sequence Module
+\item [\refstepcounter{mnum} \mthemnum \label{mQuantifier}:] Quantifier Module
 \end{description}
 
 
@@ -201,19 +214,24 @@ actually be implemented.
 {Hardware-Hiding Module} & ~ \\
 \midrule
 
-\multirow{7}{0.3\textwidth}{Behaviour-Hiding Module} & ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\ 
-& ?\\
+\multirow{12}{0.3\textwidth}{Behaviour-Hiding Module}
+& exercise\\
+& workout\\
+& workout routine\\
+& user login\\
+& user registration\\
+& user profile\\ 
+& user fitness goal\\
+& workout browser\\
+& creation\\
+& workout creation\\
+& workout routine creation\\
+& exercise creation\\
+& timed sequence\\
 \midrule
 
-\multirow{3}{0.3\textwidth}{Software Decision Module} & {?}\\
-& ?\\
-& ?\\
+\multirow{1}{0.3\textwidth}{Software Decision Module}
+& quantifier\\
 \bottomrule
 
 \end{tabular}
@@ -275,19 +293,112 @@ to be implemented.
 \item[Implemented By:] --
 \end{description}
 
-\subsubsection{Input Format Module (\mref{mInput})}
+\subsubsection{Exercise Module (\mref{mExercise})}
 
 \begin{description}
-\item[Secrets:]The format and structure of the input data.
-\item[Services:]Converts the input data into the data structure used by the
-  input parameters module.
-\item[Implemented By:] [Your Program Name Here]
-\item[Type of Module:] [Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]
+\item[Secrets:] The values of quantifiers and descriptions for each exercise.
+\item[Services:] Provides read and write (get and set) capability for individual exercises.
+\item[Implemented By:] exercise.ts
+\item[Type of Module:] Abstract Object
 \end{description}
 
-\subsubsection{Etc.}
+\subsubsection{Workout Module (\mref{mWorkout})}
 
+\begin{description}
+\item[Secrets:] The exercises that make up each workout.
+\item[Services:] Manage (read and write) which exercises comprise a workout.
+\item[Implemented By:] workout.ts
+\item[Type of Module:] Abstract Object
+\end{description}
+
+\subsubsection{Workout Routine Module (\mref{mWR})}
+
+\begin{description}
+\item[Secrets:] The workouts and scheduling to make up a workout routine.
+\item[Services:] Manage the scheduling and contents of a workout routine.
+\item[Implemented By:] workout-routine.ts
+\item[Type of Module:] Abstract Object
+\end{description}
+
+\subsubsection{User Login Module (\mref{mUL})}
+
+\begin{description}
+\item[Secrets:] The functions needed to verify a users identity. 
+\item[Services:] Accepts user credentials and, if correct, provides a token to log user in.
+\item[Implemented By:] user-login.ts
+\end{description}
+
+\subsubsection{User Registration Module (\mref{mUR})}
+
+\begin{description}
+\item[Secrets:] The functions needed to create a new user in the application database. 
+\item[Services:] Accepts user credential data and, if valid, creates a new user in the database with the provided data.
+\item[Implemented By:] user-registration.ts
+\end{description}
+
+\subsubsection{User Profile Module (\mref{mUP})}
+
+\begin{description}
+\item[Secrets:] The personal data for a user.
+\item[Services:] Manage all personal user data.
+\item[Implemented By:] user-profile.ts
+\end{description}
+
+\subsubsection{User Fitness Goal Module (\mref{mUFG})}
+
+\begin{description}
+\item[Secrets:] The quantifiers that users set for their fitness goals.
+\item[Services:] Manage fitness goals for a specific user.
+\item[Implemented By:] user-fitness-goals.ts
+\end{description}
+
+\subsubsection{Workout Browser Module (\mref{mWB})}
+
+\begin{description}
+\item[Secrets:] The data structure for filtering and displaying public workouts.
+\item[Services:] Display public workouts and allow user to search and filter options.
+\item[Implemented By:] workout-browser.ts
+\end{description}
+
+\subsubsection{Creation Module (\mref{mCreation})}
+
+\begin{description}
+\item[Secrets:] Abstract data type that provides children with methods for adding entries to the database.
+\item[Services:] Provides general append functionality to database.
+\item[Implemented By:] creation.ts
+\end{description}
+
+\subsubsection{Workout Creation Module (\mref{mWC})}
+
+\begin{description}
+\item[Secrets:] The verification of new workout data.
+\item[Services:] Uses creation module to add new workout to database.
+\item[Implemented By:] workout-creation.ts
+\end{description}
+
+\subsubsection{Workout Routine Creation Module (\mref{mWRC})}
+
+\begin{description}
+\item[Secrets:] The verification of new workout routine data.
+\item[Services:] Uses creation module to add new workout routine to database.
+\item[Implemented By:] workout-routine-creation.ts
+\end{description}
+
+\subsubsection{Exercise Creation Module (\mref{mEC})}
+
+\begin{description}
+\item[Secrets:] The verification of new exercise data.
+\item[Services:] Uses creation module to add new exercise to database.
+\item[Implemented By:] exercise-creation.ts
+\end{description}
+
+\subsubsection{Timed Sequence Module (\mref{mTS})}
+
+\begin{description}
+\item[Secrets:] A general format and structure of sequence data
+\item[Services:] Provides methods to access and create timed sequences.
+\item[Implemented By:] timed-sequence.ts
+\end{description}
 
 \subsection{Software Decision Module}
 
@@ -302,7 +413,13 @@ to be implemented.
 \item[Implemented By:] --
 \end{description}
 
-\subsubsection{Etc.}
+\subsubsection{Quantifier Module (\mref{mQuantifier})}
+\begin{description}
+\item[Secrets:] The data types used to quantify workout exercises.
+\item[Services:] Measures the exercise inputted by users as a unit of measurement.
+\item[Implemented By:] quantifiers.ts
+\item[Type of Module:] Abstract Data Type
+\end{description}
 
 \section{Traceability Matrix} \label{SecTM}
 
