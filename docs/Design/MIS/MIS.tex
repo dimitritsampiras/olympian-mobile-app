@@ -377,7 +377,7 @@ None
 
 \newpage
 
-\section{Timed Set Module}
+\section{Timed Sequence Module}
 
 \subsection{Uses}
 
@@ -388,7 +388,7 @@ TimedSequence(T) = ?
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-	\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+	\begin{tabular}{p{4cm} p{4cm} p{4cm} p{2cm}}
 		\hline
 		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 		\hline
@@ -528,7 +528,7 @@ TimedSequence(Workout)
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
-Routine = ?
+Routine = ? \\
 \textit{//Note: Same as a Workout Routine, just short version}
 \subsubsection{Exported Access Programs}
 
@@ -593,22 +593,31 @@ AddWorkout(w):
 
 \newpage
 
-\section{User Login Module}
+\section{User Profile Module}
 
 \subsection{Uses}
 
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
-
+User = ?
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-	\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+	\begin{tabular}{p{4cm} p{4cm} p{3cm} p{2cm}}
 		\hline
 		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 		\hline
-		&  &  &  \\
+		User & String, String, String, String & User &  \\
+		username &  & String &  \\
+ 		password &  & String &  \\
+ 		email &  & String &  \\
+ 		nickname &  & String &  \\
+ 		fitness Goals &  & seq of FitnessGoal &  \\
+ 		created Workouts &  & seq of Workout &  \\
+ 		created Routines &  & seq of Routine &  \\
+ 		saved Workouts &  & seq of Workout &  \\
+ 		saved Routines &  & seq of Routine &  \\
 		\hline
 	\end{tabular}
 \end{center}
@@ -616,6 +625,15 @@ AddWorkout(w):
 \subsection{Semantics}
 
 \subsubsection{State Variables}
+username: $String$ \\
+password: $String$ \\
+email: $String$ \\
+nickname: $String$ \\
+fitnessGoals: $seq of FitnessGoal$ \\
+created Workouts: $Workout[]$ \\
+created Routines: $Routine[]$ \\
+saved Workouts: $Workout[]$ \\
+saved Routines: $Routine[]$ \\
 
 \subsubsection{Environment Variables}
 
@@ -623,15 +641,156 @@ AddWorkout(w):
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \wss{accessProg}():
+User(username, pass, email, nickname):
 \begin{itemize}
-	\item transition:
-	\item output:
-	\item exception:
+	\item transition: $username, password, email, nickname := username, pass, email, nickname$
+	\item output: $out := self$
+	\item exception: None
+\end{itemize}
+
+username():
+\begin{itemize}
+	\item output: $out := username$
+	\item exception: None
+\end{itemize}
+
+email():
+\begin{itemize}
+	\item output: $out := email$
+	\item exception: PremissionException
+\end{itemize}
+
+password():
+\begin{itemize}
+	\item output: $out := password$
+	\item exception: PremissionException
+\end{itemize}
+
+nickname():
+\begin{itemize}
+	\item output: $out := nickname$
+	\item exception: None
+\end{itemize}
+
+fitnessGoals():
+\begin{itemize}
+	\item output: $out := fitnessGoals$
+	\item exception: None
+\end{itemize}
+
+createdWorkouts():
+\begin{itemize}
+	\item output: $out := createdWorkouts$
+	\item exception: None
+\end{itemize}
+
+createdRoutines():
+\begin{itemize}
+	\item output: $out := createdRoutines$
+	\item exception: None
+\end{itemize}
+
+savedWorkouts():
+\begin{itemize}
+	\item output: $out := savedWorkouts$
+	\item exception: None
+\end{itemize}
+
+savedRoutines():
+\begin{itemize}
+	\item output: $out := savedRoutines$
+	\item exception: None
+\end{itemize}
+
+createGoal(g):
+\begin{itemize}
+	\item transition: $ fitnessGoals.put(g) $
+	\item exception: None
+\end{itemize}
+
+createWorkout(workout):
+\begin{itemize}
+	\item transition: $ createdWorkouts.put(w), \ savedWorkouts.put(w) $
+	\item exception: None
+\end{itemize}
+
+createRoutine(routine):
+\begin{itemize}
+	\item transition: $ createdRoutine.put(r), \ savedRoutines.put(r) $
+	\item exception: None
+\end{itemize}
+
+saveWorkout(w):
+\begin{itemize}
+	\item transition: $ savedWorkouts.put(w) $
+	\item exception: None
+\end{itemize}
+
+saveRoutine(r):
+\begin{itemize}
+	\item transition: $ savedRoutines.put(r) $
+	\item exception: None
 \end{itemize}
 
 \subsubsection{Local Functions}
 
+\newpage
+
+\section{User Login Module}
+
+\subsection{Uses}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+UserLogin = ?
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+		\hline
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+		\hline
+		UserLogin & Database & UserLogin &  \\
+		attemptLogin & String, String & $\mathbb{B}$ & tooManyAttempts \\
+		validateUser & String, String & $\mathbb{B}$ &  \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+attempts: $\mathbb{Z}$\\
+maxAttempts: $\mathbb{Z}$\\
+userDatabase: $Database$ \\
+\subsubsection{Environment Variables}
+
+\subsubsection{Assumptions}
+There exists a stored number for maximum attempts.
+\subsubsection{Access Routine Semantics}
+
+\noindent UserLogin(db):
+\begin{itemize}
+	\item transition: $userDatabase, attempts := db, 0$
+	\item output: $out := self$
+	\item exception: None
+\end{itemize}
+
+\noindent attemptLogin(user, pass):
+\begin{itemize}
+	\item transition: $attempts := attempts + 1$
+	\item output: $out := validateUser(user, pass) \land userDatabase.getUser(user) = (pass)$
+	\item exception: $exc := attempts \ge maxAttempts \Rightarrow tooManyAttempts$
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+\noindent validateUser(user, pass) $\rightarrow \mathbb{B}$
+\begin{itemize}
+	\item output: $out := userDatabase.validate(user, pass)$
+	\item exception: None
+\end{itemize}
 \newpage
 
 \section{User Registration Module}
@@ -645,11 +804,14 @@ AddWorkout(w):
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-	\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+	\begin{tabular}{p{4cm} p{4cm} p{4cm} p{4cm}}
 		\hline
 		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 		\hline
-		&  &  &  \\
+		userRegistration & Database & userRegistration &  \\
+		register & String, String, String, String & String &  \\
+		exists & String, String & $\mathbb{B}$ & \\
+		validate & String, String, String, String & $\mathbb{B}$ & invalidPassword, invalidUsername, invalidEmail\\
 		\hline
 	\end{tabular}
 \end{center}
@@ -657,64 +819,43 @@ AddWorkout(w):
 \subsection{Semantics}
 
 \subsubsection{State Variables}
+userDatabase: $Database$\\
 
 \subsubsection{Environment Variables}
 
 \subsubsection{Assumptions}
-
+Regex operations are allowed on strings
 \subsubsection{Access Routine Semantics}
 
-\noindent \wss{accessProg}():
+\noindent userRegistration(db):
 \begin{itemize}
-	\item transition:
-	\item output:
-	\item exception:
+	\item transition: $userDatabase := db$
+	\item output: $out := self$
+	\item exception: None
+\end{itemize}
+
+\noindent register(username, password, email, nickname):
+\begin{itemize}
+	\item output: $out:= \lnot exists(username, email) \land validate(username, password, email, nickname)$
+	\item exception: None
 \end{itemize}
 
 \subsubsection{Local Functions}
 
-\newpage
-
-\section{User Profile Module}
-
-\subsection{Uses}
-
-\subsection{Syntax}
-
-\subsubsection{Exported Constants}
-
-\subsubsection{Exported Access Programs}
-
-\begin{center}
-	\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
-		\hline
-		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
-		\hline
-		&  &  &  \\
-		\hline
-	\end{tabular}
-\end{center}
-
-\subsection{Semantics}
-
-\subsubsection{State Variables}
-
-\subsubsection{Environment Variables}
-
-\subsubsection{Assumptions}
-
-\subsubsection{Access Routine Semantics}
-
-\noindent \wss{accessProg}():
+\noindent exists(username, email)$\rightarrow \mathbb{B}$:
 \begin{itemize}
-	\item transition:
-	\item output:
-	\item exception:
+	\item output: $out := userDatabase.existsUser(username) \lor userDatabase.existsEmail(email)$
+	\item exception: None
 \end{itemize}
 
-\subsubsection{Local Functions}
-
-\newpage
+\noindent validate(username, email, password, nickname)$\rightarrow \mathbb{B}$:
+\begin{itemize}
+	\item output: $out := username.matches(\{6,20\}) \\ \land password.matches( \land (?=.*\backslash d)(?=.*[a-z])(?=.*[A-Z]).\{6,20\}\$ ) \\ \land email.matches(/ \land \backslash w+([ \backslash .-]? \backslash w+)*@ \backslash w+([\backslash.-]?\backslash w+)*(\backslash.\backslash w{2,3})+\$/) \\ \land nickname.len() \ge 1$
+	\item exception: $exc := \lnot username.matches(\{6,20\}) \Rightarrow$ invalidUsername
+	\item exception: $exc := \lnot email.matches(/ \land \backslash w+([ \backslash .-]? \backslash w+)*@ \backslash w+([\backslash.-]?\backslash w+)*(\backslash.\backslash w{2,3})+\$/) \Rightarrow$ invalidEmail
+	\item exception: $exc := \lnot password.matches( \land (?=.*\backslash d)(?=.*[a-z])(?=.*[A-Z]).\{6,20\}\$ ) \Rightarrow$ invalidPassword 
+	\item exception: $exc := nickname.len() < 1 \Rightarrow$ invalidNickname
+\end{itemize}
 
 \section{User Fitness Goal Module}
 
