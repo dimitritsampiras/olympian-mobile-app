@@ -223,6 +223,39 @@ Template
 
 \newpage
 
+\section{Fitess Unit Of Measurement Type Module}
+
+\subsection{Uses}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Types}
+FitessUnit = \{Set, Rep, Curl, Press, Jump, Step, Stretch, Push, Pull, Second, Minute, Hour, Day...\} 
+\\
+\textit{//Many more, just stating a few}
+\subsubsection{Exported Access Programs}
+
+None
+
+\subsection{Semantics}
+\subsubsection{State Variables}
+None
+
+\subsubsection{Environment Variables}
+None
+
+\subsubsection{Assumptions}
+None
+
+\subsubsection{Access Routine Semantics}
+
+None
+
+\subsubsection{Local Functions}
+
+
+\newpage
+
 \section{Quantifier Module}
 
 \subsection{Uses}
@@ -230,7 +263,7 @@ Template
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
-
+Quantifier = ?
 \subsubsection{Exported Access Programs}
 
 \begin{center}
@@ -238,7 +271,9 @@ Template
 		\hline
 		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 		\hline
-		&  &  &  \\
+		Quantifier & $FitnessUnit, \mathbb{Q}$ & Quantifier &  \\
+		getUnit &  & $FitnessUnit$ &  \\
+		getValue &  & $\mathbb{Q}$ &  \\
 		\hline
 	\end{tabular}
 \end{center}
@@ -246,18 +281,33 @@ Template
 \subsection{Semantics}
 
 \subsubsection{State Variables}
+unit: $FitnessUnit$ \\
+value: $\mathbb{Q}$
 
 \subsubsection{Environment Variables}
 
 \subsubsection{Assumptions}
+None
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \wss{accessProg}():
+Quantifier(u, v):
 \begin{itemize}
-	\item transition:
-	\item output:
-	\item exception:
+	\item transition: $unit, value := u, v$
+	\item output: $out := self$
+	\item exception: None
+\end{itemize}
+
+unit():
+\begin{itemize}
+	\item output: $out := unit$
+	\item exception: None
+\end{itemize}
+
+value():
+\begin{itemize}
+	\item output: $out := value$
+	\item exception: None
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -325,17 +375,16 @@ None
 
 \subsubsection{Local Functions}
 
-
 \newpage
 
-\section{Workout Module}
+\section{Timed Set Module}
 
 \subsection{Uses}
 
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
-
+TimedSequence(T) = ?
 \subsubsection{Exported Access Programs}
 
 \begin{center}
@@ -343,7 +392,11 @@ None
 		\hline
 		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 		\hline
-		 &  &  &  \\
+		TimedSequence & seq of T, String, Time & TimedSequence &  \\
+		getSeq &  & seq of Exercise &  \\
+		getDescription &  & String &  \\
+		getDuration &  & Time &  \\
+		add & T & &  \\
 		\hline
 	\end{tabular}
 \end{center}
@@ -351,6 +404,9 @@ None
 \subsection{Semantics}
 
 \subsubsection{State Variables}
+sequence: $T[]$ \\
+description: $String$ \\
+duration: $Time$ \\
 
 \subsubsection{Environment Variables}
 
@@ -358,11 +414,107 @@ None
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \wss{accessProg}():
+TimedSequence(s, desc, dur):
 \begin{itemize}
-	\item transition:
-	\item output:
-	\item exception:
+	\item transition: $sequence, description, duration := s, desc, dur$
+	\item output: $out := self$
+	\item exception: None
+\end{itemize}
+
+sequence():
+\begin{itemize}
+	\item output: $out := sequence$
+	\item exception: None
+\end{itemize}
+
+description():
+\begin{itemize}
+	\item output: $out := description$
+	\item exception: None
+\end{itemize}
+
+duration():
+\begin{itemize}
+	\item output: $out := duration$
+	\item exception: None
+\end{itemize}
+
+add(t):
+\begin{itemize}
+	\item transition: $sequence.put(t)$
+	\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+\newpage
+
+\section{Workout Module}
+
+\subsection{Uses}
+TimedSequence(Exercise)
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+Workout = ?
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+		\hline
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+		\hline
+		Workout & seq of Exercise, String, Time & Workout &  \\
+		getExercises &  & seq of Exercise &  \\
+		getDescription &  & String &  \\
+		getDuration &  & Time &  \\
+		addExercise & Exercise & &  \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+exercises: $Exercise[]$ \\
+description: $String$ \\
+duration: $Time$ \\
+
+\subsubsection{Environment Variables}
+
+\subsubsection{Assumptions}
+
+\subsubsection{Access Routine Semantics}
+
+Workout(e, desc, dur):
+\begin{itemize}
+	\item transition: $exercises, description, duration := e, desc, dur$
+	\item output: $out := self$
+	\item exception: None
+\end{itemize}
+
+exercise():
+\begin{itemize}
+	\item output: $out := exercise$
+	\item exception: None
+\end{itemize}
+
+description():
+\begin{itemize}
+	\item output: $out := description$
+	\item exception: None
+\end{itemize}
+
+duration():
+\begin{itemize}
+	\item output: $out := duration$
+	\item exception: None
+\end{itemize}
+
+AddExercise(e):
+\begin{itemize}
+	\item transition: $exercises.put(e)$
+	\item exception: None
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -372,11 +524,12 @@ None
 \section{Workout Routine Module}
 
 \subsection{Uses}
-
+TimedSequence(Workout)
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
-
+Routine = ?
+\textit{//Note: Same as a Workout Routine, just short version}
 \subsubsection{Exported Access Programs}
 
 \begin{center}
@@ -384,7 +537,10 @@ None
 		\hline
 		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 		\hline
-		&  &  &  \\
+		Routine & seq of Workout, Duration, Description & Routine &  \\
+		getWorkouts &  & seq of Workout &  \\
+		getDescription &  & String &  \\
+		getDuration &  & Time &  \\
 		\hline
 	\end{tabular}
 \end{center}
@@ -392,6 +548,9 @@ None
 \subsection{Semantics}
 
 \subsubsection{State Variables}
+workouts: $Exercise[]$ \\
+description: $String$ \\
+duration: $Time$ \\
 
 \subsubsection{Environment Variables}
 
@@ -399,11 +558,35 @@ None
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \wss{accessProg}():
+Routine(w, desc, dur):
 \begin{itemize}
-	\item transition:
-	\item output:
-	\item exception:
+	\item transition: $workouts, description, duration := w, desc, dur$
+	\item output: $out := self$
+	\item exception: None
+\end{itemize}
+
+exercise():
+\begin{itemize}
+	\item output: $out := exercise$
+	\item exception: None
+\end{itemize}
+
+description():
+\begin{itemize}
+	\item output: $out := description$
+	\item exception: None
+\end{itemize}
+
+duration():
+\begin{itemize}
+	\item output: $out := duration$
+	\item exception: None
+\end{itemize}
+
+AddWorkout(w):
+\begin{itemize}
+	\item transition: $workouts.put(w)$
+	\item exception: None
 \end{itemize}
 
 \subsubsection{Local Functions}
