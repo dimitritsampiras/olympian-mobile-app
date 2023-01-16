@@ -981,14 +981,14 @@ Browser = ?
 
 \newpage
 
-\section{Creation Module}
-
+\section{Creator Module}
+Creator(T) interface
 \subsection{Uses}
 
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
-
+Creator(T) = ?
 \subsubsection{Exported Access Programs}
 
 \begin{center}
@@ -996,7 +996,8 @@ Browser = ?
 		\hline
 		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 		\hline
-		&  &  &  \\
+		Creator &  & Creator &  \\
+		create & Any & T &  \\
 		\hline
 	\end{tabular}
 \end{center}
@@ -1004,6 +1005,7 @@ Browser = ?
 \subsection{Semantics}
 
 \subsubsection{State Variables}
+None
 
 \subsubsection{Environment Variables}
 
@@ -1011,14 +1013,21 @@ Browser = ?
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \wss{accessProg}():
+\noindent Creator():
 \begin{itemize}
-	\item transition:
-	\item output:
-	\item exception:
+	\item output: $out := self$
+	\item exception: None
+\end{itemize}
+
+\noindent create():
+\begin{itemize}
+	\item output: $out := T$
+	\item exception: None
 \end{itemize}
 
 \subsubsection{Local Functions}
+
+None
 
 \newpage
 
@@ -1030,9 +1039,13 @@ Browser = ?
 
 \subsection{Uses}
 
+Creator(Exercise)
+
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
+
+ExerciseCreator = ?
 
 \subsubsection{Exported Access Programs}
 
@@ -1041,7 +1054,8 @@ Browser = ?
 		\hline
 		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 		\hline
-		&  &  &  \\
+		ExerciseCreator &  & ExerciseCreator &  \\
+		create & Any & Exercise &  \\
 		\hline
 	\end{tabular}
 \end{center}
@@ -1056,11 +1070,16 @@ Browser = ?
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \wss{accessProg}():
+\noindent exerciseCreator():
 \begin{itemize}
-	\item transition:
-	\item output:
-	\item exception:
+	\item output: $out := self$
+	\item exception: None
+\end{itemize}
+
+\noindent create():
+\begin{itemize}
+	\item output: $out := Exercise$
+	\item exception: None
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -1076,9 +1095,13 @@ Browser = ?
 
 \subsection{Uses}
 
+Creator(Workout)
+
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
+
+WorkoutCreator = ?
 
 \subsubsection{Exported Access Programs}
 
@@ -1087,7 +1110,8 @@ Browser = ?
 		\hline
 		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 		\hline
-		&  &  &  \\
+		WorkoutCreator &  & WorkoutCreator &  \\
+		create & Any & Workout &  \\
 		\hline
 	\end{tabular}
 \end{center}
@@ -1102,11 +1126,16 @@ Browser = ?
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \wss{accessProg}():
+\noindent workoutCreator():
 \begin{itemize}
-	\item transition:
-	\item output:
-	\item exception:
+	\item output: $out := self$
+	\item exception: None
+\end{itemize}
+
+\noindent create():
+\begin{itemize}
+	\item output: $out := Workout$
+	\item exception: None
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -1122,9 +1151,13 @@ Browser = ?
 
 \subsection{Uses}
 
+Creator(Routine)
+
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
+
+RoutineCreator = ?
 
 \subsubsection{Exported Access Programs}
 
@@ -1133,7 +1166,8 @@ Browser = ?
 		\hline
 		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 		\hline
-		&  &  &  \\
+		RoutineCreator &  & RoutineCreator &  \\
+		create & Any & Routine &  \\
 		\hline
 	\end{tabular}
 \end{center}
@@ -1148,11 +1182,16 @@ Browser = ?
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \wss{accessProg}():
+\noindent RoutineCreator():
 \begin{itemize}
-	\item transition:
-	\item output:
-	\item exception:
+	\item output: $out := self$
+	\item exception: None
+\end{itemize}
+
+\noindent create():
+\begin{itemize}
+	\item output: $out := Routine$
+	\item exception: None
 \end{itemize}
 
 \subsubsection{Local Functions}
