@@ -955,7 +955,9 @@ Browser = ?
 		\hline
 		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 		\hline
-		&  &  &  \\
+		Browser & Database & Browser &  \\
+		workouts & String &  &  \\
+		routines & String &  &  \\
 		\hline
 	\end{tabular}
 \end{center}
@@ -964,17 +966,33 @@ Browser = ?
 
 \subsubsection{State Variables}
 
+displayedRoutines: $Routine$ \\
+displayedWorkouts: $Workout$ \\
+database: $Database$ \\
+
 \subsubsection{Environment Variables}
 
 \subsubsection{Assumptions}
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \wss{accessProg}():
+\noindent Browser(db):
 \begin{itemize}
-	\item transition:
-	\item output:
-	\item exception:
+	\item transition: $database := db$
+	\item output: $out := self$
+	\item exception: None
+\end{itemize}
+
+\noindent routines(filter):
+\begin{itemize}
+	\item transition: $displayedRoutines := db.getRoutines().filter(string)$
+	\item exception: None
+\end{itemize}
+
+\noindent workouts(filter):
+\begin{itemize}
+	\item transition: $displayedWorkouts := db.getWorkouts().filter(string)$
+	\item exception: None
 \end{itemize}
 
 \subsubsection{Local Functions}
