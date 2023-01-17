@@ -101,21 +101,33 @@
 	\section{Project Overview}
 	
 	\subsection{Normal Behaviour}
-	
+	This application will be used by fitness enthusiasts and athletes alike to track workouts/programs whilst also being able to initeract with worokouts/programs created and posted by other users. 
+
 	\subsection{Undesired Event Handling}
-	
-	\wss{How you will approach undesired events}
-	
+	When an undesired event occurs, the application will ensure it halts and does not progress further. This will prevent users from entering false inputs into the system with the impression that they are acceptable. The appplication will then notify the user of the undesired event and either suggest an option to progress or to return to a previous state of the application. The halting of the application will allow for user data safety to be maintained.
+
 	\subsection{Component Diagram}
 	
 	\subsection{Connection Between Requirements and Design} \label{SecConnection}
 	
-	\wss{The intention of this section is to document decisions that are made
-		``between'' the requirements and the design.  To satisfy some requirements,
-		design decisions need to be made.  Rather than make these decisions implicit,
-		they are explicitly recorded here.  For instance, if a program has security
-		requirements, a specific design decision may be made to satisfy those
-		requirements with a password.}
+	\begin{tabular}{|c|c|}
+		\hline
+		Requirement & Design \\
+		\hline
+		The product shall appear minimal and straightforward & The application will contain an interface that only presents information that is necessary as to prevent cluttering and reduce minimality \\
+		\hline
+		The product shall use fonts of readable size to the target user group & Fonts of size 10-12 will be used across the application \\
+		\hline
+		The product shall be able to be used by untrained fitness enthusiasts and amateurs alike, who receive no training before using it & UI will be simplistic and consistent throughout, reducing the learning curve for users \\
+		\hline
+		The product shall be usable by users with hearing loss or partial blindness & The application will rely on both audio and visual cues to indicate correct inputs or application events \\
+		\hline
+		The application must inform users when maintenance is taking place and must warn them at least 1 day in advance & The application will utilize pop up screens to display important notifications to the user \\
+		\hline
+		The applicaiton will allow users to report offensive content and remove it from their feed & There will be a button on each post that gives user the option to report offensive content \\
+		\hline
+
+	\end{tabular}
 	
 	\section{System Variables}
 	
