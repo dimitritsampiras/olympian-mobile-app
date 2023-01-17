@@ -155,19 +155,13 @@ The following table is taken directly from the Module Guide document for this pr
 \newpage
 ~\newpage
 
-\section{MIS of \wss{Module Name}} \label{Module} \wss{Use labels for
-  cross-referencing}
+\section{MIS of Project Olympian} \label{Template} 
 
-\wss{You can reference SRS labels, such as R\ref{R_Inputs}.}
+\section{Template Module}
 
-\wss{It is also possible to use \LaTeX for hypperlinks to external documents.}
-
-\subsection{Module}
-
-\wss{Short name for the module}
+Template
 
 \subsection{Uses}
-
 
 \subsection{Syntax}
 
@@ -225,6 +219,1102 @@ The following table is taken directly from the Module Guide document for this pr
   They are not necessarily something that is going to be implemented
   explicitly.  Even if they are implemented, they are not exported; they only
   have local scope.}
+
+\newpage
+
+\section{Fitess Unit Of Measurement Type Module}
+
+\subsection{Uses}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Types}
+FitessUnit = \{Set, Rep, Curl, Press, Jump, Step, Stretch, Push, Pull, Second, Minute, Hour, Day...\} 
+\\
+\textit{//Many more, just stating a few}
+\subsubsection{Exported Access Programs}
+
+None
+
+\subsection{Semantics}
+\subsubsection{State Variables}
+None
+
+\subsubsection{Environment Variables}
+None
+
+\subsubsection{Assumptions}
+None
+
+\subsubsection{Access Routine Semantics}
+
+None
+
+\subsubsection{Local Functions}
+
+
+\newpage
+
+\section{Quantifier Module}
+
+\subsection{Uses}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+Quantifier = ?
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+		\hline
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+		\hline
+		Quantifier & $FitnessUnit, \mathbb{Q}$ & Quantifier &  \\
+		getUnit &  & $FitnessUnit$ &  \\
+		getValue &  & $\mathbb{Q}$ &  \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+unit: $FitnessUnit$ \\
+value: $\mathbb{Q}$
+
+\subsubsection{Environment Variables}
+
+\subsubsection{Assumptions}
+None
+
+\subsubsection{Access Routine Semantics}
+
+Quantifier(u, v):
+\begin{itemize}
+	\item transition: $unit, value := u, v$
+	\item output: $out := self$
+	\item exception: None
+\end{itemize}
+
+unit():
+\begin{itemize}
+	\item output: $out := unit$
+	\item exception: None
+\end{itemize}
+
+value():
+\begin{itemize}
+	\item output: $out := value$
+	\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+
+\newpage
+% Exercise 
+
+\section{Exercise Module}
+
+\subsection{Uses}
+N/A
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+Exercise = ?
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+		\hline
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+		\hline
+		Exercise & Quantifier, String & Exercise &  \\
+		getQuantifier &  & Quantifier &  \\
+		getDescription & & String & \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+quantifier: $Quantifier$ \\
+description: $String$
+
+\subsubsection{Environment Variables}
+
+\subsubsection{Assumptions}
+
+None
+
+\subsubsection{Access Routine Semantics}
+
+\noindent Exercise(q, d):
+\begin{itemize}
+	\item transition: $quantifier, description := q, d$
+	\item output: $out := self$
+	\item exception: None
+\end{itemize}
+
+\noindent quantifier():
+\begin{itemize}
+	\item output: $out := quantifier$
+	\item exception: None
+\end{itemize}
+
+\noindent description():
+\begin{itemize}
+	\item output: $out := description$
+	\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+\newpage
+
+\section{Timed Sequence Module}
+
+\subsection{Uses}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+TimedSequence(T) = ?
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\begin{tabular}{p{4cm} p{4cm} p{4cm} p{2cm}}
+		\hline
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+		\hline
+		TimedSequence & seq of T, String, Time & TimedSequence &  \\
+		getSeq &  & seq of Exercise &  \\
+		getDescription &  & String &  \\
+		getDuration &  & Time &  \\
+		add & T & &  \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+sequence: $T[]$ \\
+description: $String$ \\
+duration: $Time$ \\
+
+\subsubsection{Environment Variables}
+
+\subsubsection{Assumptions}
+
+\subsubsection{Access Routine Semantics}
+
+TimedSequence(s, desc, dur):
+\begin{itemize}
+	\item transition: $sequence, description, duration := s, desc, dur$
+	\item output: $out := self$
+	\item exception: None
+\end{itemize}
+
+sequence():
+\begin{itemize}
+	\item output: $out := sequence$
+	\item exception: None
+\end{itemize}
+
+description():
+\begin{itemize}
+	\item output: $out := description$
+	\item exception: None
+\end{itemize}
+
+duration():
+\begin{itemize}
+	\item output: $out := duration$
+	\item exception: None
+\end{itemize}
+
+add(t):
+\begin{itemize}
+	\item transition: $sequence.put(t)$
+	\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+\newpage
+
+\section{Database Communicator Module}
+
+\subsection{Uses}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+DatabaseCommunicator = ?
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\begin{tabular}{p{4cm} p{4cm} p{4cm} p{2cm}}
+		\hline
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+		\hline
+		DatabaseCommunicator & String & DatabaseCommunicator &  \\
+		getExercise & String & seq of Exercise &  \\
+		getWorkout & String & seq of Workout &  \\
+		getRoutine & String & seq of Routine &  \\
+		getUser & String & seq of User &  \\
+		addExercise & Exercise &  &  \\
+		addWorkout & Workout &  &  \\
+		addRoutine & Routine &  &  \\
+		addUser & User &  &  \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+databaseURL: $String$ \\
+db: $Database$
+\subsubsection{Environment Variables}
+databaseKey: $String$
+\subsubsection{Assumptions}
+
+\subsubsection{Access Routine Semantics}
+
+DatabaseCommunicator(URL):
+\begin{itemize}
+	\item transition: $databaseURL, database := URL, database.connect(URL, databaseKey)$
+	\item output: $out := self$
+	\item exception: None
+\end{itemize}
+
+getExercise(query):
+\begin{itemize}
+	\item output: $out := db.exercises.select(query)$
+	\item exception: None
+\end{itemize}
+
+getWorkout(query):
+\begin{itemize}
+	\item output: $out := db.workouts.select(query)$
+	\item exception: None
+\end{itemize}
+
+getRoutine(query):
+\begin{itemize}
+	\item output: $out := db.routines.select(query)$
+	\item exception: None
+\end{itemize}
+
+getUser(query):
+\begin{itemize}
+	\item output: $out := db.users.select(query)$
+	\item exception: None
+\end{itemize}
+
+
+addExercise(e):
+\begin{itemize}
+	\item output: $out := db.exercises.insert(e)$
+	\item exception: None
+\end{itemize}
+
+addWorkout(w):
+\begin{itemize}
+	\item output: $out := db.workouts.insert(w)$
+	\item exception: None
+\end{itemize}
+
+addRoutine(r):
+\begin{itemize}
+	\item output: $out := db.routines.insert(r)$
+	\item exception: None
+\end{itemize}
+
+addUser(u):
+\begin{itemize}
+	\item output: $out := db.users.insert(u)$
+	\item exception: None
+\end{itemize}
+
+
+
+\subsubsection{Local Functions}
+
+
+\newpage
+
+\section{Workout Module}
+
+\subsection{Uses}
+TimedSequence(Exercise)
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+Workout = ?
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+		\hline
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+		\hline
+		Workout & seq of Exercise, String, Time & Workout &  \\
+		getExercises &  & seq of Exercise &  \\
+		getDescription &  & String &  \\
+		getDuration &  & Time &  \\
+		addExercise & Exercise & &  \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+exercises: $Exercise[]$ \\
+description: $String$ \\
+duration: $Time$ \\
+
+\subsubsection{Environment Variables}
+
+\subsubsection{Assumptions}
+
+\subsubsection{Access Routine Semantics}
+
+Workout(e, desc, dur):
+\begin{itemize}
+	\item transition: $exercises, description, duration := e, desc, dur$
+	\item output: $out := self$
+	\item exception: None
+\end{itemize}
+
+exercise():
+\begin{itemize}
+	\item output: $out := exercise$
+	\item exception: None
+\end{itemize}
+
+description():
+\begin{itemize}
+	\item output: $out := description$
+	\item exception: None
+\end{itemize}
+
+duration():
+\begin{itemize}
+	\item output: $out := duration$
+	\item exception: None
+\end{itemize}
+
+AddExercise(e):
+\begin{itemize}
+	\item transition: $exercises.put(e)$
+	\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+\newpage
+
+\section{Workout Routine Module}
+
+\subsection{Uses}
+TimedSequence(Workout)
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+Routine = ? \\
+\textit{//Note: Same as a Workout Routine, just short version}
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+		\hline
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+		\hline
+		Routine & seq of Workout, Duration, Description & Routine &  \\
+		getWorkouts &  & seq of Workout &  \\
+		getDescription &  & String &  \\
+		getDuration &  & Time &  \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+workouts: $Exercise[]$ \\
+description: $String$ \\
+duration: $Time$ \\
+
+\subsubsection{Environment Variables}
+
+\subsubsection{Assumptions}
+
+\subsubsection{Access Routine Semantics}
+
+Routine(w, desc, dur):
+\begin{itemize}
+	\item transition: $workouts, description, duration := w, desc, dur$
+	\item output: $out := self$
+	\item exception: None
+\end{itemize}
+
+exercise():
+\begin{itemize}
+	\item output: $out := exercise$
+	\item exception: None
+\end{itemize}
+
+description():
+\begin{itemize}
+	\item output: $out := description$
+	\item exception: None
+\end{itemize}
+
+duration():
+\begin{itemize}
+	\item output: $out := duration$
+	\item exception: None
+\end{itemize}
+
+AddWorkout(w):
+\begin{itemize}
+	\item transition: $workouts.put(w)$
+	\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+\newpage
+
+\section{User Profile Module}
+
+\subsection{Uses}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+User = ?
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\begin{tabular}{p{4cm} p{4cm} p{3cm} p{2cm}}
+		\hline
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+		\hline
+		User & String, String, String, String & User &  \\
+		username &  & String &  \\
+ 		password &  & String &  \\
+ 		email &  & String &  \\
+ 		nickname &  & String &  \\
+ 		fitness Goals &  & seq of FitnessGoal &  \\
+ 		created Workouts &  & seq of Workout &  \\
+ 		created Routines &  & seq of Routine &  \\
+ 		saved Workouts &  & seq of Workout &  \\
+ 		saved Routines &  & seq of Routine &  \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+username: $String$ \\
+password: $String$ \\
+email: $String$ \\
+nickname: $String$ \\
+fitnessGoals: $seq of FitnessGoal$ \\
+created Workouts: $Workout[]$ \\
+created Routines: $Routine[]$ \\
+saved Workouts: $Workout[]$ \\
+saved Routines: $Routine[]$ \\
+
+\subsubsection{Environment Variables}
+
+\subsubsection{Assumptions}
+
+\subsubsection{Access Routine Semantics}
+
+User(username, pass, email, nickname):
+\begin{itemize}
+	\item transition: $username, password, email, nickname := username, pass, email, nickname$
+	\item output: $out := self$
+	\item exception: None
+\end{itemize}
+
+username():
+\begin{itemize}
+	\item output: $out := username$
+	\item exception: None
+\end{itemize}
+
+email():
+\begin{itemize}
+	\item output: $out := email$
+	\item exception: PremissionException
+\end{itemize}
+
+password():
+\begin{itemize}
+	\item output: $out := password$
+	\item exception: PremissionException
+\end{itemize}
+
+nickname():
+\begin{itemize}
+	\item output: $out := nickname$
+	\item exception: None
+\end{itemize}
+
+fitnessGoals():
+\begin{itemize}
+	\item output: $out := fitnessGoals$
+	\item exception: None
+\end{itemize}
+
+createdWorkouts():
+\begin{itemize}
+	\item output: $out := createdWorkouts$
+	\item exception: None
+\end{itemize}
+
+createdRoutines():
+\begin{itemize}
+	\item output: $out := createdRoutines$
+	\item exception: None
+\end{itemize}
+
+savedWorkouts():
+\begin{itemize}
+	\item output: $out := savedWorkouts$
+	\item exception: None
+\end{itemize}
+
+savedRoutines():
+\begin{itemize}
+	\item output: $out := savedRoutines$
+	\item exception: None
+\end{itemize}
+
+createGoal(g):
+\begin{itemize}
+	\item transition: $ fitnessGoals.put(g) $
+	\item exception: None
+\end{itemize}
+
+createWorkout(workout):
+\begin{itemize}
+	\item transition: $ createdWorkouts.put(w), \ savedWorkouts.put(w) $
+	\item exception: None
+\end{itemize}
+
+createRoutine(routine):
+\begin{itemize}
+	\item transition: $ createdRoutine.put(r), \ savedRoutines.put(r) $
+	\item exception: None
+\end{itemize}
+
+saveWorkout(w):
+\begin{itemize}
+	\item transition: $ savedWorkouts.put(w) $
+	\item exception: None
+\end{itemize}
+
+saveRoutine(r):
+\begin{itemize}
+	\item transition: $ savedRoutines.put(r) $
+	\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+\newpage
+
+\section{User Login Module}
+
+\subsection{Uses}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+UserLogin = ?
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+		\hline
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+		\hline
+		UserLogin & & UserLogin &  \\
+		attemptLogin & String, String & $\mathbb{B}$ & tooManyAttempts \\
+		validateUser & String, String & $\mathbb{B}$ &  \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+attempts: $\mathbb{Z}$\\
+maxAttempts: $\mathbb{Z}$\\
+userDatabase: $Database$ \\
+\subsubsection{Environment Variables}
+
+\subsubsection{Assumptions}
+There exists a stored number for maximum attempts.
+\subsubsection{Access Routine Semantics}
+
+\noindent UserLogin(db):
+\begin{itemize}
+	\item transition: $userDatabase, attempts := DatabaseCommunicator.users, 0$
+	\item output: $out := self$
+	\item exception: None
+\end{itemize}
+
+\noindent attemptLogin(user, pass):
+\begin{itemize}
+	\item transition: $attempts := attempts + 1$
+	\item output: $out := validateUser(user, pass) \land userDatabase.getUser(user) = (pass)$
+	\item exception: $exc := attempts \ge maxAttempts \Rightarrow tooManyAttempts$
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+\noindent validateUser(user, pass) $\rightarrow \mathbb{B}$
+\begin{itemize}
+	\item output: $out := userDatabase.validate(user, pass)$
+	\item exception: None
+\end{itemize}
+\newpage
+
+\section{User Registration Module}
+
+\subsection{Uses}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+userRegistration = ?
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\begin{tabular}{p{4cm} p{4cm} p{4cm} p{4cm}}
+		\hline
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+		\hline
+		userRegistration &  & userRegistration &  \\
+		register & String, String, String, String & String &  \\
+		exists & String, String & $\mathbb{B}$ & \\
+		validate & String, String, String, String & $\mathbb{B}$ & invalidPassword, invalidUsername, invalidEmail\\
+		\hline
+	\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+userDatabase: $Database$
+
+\subsubsection{Environment Variables}
+
+\subsubsection{Assumptions}
+Regex operations are allowed on strings
+\subsubsection{Access Routine Semantics}
+
+\noindent userRegistration(db):
+\begin{itemize}
+	\item transition: $userDatabase := DatabaseCommunicator.db.users$
+	\item output: $out := self$
+	\item exception: None
+\end{itemize}
+
+\noindent register(username, password, email, nickname):
+\begin{itemize}
+	\item output: $out:= \lnot exists(username, email) \land validate(username, password, email, nickname)$
+	\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+\noindent exists(username, email)$\rightarrow \mathbb{B}$:
+\begin{itemize}
+	\item output: $out := userDatabase.existsUser(username) \lor userDatabase.existsEmail(email)$
+	\item exception: None
+\end{itemize}
+
+\noindent validate(username, email, password, nickname)$\rightarrow \mathbb{B}$:
+\begin{itemize}
+	\item output: $out := username.matches(\{6,20\}) \\ \land password.matches( \land (?=.*\backslash d)(?=.*[a-z])(?=.*[A-Z]).\{6,20\}\$ ) \\ \land email.matches(/ \land \backslash w+([ \backslash .-]? \backslash w+)*@ \backslash w+([\backslash.-]?\backslash w+)*(\backslash.\backslash w{2,3})+\$/) \\ \land nickname.len() \ge 1$
+	\item exception: $exc := \lnot username.matches(\{6,20\}) \Rightarrow$ invalidUsername
+	\item exception: $exc := \lnot email.matches(/ \land \backslash w+([ \backslash .-]? \backslash w+)*@ \backslash w+([\backslash.-]?\backslash w+)*(\backslash.\backslash w{2,3})+\$/) \Rightarrow$ invalidEmail
+	\item exception: $exc := \lnot password.matches( \land (?=.*\backslash d)(?=.*[a-z])(?=.*[A-Z]).\{6,20\}\$ ) \Rightarrow$ invalidPassword 
+	\item exception: $exc := nickname.len() < 1 \Rightarrow$ invalidNickname
+\end{itemize}
+
+\section{User Fitness Goal Module}
+
+\subsection{Uses}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+FitnessGoal = ?
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+		\hline
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+		\hline
+		FitnessGoal & String, Quantifier & FitnessGoal &  \\
+		quantifier &  & Quantifier &  \\
+		description &  & String &  \\
+		currentProgress &  & Quantifier &  \\
+		status &  & $\mathbb{B}$ &  \\
+		progressGoal & Quantifier &  &  \\
+		&  &  &  \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+quantifier: $Quantifier$ \\
+description: $String$ \\
+progress: $Quantifier$ \\
+
+\subsubsection{Environment Variables}
+
+\subsubsection{Assumptions}
+
+\subsubsection{Access Routine Semantics}
+
+\newpage
+
+\noindent FitnessGoal(quant, desc):
+\begin{itemize}
+	\item transition: $quantifier, description, progression = quant, desc, Quantifier(quant.unit, 0)$
+	\item output: $out := self$
+	\item exception: None
+\end{itemize}
+
+\noindent quantifier():
+\begin{itemize}
+	\item output: $out := quantifier$
+	\item exception: None
+\end{itemize}
+
+\noindent description():
+\begin{itemize}
+	\item output: $out := description$
+	\item exception: None
+\end{itemize}
+
+\noindent currentProgress():
+\begin{itemize}
+	\item output: $out := progress$
+	\item exception: None
+\end{itemize}
+
+\noindent status():
+\begin{itemize}
+	\item output: $out := progress.value < quantifier.value $
+	\item exception: None
+\end{itemize}
+
+\noindent progressGoal(val):
+\begin{itemize}
+	\item transition: $progress.value := val$
+	\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+
+\newpage
+
+\section{Workout Browsing Module}
+
+\subsection{Uses}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+Browser = ?
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+		\hline
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+		\hline
+		Browser &  & Browser &  \\
+		workouts & String &  &  \\
+		routines & String &  &  \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+displayedRoutines: $Routine$ \\
+displayedWorkouts: $Workout$ \\
+workoutDatabase: $Database$ \\
+routineDatabase: $Database$ \\
+
+\subsubsection{Environment Variables}
+
+\subsubsection{Assumptions}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent Browser(db):
+\begin{itemize}
+	\item transition: $workoutDatabase, routineDatabase := DatabaseCommunicator.db.workouts, DatabaseCommunicator.db.routines$
+	\item output: $out := self$
+	\item exception: None
+\end{itemize}
+
+\noindent routines(query):
+\begin{itemize}
+	\item transition: $displayedRoutines := routineDatabase.select(query)$
+	\item exception: None
+\end{itemize}
+
+\noindent workouts(query):
+\begin{itemize}
+	\item transition: $displayedWorkouts := workoutDatabase.select(query)$
+	\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+\newpage
+
+\section{Creator Module}
+Creator(T) interface
+\subsection{Uses}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+Creator(T) = ?
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+		\hline
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+		\hline
+		Creator &  & Creator &  \\
+		create & Any & T &  \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+None
+
+\subsubsection{Environment Variables}
+
+\subsubsection{Assumptions}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent Creator():
+\begin{itemize}
+	\item output: $out := self$
+	\item exception: None
+\end{itemize}
+
+\noindent create():
+\begin{itemize}
+	\item output: $out := T$
+	\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+\newpage
+
+\bibliographystyle {plainnat}
+\bibliography {../../../refs/References}
+
+\newpage
+\section{Exercise Creation Module}
+
+\subsection{Uses}
+
+Creator(Exercise)
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+ExerciseCreator = ?
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+		\hline
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+		\hline
+		ExerciseCreator &  & ExerciseCreator &  \\
+		create & Any & Exercise &  \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+\subsubsection{Environment Variables}
+
+\subsubsection{Assumptions}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent exerciseCreator():
+\begin{itemize}
+	\item output: $out := self$
+	\item exception: None
+\end{itemize}
+
+\noindent create():
+\begin{itemize}
+	\item output: $out := Exercise$
+	\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+\newpage
+
+\bibliographystyle {plainnat}
+\bibliography {../../../refs/References}
+
+\newpage
+
+\section{Workout Creation Module}
+
+\subsection{Uses}
+
+Creator(Workout)
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+WorkoutCreator = ?
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+		\hline
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+		\hline
+		WorkoutCreator &  & WorkoutCreator &  \\
+		create & Any & Workout &  \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+\subsubsection{Environment Variables}
+
+\subsubsection{Assumptions}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent workoutCreator():
+\begin{itemize}
+	\item output: $out := self$
+	\item exception: None
+\end{itemize}
+
+\noindent create():
+\begin{itemize}
+	\item output: $out := Workout$
+	\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+\newpage
+
+\bibliographystyle {plainnat}
+\bibliography {../../../refs/References}
+
+\newpage
+
+\section{Workout Routine Creation Module}
+
+\subsection{Uses}
+
+Creator(Routine)
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+RoutineCreator = ?
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+		\hline
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+		\hline
+		RoutineCreator &  & RoutineCreator &  \\
+		create & Any & Routine &  \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+\subsubsection{Environment Variables}
+
+\subsubsection{Assumptions}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent RoutineCreator():
+\begin{itemize}
+	\item output: $out := self$
+	\item exception: None
+\end{itemize}
+
+\noindent create():
+\begin{itemize}
+	\item output: $out := Routine$
+	\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
 
 \newpage
 
