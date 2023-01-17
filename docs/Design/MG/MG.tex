@@ -201,8 +201,8 @@ actually be implemented.
 \item [\refstepcounter{mnum} \mthemnum \label{mEC}:] Exercise Creation Module
 \item [\refstepcounter{mnum} \mthemnum \label{mTS}:] Timed Sequence Module
 \item [\refstepcounter{mnum} \mthemnum \label{mQuantifier}:] Quantifier Module
+\item [\refstepcounter{mnum} \mthemnum \label{mDatabase}:] Database Communicator Module
 \end{description}
-
 
 \begin{table}[h!]
 \centering
@@ -228,6 +228,7 @@ actually be implemented.
 & workout routine creation\\
 & exercise creation\\
 & timed sequence\\
+& DatabaseCommunicator\\
 \midrule
 
 \multirow{1}{0.3\textwidth}{Software Decision Module}
@@ -436,19 +437,19 @@ FR8 & \mref{mUP}\\
 FR9 & \mref{mExercise}, \mref{mUFG}, \mref{mEC}, \mref{mQuantifier}\\
 FR10 & \mref{mExercise}, \mref{mUFG}, \mref{mQuantifier}\\
 FR11 & \mref{mUFG}, \mref{mWB}\\
-
+\midrule
 NFR1 & \mref{mUP}\\
 NFR2 & \mref{mUP}\\
 NFR3 & \mref{mUP}\\
-NFR4 & \\
+NFR4 & \mref{mExercise}, \mref{mWorkout}, \mref{mWR}, \mref{mUL}, \mref{mUR}, \mref{mUP}, \mref{mUFG}, \mref{mWB}, \mref{mCreation}\\
 NFR5 & \mref{mExercise}, \mref{mWorkout}, \mref{mWR}, \mref{mUP}, \mref{mUFG}, \mref{mWB}\\
 NFR6 & \mref{mExercise}, \mref{mWorkout}, \mref{mWR}, \mref{mUP}, \mref{mUFG}, \mref{mWB}\\
 NFR7 & \mref{mExercise}, \mref{mWorkout}, \mref{mWR}, \mref{mUP}, \mref{mUFG}, \mref{mWB}\\
 NFR8 & \mref{mExercise}, \mref{mWorkout}, \mref{mWR}, \mref{mWC}, \mref{mWRC}, \mref{mEC}\\
 NFR9 & \mref{mWB}\\
-NFR10 & \\
-NFR11 & \\
-NFR12 & \\
+NFR10 & \mref{mDatabase}\\
+NFR11 & \mref{mDatabase}\\
+NFR12 & \mref{mDatabase}\\
 NFR13 & \mref{mHH}\\
 NFR14 & \mref{mUP}\\
 NFR15 & \mref{mUP}\\
@@ -458,7 +459,7 @@ NFR18 & \mref{mHH}\\
 NFR19 & \mref{mUP}, \mref{mWB}\\
 NFR20 & \mref{mUP}, \mref{mWB}\\
 NFR21 & \mref{mUP}\\
-NFR22 & \\
+NFR22 & \mref{mDatabase}\\
 
 \bottomrule
 \end{tabular}
