@@ -449,6 +449,108 @@ add(t):
 
 \newpage
 
+\section{Database Communicator Module}
+
+\subsection{Uses}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+DatabaseCommunicator = ?
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\begin{tabular}{p{4cm} p{4cm} p{4cm} p{2cm}}
+		\hline
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+		\hline
+		DatabaseCommunicator & String & DatabaseCommunicator &  \\
+		getExercise & String & seq of Exercise &  \\
+		getWorkout & String & seq of Workout &  \\
+		getRoutine & String & seq of Routine &  \\
+		getUser & String & seq of User &  \\
+		addExercise & Exercise &  &  \\
+		addWorkout & Workout &  &  \\
+		addRoutine & Routine &  &  \\
+		addUser & User &  &  \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+databaseURL: $String$ \\
+db: $Database$
+\subsubsection{Environment Variables}
+databaseKey: $String$
+\subsubsection{Assumptions}
+
+\subsubsection{Access Routine Semantics}
+
+DatabaseCommunicator(URL):
+\begin{itemize}
+	\item transition: $databaseURL, database := URL, database.connect(URL, databaseKey)$
+	\item output: $out := self$
+	\item exception: None
+\end{itemize}
+
+getExercise(query):
+\begin{itemize}
+	\item output: $out := db.exercises.select(query)$
+	\item exception: None
+\end{itemize}
+
+getWorkout(query):
+\begin{itemize}
+	\item output: $out := db.workouts.select(query)$
+	\item exception: None
+\end{itemize}
+
+getRoutine(query):
+\begin{itemize}
+	\item output: $out := db.routines.select(query)$
+	\item exception: None
+\end{itemize}
+
+getUser(query):
+\begin{itemize}
+	\item output: $out := db.users.select(query)$
+	\item exception: None
+\end{itemize}
+
+
+addExercise(e):
+\begin{itemize}
+	\item output: $out := db.exercises.insert(e)$
+	\item exception: None
+\end{itemize}
+
+addWorkout(w):
+\begin{itemize}
+	\item output: $out := db.workouts.insert(w)$
+	\item exception: None
+\end{itemize}
+
+addRoutine(r):
+\begin{itemize}
+	\item output: $out := db.routines.insert(r)$
+	\item exception: None
+\end{itemize}
+
+addUser(u):
+\begin{itemize}
+	\item output: $out := db.users.insert(u)$
+	\item exception: None
+\end{itemize}
+
+
+
+\subsubsection{Local Functions}
+
+
+\newpage
+
 \section{Workout Module}
 
 \subsection{Uses}
@@ -751,7 +853,7 @@ UserLogin = ?
 		\hline
 		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 		\hline
-		UserLogin & Database & UserLogin &  \\
+		UserLogin & & UserLogin &  \\
 		attemptLogin & String, String & $\mathbb{B}$ & tooManyAttempts \\
 		validateUser & String, String & $\mathbb{B}$ &  \\
 		\hline
@@ -772,7 +874,7 @@ There exists a stored number for maximum attempts.
 
 \noindent UserLogin(db):
 \begin{itemize}
-	\item transition: $userDatabase, attempts := db, 0$
+	\item transition: $userDatabase, attempts := DatabaseCommunicator.users, 0$
 	\item output: $out := self$
 	\item exception: None
 \end{itemize}
@@ -808,7 +910,7 @@ userRegistration = ?
 		\hline
 		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 		\hline
-		userRegistration & Database & userRegistration &  \\
+		userRegistration &  & userRegistration &  \\
 		register & String, String, String, String & String &  \\
 		exists & String, String & $\mathbb{B}$ & \\
 		validate & String, String, String, String & $\mathbb{B}$ & invalidPassword, invalidUsername, invalidEmail\\
@@ -829,7 +931,7 @@ Regex operations are allowed on strings
 
 \noindent userRegistration(db):
 \begin{itemize}
-	\item transition: $userDatabase := db$
+	\item transition: $userDatabase := DatabaseCommunicator.db.users$
 	\item output: $out := self$
 	\item exception: None
 \end{itemize}
@@ -955,7 +1057,7 @@ Browser = ?
 		\hline
 		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 		\hline
-		Browser & Database & Browser &  \\
+		Browser &  & Browser &  \\
 		workouts & String &  &  \\
 		routines & String &  &  \\
 		\hline
@@ -968,7 +1070,8 @@ Browser = ?
 
 displayedRoutines: $Routine$ \\
 displayedWorkouts: $Workout$ \\
-database: $Database$ \\
+workoutDatabase: $Database$ \\
+routineDatabase: $Database$ \\
 
 \subsubsection{Environment Variables}
 
@@ -978,20 +1081,20 @@ database: $Database$ \\
 
 \noindent Browser(db):
 \begin{itemize}
-	\item transition: $database := db$
+	\item transition: $workoutDatabase, routineDatabase := DatabaseCommunicator.db.workouts, DatabaseCommunicator.db.routines$
 	\item output: $out := self$
 	\item exception: None
 \end{itemize}
 
-\noindent routines(filter):
+\noindent routines(query):
 \begin{itemize}
-	\item transition: $displayedRoutines := db.getRoutines().filter(string)$
+	\item transition: $displayedRoutines := routineDatabase.select(query)$
 	\item exception: None
 \end{itemize}
 
-\noindent workouts(filter):
+\noindent workouts(query):
 \begin{itemize}
-	\item transition: $displayedWorkouts := db.getWorkouts().filter(string)$
+	\item transition: $displayedWorkouts := workoutDatabase.select(query)$
 	\item exception: None
 \end{itemize}
 
