@@ -8,6 +8,8 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{hyperref}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
 \hypersetup{
 	colorlinks,
 	citecolor=blue,
@@ -46,8 +48,7 @@
 	\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 		\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 		\midrule
-		Date 1 & 1.0 & Notes\\
-		Date 2 & 1.1 & Notes\\
+		January 13 2023 & 1.0 & Initial Draft\\
 		\bottomrule
 	\end{tabularx}
 	
@@ -87,23 +88,43 @@
 	
 	\wss{Include references to your other documentation}
 	
+	This document serves to illustrate and explain design decisions (in the context of alternatives) and the thought processes and considerations of the team that made said decisions.
 	\section{Purpose}
 	
-	\wss{Purpose of your design documentation}
+	The purpose of this design documentation is to justify design decisions and prove that our final design meets all requirements as specified in the Software Requirements Specification (SRS).
 	
-	\wss{Point to your other design documents}
+	The purpose of this design documentation is to make clear current design choices, and to show why these designs were chosen over possible alternatives. This document also must prove that the current designs fulfill the requirements enumerated in the Software Requirements Specification (SRS) document.
 	
 	\section{Scope}
 	
 	\wss{Include a figure that show the System Context (showing the boundary between
-		your system and the environment around it.)}
+		your system and the environment around it.)}\\
 	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.55]{system_context}
+		\caption{System Context Diagram}
+	\end{figure}
+
 	\section{Project Overview}
 	
 	\subsection{Normal Behaviour}
-
+  
+	Normal behaviour for the application can be defined as the state of the available program when all FRs and NFRs are fulfilled. If an FR or NFR is not fulfilled, this is abnormal behaviour, and indicative of the occurrence of an undesired event.
+	
 	\subsection{Undesired Event Handling}
-
+	
+	\wss{How you will approach undesired events}
+	
+	An `undesired event' can comprise anything from incorrect user input to database failure to connectivity issues. 
+	
+	\textbf{Invalid User Input}: Whenever a user provides incorrect information to a form (e.g. an invalid email address during sign-up), an informative error message is displayed beneath the incorrectly filled field, and a visual queue is given in the form of highlighting the field in red to indicate error. To prevent annoying the user with error messages before they have actually made an error, forms will only display error messages after the first submit attempt. After an initial submit attempt, the error message will remain until the contents of the field are valid. This is to give the user information as to whether or not their entry is valid before having to submit again.
+	
+	\textbf{Connection/Database Failure}: If the application is unable to connect to the internet, and subsequently the server and database, an informative error message is displayed, informing the user to verify their internet connection. Note that a stretch goal for the future is to have the Olympian application save certain information locally to enable the user to perform certain functions offline. Changed local information would be synced with the database once connection is re-established. However, this is a stretch goal, and current requirements and designs list the database as the only information store, no data (other than an authentication token) is stored locally. If the database/server itself is failing, an appropriate message is displayed to the user. The message will indicate that the failure is not the fault of the user, but rather an internal failure outside of their control.
+	\\
+	
+	Error messages are kept consistent and concise in format, to make errors easy for the user to recognize and act upon.
+  
 	\subsection{Component Diagram}
 	
 	\subsection{Connection Between Requirements and Design} \label{SecConnection}
@@ -130,12 +151,13 @@
 	\section{System Variables}
 	
 	\wss{Include this section for Mechatronics projects}
+	N/A
 	
-	\subsection{Monitored Variables}
+%	\subsection{Monitored Variables}
 	
-	\subsection{Controlled Variables}
+%	\subsection{Controlled Variables}
 	
-	\subsection{Constants Variables}
+%	\subsection{Constants Variables}
 	
 	\section{User Interfaces}
 	
@@ -149,6 +171,8 @@
 	\wss{Show what will be built, with detail on fabrication and materials}
 	\wss{Include appendices as appropriate, possibly with sketches, drawings, CAD, etc}
 	
+	Olympian will run on mobile devices (e.g. iPhone, Samsung Galaxy) not designed or manufactured by the team.
+	
 	\section{Design of Electrical Components}
 	
 	\wss{Most relevant for mechatronics projects}
@@ -157,13 +181,20 @@
 	\wss{Include appendices as appropriate, possibly with sketches, drawings,
 		circuit diagrams, etc}
 	
+	N/A - See Section 9.
+	
 	\section{Design of Communication Protocols}
 	
 	\wss{If appropriate}
 	
-	\section{Timeline}
+	Communication between client and server will be done with HTTP requests.
+
+	There is no custom communication protocol used.
 	
+	\section{Timeline}
 	\wss{Schedule of tasks and who is responsible}
+	
+	Below is a timeline of the major milestones and the developers responsible for completing them.
 	
 	% \bibliographystyle {plainnat}
 	% \bibliography{../../../refs/References}
@@ -177,11 +208,16 @@
 	\wss{Include additional information related to the appearance of, and
 		interaction with, the user interface}
 	
+	See Figma.
+	
 	\section{Mechanical Hardware}
+	N/A
 	
 	\section{Electrical Components}
+	N/A
 	
 	\section{Communication Protocols}
+	The project employs Hyper Text Transfer Protocol (HTTP), enabling the client to communicate with the server and database through HTTP requests.
 	
 	\section{Reflection}
 	
