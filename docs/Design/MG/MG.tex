@@ -8,6 +8,7 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{hyperref}
+\usepackage{array}
 \hypersetup{
     colorlinks,
     citecolor=blue,
@@ -239,11 +240,33 @@ actually be implemented.
 \label{TblMH}
 \end{table}
 
+\newpage
 \section{Connection Between Requirements and Design} \label{SecConnection}
 
 The design of the system is intended to satisfy the requirements developed in
 the SRS. In this stage, the system is decomposed into modules. The connection
 between requirements and modules is listed in Table \ref{TblRT}.
+
+\newpage
+
+\begin{tabular}{ | m{20em} | m{20em} | } 
+  \hline
+  Requirement & Design \\
+  \hline
+  The product shall appear minimal and straightforward & The application will contain an interface that only presents information that is necessary as to prevent cluttering and reduce minimality \\
+  \hline
+  The product shall use fonts of readable size to the target user group & Fonts of size 10-12 will be used across the application \\
+  \hline
+  The product shall be able to be used by untrained fitness enthusiasts and amateurs alike, who receive no training before using it & UI will be simplistic and consistent throughout, reducing the learning curve for users \\
+  \hline
+  The product shall be usable by users with hearing loss or partial blindness & The application will rely on both audio and visual cues to indicate correct inputs or application events \\
+  \hline
+  The application must inform users when maintenance is taking place and must warn them at least 1 day in advance & The application will utilize pop up screens to display important notifications to the user \\
+  \hline
+  The applicaiton will allow users to report offensive content and remove it from their feed & There will be a button on each post that gives user the option to report offensive content \\
+  \hline
+
+\end{tabular}
 
 \section{Module Decomposition} \label{SecMD}
 
