@@ -157,11 +157,10 @@ adapted here is called design for
 change.
 
 \begin{description}
-\item[\refstepcounter{acnum} \actheacnum \label{acHardware}:] The specific
-  hardware on which the software is running.
-\item[\refstepcounter{acnum} \actheacnum \label{acInput}:] The format of the
-  initial input data.
-\item ...
+\item[\refstepcounter{acnum} \actheacnum \label{acLayout}:] The layout and order of prompts or screens that are presented during the user registration process.
+\item[\refstepcounter{acnum} \actheacnum \label{acDiscovery}:] The process by which users discover new content / other users.
+\item[\refstepcounter{acnum} \actheacnum \label{acStorage}:] Leverage local storage for exercises and workouts instead of storing all data on database. 
+\item[\refstepcounter{acnum} \actheacnum \label{acStyling}:] Visual styling and color design choices.
 \end{description}
 
 \subsection{Unlikely Changes} \label{SecUchange}
@@ -174,9 +173,9 @@ will potentially need to be modified. Hence, it is not intended that these
 decisions will be changed.
 
 \begin{description}
-\item[\refstepcounter{ucnum} \uctheucnum \label{ucIO}:] Input/Output devices
-  (Input: File and/or Keyboard, Output: File, Memory, and/or Screen).
-\item ...
+\item[\refstepcounter{ucnum} \uctheucnum \label{ucLegal}:] Security requirements and legal compliance requirements are unlikely to be changed: NFR15, NFR16, NFR17, NFR18, NFR22.
+\item[\refstepcounter{ucnum} \uctheucnum \label{ucUsability}:] To maintain accessibility for all users, the following Usability and Humanity requirements are likely to remain unchanged: NFR2, NFR3, NFR4, NFR5, NFR6, NFR7.
+\item[\refstepcounter{ucnum} \uctheucnum \label{ucPerformance}:] The performance requirement specified by NFR8 encapsulates the mission of this application, which is to allow users to quickly update / interact with programs. As such, it is unlikely to change.
 \end{description}
 
 \section{Module Hierarchy} \label{SecMH}
@@ -188,9 +187,22 @@ actually be implemented.
 
 \begin{description}
 \item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding Module
-\item ...
+\item [\refstepcounter{mnum} \mthemnum \label{mExercise}:] Exercise Module
+\item [\refstepcounter{mnum} \mthemnum \label{mWorkout}:] Workout Module
+\item [\refstepcounter{mnum} \mthemnum \label{mWR}:] Workout Routine Module
+\item [\refstepcounter{mnum} \mthemnum \label{mUL}:] User Login Module
+\item [\refstepcounter{mnum} \mthemnum \label{mUR}:] User Registration Module
+\item [\refstepcounter{mnum} \mthemnum \label{mUP}:] User Profile Module
+\item [\refstepcounter{mnum} \mthemnum \label{mUFG}:] User Fitness Goal Module
+\item [\refstepcounter{mnum} \mthemnum \label{mWB}:] User Workout Browser Module
+\item [\refstepcounter{mnum} \mthemnum \label{mCreation}:] Creation Module
+\item [\refstepcounter{mnum} \mthemnum \label{mWC}:] Workout Creation Module
+\item [\refstepcounter{mnum} \mthemnum \label{mWRC}:] Workout Routine Creation Module
+\item [\refstepcounter{mnum} \mthemnum \label{mEC}:] Exercise Creation Module
+\item [\refstepcounter{mnum} \mthemnum \label{mTS}:] Timed Sequence Module
+\item [\refstepcounter{mnum} \mthemnum \label{mQuantifier}:] Quantifier Module
+\item [\refstepcounter{mnum} \mthemnum \label{mDatabase}:] Database Communicator Module
 \end{description}
-
 
 \begin{table}[h!]
 \centering
@@ -202,19 +214,25 @@ actually be implemented.
 {Hardware-Hiding Module} & ~ \\
 \midrule
 
-\multirow{7}{0.3\textwidth}{Behaviour-Hiding Module} & ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\ 
-& ?\\
+\multirow{12}{0.3\textwidth}{Behaviour-Hiding Module}
+& exercise\\
+& workout\\
+& workout routine\\
+& user login\\
+& user registration\\
+& user profile\\ 
+& user fitness goal\\
+& workout browser\\
+& creation\\
+& workout creation\\
+& workout routine creation\\
+& exercise creation\\
+& timed sequence\\
+& DatabaseCommunicator\\
 \midrule
 
-\multirow{3}{0.3\textwidth}{Software Decision Module} & {?}\\
-& ?\\
-& ?\\
+\multirow{1}{0.3\textwidth}{Software Decision Module}
+& quantifier\\
 \bottomrule
 
 \end{tabular}
@@ -227,15 +245,6 @@ actually be implemented.
 The design of the system is intended to satisfy the requirements developed in
 the SRS. In this stage, the system is decomposed into modules. The connection
 between requirements and modules is listed in Table \ref{TblRT}.
-
-\wss{The intention of this section is to document decisions that are made
-  ``between'' the requirements and the design.  To satisfy some requirements,
-  design decisions need to be made.  Rather than make these decisions implicit,
-  they are explicitly recorded here.  For instance, if a program has security
-  requirements, a specific design decision may be made to satisfy those
-  requirements with a password.  In scientific examples, the choice of algorithm
-could potentially go here, if that is a decision that is exposed by the
-interface.}
 
 \section{Module Decomposition} \label{SecMD}
 
@@ -276,19 +285,112 @@ to be implemented.
 \item[Implemented By:] --
 \end{description}
 
-\subsubsection{Input Format Module (\mref{mInput})}
+\subsubsection{Exercise Module (\mref{mExercise})}
 
 \begin{description}
-\item[Secrets:]The format and structure of the input data.
-\item[Services:]Converts the input data into the data structure used by the
-  input parameters module.
-\item[Implemented By:] [Your Program Name Here]
-\item[Type of Module:] [Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]
+\item[Secrets:] The values of quantifiers and descriptions for each exercise.
+\item[Services:] Provides read and write (get and set) capability for individual exercises.
+\item[Implemented By:] exercise.ts
+\item[Type of Module:] Abstract Object
 \end{description}
 
-\subsubsection{Etc.}
+\subsubsection{Workout Module (\mref{mWorkout})}
 
+\begin{description}
+\item[Secrets:] The exercises that make up each workout.
+\item[Services:] Manage (read and write) which exercises comprise a workout.
+\item[Implemented By:] workout.ts
+\item[Type of Module:] Abstract Object
+\end{description}
+
+\subsubsection{Workout Routine Module (\mref{mWR})}
+
+\begin{description}
+\item[Secrets:] The workouts and scheduling to make up a workout routine.
+\item[Services:] Manage the scheduling and contents of a workout routine.
+\item[Implemented By:] workout-routine.ts
+\item[Type of Module:] Abstract Object
+\end{description}
+
+\subsubsection{User Login Module (\mref{mUL})}
+
+\begin{description}
+\item[Secrets:] The functions needed to verify a users identity. 
+\item[Services:] Accepts user credentials and, if correct, provides a token to log user in.
+\item[Implemented By:] user-login.ts
+\end{description}
+
+\subsubsection{User Registration Module (\mref{mUR})}
+
+\begin{description}
+\item[Secrets:] The functions needed to create a new user in the application database. 
+\item[Services:] Accepts user credential data and, if valid, creates a new user in the database with the provided data.
+\item[Implemented By:] user-registration.ts
+\end{description}
+
+\subsubsection{User Profile Module (\mref{mUP})}
+
+\begin{description}
+\item[Secrets:] The personal data for a user.
+\item[Services:] Manage all personal user data.
+\item[Implemented By:] user-profile.ts
+\end{description}
+
+\subsubsection{User Fitness Goal Module (\mref{mUFG})}
+
+\begin{description}
+\item[Secrets:] The quantifiers that users set for their fitness goals.
+\item[Services:] Manage fitness goals for a specific user.
+\item[Implemented By:] user-fitness-goals.ts
+\end{description}
+
+\subsubsection{Workout Browser Module (\mref{mWB})}
+
+\begin{description}
+\item[Secrets:] The data structure for filtering and displaying public workouts.
+\item[Services:] Display public workouts and allow user to search and filter options.
+\item[Implemented By:] workout-browser.ts
+\end{description}
+
+\subsubsection{Creation Module (\mref{mCreation})}
+
+\begin{description}
+\item[Secrets:] Abstract data type that provides children with methods for adding entries to the database.
+\item[Services:] Provides general append functionality to database.
+\item[Implemented By:] creation.ts
+\end{description}
+
+\subsubsection{Workout Creation Module (\mref{mWC})}
+
+\begin{description}
+\item[Secrets:] The verification of new workout data.
+\item[Services:] Uses creation module to add new workout to database.
+\item[Implemented By:] workout-creation.ts
+\end{description}
+
+\subsubsection{Workout Routine Creation Module (\mref{mWRC})}
+
+\begin{description}
+\item[Secrets:] The verification of new workout routine data.
+\item[Services:] Uses creation module to add new workout routine to database.
+\item[Implemented By:] workout-routine-creation.ts
+\end{description}
+
+\subsubsection{Exercise Creation Module (\mref{mEC})}
+
+\begin{description}
+\item[Secrets:] The verification of new exercise data.
+\item[Services:] Uses creation module to add new exercise to database.
+\item[Implemented By:] exercise-creation.ts
+\end{description}
+
+\subsubsection{Timed Sequence Module (\mref{mTS})}
+
+\begin{description}
+\item[Secrets:] A general format and structure of sequence data
+\item[Services:] Provides methods to access and create timed sequences.
+\item[Implemented By:] timed-sequence.ts
+\end{description}
 
 \subsection{Software Decision Module}
 
@@ -303,7 +405,13 @@ to be implemented.
 \item[Implemented By:] --
 \end{description}
 
-\subsubsection{Etc.}
+\subsubsection{Quantifier Module (\mref{mQuantifier})}
+\begin{description}
+\item[Secrets:] The data types used to quantify workout exercises.
+\item[Services:] Measures the exercise inputted by users as a unit of measurement.
+\item[Implemented By:] quantifiers.ts
+\item[Type of Module:] Abstract Data Type
+\end{description}
 
 \section{Traceability Matrix} \label{SecTM}
 
@@ -318,17 +426,41 @@ requirements and between the modules and the anticipated changes.
 \toprule
 \textbf{Req.} & \textbf{Modules}\\
 \midrule
-R1 & \mref{mHH}, \mref{mInput}, \mref{mParams}, \mref{mControl}\\
-R2 & \mref{mInput}, \mref{mParams}\\
-R3 & \mref{mVerify}\\
-R4 & \mref{mOutput}, \mref{mControl}\\
-R5 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}, \mref{mSeqDS}, \mref{mSolver}, \mref{mPlot}\\
-R6 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}, \mref{mSeqDS}, \mref{mSolver}, \mref{mPlot}\\
-R7 & \mref{mOutput}, \mref{mEnergy}, \mref{mControl}, \mref{mSeqDS}, \mref{mPlot}\\
-R8 & \mref{mOutput}, \mref{mEnergy}, \mref{mControl}, \mref{mSeqDS}, \mref{mPlot}\\
-R9 & \mref{mVerifyOut}\\
-R10 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}\\
-R11 & \mref{mOutput}, \mref{mODEs}, \mref{mEnergy}, \mref{mControl}\\
+FR1 & \mref{mWRC}\\
+FR2 & \mref{mExercise}, \mref{mWR}, \mref{mEC}\\
+FR3 & \mref{mExercise}, \mref{mQuantifier}\\
+FR4 & \mref{mWR}, \mref{mUP}\\
+FR5 & \mref{mWR}\\
+FR6 & \mref{mWR}, \mref{mWB}\\
+FR7 & \mref{mUP}\\
+FR8 & \mref{mUP}\\
+FR9 & \mref{mExercise}, \mref{mUFG}, \mref{mEC}, \mref{mQuantifier}\\
+FR10 & \mref{mExercise}, \mref{mUFG}, \mref{mQuantifier}\\
+FR11 & \mref{mUFG}, \mref{mWB}\\
+\midrule
+NFR1 & \mref{mUP}\\
+NFR2 & \mref{mUP}\\
+NFR3 & \mref{mUP}\\
+NFR4 & \mref{mExercise}, \mref{mWorkout}, \mref{mWR}, \mref{mUL}, \mref{mUR}, \mref{mUP}, \mref{mUFG}, \mref{mWB}, \mref{mCreation}\\
+NFR5 & \mref{mExercise}, \mref{mWorkout}, \mref{mWR}, \mref{mUP}, \mref{mUFG}, \mref{mWB}\\
+NFR6 & \mref{mExercise}, \mref{mWorkout}, \mref{mWR}, \mref{mUP}, \mref{mUFG}, \mref{mWB}\\
+NFR7 & \mref{mExercise}, \mref{mWorkout}, \mref{mWR}, \mref{mUP}, \mref{mUFG}, \mref{mWB}\\
+NFR8 & \mref{mExercise}, \mref{mWorkout}, \mref{mWR}, \mref{mWC}, \mref{mWRC}, \mref{mEC}\\
+NFR9 & \mref{mWB}\\
+NFR10 & \mref{mDatabase}\\
+NFR11 & \mref{mDatabase}\\
+NFR12 & \mref{mDatabase}\\
+NFR13 & \mref{mHH}\\
+NFR14 & \mref{mUP}\\
+NFR15 & \mref{mUP}\\
+NFR16 & \mref{mHH}\\
+NFR17 & \mref{mHH}\\
+NFR18 & \mref{mHH}\\
+NFR19 & \mref{mUP}, \mref{mWB}\\
+NFR20 & \mref{mUP}, \mref{mWB}\\
+NFR21 & \mref{mUP}\\
+NFR22 & \mref{mDatabase}\\
+
 \bottomrule
 \end{tabular}
 \caption{Trace Between Requirements and Modules}
@@ -341,18 +473,10 @@ R11 & \mref{mOutput}, \mref{mODEs}, \mref{mEnergy}, \mref{mControl}\\
 \toprule
 \textbf{AC} & \textbf{Modules}\\
 \midrule
-\acref{acHardware} & \mref{mHH}\\
-\acref{acInput} & \mref{mInput}\\
-\acref{acParams} & \mref{mParams}\\
-\acref{acVerify} & \mref{mVerify}\\
-\acref{acOutput} & \mref{mOutput}\\
-\acref{acVerifyOut} & \mref{mVerifyOut}\\
-\acref{acODEs} & \mref{mODEs}\\
-\acref{acEnergy} & \mref{mEnergy}\\
-\acref{acControl} & \mref{mControl}\\
-\acref{acSeqDS} & \mref{mSeqDS}\\
-\acref{acSolver} & \mref{mSolver}\\
-\acref{acPlot} & \mref{mPlot}\\
+\acref{acLayout} & \mref{mUR}\\
+\acref{acDiscovery} & \mref{mWB}\\
+\acref{acStorage} & \mref{mHH}\\
+\acref{acStyling} & \mref{mWorkout}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Anticipated Changes and Modules}
