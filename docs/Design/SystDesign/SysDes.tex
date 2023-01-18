@@ -9,6 +9,8 @@
 \usepackage{float}
 \usepackage{hyperref}
 \usepackage{graphicx}
+\usepackage{adjustbox}
+
 \graphicspath{ {./images/} }
 \hypersetup{
 	colorlinks,
@@ -66,7 +68,6 @@
 		\textbf{symbol} & \textbf{description}\\
 		\midrule 
 		\progname & Explanation of program name\\
-		\wss{...} & \wss{...}\\
 		\bottomrule
 	\end{tabular}\\
 	
@@ -86,8 +87,6 @@
 	
 	\section{Introduction}
 	
-	\wss{Include references to your other documentation}
-	
 	This document serves to illustrate and explain design decisions (in the context of alternatives) and the thought processes and considerations of the team that made said decisions.
 	\section{Purpose}
 	
@@ -96,9 +95,6 @@
 	The purpose of this design documentation is to make clear current design choices, and to show why these designs were chosen over possible alternatives. This document also must prove that the current designs fulfill the requirements enumerated in the Software Requirements Specification (SRS) document.
 	
 	\section{Scope}
-	
-	\wss{Include a figure that show the System Context (showing the boundary between
-		your system and the environment around it.)}\\
 	
 	\begin{figure}[H]
 		\centering
@@ -114,8 +110,6 @@
 	
 	\subsection{Undesired Event Handling}
 	
-	\wss{How you will approach undesired events}
-	
 	An `undesired event' can comprise anything from incorrect user input to database failure to connectivity issues. 
 	
 	\textbf{Invalid User Input}: Whenever a user provides incorrect information to a form (e.g. an invalid email address during sign-up), an informative error message is displayed beneath the incorrectly filled field, and a visual queue is given in the form of highlighting the field in red to indicate error. To prevent annoying the user with error messages before they have actually made an error, forms will only display error messages after the first submit attempt. After an initial submit attempt, the error message will remain until the contents of the field are valid. This is to give the user information as to whether or not their entry is valid before having to submit again.
@@ -129,7 +123,7 @@
 	
 	\subsection{Connection Between Requirements and Design} \label{SecConnection}
 	
-	\begin{tabular}{|c|c|}
+\begin{tabular}{ | m{20em} | m{20em} | }
 		\hline
 		Requirement & Design \\
 		\hline
@@ -149,8 +143,6 @@
 	\end{tabular}
 	
 	\section{System Variables}
-	
-	\wss{Include this section for Mechatronics projects}
 	N/A
 	
 %	\subsection{Monitored Variables}
@@ -160,41 +152,67 @@
 %	\subsection{Constants Variables}
 	
 	\section{User Interfaces}
-	
-	\wss{Design of user interface for software and hardware.  Attach an appendix if
-		needed. Drawings, Sketches, Figma}
+
+  \begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth,keepaspectratio]{register_stack}
+		\caption{Multi page register form}
+	\end{figure}
+
+  \begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.35]{home_screen}
+		\caption{Home Screen (Landing page for logged in users)}
+	\end{figure}
+
+  \begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.35]{discover_screen}
+		\caption{Discover Screen}
+	\end{figure}
+
+  \begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth,keepaspectratio]{static_program_stack}
+    \caption{Static Program Stack: View when browsing programs from other authors or non active, personal programs.}
+	\end{figure}
+
+  \begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth,keepaspectratio]{create_program_form}
+    \caption{Multi page form for creating a program.}
+	\end{figure}
+
+  \begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth,keepaspectratio]{active_program_stack}
+    \caption{Multi page form for creating a program.}
+	\end{figure}
 	
 	\section{Design of Hardware}
-	
-	\wss{Most relevant for mechatronics projects}
-	\wss{Show what will be acquired}
-	\wss{Show what will be built, with detail on fabrication and materials}
-	\wss{Include appendices as appropriate, possibly with sketches, drawings, CAD, etc}
 	
 	Olympian will run on mobile devices (e.g. iPhone, Samsung Galaxy) not designed or manufactured by the team.
 	
 	\section{Design of Electrical Components}
 	
-	\wss{Most relevant for mechatronics projects}
-	\wss{Show what will be acquired}
-	\wss{Show what will be built, with detail on fabrication and materials}
-	\wss{Include appendices as appropriate, possibly with sketches, drawings,
-		circuit diagrams, etc}
-	
 	N/A - See Section 9.
 	
 	\section{Design of Communication Protocols}
-	
-	\wss{If appropriate}
 	
 	Communication between client and server will be done with HTTP requests.
 
 	There is no custom communication protocol used.
 	
 	\section{Timeline}
-	\wss{Schedule of tasks and who is responsible}
+
+  Below is a timeline of the major milestones and the developers responsible for completing them.
+
+  \begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth,keepaspectratio]{gantt_chart}
+    \caption{Multi page form for creating a program.}
+	\end{figure}
 	
-	Below is a timeline of the major milestones and the developers responsible for completing them.
 	
 	% \bibliographystyle {plainnat}
 	% \bibliography{../../../refs/References}
@@ -204,9 +222,6 @@
 	\appendix
 	
 	\section{Interface}
-	
-	\wss{Include additional information related to the appearance of, and
-		interaction with, the user interface}
 	
 	See Figma.
 	
