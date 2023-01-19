@@ -62,9 +62,7 @@ Date 2 & 1.1 & Notes\\
 
 \section{Symbols, Abbreviations and Acronyms}
 
-See SRS Documentation at \wss{give url}
-
-\wss{Also add any additional symbols, abbreviations or acronyms}
+See SRS Documentation at \url{https://github.com/dimitritsampiras/olympian/tree/main/docs/SRS}.
 
 \newpage
 
@@ -83,9 +81,6 @@ and Module Guide.  The full documentation and implementation can be
 found at \url{https://github.com/dimitritsampiras/olympian}.
 Note that actual code is contained on the `dev' branch.
 \section{Notation}
-
-\wss{You should describe your notation.  You can use what is below as
-  a starting point.}
 
 The structure of the MIS for modules comes from \citet{HoffmanAndStrooper1995},
 with the addition that template modules have been adapted from
@@ -124,32 +119,39 @@ described by giving their type signature followed by their specification.
 The following table is taken directly from the Module Guide document for this project.
 
 \begin{table}[h!]
-\centering
-\begin{tabular}{p{0.3\textwidth} p{0.6\textwidth}}
-\toprule
-\textbf{Level 1} & \textbf{Level 2}\\
-\midrule
-
-{Hardware-Hiding} & ~ \\
-\midrule
-
-\multirow{7}{0.3\textwidth}{Behaviour-Hiding} & Input Parameters\\
-& Output Format\\
-& Output Verification\\
-& Temperature ODEs\\
-& Energy Equations\\ 
-& Control Module\\
-& Specification Parameters Module\\
-\midrule
-
-\multirow{3}{0.3\textwidth}{Software Decision} & {Sequence Data Structure}\\
-& ODE Solver\\
-& Plotting\\
-\bottomrule
-
-\end{tabular}
-\caption{Module Hierarchy}
-\label{TblMH}
+	\centering
+	\begin{tabular}{p{0.3\textwidth} p{0.6\textwidth}}
+		\toprule
+		\textbf{Level 1} & \textbf{Level 2}\\
+		\midrule
+		
+		{Hardware-Hiding Module} & ~ \\
+		\midrule
+		
+		\multirow{12}{0.3\textwidth}{Behaviour-Hiding Module}
+		& exercise\\
+		& workout\\
+		& workout routine\\
+		& user login\\
+		& user registration\\
+		& user profile\\ 
+		& user fitness goal\\
+		& workout browser\\
+		& creation\\
+		& workout creation\\
+		& workout routine creation\\
+		& exercise creation\\
+		& timed sequence\\
+		& DatabaseCommunicator\\
+		\midrule
+		
+		\multirow{1}{0.3\textwidth}{Software Decision Module}
+		& quantifier\\
+		\bottomrule
+		
+	\end{tabular}
+	\caption{Module Hierarchy}
+	\label{TblMH}
 \end{table}
 
 \newpage
@@ -343,9 +345,9 @@ description: $String$ \\
 duration: $Time$ \\
 
 \subsubsection{Environment Variables}
-
+None
 \subsubsection{Assumptions}
-
+None
 \subsubsection{Access Routine Semantics}
 
 TimedSequence(s, desc, dur):
@@ -419,7 +421,7 @@ db: $Database$
 \subsubsection{Environment Variables}
 databaseKey: $String$
 \subsubsection{Assumptions}
-
+None
 \subsubsection{Access Routine Semantics}
 
 DatabaseCommunicator(URL):
@@ -517,9 +519,9 @@ description: $String$ \\
 duration: $Time$ \\
 
 \subsubsection{Environment Variables}
-
+None
 \subsubsection{Assumptions}
-
+None
 \subsubsection{Access Routine Semantics}
 
 Workout(e, desc, dur):
@@ -589,9 +591,9 @@ description: $String$ \\
 duration: $Time$ \\
 
 \subsubsection{Environment Variables}
-
+None
 \subsubsection{Assumptions}
-
+None
 \subsubsection{Access Routine Semantics}
 
 Routine(w, desc, dur):
@@ -672,9 +674,9 @@ saved Workouts: $Workout[]$ \\
 saved Routines: $Routine[]$ \\
 
 \subsubsection{Environment Variables}
-
+None
 \subsubsection{Assumptions}
-
+None
 \subsubsection{Access Routine Semantics}
 
 User(username, pass, email, nickname):
@@ -801,7 +803,7 @@ attempts: $\mathbb{Z}$\\
 maxAttempts: $\mathbb{Z}$\\
 userDatabase: $Database$ \\
 \subsubsection{Environment Variables}
-
+None
 \subsubsection{Assumptions}
 There exists a stored number for maximum attempts.
 \subsubsection{Access Routine Semantics}
@@ -858,7 +860,7 @@ userRegistration = ?
 userDatabase: $Database$
 
 \subsubsection{Environment Variables}
-
+None
 \subsubsection{Assumptions}
 Regex operations are allowed on strings
 \subsubsection{Access Routine Semantics}
@@ -927,9 +929,9 @@ description: $String$ \\
 progress: $Quantifier$ \\
 
 \subsubsection{Environment Variables}
-
+None
 \subsubsection{Assumptions}
-
+None
 \subsubsection{Access Routine Semantics}
 
 \newpage
@@ -1008,9 +1010,9 @@ workoutDatabase: $Database$ \\
 routineDatabase: $Database$ \\
 
 \subsubsection{Environment Variables}
-
+None
 \subsubsection{Assumptions}
-
+None
 \subsubsection{Access Routine Semantics}
 
 \noindent Browser(db):
@@ -1063,9 +1065,9 @@ Creator(T) = ?
 None
 
 \subsubsection{Environment Variables}
-
+None
 \subsubsection{Assumptions}
-
+None
 \subsubsection{Access Routine Semantics}
 
 \noindent Creator():
@@ -1113,11 +1115,11 @@ ExerciseCreator = ?
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-
+None
 \subsubsection{Environment Variables}
-
+None
 \subsubsection{Assumptions}
-
+None
 \subsubsection{Access Routine Semantics}
 
 \noindent exerciseCreator():
@@ -1164,11 +1166,12 @@ WorkoutCreator = ?
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-
+None
 \subsubsection{Environment Variables}
+None
 
 \subsubsection{Assumptions}
-
+None
 \subsubsection{Access Routine Semantics}
 
 \noindent workoutCreator():
@@ -1215,11 +1218,11 @@ RoutineCreator = ?
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-
+None
 \subsubsection{Environment Variables}
-
+None
 \subsubsection{Assumptions}
-
+None
 \subsubsection{Access Routine Semantics}
 
 \noindent RoutineCreator():
@@ -1240,11 +1243,5 @@ RoutineCreator = ?
 
 \bibliographystyle {plainnat}
 \bibliography {../../../refs/References}
-
-\newpage
-
-\section{Appendix} \label{Appendix}
-
-\wss{Extra information if required}
 
 \end{document}
