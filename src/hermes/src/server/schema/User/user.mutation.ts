@@ -1,7 +1,5 @@
-import { isNil } from 'lodash';
 import { extendType, inputObjectType, nullable, objectType } from 'nexus';
 import { loginUser, signUpUser } from './helpers/authentication';
-import { findEmail, findUsername } from './helpers/findUsers';
 
 // login () -> user
 // register () -> user
@@ -15,32 +13,14 @@ export const UserMutation = extendType({
       type: nullable('String'),
       args: { input: 'LoginInput' },
       resolve: async (_root, { input }, { prisma }) => {
-        const token = await loginUser(prisma, input);
-        return token;
+        return await loginUser(prisma, input);
       },
     });
     t.field('signup', {
       type: nullable('Boolean'),
       args: { input: 'SignUpInput' },
       resolve: async (_root, { input }, { prisma }) => {
-        const userCreated = await signUpUser(prisma, input);
-        return userCreated;
-      },
-    });
-    t.field('usernameExists', {
-      type: nullable('Boolean'),
-      args: { input: 'String' },
-      resolve: async (_root, { input }, { prisma }) => {
-        const existingUser = await prisma.user.findUnique({ where: { username: input } });
-        return !isNil(existingUser);
-      },
-    });
-    t.field('emailExists', {
-      type: nullable('Boolean'),
-      args: { input: 'String' },
-      resolve: async (_root, { input }, { prisma }) => {
-        const emailFound = await findEmail(prisma, input);
-        return emailFound;
+        return await signUpUser(prisma, input);
       },
     });
   },
