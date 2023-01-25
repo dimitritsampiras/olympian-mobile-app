@@ -22,8 +22,6 @@ input LoginInput {
 }
 
 type Mutation {
-  findemail(input: String!): Boolean
-  findusername(input: String!): Boolean
   login(input: LoginInput!): String
   signup(input: SignUpInput!): Boolean
 }
@@ -46,7 +44,9 @@ enum Publicity {
 }
 
 type Query {
+  emailExists(email: String!): Boolean
   me: User
+  usernameExists(username: String!): Boolean
 }
 
 input SignUpInput {
@@ -73,6 +73,8 @@ enum TrainingLevel {
 type User {
   email: String!
   id: ID!
+  name: String!
+  password: String!
   username: String!
 }
 
