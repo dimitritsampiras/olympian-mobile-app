@@ -1,6 +1,6 @@
 import { ApolloQueryResult } from '@apollo/client';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { createContext, ReactNode, useEffect, useState } from 'react';
+import React, { createContext, useEffect } from 'react';
 import { Exact, MeQuery, useMeQuery, User } from '../../lib/graphql';
 
 export const UserContext = createContext({
