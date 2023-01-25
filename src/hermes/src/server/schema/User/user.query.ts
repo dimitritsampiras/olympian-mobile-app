@@ -1,4 +1,4 @@
-import { extendType, list, nullable } from 'nexus';
+import { extendType, nullable } from 'nexus';
 
 export const UserQuery = extendType({
   type: 'Query',

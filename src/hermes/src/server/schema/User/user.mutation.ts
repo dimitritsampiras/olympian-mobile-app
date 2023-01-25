@@ -1,3 +1,4 @@
+import { isNil } from 'lodash';
 import { extendType, inputObjectType, nullable, objectType } from 'nexus';
 import { loginUser, signUpUser } from './helpers/authentication';
 import { findEmail, findUsername } from './helpers/findUsers';
@@ -26,15 +27,15 @@ export const UserMutation = extendType({
         return userCreated;
       },
     });
-    t.field('findusername', {
+    t.field('usernameExists', {
       type: nullable('Boolean'),
       args: { input: 'String' },
       resolve: async (_root, { input }, { prisma }) => {
-        const usernameFound = await findUsername(prisma, input);
-        return usernameFound;
+        const existingUser = await prisma.user.findUnique({ where: { username: input } });
+        return !isNil(existingUser);
       },
     });
-    t.field('findemail', {
+    t.field('emailExists', {
       type: nullable('Boolean'),
       args: { input: 'String' },
       resolve: async (_root, { input }, { prisma }) => {

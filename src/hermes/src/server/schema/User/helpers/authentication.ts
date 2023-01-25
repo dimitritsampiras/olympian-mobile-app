@@ -94,6 +94,5 @@ export const signUpUser = async (prisma: PrismaClient, input: SignUpInput) => {
  */
 export const isUserAuthorized = (user: User | null) => {
   if (!user) return false;
-
   return true;
 };
