@@ -1,7 +1,13 @@
 query Me {
   me {
-    id
-    username
-    email
+    ...User
   }
+}
+
+query UserExists($username: String!) {
+  usernameExists(username: $username)
+}
+
+query EmailExists($email: String!) {
+  emailExists(email: $email)
 }

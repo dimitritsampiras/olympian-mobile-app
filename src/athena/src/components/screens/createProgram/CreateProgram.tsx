@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { PageControl } from 'react-native-ui-lib';
@@ -22,7 +22,7 @@ export const CreateProgramContext = createContext({
   setProgram: (() => {}) as React.Dispatch<React.SetStateAction<Partial<Program>>>,
 });
 
-export const CreateProgram: React.FC<CreateProgramProps> = ({ navigation }) => {
+export const CreateProgram: React.FC<CreateProgramProps> = () => {
   const [program, setProgram] = useState<Partial<Program>>({
     name: '',
   });

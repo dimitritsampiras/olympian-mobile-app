@@ -1,6 +1,6 @@
 import { selectionAsync } from 'expo-haptics';
-import React, { SVGProps, useContext, useState } from 'react';
-import { Pressable, PressableProps, StyleSheet, View, Text, ViewStyle } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { Pressable, PressableProps, StyleSheet, View, Text } from 'react-native';
 import { GlobeAltIcon, UserGroupIcon, UserIcon } from 'react-native-heroicons/solid';
 
 import { Publicity } from '../../../lib/graphql';

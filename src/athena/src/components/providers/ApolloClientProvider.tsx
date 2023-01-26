@@ -27,7 +27,7 @@ export const ApolloClientProvider: React.FC<ApolloClientProviderProps> = ({ chil
 
 const createApolloClient = () => {
   const uri = `http://${IP_ADDRESS}:${PORT}/graphql`;
-  // const uri = `http://${'localhost'}:${PORT}/graphql`;
+
   // servers links
   const httpLink = createHttpLink({ uri });
 
@@ -81,6 +81,10 @@ export const handleNetworkErrors = (error: NonNullable<NetworkError>) => {
   console.log(name, message, error);
 };
 
+/**
+ *
+ * retieves jwt from local storage
+ */
 export const retrieveToken = async (): Promise<string | null> => {
   return await AsyncStorage.getItem(AUTH_TOKEN);
 };

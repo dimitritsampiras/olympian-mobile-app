@@ -3,7 +3,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useContext } from 'react';
 import { Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { AuthParamList, TabParamList } from '../navigation';
+import { TabParamList } from '../navigation';
 import { Button } from '../elements/Button';
 import { UserContext } from '../providers';
 

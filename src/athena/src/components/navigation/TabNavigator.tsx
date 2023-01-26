@@ -11,7 +11,11 @@ const Tabs = createBottomTabNavigator<TabParamList>();
 
 export const TabNavigator: React.FC = () => {
   return (
-    <Tabs.Navigator initialRouteName="Home">
+    <Tabs.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        headerShown: false,
+      }}>
       <Tabs.Screen name="Home" component={Home} />
       <Tabs.Screen name="Settings" component={Settings} />
     </Tabs.Navigator>

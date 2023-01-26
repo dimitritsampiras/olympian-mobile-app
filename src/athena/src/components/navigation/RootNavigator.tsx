@@ -1,7 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Text, View } from 'react-native';
-import { globalstyles } from '../../theme/globalStyles';
-import { Home } from '../screens';
+
 import { CreateProgram } from '../screens/createProgram/CreateProgram';
 import { TabNavigator } from './TabNavigator';
 
@@ -15,7 +13,7 @@ const RootStack = createNativeStackNavigator<RootParamList>();
 export const RootStackNavigator: React.FC = () => {
   return (
     <>
-      <RootStack.Navigator initialRouteName="Tabs">
+      <RootStack.Navigator initialRouteName="Tabs" screenOptions={{ headerShown: false }}>
         <RootStack.Screen name="Tabs" component={TabNavigator} />
         <RootStack.Screen name="CreateProgram" component={CreateProgram} />
       </RootStack.Navigator>
