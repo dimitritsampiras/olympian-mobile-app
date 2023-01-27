@@ -1,4 +1,4 @@
-import { PrismaClient, User } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 
 /**
  *
@@ -9,5 +9,5 @@ export interface AppContext {
   req: Express.Request;
   res: Express.Response;
   prisma: PrismaClient;
-  user: User | null;
+  userId?: string;
 }

@@ -1,11 +1,10 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { UserContext } from '../providers';
 import { LandingPage } from '../screens/auth/LandingPage';
 import { Login } from '../screens/auth/Login';
 import theme from '../../theme';
 import { RootStackNavigator } from './RootNavigator';
-import { useMeQuery } from '../../lib/graphql';
 import { SignUp } from '../screens/auth/SignUp';
 
 export type AuthParamList = {

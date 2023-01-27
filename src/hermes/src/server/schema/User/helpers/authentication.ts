@@ -19,17 +19,21 @@ type SignUpInput = NexusGenInputs['SignUpInput'];
  * @param authorization Authorization string from request headers.
  * @returns Payload object.
  */
-export const authenticateUser = (authorization: string | undefined): User | null => {
+export const authenticateUser = (authorization: string | undefined): string | undefined => {
   try {
     const bearerLength = 'Bearer '.length;
-    if (!authorization || !(authorization.length > bearerLength)) return null;
+    if (!authorization || !(authorization.length > bearerLength)) return;
     const reqToken = authorization.slice(bearerLength);
 
-    const payload = jwt.verify(reqToken, config.jwtSecret);
+    const payload = jwt.verify(reqToken, config.jwtSecret) as {
+      userId: string;
+      iat: number;
+      exp: number;
+    };
 
-    return (payload as any).user as User;
+    return payload.userId;
   } catch (e) {
-    return null;
+    return;
   }
 };
 
@@ -55,15 +59,23 @@ export const loginUser = async (prisma: PrismaClient, input: LoginInput) => {
 
   // user does not exist guard clause
   if (!user) return null;
+  console.log(user);
+
   const isVerified = await argon2.verify(user.password, password);
+
   // incorrect password guard clause
   if (!isVerified) return null;
 
-  const token = jwt.sign({ user }, config.jwtSecret, {
-    expiresIn: '3 days',
-  });
+  try {
+    const token = jwt.sign({ userId: user.id }, config.jwtSecret, {
+      expiresIn: '3d',
+    });
 
-  return token;
+    return token;
+  } catch (error) {
+    console.log(error);
+    return;
+  }
 };
 
 /**
@@ -94,6 +106,5 @@ export const signUpUser = async (prisma: PrismaClient, input: SignUpInput) => {
  */
 export const isUserAuthorized = (user: User | null) => {
   if (!user) return false;
-
   return true;
 };

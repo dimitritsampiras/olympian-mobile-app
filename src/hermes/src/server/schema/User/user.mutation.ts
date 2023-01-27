@@ -1,6 +1,5 @@
 import { extendType, inputObjectType, nullable, objectType } from 'nexus';
 import { loginUser, signUpUser } from './helpers/authentication';
-import { findEmail, findUsername } from './helpers/findUsers';
 
 // login () -> user
 // register () -> user
@@ -14,32 +13,16 @@ export const UserMutation = extendType({
       type: nullable('String'),
       args: { input: 'LoginInput' },
       resolve: async (_root, { input }, { prisma }) => {
-        const token = await loginUser(prisma, input);
-        return token;
+        console.log('hit');
+
+        return await loginUser(prisma, input);
       },
     });
     t.field('signup', {
       type: nullable('Boolean'),
       args: { input: 'SignUpInput' },
       resolve: async (_root, { input }, { prisma }) => {
-        const userCreated = await signUpUser(prisma, input);
-        return userCreated;
-      },
-    });
-    t.field('findusername', {
-      type: nullable('Boolean'),
-      args: { input: 'String' },
-      resolve: async (_root, { input }, { prisma }) => {
-        const usernameFound = await findUsername(prisma, input);
-        return usernameFound;
-      },
-    });
-    t.field('findemail', {
-      type: nullable('Boolean'),
-      args: { input: 'String' },
-      resolve: async (_root, { input }, { prisma }) => {
-        const emailFound = await findEmail(prisma, input);
-        return emailFound;
+        return await signUpUser(prisma, input);
       },
     });
   },

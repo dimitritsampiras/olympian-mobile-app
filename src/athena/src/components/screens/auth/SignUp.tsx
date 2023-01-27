@@ -12,9 +12,10 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AuthParamList } from '../../navigation';
 import {
-  useFindEmailMutation,
-  useFindUsernameMutation,
+  useEmailExistsLazyQuery,
   useSignUpMutation,
+  useUserExistsLazyQuery,
+  useUserExistsQuery,
 } from '../../../lib/graphql';
 import { Input } from '../../elements/Input';
 import { Button } from '../../elements/Button';
@@ -39,25 +40,23 @@ const initialValues: SignUpInput = {
 
 export const SignUp: React.FC<SignUpProps> = ({ navigation }) => {
   const [signup] = useSignUpMutation();
-  const [findusername] = useFindUsernameMutation();
-  const [findemail] = useFindEmailMutation();
+  const [usernameExists] = useUserExistsLazyQuery();
+  const [emailExists] = useEmailExistsLazyQuery();
 
   const SignUpSchema = object({
     name: string().required(),
     username: string()
       .required()
-      .test('', 'Username is not available.', async (username) => {
-        const { data } = await findusername({ variables: { input: username || '' } });
-
-        return !data?.findusername;
+      .test('', 'Username is not available.', async (username?: string) => {
+        const { data } = await usernameExists({ variables: { username } });
+        return !data?.usernameExists;
       }),
     email: string()
       .required()
       .email('Must provide valid email address.')
-      .test('', 'This email is already used on another account.', async (email) => {
-        const { data } = await findemail({ variables: { input: email || '' } });
-
-        return !data?.findemail;
+      .test('', 'This email is already used on another account.', async (email: string) => {
+        const { data } = await emailExists({ variables: { email } });
+        return !data?.emailExists;
       }),
     password: string()
       .required()
@@ -67,6 +66,7 @@ export const SignUp: React.FC<SignUpProps> = ({ navigation }) => {
       ),
   });
 
+  // TODO: this needs to be fixed
   const validate = async (values: SignUpInput) => {
     const errors: Record<string, string> = {};
     await SignUpSchema.validate(values, { abortEarly: false }).catch((err: ValidationError) => {
