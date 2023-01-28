@@ -50,16 +50,18 @@ export const createPassword = async (password: string) => {
 /**
  *
  * Body of log in mutation
- * @returns Either a user object or an error
+ * @returns Either a jwt or undefined
  */
-export const loginUser = async (prisma: PrismaClient, input: LoginInput) => {
+export const loginUser = async (
+  prisma: PrismaClient,
+  input: LoginInput
+): Promise<string | null> => {
   const { username, password } = input;
 
   const user = await prisma.user.findUnique({ where: { username } });
 
   // user does not exist guard clause
   if (!user) return null;
-  console.log(user);
 
   const isVerified = await argon2.verify(user.password, password);
 
@@ -73,8 +75,7 @@ export const loginUser = async (prisma: PrismaClient, input: LoginInput) => {
 
     return token;
   } catch (error) {
-    console.log(error);
-    return;
+    return null;
   }
 };
 
