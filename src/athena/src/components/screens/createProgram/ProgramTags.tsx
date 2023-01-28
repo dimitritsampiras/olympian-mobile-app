@@ -1,44 +1,38 @@
-import React, { useContext, useState } from 'react';
-import { StyleSheet, View, ViewStyle } from 'react-native';
-import { ChipsInput, Incubator, Text } from 'react-native-ui-lib';
-import theme from '../../../theme';
-import { Button } from '../../elements/Button';
-import { Input } from '../../elements/Input';
+import React, { useContext } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Incubator } from 'react-native-ui-lib';
+
+import { Heading } from '../../elements';
+import { BodyText } from '../../elements/typography/Body';
+
 import { CreateProgramContext } from './CreateProgram';
 
+/**
+ *
+ * Program Tag page form
+ */
 export const ProgramTags: React.FC = () => {
-  const { program, setProgram, step, setStep } = useContext(CreateProgramContext);
+  const { program, setProgram } = useContext(CreateProgramContext);
 
-  const [chips, setChips] = useState<{ label: string }[]>([]);
-
-  const handleOnNext = () => {
+  const handleSetTags = (chips: { label: string }[]) => {
     setProgram((prev) => ({ ...prev, tags: chips.map(({ label }) => label) }));
-    setStep((prev) => prev + 1);
   };
 
   return (
     <>
-      <Text style={styles.heading}>Add Tags to Program</Text>
+      <Heading as="h2">Add tags to Programs</Heading>
+      <BodyText style={{ marginBottom: 34 }}>
+        Adding tags to your program helps users find it based on their interests. Use keywords to
+        accurately describe your program and increase its reach.
+      </BodyText>
       <View style={{ marginBottom: 24 }}>
         <Incubator.ChipsInput
           placeholder={'Enter tags..'}
-          chips={chips}
+          chips={program.tags?.map((chip) => ({ label: chip }))}
           maxChips={6}
-          onChange={(value) => setChips(value as { label: string }[])}
+          onChange={(value) => handleSetTags(value as { label: string }[])}
         />
       </View>
-      <Button shadow={false} onPress={handleOnNext} style={{marginTop: 30}}>
-        Next
-      </Button>
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  heading: {
-    fontWeight: '700',
-    fontSize: 22,
-    width: 200,
-    marginBottom: 40,
-  },
-});

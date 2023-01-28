@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { Text } from 'react-native';
-import theme from '../../theme';
+import theme from '../../../theme';
 
 interface SubHeadingProps {
   as?: 'title' | 'h1' | 'h2' | 'h3';

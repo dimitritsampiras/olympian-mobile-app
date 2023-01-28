@@ -7,9 +7,15 @@ interface ScreenViewProps {
   children: ReactNode[] | ReactNode;
   type?: 'main' | 'form';
   styles?: ViewProps['style'];
+  spaced?: boolean;
 }
 
-export const ScreenView: React.FC<ScreenViewProps> = ({ type = 'main', styles, children }) => {
+export const ScreenView: React.FC<ScreenViewProps> = ({
+  type = 'main',
+  spaced,
+  styles,
+  children,
+}) => {
   return (
     <SafeAreaView
       style={[
@@ -18,6 +24,7 @@ export const ScreenView: React.FC<ScreenViewProps> = ({ type = 'main', styles, c
           paddingHorizontal: 24,
           backgroundColor: type === 'form' ? theme.white : theme.gray[50],
         },
+        spaced && { justifyContent: 'space-between' },
         styles,
       ]}>
       {children}
