@@ -5,7 +5,6 @@ import React, { createContext, useState } from 'react';
 import {
   Pressable,
   StyleSheet,
-  Text,
   View,
   TouchableWithoutFeedback,
   Keyboard,
@@ -17,7 +16,6 @@ import { ChevronLeftIcon } from 'react-native-heroicons/solid';
 
 import { SignUpName } from './SignUpName';
 import { SignUpUsername } from './SignUpUsername';
-import { Button } from '../../../elements/Button';
 import { SignUpPassword } from './SignUpPassword';
 import { SignUpEmail } from './SignUpEmail';
 

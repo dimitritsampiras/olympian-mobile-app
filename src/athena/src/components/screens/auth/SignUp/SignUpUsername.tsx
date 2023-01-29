@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { SignUpContext } from './SignUp';
 import { Input } from '../../../elements/Input';
 import theme from '../../../../theme';
@@ -7,16 +7,18 @@ import { Formik } from 'formik';
 import { Button } from '../../../elements/Button';
 import SampleSvg from '../../../../../assets/caution.svg';
 import { PageControl } from 'react-native-ui-lib';
-import { object, string, ValidationError } from 'yup';
+import { object, string } from 'yup';
 import { SignUpInput } from '../../../../lib/graphql';
 import { UserCircleIcon } from 'react-native-heroicons/solid';
-import { useFindUsernameMutation } from '../../../../lib/graphql';
+import { useUserExistsLazyQuery } from '../../../../lib/graphql';
+import { Heading } from '../../../elements/typography/Heading';
+import { BodyText } from '../../../elements/typography/Body';
 
 interface SignUpUsernameProps {}
 
 export const SignUpUsername: React.FC<SignUpUsernameProps> = () => {
-  const [findusername] = useFindUsernameMutation();
-  const { signUpInput, setSignUpInput, step, setStep } = useContext(SignUpContext);
+  const [findusername] = useUserExistsLazyQuery();
+  const { setSignUpInput, step, setStep } = useContext(SignUpContext);
   const maxLength = 16;
   const usernameSchema = object({
     username: string()
@@ -27,8 +29,8 @@ export const SignUpUsername: React.FC<SignUpUsernameProps> = () => {
       )
       .max(maxLength, `Please enter a maximum of ${maxLength} characters.`)
       .test('', 'Username is already in use.', async (username) => {
-        const { data } = await findusername({ variables: { input: username || '' } });
-        return !data?.findusername;
+        const { data } = await findusername({ variables: { username: username || '' } });
+        return !data?.usernameExists;
       }),
   });
 
@@ -49,10 +51,13 @@ export const SignUpUsername: React.FC<SignUpUsernameProps> = () => {
               <View style={styles.innerContainer}>
                 {/* Sample SVG to be replaced with the actual torch once we have it*/}
                 <SampleSvg width={56} height={82} fill={'black'}></SampleSvg>
-                <Text style={styles.header}>Username Time</Text>
-                <Text style={styles.secondaryText}>
+                <Heading noMargin style={{ textAlign: 'center' }}>
+                  Username Time
+                </Heading>
+                <BodyText style={{ textAlign: 'center' }}>
                   This will be the name you display publicly. Make it uniquely yours!
-                </Text>
+                </BodyText>
+
                 <Input
                   placeholder="username"
                   value={values.username}
@@ -105,19 +110,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
-    height: '60%',
+    height: '50%',
     width: '100%',
-  },
-  header: {
-    fontWeight: '700',
-    fontSize: 32,
-    textAlign: 'center',
-  },
-  secondaryText: {
-    fontWeight: '500',
-    fontSize: 16,
-    color: theme.gray[400],
-    textAlign: 'center',
   },
   usernameField: {
     display: 'flex',

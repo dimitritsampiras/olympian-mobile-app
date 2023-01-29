@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { SignUpContext } from './SignUp';
 import { Input } from '../../../elements/Input';
 import theme from '../../../../theme';
@@ -7,14 +7,16 @@ import { Formik } from 'formik';
 import { Button } from '../../../elements/Button';
 import SampleSvg from '../../../../../assets/caution.svg';
 import { PageControl } from 'react-native-ui-lib';
-import { object, string, ValidationError } from 'yup';
+import { object, string } from 'yup';
 import { SignUpInput } from '../../../../lib/graphql';
 import { UserIcon } from 'react-native-heroicons/solid';
+import { Heading } from '../../../elements/typography/Heading';
+import { BodyText } from '../../../elements/typography/Body';
 
 interface SignUpNameProps {}
 
 export const SignUpName: React.FC<SignUpNameProps> = () => {
-  const { signUpInput, setSignUpInput, step, setStep } = useContext(SignUpContext);
+  const { setSignUpInput, step, setStep } = useContext(SignUpContext);
   const maxLength = 16;
   const nameSchema = object({
     // We may opt to make this optional in the future.
@@ -38,10 +40,12 @@ export const SignUpName: React.FC<SignUpNameProps> = () => {
               <View style={styles.innerContainer}>
                 {/* Sample SVG to be replaced with the actual torch once we have it*/}
                 <SampleSvg width={56} height={82} fill={'black'}></SampleSvg>
-                <Text style={styles.header}>Sign Up</Text>
-                <Text style={styles.secondaryText}>
+                <Heading noMargin style={{ textAlign: 'center' }}>
+                  Sign Up
+                </Heading>
+                <BodyText style={{ textAlign: 'center' }}>
                   Why don't you start by telling us your name? This won't be displayed publicly.
-                </Text>
+                </BodyText>
                 <Input
                   placeholder="name"
                   value={values.name}
@@ -94,19 +98,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
-    height: '60%',
+    height: '50%',
     width: '100%',
-  },
-  header: {
-    fontWeight: '700',
-    fontSize: 32,
-    textAlign: 'center',
-  },
-  secondaryText: {
-    fontWeight: '500',
-    fontSize: 16,
-    color: theme.gray[400],
-    textAlign: 'center',
   },
   nameField: {
     display: 'flex',

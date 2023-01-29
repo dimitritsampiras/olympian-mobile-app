@@ -1,7 +1,7 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { AuthParamList } from '../../../navigation';
 import { StyleSheet, Text, View } from 'react-native';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { SignUpContext } from './SignUp';
 import { Input } from '../../../elements/Input';
 import theme from '../../../../theme';
@@ -9,10 +9,12 @@ import { Formik } from 'formik';
 import { Button } from '../../../elements/Button';
 import SampleSvg from '../../../../../assets/caution.svg';
 import { PageControl } from 'react-native-ui-lib';
-import { object, ref, string, ValidationError } from 'yup';
+import { object, ref, string } from 'yup';
 import { SignUpInput } from '../../../../lib/graphql';
 import { KeyIcon, ClipboardDocumentCheckIcon, LockClosedIcon } from 'react-native-heroicons/solid';
 import { useSignUpMutation } from '../../../../lib/graphql';
+import { Heading } from '../../../elements/typography/Heading';
+import { BodyText } from '../../../elements/typography/Body';
 
 // This page will be doing navigating
 type ParamList = NativeStackScreenProps<AuthParamList, 'SignUp'>;
@@ -24,7 +26,7 @@ interface SignUpInputConfirmPass extends SignUpInput {
 
 export const SignUpPassword: React.FC<SignUpPasswordProps> = ({ navigation }) => {
   const [signup] = useSignUpMutation();
-  const { signUpInput, setSignUpInput, step, setStep } = useContext(SignUpContext);
+  const { signUpInput, step } = useContext(SignUpContext);
   const maxLength = 16;
   const minLength = 4;
   const passwordSchema = object({
@@ -70,10 +72,12 @@ export const SignUpPassword: React.FC<SignUpPasswordProps> = ({ navigation }) =>
               <View style={styles.innerContainer}>
                 {/* Sample SVG to be replaced with the actual torch once we have it*/}
                 <SampleSvg width={56} height={82} fill={'black'}></SampleSvg>
-                <Text style={styles.header}>Password...Shhh</Text>
-                <Text style={styles.secondaryText}>
+                <Heading noMargin style={{ textAlign: 'center' }}>
+                  Password...Shhh
+                </Heading>
+                <BodyText style={{ textAlign: 'center' }}>
                   Enter a strong password. Don't worry, you can recover it if you forget.
-                </Text>
+                </BodyText>
                 <Input
                   placeholder="password"
                   value={values.password}
@@ -152,17 +156,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: '60%',
     width: '100%',
-  },
-  header: {
-    fontWeight: '700',
-    fontSize: 32,
-    textAlign: 'center',
-  },
-  secondaryText: {
-    fontWeight: '500',
-    fontSize: 16,
-    color: theme.gray[400],
-    textAlign: 'center',
   },
   passwordField: {
     display: 'flex',

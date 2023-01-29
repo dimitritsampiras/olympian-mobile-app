@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { SignUpContext } from './SignUp';
 import { Input } from '../../../elements/Input';
 import theme from '../../../../theme';
@@ -7,16 +7,18 @@ import { Formik } from 'formik';
 import { Button } from '../../../elements/Button';
 import SampleSvg from '../../../../../assets/caution.svg';
 import { PageControl } from 'react-native-ui-lib';
-import { object, string, ValidationError } from 'yup';
+import { object, string } from 'yup';
 import { SignUpInput } from '../../../../lib/graphql';
 import { AtSymbolIcon } from 'react-native-heroicons/solid';
-import { useFindEmailMutation } from '../../../../lib/graphql';
+import { useEmailExistsLazyQuery } from '../../../../lib/graphql';
+import { Heading } from '../../../elements/typography/Heading';
+import { BodyText } from '../../../elements/typography/Body';
 
 interface SignUpEmailProps {}
 
 export const SignUpEmail: React.FC<SignUpEmailProps> = () => {
   const { signUpInput, setSignUpInput, step, setStep } = useContext(SignUpContext);
-  const [findemail] = useFindEmailMutation();
+  const [findemail] = useEmailExistsLazyQuery();
   const maxLength = 32;
   const emailSchema = object({
     email: string()
@@ -24,8 +26,8 @@ export const SignUpEmail: React.FC<SignUpEmailProps> = () => {
       .email('Please enter a valid email address\n(e.g. johndoe@example.com)')
       .max(maxLength, `Please enter a maximum of ${maxLength} characters.`)
       .test('', 'Email is already used on another account.', async (email) => {
-        const { data } = await findemail({ variables: { input: email || '' } });
-        return !data?.findemail;
+        const { data } = await findemail({ variables: { email: email || '' } });
+        return !data?.emailExists;
       }),
   });
 
@@ -43,10 +45,14 @@ export const SignUpEmail: React.FC<SignUpEmailProps> = () => {
               <View style={styles.innerContainer}>
                 {/* Sample SVG to be replaced with the actual torch once we have it*/}
                 <SampleSvg width={56} height={82} fill={'black'}></SampleSvg>
-                <Text style={styles.header}>Hello, {signUpInput.name}!</Text>
-                <Text style={styles.secondaryText}>
-                  Please enter your email address, just in case you forget your password.
-                </Text>
+                <Heading noMargin style={{ textAlign: 'center' }}>
+                  {' '}
+                  Hello, {signUpInput.name}{' '}
+                </Heading>
+                <BodyText style={{ textAlign: 'center' }}>
+                  {' '}
+                  Please enter your email address, just in case you forget your password.{' '}
+                </BodyText>
                 <Input
                   placeholder="email"
                   value={values.email}
@@ -99,27 +105,13 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
-    height: '60%',
+    height: '50%',
     width: '100%',
-  },
-  header: {
-    fontWeight: '700',
-    fontSize: 32,
-    textAlign: 'center',
-    marginBottom: 35,
-  },
-  secondaryText: {
-    fontWeight: '500',
-    fontSize: 16,
-    color: theme.gray[400],
-    textAlign: 'center',
-    marginBottom: 35,
   },
   emailField: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 15,
   },
   footer: {
     display: 'flex',
@@ -133,6 +125,5 @@ const styles = StyleSheet.create({
     color: 'red',
     // Fix the lineHeight to prevent bumping when the text comes in
     lineHeight: 14,
-    marginBottom: 240,
   },
 });
