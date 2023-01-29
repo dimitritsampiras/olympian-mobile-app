@@ -1,55 +1,48 @@
-import { selectionAsync } from 'expo-haptics';
-import React, { SVGProps, useContext, useState } from 'react';
-import { Pressable, PressableProps, StyleSheet, View, Text, ViewStyle } from 'react-native';
+import * as Haptics from 'expo-haptics';
+import React, { useContext, useState } from 'react';
+import { Pressable, PressableProps, StyleSheet, View, Text } from 'react-native';
 import { GlobeAltIcon, UserGroupIcon, UserIcon } from 'react-native-heroicons/solid';
 
 import { Publicity } from '../../../lib/graphql';
 import theme from '../../../theme';
-import { Button } from '../../elements/Button';
+import { Heading } from '../../elements';
+import { BodyText } from '../../elements/typography/Body';
 
 import { CreateProgramContext } from './CreateProgram';
 
 interface ProgramPublicityProps {}
 
 export const ProgramPublicity: React.FC<ProgramPublicityProps> = () => {
-  const { program, setProgram, step, setStep } = useContext(CreateProgramContext);
+  const { program, setProgram } = useContext(CreateProgramContext);
 
-  const [selectedPublicity, setSelectedPublicity] = useState<Publicity | undefined>(
-    program.publicity
-  );
-
-  const handleOnNext = () => {
-    if (!selectedPublicity) return;
-    setProgram((prev) => ({ ...prev, publicity: selectedPublicity }));
-    setStep((prev) => prev + 1);
+  const handleSelectPublicity = (publicity: Publicity) => {
+    Haptics.selectionAsync();
+    setProgram((prev) => ({ ...prev, publicity }));
   };
 
   return (
     <>
-      <Text style={{ color: theme.gray[600], marginBottom: 14 }}>{program.name}</Text>
-      <Text style={styles.heading}>Choose Program Publicity</Text>
-
+      <Heading as="h2" style={{ marginBottom: 24 }}>
+        Select Program Publicity
+      </Heading>
+      <BodyText style={{ width: 250, marginBottom: 24 }}>
+        Do you want your program to be seen publicly, by just your friends, or just yourself?
+      </BodyText>
       <View style={{ marginBottom: 44 }}>
         {[Publicity.Public, Publicity.Friends, Publicity.Private].map((p) => (
           <PublicitySelector
             key={p}
             publicity={p}
-            selected={p === selectedPublicity}
-            onPress={() => {
-              selectionAsync();
-              setSelectedPublicity(p);
-            }}
+            selected={p === program.publicity}
+            onPress={() => handleSelectPublicity(p)}
           />
         ))}
       </View>
-
-      <Button shadow={false} onPress={handleOnNext}>
-        Next
-      </Button>
     </>
   );
 };
 
+// TODO: clean up this component
 export const PublicitySelector: React.FC<
   {
     selected: boolean;
@@ -59,13 +52,11 @@ export const PublicitySelector: React.FC<
   return (
     <Pressable
       onPress={props.onPress}
-      style={(pressed) => ({
-        backgroundColor: selected ? theme.blue[100] : 'white',
-        marginVertical: 4,
-        height: 54,
+      style={() => ({
+        backgroundColor: selected ? theme.blue[100] : theme.gray[50],
+        marginVertical: 6,
+        height: 64,
         borderRadius: 12,
-        borderWidth: 1,
-        borderColor: theme.gray[100],
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -80,7 +71,7 @@ export const PublicitySelector: React.FC<
           style={{
             marginLeft: 8,
             textTransform: 'capitalize',
-            color: selected ? theme.blue[600] : theme.gray[600],
+            color: selected ? theme.blue[600] : theme.gray[400],
             fontWeight: '600',
             ...styles,
           }}>
@@ -95,7 +86,7 @@ export const PublicityIcon: React.FC<{ publicity: `${Publicity}`; selected: bool
   publicity,
   selected,
 }) => {
-  const styles = !selected ? { fill: theme.gray[600] } : { fill: theme.blue[600] };
+  const styles = !selected ? { fill: theme.gray[400] } : { fill: theme.blue[600] };
   if (publicity === Publicity.Friends) return <UserGroupIcon size="18" {...styles} />;
   if (publicity === Publicity.Private) return <UserIcon size="18" {...styles} />;
   return <GlobeAltIcon size="18" {...styles} />;

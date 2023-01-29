@@ -1,11 +1,14 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { createContext, useEffect, useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
+import React, { createContext, useState } from 'react';
+import { TouchableOpacity, View } from 'react-native';
+import { ArrowLongLeftIcon, XMarkIcon } from 'react-native-heroicons/solid';
 import { PageControl } from 'react-native-ui-lib';
 import { Program } from '../../../lib/graphql';
 
 import theme from '../../../theme';
+import { ScreenView } from '../../containers/ScreenView';
+import { Button } from '../../elements';
 import { RootParamList } from '../../navigation';
 import { ProgramName } from './ProgramName';
 import { ProgramPublicity } from './ProgramPublicity';
@@ -22,53 +25,69 @@ export const CreateProgramContext = createContext({
   setProgram: (() => {}) as React.Dispatch<React.SetStateAction<Partial<Program>>>,
 });
 
-export const CreateProgram: React.FC<CreateProgramProps> = ({ navigation }) => {
+const PAGES = [ProgramName, ProgramPublicity, ProgramTags];
+
+/**
+ *
+ * Create Program Multi-page form
+ */
+export const CreateProgram: React.FC<CreateProgramProps> = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<RootParamList>>();
+
   const [program, setProgram] = useState<Partial<Program>>({
     name: '',
   });
 
   const [step, setStep] = useState(0);
 
+  const handleOnNext = () => {
+    if (step >= PAGES.length - 1) navigation.navigate('ProgramNavigator');
+    setStep(step + 1);
+  };
+
   return (
     <CreateProgramContext.Provider value={{ program, setProgram, step, setStep }}>
-      <SafeAreaView style={styles.screen}>
-        <View style={{ marginBottom: 24 }}>
-          <Pressable onPress={() => setStep((prev) => (prev > 0 ? prev - 1 : prev))}>
-            <Text>{'<-Back'}</Text>
-          </Pressable>
+      <ScreenView type="form" spaced>
+        <View>
+          <View
+            style={{
+              height: 45,
+              marginBottom: 24,
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}>
+            {step > 0 ? (
+              <TouchableOpacity
+                onPress={() => {
+                  setStep((prev) => (prev > 0 ? prev - 1 : prev));
+                }}>
+                <ArrowLongLeftIcon color={theme.blue[600]} />
+              </TouchableOpacity>
+            ) : (
+              <View></View>
+            )}
+            <TouchableOpacity onPress={navigation.goBack}>
+              <XMarkIcon color={theme.coolGray[500]} />
+            </TouchableOpacity>
+          </View>
+          <View>{PAGES.map((Page, i) => i === step && <Page key={i} />)}</View>
         </View>
-        <View style={{ flex: 1 }}>
-          {step === 0 && <ProgramName />}
-          {step === 1 && <ProgramPublicity />}
-          {step === 2 && <ProgramTags />}
+        <View>
+          <Button shadow={false} style={{ marginBottom: 24 }} onPress={handleOnNext}>
+            Next
+          </Button>
+          <PageControl
+            color={theme.blue[500]}
+            inactiveColor={theme.gray[200]}
+            currentPage={step}
+            numOfPages={PAGES.length}
+            limitShownPages
+            spacing={8}
+            size={8}
+          />
         </View>
-        <PageControl
-          color={theme.blue[500]}
-          inactiveColor={theme.gray[200]}
-          currentPage={step}
-          numOfPages={9}
-          limitShownPages
-          spacing={8}
-          size={8}
-        />
-      </SafeAreaView>
+      </ScreenView>
     </CreateProgramContext.Provider>
   );
 };
-
-const styles = StyleSheet.create({
-  screen: {
-    backgroundColor: theme.gray[50],
-    height: '100%',
-    paddingHorizontal: 24,
-    display: 'flex',
-    justifyContent: 'space-between',
-    paddingBottom: 60,
-  },
-  heading: {
-    fontWeight: '700',
-    fontSize: 22,
-    width: 200,
-    marginBottom: 20,
-  },
-});
