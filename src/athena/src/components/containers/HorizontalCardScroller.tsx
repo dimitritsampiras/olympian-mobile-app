@@ -1,7 +1,5 @@
 import React, { ReactNode } from 'react';
-import { SafeAreaView, ScrollView, View, ViewProps, Text } from 'react-native';
-import theme from '../../theme';
-import { Card } from './Card';
+import { ScrollView, ViewProps } from 'react-native';
 
 interface HorizontalCardScrollerProps {
   children: ReactNode[] | ReactNode;
