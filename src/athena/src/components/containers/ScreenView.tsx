@@ -22,7 +22,7 @@ export const ScreenView: React.FC<ScreenViewProps> = ({
         {
           flex: 1,
           paddingHorizontal: 24,
-          backgroundColor: type === 'form' ? theme.white : theme.gray[50],
+          backgroundColor: type === 'form' ? theme.colors.white : theme.colors.gray[50],
         },
         spaced && { justifyContent: 'space-between' },
         styles,

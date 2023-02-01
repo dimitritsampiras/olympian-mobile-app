@@ -55,11 +55,11 @@ export const Input: React.FC<InputProps> = ({ style, placeholder, ...props }) =>
       <TextInput
         {...props}
         style={{ ...styles.input }}
-        selectionColor={theme.gray[900]}
+        selectionColor={theme.colors.gray[900]}
         onPressIn={handleOnPressIn}
         onSubmitEditing={handleUnFocus}
         placeholder={placeholder}
-        placeholderTextColor={theme.gray[400]}
+        placeholderTextColor={theme.colors.gray[400]}
         // autoCapitalize={'none'}
       />
     </Animated.View>
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     height: 50,
     paddingLeft: 10,
     borderRadius: 18,
-    backgroundColor: theme.gray[100],
+    backgroundColor: theme.colors.gray[100],
     width: '100%',
     zIndex: 1,
   },

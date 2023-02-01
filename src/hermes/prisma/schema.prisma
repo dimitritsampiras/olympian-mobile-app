@@ -25,14 +25,15 @@ model User {
 
 model Profile {
   id          String         @id @default(cuid())
-  dateOfBirth DateTime
-  gender      Gender
+  dateOfBirth DateTime?
+  gender      Gender?
   weight      Int?
   height      Int?
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
   trainingAge TrainingLevel?
   goals       Specificity[]
+  programs    Program[]
   user        User           @relation(fields: [userId], references: [id])
   userId      String         @unique
 }
@@ -51,6 +52,8 @@ model Program {
   tags          String[]
   publicity     Publicity
   workouts      Workout[]
+  profile       Profile        @relation(fields: [profileId], references: [id])
+  profileId     String
 }
 
 model Workout {

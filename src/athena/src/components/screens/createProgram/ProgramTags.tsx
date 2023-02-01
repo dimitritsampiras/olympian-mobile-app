@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import { Incubator } from 'react-native-ui-lib';
 
 import { Heading } from '../../elements';
-import { BodyText } from '../../elements/typography/Body';
+import { BodyText } from '../../elements/typography/BodyText';
 
 import { CreateProgramContext } from './CreateProgram';
 
