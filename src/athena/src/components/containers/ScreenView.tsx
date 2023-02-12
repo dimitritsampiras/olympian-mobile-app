@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { ScrollView, ViewProps } from 'react-native';
+import { StyleSheet, ScrollView, ViewProps } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import theme from '../../theme';
 
@@ -34,11 +34,16 @@ export const ScreenView: React.FC<ScreenViewProps> = ({
       <ScrollView
         showsVerticalScrollIndicator={showScrollBar}
         alwaysBounceVertical={scrollBounce}
-        style={{
-          flex: 1,
-        }}>
+        contentContainerStyle={ScrollStyle.wrapper}>
         {children}
       </ScrollView>
     </SafeAreaView>
   );
 };
+
+const ScrollStyle = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+});
