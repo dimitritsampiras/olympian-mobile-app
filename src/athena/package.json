@@ -33,6 +33,8 @@
     "react-native": "0.69.6",
     "react-native-body-highlighter": "^2.1.0",
     "react-native-dotenv": "^3.4.2",
+    "react-native-dynamic-search-bar": "github:WrathChaos/react-native-dynamic-search-bar#expo",
+    "react-native-dynamic-vector-icons": "WrathChaos/react-native-dynamic-vector-icons#expo",
     "react-native-gesture-handler": "~2.5.0",
     "react-native-heroicons": "^3.2.0",
     "react-native-reanimated": "~2.9.1",
@@ -55,6 +57,11 @@
     "lint-staged": "^13.0.3",
     "pretty-quick": "^3.1.3",
     "typescript": "~4.3.5"
+  },
+  "peerDependencies": {
+    "@freakycoder/react-native-bounceable": "^1.0.3",
+    "react-native-animated-spinkit": "^1.5.2",
+    "react-native-dynamic-vector-icons": "WrathChaos/react-native-dynamic-vector-icons#expo"
   },
   "private": true
 }
