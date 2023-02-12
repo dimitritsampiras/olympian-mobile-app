@@ -1,7 +1,9 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { HeartIcon, GiftIcon } from 'react-native-heroicons/solid';
+import { Avatar } from 'react-native-ui-lib';
 import theme from '../../theme';
+import { ProgramImage } from '../elements/display/ProgramImage';
 import { Card } from './Card';
 
 interface ProgramCardProps {
@@ -12,29 +14,18 @@ export const ProgramCard: React.FC<ProgramCardProps> = ({ Program }) => {
   // TODO : Replace with Program props
   const likes = 32;
   const programName = 'Push Pull No Legs';
-  const icon = <GiftIcon width={40} height={40}></GiftIcon>;
+  const icon = <ProgramImage size={'small'}></ProgramImage>;
   // END TODO
   return (
     <Card
       style={{
-        width: 160,
-        height: 160,
+        width: 150,
+        height: 150,
         borderRadius: 25,
         marginHorizontal: 5,
       }}>
       {/* Icon */}
-      <View
-        style={{
-          width: 50,
-          height: 50,
-          borderWidth: 1,
-          borderColor: theme.gray[200],
-          paddingLeft: 5,
-          paddingRight: 5,
-          borderRadius: 10,
-        }}>
-        {icon}
-      </View>
+      {icon}
 
       {/* Title */}
       <View style={{ flex: 1 }}>
@@ -43,7 +34,7 @@ export const ProgramCard: React.FC<ProgramCardProps> = ({ Program }) => {
 
       {/* Hearts */}
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <HeartIcon width={20} fill={theme.rose[300]} />
+        <HeartIcon width={20} fill={theme.colors.rose[300]} />
         <Text>{likes}</Text>
       </View>
     </Card>
