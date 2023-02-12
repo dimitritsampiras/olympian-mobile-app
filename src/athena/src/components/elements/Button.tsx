@@ -17,9 +17,9 @@ import Animated, {
 } from 'react-native-reanimated';
 import theme from '../../theme';
 
-const FULL_GRADIENT = [theme.blue[600], theme.blue[700]];
-// const FLAT_GRADIENT = [theme.blue[100], theme.blue[200]];
-// const GHOST_GRADIENT = [theme.gray[50], theme.blue[100]];
+const FULL_GRADIENT = [theme.colors.blue[600], theme.colors.blue[700]];
+// const FLAT_GRADIENT = [theme.colors.blue[100], theme.colors.blue[200]];
+// const GHOST_GRADIENT = [theme.colors.gray[50], theme.colors.blue[100]];
 
 type ButtonVariant =
   | { full?: true; flat?: never; ghost?: never }
@@ -95,7 +95,7 @@ export const Button: React.FC<ButtonProps & ButtonVariant> = ({
       transform: [{ scale: interpolate(scale.value, [1, 0], [1, 0.98]) }],
       backgroundColor:
         disabled || loading
-          ? interpolateColor(color.value, [1, 0], [theme.blue[300], theme.blue[300]])
+          ? interpolateColor(color.value, [1, 0], [theme.colors.blue[300], theme.colors.blue[300]])
           : interpolateColor(color.value, [1, 0], gradient),
     };
   });
@@ -133,10 +133,10 @@ const styles = StyleSheet.create({
     letterSpacing: 0.1,
   },
   full: {
-    backgroundColor: theme.blue[600],
+    backgroundColor: theme.colors.blue[600],
   },
   fullDisabled: {
-    backgroundColor: theme.blue[300],
+    backgroundColor: theme.colors.blue[300],
   },
   fullText: {
     color: '#fff',
@@ -145,28 +145,28 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0)',
   },
   ghostText: {
-    color: theme.blue[700],
+    color: theme.colors.blue[700],
   },
   flat: {
-    backgroundColor: theme.blue[100],
+    backgroundColor: theme.colors.blue[100],
   },
   flatDisabled: {
-    backgroundColor: theme.blue[50],
+    backgroundColor: theme.colors.blue[50],
   },
   flatText: {
-    color: theme.blue[700],
+    color: theme.colors.blue[700],
   },
   flatTextDisabled: {
-    color: theme.blue[300],
+    color: theme.colors.blue[300],
   },
   buttonShadowBase: {
-    shadowColor: theme.blue[600],
+    shadowColor: theme.colors.blue[600],
     shadowRadius: 6,
     shadowOpacity: 0.35,
     shadowOffset: { height: 10, width: 0 },
   },
   disabled: {
-    backgroundColor: theme.gray[200],
+    backgroundColor: theme.colors.gray[200],
   },
   auto: {
     alignSelf: 'flex-start',

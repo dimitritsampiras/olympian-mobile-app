@@ -1,0 +1,17 @@
+query ProgramFromId($programId: String!) {
+  program(programId: $programId) {
+    ...Program
+    profile {
+      user {
+        username
+      }
+    }
+  }
+}
+
+
+query UserPrograms {
+  userPrograms {
+    ...Program
+  }
+}

@@ -44,18 +44,16 @@ export const SignUp: React.FC<SignUpProps> = ({ navigation, route }) => {
       <SafeAreaView>
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
           <View style={styles.screen}>
-            <KeyboardAvoidingView behavior="padding">
-              {/* This header should be a component */}
-              <View style={styles.header}>
-                <Pressable onPress={() => setStep((prev) => prev - Number(prev > 0))}>
-                  <ChevronLeftIcon size="20" {...{ fill: theme.gray[600] }} />
-                </Pressable>
-              </View>
-              {step === 0 && <SignUpName />}
-              {step === 1 && <SignUpEmail />}
-              {step === 2 && <SignUpUsername />}
-              {step === 3 && <SignUpPassword navigation={navigation} route={route} />}
-            </KeyboardAvoidingView>
+            {/* This header should be a component */}
+            <View style={styles.header}>
+              <Pressable onPress={() => setStep((prev) => prev - Number(prev > 0))}>
+                <ChevronLeftIcon size="20" {...{ fill: theme.colors.gray[600] }} />
+              </Pressable>
+            </View>
+            {step === 0 && <SignUpName />}
+            {step === 1 && <SignUpEmail />}
+            {step === 2 && <SignUpUsername />}
+            {step === 3 && <SignUpPassword navigation={navigation} route={route} />}
           </View>
         </TouchableWithoutFeedback>
       </SafeAreaView>
@@ -65,7 +63,7 @@ export const SignUp: React.FC<SignUpProps> = ({ navigation, route }) => {
 
 const styles = StyleSheet.create({
   screen: {
-    backgroundColor: theme.gray[50],
+    backgroundColor: theme.colors.gray[50],
     width: '100%',
     height: '100%',
     display: 'flex',

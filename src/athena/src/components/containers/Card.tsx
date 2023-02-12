@@ -17,10 +17,10 @@ export const Card: React.FC<CardProps> = ({ style, children }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: theme.white,
+    backgroundColor: theme.colors.white,
     borderRadius: 18,
-    borderColor: theme.gray[100],
+    borderColor: theme.colors.gray[100],
     borderWidth: 1,
-    padding: 22
-  }
+    padding: 22,
+  },
 });

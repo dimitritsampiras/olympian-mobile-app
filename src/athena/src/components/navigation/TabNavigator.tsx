@@ -8,12 +8,14 @@ import {
 } from 'react-native-heroicons/solid';
 import { Home } from '../screens';
 import { Settings } from '../screens/Settings';
+import { Programs } from '../screens/program/Programs';
+import { Explore } from '../screens/Explore';
 
 export type TabParamList = {
   Home: undefined;
-  Settings: undefined;
+  Programs: undefined;
   Explore: undefined;
-  MyPrograms: undefined;
+  Profile: undefined;
 };
 const Tabs = createBottomTabNavigator<TabParamList>();
 
@@ -27,10 +29,10 @@ export const TabNavigator: React.FC = () => {
       <Tabs.Screen name="Home" component={Home} options={{ tabBarIcon: HomeIcon }} />
       <Tabs.Screen
         name="Explore"
-        component={Home}
+        component={Explore}
         options={{ tabBarIcon: GlobeAsiaAustraliaIcon }}
       />
-      <Tabs.Screen name="My Programs" component={Home} options={{ tabBarIcon: BookOpenIcon }} />
+      <Tabs.Screen name="Programs" component={Programs} options={{ tabBarIcon: BookOpenIcon }} />
       <Tabs.Screen name="Profile" component={Settings} options={{ tabBarIcon: UserIcon }} />
     </Tabs.Navigator>
   );

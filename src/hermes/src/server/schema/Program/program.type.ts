@@ -1,7 +1,6 @@
 import { enumType, objectType } from 'nexus';
 import { Exercise, Program, Publicity, Specificity, TrainingLevel, Workout } from 'nexus-prisma';
 
-
 // Session object type from prisma
 export const ProgramType = objectType({
   name: Program.$name,
@@ -14,9 +13,9 @@ export const ProgramType = objectType({
     t.field(Program.tags);
     t.field(Program.trainingLevel);
     t.field(Program.workouts);
-  }
+    t.field(Program.profile);
+  },
 });
-
 
 // Session object type from prisma
 export const WorkoutType = objectType({
@@ -29,7 +28,7 @@ export const WorkoutType = objectType({
     t.field(Workout.tags);
     t.field(Workout.trainingLevel);
     // t.field(Workout.exercises);
-  }
+  },
 });
 
 export const ExerciseType = objectType({
@@ -41,22 +40,20 @@ export const ExerciseType = objectType({
     t.field(Exercise.rpe);
     t.field(Exercise.description);
   },
-})
+});
 
 // Session object type from prisma
 export const PublicityEnum = enumType({
   name: Publicity.name,
-  members: Publicity.members
+  members: Publicity.members,
 });
 
 export const SpecificityEnum = enumType({
   name: Specificity.name,
-  members: Specificity.members
-})
+  members: Specificity.members,
+});
 
 export const TrainingLevelEnum = enumType({
   name: TrainingLevel.name,
-  members: TrainingLevel.members
-})
-
-
+  members: TrainingLevel.members,
+});

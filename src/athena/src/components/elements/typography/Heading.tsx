@@ -26,11 +26,27 @@ export const Heading: React.FC<HeadingProps> = ({ as = 'h1', children, style, no
       break;
   }
 
+  let marginBottom;
+  switch (as) {
+    case 'title':
+      marginBottom = 24;
+      break;
+    case 'h1':
+      marginBottom = 22;
+      break;
+    case 'h2':
+      marginBottom = 18;
+      break;
+    case 'h3':
+      marginBottom = 14;
+      break;
+  }
+
   return (
     <Text
       style={[
-        { fontSize, color: theme.gray[900], fontWeight: '700', width: 250 },
-        !noMargin && { marginBottom: 24 },
+        { fontSize, color: theme.colors.gray[900], fontWeight: '700', width: 250 },
+        !noMargin && { marginBottom },
         style,
       ]}>
       {children}
