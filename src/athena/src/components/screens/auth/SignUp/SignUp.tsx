@@ -47,7 +47,7 @@ export const SignUp: React.FC<SignUpProps> = ({ navigation, route }) => {
             {/* This header should be a component */}
             <View style={styles.header}>
               <Pressable onPress={() => setStep((prev) => prev - Number(prev > 0))}>
-                <ChevronLeftIcon size="20" {...{ fill: theme.gray[600] }} />
+                <ChevronLeftIcon size="20" {...{ fill: theme.colors.gray[600] }} />
               </Pressable>
             </View>
             {step === 0 && <SignUpName />}
@@ -63,7 +63,7 @@ export const SignUp: React.FC<SignUpProps> = ({ navigation, route }) => {
 
 const styles = StyleSheet.create({
   screen: {
-    backgroundColor: theme.gray[50],
+    backgroundColor: theme.colors.gray[50],
     width: '100%',
     height: '100%',
     display: 'flex',

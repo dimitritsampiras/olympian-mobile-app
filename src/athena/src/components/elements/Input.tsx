@@ -20,7 +20,7 @@ export const Input: React.FC<InputProps> = ({
   style,
   placeholder,
   Icon,
-  iconProps = { size: '18', fill: theme.gray[400] },
+  iconProps = { size: '18', fill: theme.colors.gray[400] },
   ...props
 }) => {
   const animatedTranslationX = useRef(new Animated.Value(1)).current;
@@ -57,11 +57,11 @@ export const Input: React.FC<InputProps> = ({
         <TextInput
           {...props}
           style={{ ...styles.input }}
-          selectionColor={theme.gray[900]}
+          selectionColor={theme.colors.gray[900]}
           onPressIn={handleOnPressIn}
           onSubmitEditing={handleUnFocus}
           placeholder={placeholder}
-          placeholderTextColor={theme.gray[400]}
+          placeholderTextColor={theme.colors.gray[400]}
           // autoCapitalize={'none'}
         />
       </View>

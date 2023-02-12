@@ -18,8 +18,8 @@ import Animated, {
 import theme from '../../theme';
 
 const FULL_GRADIENT = [theme.colors.blue[600], theme.colors.blue[700]];
-// const FLAT_GRADIENT = [theme.blue[100], theme.blue[200]];
-// const GHOST_GRADIENT = [theme.gray[50], theme.blue[100]];
+// const FLAT_GRADIENT = [theme.colors.blue[100], theme.colors.blue[200]];
+// const GHOST_GRADIENT = [theme.colors.gray[50], theme.colors.blue[100]];
 
 type ButtonVariant =
   | { full?: true; flat?: never; ghost?: never }
@@ -167,9 +167,6 @@ const styles = StyleSheet.create({
   },
   disabled: {
     backgroundColor: theme.colors.gray[200],
-  },
-  auto: {
-    alignSelf: 'flex-start',
   },
   auto: {
     alignSelf: 'flex-start',

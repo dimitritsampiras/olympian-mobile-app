@@ -14,7 +14,7 @@ import { SignUpInput } from '../../../../lib/graphql';
 import { KeyIcon, ClipboardDocumentCheckIcon, LockClosedIcon } from 'react-native-heroicons/solid';
 import { useSignUpMutation } from '../../../../lib/graphql';
 import { Heading } from '../../../elements/typography/Heading';
-import { BodyText } from '../../../elements/typography/Body';
+import { BodyText } from '../../../elements/typography/BodyText';
 
 // This page will be doing navigating
 type ParamList = NativeStackScreenProps<AuthParamList, 'SignUp'>;
@@ -91,7 +91,7 @@ export const SignUpPassword: React.FC<SignUpPasswordProps> = ({ navigation }) =>
                   Icon={LockClosedIcon}
                   iconProps={{
                     size: 20,
-                    fill: touched.password && !!errors.password ? 'red' : theme.gray[400],
+                    fill: touched.password && !!errors.password ? 'red' : theme.colors.gray[400],
                   }}
                 />
                 <Input
@@ -110,7 +110,7 @@ export const SignUpPassword: React.FC<SignUpPasswordProps> = ({ navigation }) =>
                     fill:
                       touched.confirm_password && !!errors.confirm_password
                         ? 'red'
-                        : theme.gray[400],
+                        : theme.colors.gray[400],
                   }}
                 />
                 {/* Password error message takes priority */}
@@ -120,8 +120,8 @@ export const SignUpPassword: React.FC<SignUpPasswordProps> = ({ navigation }) =>
               </View>
               <View style={styles.footer}>
                 <PageControl
-                  color={theme.blue[500]}
-                  inactiveColor={theme.gray[200]}
+                  color={theme.colors.blue[500]}
+                  inactiveColor={theme.colors.gray[200]}
                   currentPage={step}
                   numOfPages={4}
                   limitShownPages
