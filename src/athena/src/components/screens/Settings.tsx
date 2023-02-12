@@ -8,7 +8,7 @@ import { Button } from '../elements/Button';
 import { UserContext } from '../providers';
 import { Heading } from '../elements';
 
-interface SettingsProps extends NativeStackScreenProps<TabParamList, 'Settings'> {}
+interface SettingsProps extends NativeStackScreenProps<TabParamList, 'Profile'> {}
 
 export const Settings: React.FC<SettingsProps> = ({ route }) => {
   const { user, refetch } = useContext(UserContext);
