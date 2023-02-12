@@ -13,8 +13,6 @@ export const UserMutation = extendType({
       type: nullable('String'),
       args: { input: 'LoginInput' },
       resolve: async (_root, { input }, { prisma }) => {
-        console.log('hit');
-
         return await loginUser(prisma, input);
       },
     });

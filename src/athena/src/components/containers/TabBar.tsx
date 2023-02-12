@@ -73,7 +73,7 @@
 // };
 
 // const getIcon = (label: string, isFocused: boolean) => {
-//   if (label === 'Home') return <HomeIcon fill={isFocused ? theme.blue[600] : theme.gray[200]} />;
+//   if (label === 'Home') return <HomeIcon fill={isFocused ? theme.colors.blue[600] : theme.colors.gray[200]} />;
 //   if (label === 'Settings')
-//     return <Cog6ToothIcon fill={isFocused ? theme.blue[600] : theme.gray[200]} />;
+//     return <Cog6ToothIcon fill={isFocused ? theme.colors.blue[600] : theme.colors.gray[200]} />;
 // };

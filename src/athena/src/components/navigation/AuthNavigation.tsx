@@ -38,12 +38,12 @@ export const AuthNavigator: React.FC<AuthNavigatorProps> = () => {
           <AuthStack.Screen
             name="Login"
             component={Login}
-            options={{ contentStyle: { backgroundColor: theme.gray[50] } }}
+            options={{ contentStyle: { backgroundColor: theme.colors.gray[50] } }}
           />
           <AuthStack.Screen
             name="SignUp"
             component={SignUp}
-            options={{ contentStyle: { backgroundColor: theme.gray[50] } }}
+            options={{ contentStyle: { backgroundColor: theme.colors.gray[50] } }}
           />
         </>
       ) : (

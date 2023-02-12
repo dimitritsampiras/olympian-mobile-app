@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 import { Heading } from '../../elements';
 
 import { Input } from '../../elements/Input';
-import { BodyText } from '../../elements/typography/Body';
+import { BodyText } from '../../elements/typography/BodyText';
 
 import { CreateProgramContext } from './CreateProgram';
 

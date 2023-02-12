@@ -19,21 +19,19 @@ export const Exercise: React.FC<ExerciseProps> = ({ muscles, exerciseName }) => 
           height: 45,
           borderRadius: 999,
           overflow: 'hidden',
-          position: 'relative'
-        }}
-      >
+          position: 'relative',
+        }}>
         <View
           style={{
             position: 'absolute',
             right: -8,
-            top: 0
-          }}
-        >
+            top: 0,
+          }}>
           <Body
             scale={0.6}
             data={muscles}
             frontOnly
-            colors={[theme.blue[600], theme.blue[300]]}
+            colors={[theme.colors.blue[600], theme.colors.blue[300]]}
           />
         </View>
       </View>
@@ -47,14 +45,13 @@ export const Exercise: React.FC<ExerciseProps> = ({ muscles, exerciseName }) => 
               key={muscle.slug}
               style={{
                 borderWidth: 1,
-                borderColor: theme.gray[200],
+                borderColor: theme.colors.gray[200],
                 padding: 3,
                 paddingLeft: 5,
                 paddingRight: 5,
                 borderRadius: 4,
-                marginRight: 4
-              }}
-            >
+                marginRight: 4,
+              }}>
               <Text style={{ color: 'gray', fontSize: 10 }}>{muscle.slug}</Text>
             </View>
           ))}
@@ -63,7 +60,7 @@ export const Exercise: React.FC<ExerciseProps> = ({ muscles, exerciseName }) => 
 
       {/* chrevron column */}
       <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-        <ChevronRightIcon width={18} fill={theme.gray[200]} />
+        <ChevronRightIcon width={18} fill={theme.colors.gray[200]} />
       </View>
     </Card>
   );

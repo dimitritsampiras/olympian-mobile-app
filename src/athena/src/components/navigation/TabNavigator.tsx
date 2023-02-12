@@ -8,9 +8,11 @@ import {
 } from 'react-native-heroicons/solid';
 import { Home } from '../screens';
 import { Settings } from '../screens/Settings';
+import { Programs } from '../screens/program/Programs';
 
 export type TabParamList = {
   Home: undefined;
+  Programs: undefined;
   Settings: undefined;
   Explore: undefined;
   MyPrograms: undefined;

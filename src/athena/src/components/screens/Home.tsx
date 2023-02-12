@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 
 import { Button } from '../elements/Button';
 import { RootParamList } from '../navigation/RootNavigator';
