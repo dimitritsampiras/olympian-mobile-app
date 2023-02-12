@@ -171,4 +171,7 @@ const styles = StyleSheet.create({
   auto: {
     alignSelf: 'flex-start',
   },
+  auto: {
+    alignSelf: 'flex-start',
+  },
 });
