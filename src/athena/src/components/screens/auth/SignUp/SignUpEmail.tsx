@@ -79,7 +79,7 @@ export const SignUpEmail: React.FC<SignUpEmailProps> = () => {
                   spacing={8}
                   size={8}
                 />
-                <Button style={{ padding: 19 }} onPress={handleSubmit as () => void}>
+                <Button style={{ padding: 19, width: '100%' }} onPress={handleSubmit as () => void}>
                   Next
                 </Button>
               </View>
