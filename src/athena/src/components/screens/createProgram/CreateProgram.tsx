@@ -6,7 +6,12 @@ import { ArrowLongLeftIcon, XMarkIcon } from 'react-native-heroicons/solid';
 import { PageControl } from 'react-native-ui-lib';
 import _ from 'lodash';
 
-import { Program, Publicity, useCreateProgramMutation } from '../../../lib/graphql';
+import {
+  CreateProgramInput,
+  Program,
+  Publicity,
+  useCreateProgramMutation,
+} from '../../../lib/graphql';
 import theme from '../../../theme';
 import { ScreenView } from '../../containers/ScreenView';
 import { Button } from '../../elements';
@@ -17,12 +22,13 @@ import { ProgramTags } from './ProgramTags';
 import { UserContext } from '../../providers';
 
 type CreateProgramProps = NativeStackScreenProps<RootParamList, 'CreateProgram'>;
+type CreateProgramInputWithoutUserId = Omit<CreateProgramInput, 'userId'>;
 
 export const CreateProgramContext = createContext({
   step: 0,
   setStep: (() => {}) as React.Dispatch<React.SetStateAction<number>>,
   program: {} as Partial<Program>,
-  setProgram: (() => {}) as React.Dispatch<React.SetStateAction<Partial<Program>>>,
+  setProgram: (() => {}) as React.Dispatch<React.SetStateAction<CreateProgramInputWithoutUserId>>,
 });
 
 const PAGES = [ProgramName, ProgramPublicity, ProgramTags];
@@ -37,18 +43,19 @@ export const CreateProgram: React.FC<CreateProgramProps> = () => {
 
   // state
   const [step, setStep] = useState(0);
-  const [program, setProgram] = useState<Partial<Program>>({
+  const [program, setProgram] = useState<CreateProgramInputWithoutUserId>({
     name: '',
     publicity: Publicity.Private,
+    tags: [],
   });
 
   const [createProgram, { loading }] = useCreateProgramMutation();
 
   //
   const handleSubmit = async () => {
-    if (!program.name || !program.publicity || !program.tags) return;
+    if (!program.name || !program.publicity) return;
     if (!user) return;
-    const { data } = await createProgram({
+    const { data, errors } = await createProgram({
       variables: {
         input: {
           name: program.name,
@@ -58,14 +65,17 @@ export const CreateProgram: React.FC<CreateProgramProps> = () => {
         },
       },
     });
+    console.log(errors);
+
     // TODO: handle error
     if (!data?.createProgram) return;
     navigation.navigate('ProgramNavigator', { programId: data?.createProgram.id });
   };
 
-  const handleOnNext = () => {
-    if (step <= PAGES.length) handleSubmit();
-    setStep(step + 1);
+  const handleOnNext = async () => {
+    if (step >= PAGES.length - 1) {
+      await handleSubmit();
+    } else setStep(step + 1);
   };
 
   return (

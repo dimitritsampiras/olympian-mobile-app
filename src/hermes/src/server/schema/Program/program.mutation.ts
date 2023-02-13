@@ -9,6 +9,7 @@ export const ProgramMutation = extendType({
       type: nullable('Program'),
       args: { input: 'CreateProgramInput' },
       resolve: async (_root, { input }, { prisma }) => {
+        console.log('hit');
         const { name, publicity, tags, userId } = input;
         // check if the profile exists
         const profile = await prisma.profile.findUnique({
