@@ -1,19 +1,19 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { HeartIcon, GiftIcon } from 'react-native-heroicons/solid';
-import { Avatar } from 'react-native-ui-lib';
+import { Program } from '../../lib/graphql';
 import theme from '../../theme';
 import { ProgramImage } from '../elements/display/ProgramImage';
 import { Card } from './Card';
 
 interface ProgramCardProps {
-  Program: undefined;
+  program: Program;
 }
 
-export const ProgramCard: React.FC<ProgramCardProps> = ({ Program }) => {
+export const ProgramCard: React.FC<ProgramCardProps> = ({ program }) => {
   // TODO : Replace with Program props
   const likes = 32;
-  const programName = 'Push Pull No Legs';
+  const programName = program.name;
   const icon = <ProgramImage size={'small'}></ProgramImage>;
   // END TODO
   return (
