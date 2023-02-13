@@ -10,12 +10,14 @@ import { Home } from '../screens';
 import { Settings } from '../screens/Settings';
 import { Programs } from '../screens/program/Programs';
 import { Explore } from '../screens/Explore';
+import { StaticExercise } from '../screens/staticExercise/StaticExercise';
 
 export type TabParamList = {
   Home: undefined;
   Programs: undefined;
   Explore: undefined;
   Profile: undefined;
+  StaticExercise: undefined;
 };
 const Tabs = createBottomTabNavigator<TabParamList>();
 
@@ -34,6 +36,11 @@ export const TabNavigator: React.FC = () => {
       />
       <Tabs.Screen name="Programs" component={Programs} options={{ tabBarIcon: BookOpenIcon }} />
       <Tabs.Screen name="Profile" component={Settings} options={{ tabBarIcon: UserIcon }} />
+      <Tabs.Screen
+        name="Static Exercise"
+        component={StaticExercise}
+        options={{ tabBarIcon: BookOpenIcon }}
+      />
     </Tabs.Navigator>
   );
 };
