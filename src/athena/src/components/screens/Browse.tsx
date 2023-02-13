@@ -1,6 +1,8 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useContext, useEffect } from 'react';
 
+import { useTrendingProgramsQuery, usePopularProgramsQuery } from '../../lib/graphql';
+
 import { RootParamList } from '../navigation/RootNavigator';
 import { TabParamList } from '../navigation';
 import { ScreenView } from '../containers/ScreenView';
@@ -17,41 +19,19 @@ interface BrowseProps extends NativeStackScreenProps<TabParamList & RootParamLis
 export const Browse: React.FC<BrowseProps> = ({ navigation }) => {
   const { user } = useContext(UserContext);
 
-  const fetchDiscoveryPrograms = () => {
-    // TODO: Replace this with a query to the database
-    return {
-      trending: (
-        <HorizontalCardScroller styles={{ paddingVertical: 10 }}>
-          <Card>T1</Card>
-          <Card>T2</Card>
-          <Card>T3</Card>
-          <Card>T4</Card>
-          <Card>T5</Card>
-          <Card>T6</Card>
-          <Card>T7</Card>
-          <Card>T8</Card>
-          <Card>T9</Card>
-          <Card>T10</Card>
-        </HorizontalCardScroller>
-      ),
-      popular: (
-        <HorizontalCardScroller styles={{ paddingVertical: 10 }}>
-          <Card>P1</Card>
-          <Card>P2</Card>
-          <Card>P3</Card>
-          <Card>P4</Card>
-          <Card>P5</Card>
-          <Card>P6</Card>
-          <Card>P7</Card>
-          <Card>P8</Card>
-          <Card>P9</Card>
-          <Card>P10</Card>
-        </HorizontalCardScroller>
-      ),
-    };
-  };
+  const trendingProgramsData = useTrendingProgramsQuery({
+    variables: {
+      skip: 0,
+      take: 10,
+    },
+  });
 
-  const discoveryPrograms = fetchDiscoveryPrograms();
+  const popularProgramsData = usePopularProgramsQuery({
+    variables: {
+      skip: 0,
+      take: 10,
+    },
+  });
 
   return (
     <ScreenView>
@@ -67,12 +47,20 @@ export const Browse: React.FC<BrowseProps> = ({ navigation }) => {
         onChangeText={(text) => console.log(text)}
       />
       <View style={{ paddingTop: 10, paddingBottom: 10 }}>
-        <SubHeading>Trending Exercises</SubHeading>
-        {discoveryPrograms.trending}
+        <SubHeading>Trending Programs</SubHeading>
+        <HorizontalCardScroller>
+          {trendingProgramsData.data?.trendingPrograms.map((program) => (
+            <Card>{program.name}</Card>
+          ))}
+        </HorizontalCardScroller>
       </View>
       <View style={{ paddingTop: 10, paddingBottom: 10 }}>
         <SubHeading>Popular</SubHeading>
-        {discoveryPrograms.popular}
+        <HorizontalCardScroller>
+          {popularProgramsData.data?.popularPrograms.map((program) => (
+            <Card>{program.name}</Card>
+          ))}
+        </HorizontalCardScroller>
       </View>
     </ScreenView>
   );
