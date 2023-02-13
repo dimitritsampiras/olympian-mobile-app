@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   },
   input: {
     padding: 13,
-    height: '100%',
+    flex: 1,
     borderRadius: 18,
     zIndex: 10,
     fontWeight: '300',
