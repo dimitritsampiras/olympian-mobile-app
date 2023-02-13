@@ -46,6 +46,8 @@ enum Publicity {
 type Query {
   emailExists(email: String!): Boolean
   me: User
+  popularPrograms(skip: Int!, take: Int!): [Program!]!
+  trendingPrograms(skip: Int!, take: Int!): [Program!]!
   usernameExists(username: String!): Boolean
 }
 
