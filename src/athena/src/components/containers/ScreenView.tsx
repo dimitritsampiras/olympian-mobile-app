@@ -34,7 +34,7 @@ export const ScreenView: React.FC<ScreenViewProps> = ({
       <ScrollView
         showsVerticalScrollIndicator={showScrollBar}
         alwaysBounceVertical={scrollBounce}
-        contentContainerStyle={ScrollStyle.wrapper}>
+        contentContainerStyle={spaced ? ScrollStyle.isSpaced : ScrollStyle.notSpaced}>
         {children}
       </ScrollView>
     </SafeAreaView>
@@ -42,7 +42,10 @@ export const ScreenView: React.FC<ScreenViewProps> = ({
 };
 
 const ScrollStyle = StyleSheet.create({
-  wrapper: {
+  notSpaced: {
+    flex: 1,
+  },
+  isSpaced: {
     flex: 1,
     justifyContent: 'space-between',
   },
