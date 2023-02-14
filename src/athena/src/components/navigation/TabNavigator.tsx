@@ -7,7 +7,7 @@ import {
   UserIcon,
 } from 'react-native-heroicons/solid';
 import { Home } from '../screens';
-import { Settings } from '../screens/Settings';
+import { Profile } from '../screens/Profile';
 import { Programs } from '../screens/program/Programs';
 import { Explore } from '../screens/Explore';
 
@@ -33,7 +33,7 @@ export const TabNavigator: React.FC = () => {
         options={{ tabBarIcon: GlobeAsiaAustraliaIcon }}
       />
       <Tabs.Screen name="Programs" component={Programs} options={{ tabBarIcon: BookOpenIcon }} />
-      <Tabs.Screen name="Profile" component={Settings} options={{ tabBarIcon: UserIcon }} />
+      <Tabs.Screen name="Profile" component={Profile} options={{ tabBarIcon: UserIcon }} />
     </Tabs.Navigator>
   );
 };
