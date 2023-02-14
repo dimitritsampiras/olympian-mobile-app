@@ -76,7 +76,7 @@ input SignUpInput {
 }
 
 enum Specificity {
-  athletic
+  athleticism
   cardio
   general
   hypertrophy
@@ -108,5 +108,5 @@ type Workout {
   name: String!
   specificity: [Specificity!]!
   tags: [String!]!
-  trainingLevel: TrainingLevel!
+  trainingLevel: TrainingLevel
 }
