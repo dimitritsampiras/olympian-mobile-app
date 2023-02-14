@@ -3,3 +3,9 @@ mutation CreateProgram($input: CreateProgramInput!) {
     ...Program
   }
 }
+
+mutation CreateWorkout($programId: String!) {
+  createWorkout(programId: $programId) {
+    ...Workout
+  }
+}

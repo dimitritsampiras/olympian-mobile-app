@@ -4,12 +4,13 @@ import theme from '../../theme';
 
 interface CardProps {
   style?: ViewStyle;
+  square?: boolean;
   children: ReactNode | ReactNode[];
 }
 
-export const Card: React.FC<CardProps> = ({ style, children }) => {
+export const Card: React.FC<CardProps> = ({ style, square, children }) => {
   return (
-    <View style={[styles.container, style]}>
+    <View style={[styles.container, style, square && { width: 150, height: 150 }]}>
       {Array.isArray(children) ? children : <Text>{children}</Text>}
     </View>
   );
@@ -18,9 +19,9 @@ export const Card: React.FC<CardProps> = ({ style, children }) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.colors.white,
-    borderRadius: 18,
+    borderRadius: 22,
     borderColor: theme.colors.gray[100],
     borderWidth: 1,
-    padding: 22,
+    padding: 18,
   },
 });

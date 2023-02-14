@@ -6,12 +6,7 @@ import { ArrowLongLeftIcon, XMarkIcon } from 'react-native-heroicons/solid';
 import { PageControl } from 'react-native-ui-lib';
 import _ from 'lodash';
 
-import {
-  CreateProgramInput,
-  Program,
-  Publicity,
-  useCreateProgramMutation,
-} from '../../../lib/graphql';
+import { CreateProgramInput, Publicity, useCreateProgramMutation } from '../../../lib/graphql';
 import theme from '../../../theme';
 import { ScreenView } from '../../containers/ScreenView';
 import { Button } from '../../elements';
@@ -20,6 +15,7 @@ import { ProgramName } from './ProgramName';
 import { ProgramPublicity } from './ProgramPublicity';
 import { ProgramTags } from './ProgramTags';
 import { UserContext } from '../../providers';
+import { ProgramSpecificty } from './ProgramSpecificty';
 
 type CreateProgramProps = NativeStackScreenProps<RootParamList, 'CreateProgram'>;
 type CreateProgramInputWithoutUserId = Omit<CreateProgramInput, 'userId'>;
@@ -27,11 +23,11 @@ type CreateProgramInputWithoutUserId = Omit<CreateProgramInput, 'userId'>;
 export const CreateProgramContext = createContext({
   step: 0,
   setStep: (() => {}) as React.Dispatch<React.SetStateAction<number>>,
-  program: {} as Partial<Program>,
+  program: {} as CreateProgramInputWithoutUserId,
   setProgram: (() => {}) as React.Dispatch<React.SetStateAction<CreateProgramInputWithoutUserId>>,
 });
 
-const PAGES = [ProgramName, ProgramPublicity, ProgramTags];
+const PAGES = [ProgramName, ProgramPublicity, ProgramSpecificty, ProgramTags];
 
 /**
  *
@@ -47,6 +43,7 @@ export const CreateProgram: React.FC<CreateProgramProps> = () => {
     name: '',
     publicity: Publicity.Private,
     tags: [],
+    specificity: [],
   });
 
   const [createProgram, { loading }] = useCreateProgramMutation();
@@ -54,18 +51,20 @@ export const CreateProgram: React.FC<CreateProgramProps> = () => {
   //
   const handleSubmit = async () => {
     if (!program.name || !program.publicity) return;
+    console.log('submitting', program, user?.id);
+
     if (!user) return;
-    const { data, errors } = await createProgram({
+    const { data } = await createProgram({
       variables: {
         input: {
           name: program.name,
           publicity: program.publicity,
           tags: program.tags,
+          specificity: program.specificity,
           userId: user.id,
         },
       },
     });
-    console.log(errors);
 
     // TODO: handle error
     if (!data?.createProgram) return;

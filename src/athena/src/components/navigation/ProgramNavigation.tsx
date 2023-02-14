@@ -1,5 +1,6 @@
 import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Program } from '../screens/program/Program';
+import { Workout } from '../screens/program/Workout';
 import { RootParamList } from './RootNavigator';
 
 export type ProgramParamList = {
@@ -17,7 +18,7 @@ export const ProgramStackNavigator: React.FC<ProgramStackNavigatorProps> = ({ ro
     <>
       <ProgramStack.Navigator initialRouteName="Program" screenOptions={{ headerShown: false }}>
         <ProgramStack.Screen name="Program" component={Program} initialParams={{ programId }} />
-        {/* <ProgramStack.Screen name="Workout" component={Program} /> */}
+        <ProgramStack.Screen name="Workout" component={Workout} />
       </ProgramStack.Navigator>
     </>
   );

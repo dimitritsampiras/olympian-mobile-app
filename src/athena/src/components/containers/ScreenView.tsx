@@ -28,15 +28,19 @@ export const ScreenView: React.FC<ScreenViewProps> = ({
           paddingHorizontal: 24,
           backgroundColor: type === 'form' ? theme.colors.white : theme.colors.gray[50],
         },
-        spaced && { justifyContent: 'space-between' },
+        type === 'form' && spaced && { justifyContent: 'space-between' },
         styles,
       ]}>
-      <ScrollView
-        showsVerticalScrollIndicator={showScrollBar}
-        alwaysBounceVertical={scrollBounce}
-        contentContainerStyle={spaced ? ScrollStyle.isSpaced : ScrollStyle.notSpaced}>
-        {children}
-      </ScrollView>
+      {type === 'main' ? (
+        <ScrollView
+          showsVerticalScrollIndicator={showScrollBar}
+          alwaysBounceVertical={scrollBounce}
+          contentContainerStyle={spaced ? ScrollStyle.isSpaced : ScrollStyle.notSpaced}>
+          {children}
+        </ScrollView>
+      ) : (
+        children
+      )}
     </SafeAreaView>
   );
 };

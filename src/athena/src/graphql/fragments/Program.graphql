@@ -6,4 +6,15 @@ fragment Program on Program {
   specificity
   tags
   trainingLevel
+  workouts {
+    ...Workout
+  }
+}
+
+fragment Workout on Workout {
+  id
+  name
+  specificity
+  tags
+  trainingLevel
 }

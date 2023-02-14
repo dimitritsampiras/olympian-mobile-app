@@ -4,7 +4,7 @@ import express from 'express';
 import config from './config';
 import { createApolloServer } from './server/createServer';
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({ log: ['info', 'warn', 'error'] });
 
 const main = async () => {
   // main

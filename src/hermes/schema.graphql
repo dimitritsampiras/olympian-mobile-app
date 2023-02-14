@@ -11,9 +11,15 @@ type AppError {
 input CreateProgramInput {
   name: String!
   publicity: Publicity!
+  specificity: [Specificity!]!
   tags: [String!]!
   userId: String!
 }
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
 
 type Exercise {
   description: String!
@@ -30,6 +36,7 @@ input LoginInput {
 
 type Mutation {
   createProgram(input: CreateProgramInput!): Program
+  createWorkout(programId: String!): Workout
   login(input: LoginInput!): String
   signup(input: SignUpInput!): Boolean
 }
@@ -64,6 +71,7 @@ type Query {
   program(programId: String!): Program
   userPrograms: [Program!]!
   usernameExists(username: String!): Boolean
+  workout(workoutId: String!): Workout
 }
 
 input SignUpInput {
@@ -74,7 +82,7 @@ input SignUpInput {
 }
 
 enum Specificity {
-  athletic
+  athleticism
   cardio
   general
   hypertrophy
@@ -102,9 +110,12 @@ type UserResponse {
 }
 
 type Workout {
+  duration: DateTime!
+  exercises: [Exercise!]!
   id: ID!
   name: String!
+  programId: String
   specificity: [Specificity!]!
   tags: [String!]!
-  trainingLevel: TrainingLevel!
+  trainingLevel: TrainingLevel
 }

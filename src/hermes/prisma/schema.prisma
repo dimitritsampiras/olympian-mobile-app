@@ -39,32 +39,36 @@ model Profile {
 }
 
 model Program {
-  id            String         @id @default(cuid())
-  name          String
+  id                       String         @id @default(cuid())
+  name                     String
   // complimentary to other programs. for searching purposes
   // i.e. stretch routine etc. 
-  complimentary Boolean?
+  complimentary            Boolean?
   // type of training for searching purposes
-  specificity   Specificity[]
+  specificity              Specificity[]
   // optionally provide training level recommended for program
-  trainingLevel TrainingLevel?
+  trainingLevel            TrainingLevel?
   // list of tags for search purposes
-  tags          String[]
-  publicity     Publicity
-  workouts      Workout[]
-  profile       Profile        @relation(fields: [profileId], references: [id])
-  profileId     String
+  tags                     String[]
+  publicity                Publicity
+  // public stuff
+  likes                    Int?
+  profileImageDefaultColor String         @default("e0e7ff") @db.VarChar(7)
+  profileImageDefaultEmoji String         @default("1F93C") @db.VarChar(5)
+  workouts                 Workout[]
+  profile                  Profile        @relation(fields: [profileId], references: [id])
+  profileId                String
 }
 
 model Workout {
-  id            String        @id @default(cuid())
+  id            String         @id @default(cuid())
   name          String
   specificity   Specificity[]
-  trainingLevel TrainingLevel
+  trainingLevel TrainingLevel?
   tags          String[]
   duration      DateTime
   exercises     Exercise[]
-  Program       Program?      @relation(fields: [programId], references: [id])
+  program       Program?       @relation(fields: [programId], references: [id], onDelete: Cascade)
   programId     String?
 }
 
@@ -77,7 +81,7 @@ model Exercise {
   description      String
   staticExercise   StaticExercise @relation(fields: [staticExerciseId], references: [id])
   staticExerciseId String
-  Workout          Workout?       @relation(fields: [workoutId], references: [id])
+  workout          Workout?       @relation(fields: [workoutId], references: [id])
   workoutId        String?
 }
 
@@ -87,7 +91,7 @@ model StaticExercise {
   movement      Movement
   targetMuscles Muscle[]
   equipment     Equipment?
-  Exercise      Exercise[]
+  exercise      Exercise[]
 }
 
 model Muscle {
@@ -102,7 +106,7 @@ enum Specificity {
   general
   strength
   hypertrophy
-  athletic
+  athleticism
   cardio
 }
 

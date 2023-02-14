@@ -9,9 +9,22 @@ query ProgramFromId($programId: String!) {
   }
 }
 
+query WorkoutFromId($workoutId: String!) {
+  workout(workoutId: $workoutId) {
+    ...Workout
+    exercises {
+      id
+    }
+  }
+}
 
 query UserPrograms {
   userPrograms {
     ...Program
+    profile {
+      user {
+        username
+      }
+    }
   }
 }

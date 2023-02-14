@@ -8,7 +8,7 @@ import {
 } from 'react-native-heroicons/solid';
 import { Home } from '../screens';
 import { Settings } from '../screens/Settings';
-import { Programs } from '../screens/program/Programs';
+import { Programs } from '../screens/Programs';
 import { Explore } from '../screens/Explore';
 import { StaticExercise } from '../screens/staticExercise/StaticExercise';
 

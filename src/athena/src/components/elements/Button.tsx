@@ -68,6 +68,7 @@ export const Button: React.FC<ButtonProps & ButtonVariant> = ({
 
   // handle the press in event
   const handleOnPressIn = () => {
+    if (!onPress) return;
     // guard press in if button is disabled
     if (disabled || loading) return;
     // haptic feedback

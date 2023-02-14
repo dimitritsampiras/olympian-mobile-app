@@ -22,7 +22,7 @@ export const Heading: React.FC<HeadingProps> = ({ as = 'h1', children, style, no
       fontSize = 26;
       break;
     case 'h3':
-      fontSize = 20;
+      fontSize = 18;
       break;
   }
 
@@ -35,7 +35,7 @@ export const Heading: React.FC<HeadingProps> = ({ as = 'h1', children, style, no
       marginBottom = 22;
       break;
     case 'h2':
-      marginBottom = 18;
+      marginBottom = 14;
       break;
     case 'h3':
       marginBottom = 14;

@@ -8,6 +8,11 @@ const rules = {
   }),
 };
 
-export const permissions = shield({
-  // Queries with rules go here.
-});
+export const permissions = shield(
+  {
+    // Queries with rules go here.
+  },
+  {
+    debug: true,
+  }
+);

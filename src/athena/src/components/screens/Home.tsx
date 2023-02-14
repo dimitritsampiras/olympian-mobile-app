@@ -9,6 +9,7 @@ import { Heading } from '../elements/typography/Heading';
 import { UserContext } from '../providers';
 import { View } from 'react-native';
 import { SubHeading } from '../elements/typography/SubHeading';
+import { Header } from '../containers/Header';
 
 interface HomeProps extends NativeStackScreenProps<TabParamList & RootParamList, 'Home'> {}
 
@@ -18,12 +19,12 @@ export const Home: React.FC<HomeProps> = ({ navigation }) => {
   return (
     <ScreenView>
       {/* TOD0: turn this into a header component */}
-      <View style={{ paddingTop: 25, paddingBottom: 25 }}>
+      <Header>
         <Heading style={{ width: 300 }}>
           Welcome back, {'\n'}
           {user?.name} 👋
         </Heading>
-      </View>
+      </Header>
 
       <SubHeading>Trending Exercises</SubHeading>
       <Button onPress={() => navigation.navigate('CreateProgram')}>Create Program</Button>

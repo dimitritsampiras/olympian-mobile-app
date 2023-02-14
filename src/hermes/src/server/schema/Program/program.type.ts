@@ -23,11 +23,12 @@ export const WorkoutType = objectType({
   definition(t) {
     t.field(Workout.id);
     t.field(Workout.name);
-    // t.field(Workout.duration);
+    t.field(Workout.duration);
     t.field(Workout.specificity);
     t.field(Workout.tags);
     t.field(Workout.trainingLevel);
-    // t.field(Workout.exercises);
+    t.field(Workout.exercises);
+    t.field(Workout.programId);
   },
 });
 

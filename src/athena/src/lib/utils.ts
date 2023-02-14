@@ -1,10 +1,11 @@
-const hexToRgb = (hex: string) => {
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result
-    ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16)
-      }
-    : null;
+import { Specificity } from './graphql';
+import { ThemeColor } from './types';
+
+export const specificityColor = (specificity: Specificity): ThemeColor => {
+  if (specificity === Specificity.Strength) return 'red';
+  if (specificity === Specificity.Hypertrophy) return 'blue';
+  if (specificity === Specificity.General) return 'green';
+  if (specificity === Specificity.Athleticism) return 'orange';
+  if (specificity === Specificity.Cardio) return 'violet';
+  return 'gray';
 };

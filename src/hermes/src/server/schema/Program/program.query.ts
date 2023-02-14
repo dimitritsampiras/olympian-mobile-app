@@ -4,7 +4,10 @@ import { extendType, list, nullable } from 'nexus';
 export const ProgramQuery = extendType({
   type: 'Query',
   definition(t) {
-    // create program mutation
+    /**
+     *
+     * gets the program from an id
+     */
     t.field('program', {
       type: nullable('Program'),
       args: { programId: 'String' },
@@ -16,7 +19,10 @@ export const ProgramQuery = extendType({
         return program;
       },
     });
-    // create program mutation
+    /**
+     *
+     * gets all programs that the user has
+     */
     t.field('userPrograms', {
       type: list('Program'),
       resolve: async (_root, _args, { prisma, userId }) => {
@@ -25,6 +31,21 @@ export const ProgramQuery = extendType({
           include: { profile: { include: { user: { select: { username: true } } } } },
         });
         return programs;
+      },
+    });
+    /**
+     *
+     * gets all programs that the user has
+     */
+    t.field('workout', {
+      type: nullable('Workout'),
+      args: { workoutId: 'String' },
+      resolve: async (_root, { workoutId }, { prisma }) => {
+        const program = await prisma.workout.findUnique({
+          where: { id: workoutId },
+          include: { program: { include: { profile: true } }, exercises: true },
+        });
+        return program;
       },
     });
   },
