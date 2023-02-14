@@ -10,5 +10,6 @@ export const UserType = objectType({
     t.field(User.username);
     t.field(User.email);
     t.field(User.password);
+    t.field(User.profile);
   },
 });

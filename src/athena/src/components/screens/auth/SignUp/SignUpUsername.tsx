@@ -12,7 +12,7 @@ import { SignUpInput } from '../../../../lib/graphql';
 import { UserCircleIcon } from 'react-native-heroicons/solid';
 import { useUserExistsLazyQuery } from '../../../../lib/graphql';
 import { Heading } from '../../../elements/typography/Heading';
-import { BodyText } from '../../../elements/typography/Body';
+import { BodyText } from '../../../elements/typography/BodyText';
 
 interface SignUpUsernameProps {}
 
@@ -69,22 +69,22 @@ export const SignUpUsername: React.FC<SignUpUsernameProps> = () => {
                   Icon={UserCircleIcon}
                   iconProps={{
                     size: 20,
-                    fill: touched.username && !!errors.username ? 'red' : theme.gray[400],
+                    fill: touched.username && !!errors.username ? 'red' : theme.colors.gray[400],
                   }}
                 />
                 <Text style={styles.errorMessageStyle}>{touched.username && errors.username}</Text>
               </View>
               <View style={styles.footer}>
                 <PageControl
-                  color={theme.blue[500]}
-                  inactiveColor={theme.gray[200]}
+                  color={theme.colors.blue[500]}
+                  inactiveColor={theme.colors.gray[200]}
                   currentPage={step}
                   numOfPages={4}
                   limitShownPages
                   spacing={8}
                   size={8}
                 />
-                <Button style={{ padding: 19 }} onPress={handleSubmit as () => void}>
+                <Button style={{ padding: 19, width: '100%' }} onPress={handleSubmit as () => void}>
                   Next
                 </Button>
               </View>

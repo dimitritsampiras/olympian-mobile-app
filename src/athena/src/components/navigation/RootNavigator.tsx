@@ -7,7 +7,7 @@ import { TabNavigator } from './TabNavigator';
 export type RootParamList = {
   Tabs: undefined;
   CreateProgram: undefined;
-  ProgramNavigator: undefined;
+  ProgramNavigator: { programId: string };
 };
 
 const RootStack = createNativeStackNavigator<RootParamList>();

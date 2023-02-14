@@ -6,7 +6,7 @@ import { GlobeAltIcon, UserGroupIcon, UserIcon } from 'react-native-heroicons/so
 import { Publicity } from '../../../lib/graphql';
 import theme from '../../../theme';
 import { Heading } from '../../elements';
-import { BodyText } from '../../elements/typography/Body';
+import { BodyText } from '../../elements/typography/BodyText';
 
 import { CreateProgramContext } from './CreateProgram';
 
@@ -53,7 +53,7 @@ export const PublicitySelector: React.FC<
     <Pressable
       onPress={props.onPress}
       style={() => ({
-        backgroundColor: selected ? theme.blue[100] : theme.gray[50],
+        backgroundColor: selected ? theme.colors.blue[100] : theme.colors.gray[50],
         marginVertical: 6,
         height: 64,
         borderRadius: 12,
@@ -71,7 +71,7 @@ export const PublicitySelector: React.FC<
           style={{
             marginLeft: 8,
             textTransform: 'capitalize',
-            color: selected ? theme.blue[600] : theme.gray[400],
+            color: selected ? theme.colors.blue[600] : theme.colors.gray[400],
             fontWeight: '600',
             ...styles,
           }}>
@@ -86,7 +86,7 @@ export const PublicityIcon: React.FC<{ publicity: `${Publicity}`; selected: bool
   publicity,
   selected,
 }) => {
-  const styles = !selected ? { fill: theme.gray[400] } : { fill: theme.blue[600] };
+  const styles = !selected ? { fill: theme.colors.gray[400] } : { fill: theme.colors.blue[600] };
   if (publicity === Publicity.Friends) return <UserGroupIcon size="18" {...styles} />;
   if (publicity === Publicity.Private) return <UserIcon size="18" {...styles} />;
   return <GlobeAltIcon size="18" {...styles} />;

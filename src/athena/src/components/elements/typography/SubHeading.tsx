@@ -21,5 +21,7 @@ export const SubHeading: React.FC<SubHeadingProps> = ({ as = 'h1', children }) =
       break;
   }
 
-  return <Text style={{ fontSize, color: theme.gray[600], fontWeight: '400' }}>{children}</Text>;
+  return (
+    <Text style={{ fontSize, color: theme.colors.gray[600], fontWeight: '400' }}>{children}</Text>
+  );
 };

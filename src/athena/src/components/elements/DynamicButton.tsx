@@ -1,32 +1,15 @@
 import * as Haptics from 'expo-haptics';
 import React, { ReactNode } from 'react';
-import {
-  StyleSheet,
-  Pressable,
-  Text,
-  ViewStyle,
-  PressableProps,
-  ActivityIndicator,
-} from 'react-native';
+import { StyleSheet, Pressable, Text, ViewStyle, PressableProps } from 'react-native';
 import Animated, {
   interpolate,
-  interpolateColor,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
 import theme from '../../theme';
 
-const FULL_GRADIENT = [theme.colors.blue[600], theme.colors.blue[700]];
-// const FLAT_GRADIENT = [theme.colors.blue[100], theme.colors.blue[200]];
-// const GHOST_GRADIENT = [theme.colors.gray[50], theme.colors.blue[100]];
-
-type ButtonVariant =
-  | { full?: true; flat?: never; ghost?: never }
-  | { full?: never; flat?: true; ghost?: never }
-  | { full?: never; flat?: never; ghost?: true };
-
-interface ButtonProps extends PressableProps {
+interface DynamicButtonProps extends PressableProps {
   // button can't be pressed
   disabled?: boolean;
   // fit-content instead of full width
@@ -48,10 +31,7 @@ interface ButtonProps extends PressableProps {
  * @param ButtonProps properties of a button element
  * @returns JSX element
  */
-export const Button: React.FC<ButtonProps & ButtonVariant> = ({
-  full = true,
-  flat,
-  ghost,
+export const DynamicButton: React.FC<DynamicButtonProps> = ({
   auto,
   style,
   disabled,
@@ -66,53 +46,33 @@ export const Button: React.FC<ButtonProps & ButtonVariant> = ({
   const scale = useSharedValue(1);
   const color = useSharedValue(1);
 
-  // handle the press in event
-  const handleOnPressIn = () => {
+  //handle on press action
+  const handleOnPress: PressableProps['onPress'] = (event) => {
     // guard press in if button is disabled
     if (disabled || loading) return;
+
+    if (!onPress) return;
     // haptic feedback
     Haptics.selectionAsync();
     scale.value = withSpring(0, { mass: 0.1, velocity: 10 });
     color.value = withSpring(0, { mass: 0.1, velocity: 10 });
-  };
 
-  // handle the press out event
-  const handleOnPressOut: PressableProps['onPressOut'] = (event) => {
-    // guard press out if button is disabled
-    if (disabled || loading) return;
-    if (!onPress) return;
-    scale.value = withSpring(1, { mass: 0.1 });
-    color.value = withSpring(1, { mass: 0.1 });
-
-    // fire onPress property
     onPress(event);
   };
 
+  const backgroundColor = style?.backgroundColor || theme.colors.blue[600];
   const animatedScaleStyle = useAnimatedStyle(() => {
-    const gradient = FULL_GRADIENT;
-
     return {
       transform: [{ scale: interpolate(scale.value, [1, 0], [1, 0.98]) }],
-      backgroundColor:
-        disabled || loading
-          ? interpolateColor(color.value, [1, 0], [theme.colors.blue[300], theme.colors.blue[300]])
-          : interpolateColor(color.value, [1, 0], gradient),
+      backgroundColor,
     };
   });
 
   return (
-    <Pressable
-      style={[auto && styles.auto, { ...style }]}
-      onPressIn={handleOnPressIn}
-      onPressOut={handleOnPressOut}
-      {...props}>
+    <Pressable style={[auto && styles.auto, { ...style }]} onPress={handleOnPress} {...props}>
       {({ pressed }) => (
         <Animated.View style={[styles.button, animatedScaleStyle]}>
-          {!loading ? (
-            <Text style={[styles.text, full && styles.fullText]}>{children}</Text>
-          ) : (
-            <ActivityIndicator color={'white'} />
-          )}
+          <Text style={[styles.text]}>{children}</Text>
         </Animated.View>
       )}
     </Pressable>
@@ -121,16 +81,15 @@ export const Button: React.FC<ButtonProps & ButtonVariant> = ({
 
 const styles = StyleSheet.create({
   button: {
-    height: 52,
     borderRadius: 18,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 18,
   },
   text: {
-    fontSize: 17,
+    fontSize: 20,
     fontWeight: '400',
-    letterSpacing: 0.1,
+    letterSpacing: 1,
+    color: 'white',
   },
   full: {
     backgroundColor: theme.colors.blue[600],
@@ -158,12 +117,6 @@ const styles = StyleSheet.create({
   },
   flatTextDisabled: {
     color: theme.colors.blue[300],
-  },
-  buttonShadowBase: {
-    shadowColor: theme.colors.blue[600],
-    shadowRadius: 6,
-    shadowOpacity: 0.35,
-    shadowOffset: { height: 10, width: 0 },
   },
   disabled: {
     backgroundColor: theme.colors.gray[200],

@@ -8,6 +8,13 @@ type AppError {
   name: String!
 }
 
+input CreateProgramInput {
+  name: String!
+  publicity: Publicity!
+  tags: [String!]!
+  userId: String!
+}
+
 type Exercise {
   description: String!
   id: ID!
@@ -22,14 +29,22 @@ input LoginInput {
 }
 
 type Mutation {
+  createProgram(input: CreateProgramInput!): Program
   login(input: LoginInput!): String
   signup(input: SignUpInput!): Boolean
+}
+
+type Profile {
+  id: ID!
+  programs: [Program!]!
+  user: User!
 }
 
 type Program {
   complimentary: Boolean
   id: ID!
   name: String!
+  profile: Profile!
   publicity: Publicity!
   specificity: [Specificity!]!
   tags: [String!]!
@@ -47,7 +62,9 @@ type Query {
   emailExists(email: String!): Boolean
   me: User
   popularPrograms(skip: Int!, take: Int!): [Program!]!
+  program(programId: String!): Program
   trendingPrograms(skip: Int!, take: Int!): [Program!]!
+  userPrograms: [Program!]!
   usernameExists(username: String!): Boolean
 }
 
@@ -77,6 +94,7 @@ type User {
   id: ID!
   name: String!
   password: String!
+  profile: Profile
   username: String!
 }
 

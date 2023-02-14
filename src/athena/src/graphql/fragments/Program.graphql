@@ -4,3 +4,13 @@ fragment DiscoveryProgram on Program {
   publicity
   trainingLevel
 }
+
+fragment Program on Program {
+  id
+  name
+  publicity
+  complimentary
+  specificity
+  tags
+  trainingLevel
+}

@@ -1,11 +1,11 @@
-import { extendType, list, nonNull } from 'nexus';
+import { extendType, list, nonNull, nullable } from 'nexus';
 import { mockTrendingPrograms, mockPopularPrograms } from '../../../data/programs';
 
 export const ProgramQuery = extendType({
   type: 'Query',
   definition(t) {
     t.field('trendingPrograms', {
-      type: nonNull(list(nonNull('Program'))),
+      type: list('Program'),
       args: { skip: 'Int', take: 'Int' },
       resolve: async (_root, { skip, take }, { prisma }) => {
         console.log(skip, take, prisma);
@@ -21,7 +21,7 @@ export const ProgramQuery = extendType({
       },
     });
     t.field('popularPrograms', {
-      type: nonNull(list(nonNull('Program'))),
+      type: list('Program'),
       args: { skip: 'Int', take: 'Int' },
       resolve: async (_root, { skip, take }, { prisma }) => {
         console.log(skip, take, prisma);
@@ -34,6 +34,29 @@ export const ProgramQuery = extendType({
         //       popularity: 'desc',
         //     },
         //   });
+      },
+    });
+    // create program mutation
+    t.field('program', {
+      type: nullable('Program'),
+      args: { programId: 'String' },
+      resolve: async (_root, { programId }, { prisma }) => {
+        const program = await prisma.program.findUnique({
+          where: { id: programId },
+          include: { profile: { include: { user: { select: { username: true } } } } },
+        });
+        return program;
+      },
+    });
+    // create program mutation
+    t.field('userPrograms', {
+      type: list('Program'),
+      resolve: async (_root, _args, { prisma, userId }) => {
+        const programs = await prisma.program.findMany({
+          where: { profile: { userId } },
+          include: { profile: { include: { user: { select: { username: true } } } } },
+        });
+        return programs;
       },
     });
   },

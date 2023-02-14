@@ -1,11 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { createContext, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { ArrowLongLeftIcon, XMarkIcon } from 'react-native-heroicons/solid';
 import { PageControl } from 'react-native-ui-lib';
-import { Program } from '../../../lib/graphql';
+import _ from 'lodash';
 
+import { Program, Publicity, useCreateProgramMutation } from '../../../lib/graphql';
 import theme from '../../../theme';
 import { ScreenView } from '../../containers/ScreenView';
 import { Button } from '../../elements';
@@ -13,10 +14,9 @@ import { RootParamList } from '../../navigation';
 import { ProgramName } from './ProgramName';
 import { ProgramPublicity } from './ProgramPublicity';
 import { ProgramTags } from './ProgramTags';
+import { UserContext } from '../../providers';
 
-type ParamList = NativeStackScreenProps<RootParamList, 'CreateProgram'>;
-
-interface CreateProgramProps extends ParamList {}
+type CreateProgramProps = NativeStackScreenProps<RootParamList, 'CreateProgram'>;
 
 export const CreateProgramContext = createContext({
   step: 0,
@@ -33,15 +33,38 @@ const PAGES = [ProgramName, ProgramPublicity, ProgramTags];
  */
 export const CreateProgram: React.FC<CreateProgramProps> = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootParamList>>();
+  const { user } = useContext(UserContext);
 
+  // state
+  const [step, setStep] = useState(0);
   const [program, setProgram] = useState<Partial<Program>>({
     name: '',
+    publicity: Publicity.Private,
   });
 
-  const [step, setStep] = useState(0);
+  const [createProgram, { loading }] = useCreateProgramMutation();
+
+  //
+  const handleSubmit = async () => {
+    if (!program.name || !program.publicity || !program.tags) return;
+    if (!user) return;
+    const { data } = await createProgram({
+      variables: {
+        input: {
+          name: program.name,
+          publicity: program.publicity,
+          tags: program.tags,
+          userId: user.id,
+        },
+      },
+    });
+    // TODO: handle error
+    if (!data?.createProgram) return;
+    navigation.navigate('ProgramNavigator', { programId: data?.createProgram.id });
+  };
 
   const handleOnNext = () => {
-    if (step >= PAGES.length - 1) navigation.navigate('ProgramNavigator');
+    if (step <= PAGES.length) handleSubmit();
     setStep(step + 1);
   };
 
@@ -62,24 +85,31 @@ export const CreateProgram: React.FC<CreateProgramProps> = () => {
                 onPress={() => {
                   setStep((prev) => (prev > 0 ? prev - 1 : prev));
                 }}>
-                <ArrowLongLeftIcon color={theme.blue[600]} />
+                <ArrowLongLeftIcon color={theme.colors.blue[600]} />
               </TouchableOpacity>
             ) : (
               <View></View>
             )}
             <TouchableOpacity onPress={navigation.goBack}>
-              <XMarkIcon color={theme.coolGray[500]} />
+              <XMarkIcon color={theme.colors.coolGray[500]} />
             </TouchableOpacity>
           </View>
+
+          {/* page form */}
           <View>{PAGES.map((Page, i) => i === step && <Page key={i} />)}</View>
         </View>
         <View>
-          <Button shadow={false} style={{ marginBottom: 24 }} onPress={handleOnNext}>
-            Next
+          <Button
+            loading={loading}
+            disabled={_.isEmpty(program.name)}
+            shadow={false}
+            style={{ marginBottom: 24 }}
+            onPress={handleOnNext}>
+            {step >= PAGES.length - 1 ? 'Submit' : 'Next'}
           </Button>
           <PageControl
-            color={theme.blue[500]}
-            inactiveColor={theme.gray[200]}
+            color={theme.colors.blue[500]}
+            inactiveColor={theme.colors.gray[200]}
             currentPage={step}
             numOfPages={PAGES.length}
             limitShownPages

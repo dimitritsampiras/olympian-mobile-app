@@ -120,7 +120,9 @@ export const Login: React.FC<LoginProps> = ({ navigation }) => {
                   <View style={{ minHeight: 16, marginBottom: 30 }}>
                     <Text style={styles.errorMessageStyle}>{errors.errorMessage}</Text>
                   </View>
-                  <Button onPress={handleSubmit as () => void}>Login</Button>
+                  <Button onPress={handleSubmit as () => void} style={{ width: '100%' }}>
+                    Login
+                  </Button>
                 </>
               )}
             </Formik>

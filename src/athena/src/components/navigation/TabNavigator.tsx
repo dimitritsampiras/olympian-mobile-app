@@ -8,14 +8,16 @@ import {
 } from 'react-native-heroicons/solid';
 import { Home } from '../screens';
 import { Settings } from '../screens/Settings';
+import { Programs } from '../screens/program/Programs';
 import { Browse } from '../screens/Browse';
+import { StaticExercise } from '../screens/staticExercise/StaticExercise';
 
 export type TabParamList = {
   Home: undefined;
-  Browse: undefined;
-  Settings: undefined;
+  Programs: undefined;
   Explore: undefined;
-  MyPrograms: undefined;
+  Profile: undefined;
+  StaticExercise: undefined;
 };
 const Tabs = createBottomTabNavigator<TabParamList>();
 
@@ -32,8 +34,13 @@ export const TabNavigator: React.FC = () => {
         component={Browse}
         options={{ tabBarIcon: GlobeAsiaAustraliaIcon }}
       />
-      <Tabs.Screen name="My Programs" component={Home} options={{ tabBarIcon: BookOpenIcon }} />
+      <Tabs.Screen name="Programs" component={Programs} options={{ tabBarIcon: BookOpenIcon }} />
       <Tabs.Screen name="Profile" component={Settings} options={{ tabBarIcon: UserIcon }} />
+      <Tabs.Screen
+        name="Static Exercise"
+        component={StaticExercise}
+        options={{ tabBarIcon: BookOpenIcon }}
+      />
     </Tabs.Navigator>
   );
 };

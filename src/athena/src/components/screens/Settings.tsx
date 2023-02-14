@@ -6,10 +6,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { TabParamList } from '../navigation';
 import { Button } from '../elements/Button';
 import { UserContext } from '../providers';
+import { Heading } from '../elements';
 
-interface SettingsProps extends NativeStackScreenProps<TabParamList, 'Settings'> {}
+interface SettingsProps extends NativeStackScreenProps<TabParamList, 'Profile'> {}
 
-export const Settings: React.FC<SettingsProps> = () => {
+export const Settings: React.FC<SettingsProps> = ({ route }) => {
   const { user, refetch } = useContext(UserContext);
 
   const handleLogout = async () => {
@@ -19,6 +20,7 @@ export const Settings: React.FC<SettingsProps> = () => {
 
   return (
     <SafeAreaView style={{ paddingHorizontal: 25 }}>
+      <Heading>{route.name}</Heading>
       {user && (
         <>
           <Text>{user.username}</Text>
