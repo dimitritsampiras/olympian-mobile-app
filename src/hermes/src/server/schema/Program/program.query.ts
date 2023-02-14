@@ -1,9 +1,41 @@
-import { extendType, list, nullable } from 'nexus';
+import { extendType, list, nonNull, nullable } from 'nexus';
+import { mockTrendingPrograms, mockPopularPrograms } from '../../../data/programs';
 
-// All mutations for User graphql object type
 export const ProgramQuery = extendType({
   type: 'Query',
   definition(t) {
+    t.field('trendingPrograms', {
+      type: list('Program'),
+      args: { skip: 'Int', take: 'Int' },
+      resolve: async (_root, { skip, take }, { prisma }) => {
+        console.log(skip, take, prisma);
+        return mockTrendingPrograms;
+        //   return await prisma.program.findMany({
+        //     skip,
+        //     take,
+        //     orderBy: {
+        //       // "trendingness" Program field does not yet exist.
+        //       trendingness: 'desc',
+        //     },
+        //   });
+      },
+    });
+    t.field('popularPrograms', {
+      type: list('Program'),
+      args: { skip: 'Int', take: 'Int' },
+      resolve: async (_root, { skip, take }, { prisma }) => {
+        console.log(skip, take, prisma);
+        return mockPopularPrograms;
+        //   return await prisma.program.findMany({
+        //     skip,
+        //     take,
+        //     orderBy: {
+        //       // "popularity" Program field does not yet exist.
+        //       popularity: 'desc',
+        //     },
+        //   });
+      },
+    });
     // create program mutation
     t.field('program', {
       type: nullable('Program'),

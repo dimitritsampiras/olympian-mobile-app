@@ -1,0 +1,11 @@
+query TrendingPrograms($skip: Int!, $take: Int!) {
+  trendingPrograms(skip: $skip, take: $take) {
+    ...DiscoveryProgram
+  }
+}
+
+query PopularPrograms($skip: Int!, $take: Int!) {
+  popularPrograms(skip: $skip, take: $take) {
+    ...DiscoveryProgram
+  }
+}

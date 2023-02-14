@@ -1,3 +1,10 @@
+# This should be modified to include 
+fragment DiscoveryProgram on Program {
+  name
+  publicity
+  trainingLevel
+}
+
 fragment Program on Program {
   id
   name

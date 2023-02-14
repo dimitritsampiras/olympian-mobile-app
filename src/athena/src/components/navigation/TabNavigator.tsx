@@ -9,7 +9,7 @@ import {
 import { Home } from '../screens';
 import { Settings } from '../screens/Settings';
 import { Programs } from '../screens/program/Programs';
-import { Explore } from '../screens/Explore';
+import { Browse } from '../screens/Browse';
 import { StaticExercise } from '../screens/staticExercise/StaticExercise';
 
 export type TabParamList = {
@@ -31,7 +31,7 @@ export const TabNavigator: React.FC = () => {
       <Tabs.Screen name="Home" component={Home} options={{ tabBarIcon: HomeIcon }} />
       <Tabs.Screen
         name="Explore"
-        component={Explore}
+        component={Browse}
         options={{ tabBarIcon: GlobeAsiaAustraliaIcon }}
       />
       <Tabs.Screen name="Programs" component={Programs} options={{ tabBarIcon: BookOpenIcon }} />
