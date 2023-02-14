@@ -1,0 +1,10 @@
+# fragment DiscoveryStaticExercise on Exercise {
+#   name
+# }
+
+# fragment StaticExercise on Exercise {
+#   id
+#   name
+#   movement
+#   equipment
+# }

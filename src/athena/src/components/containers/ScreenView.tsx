@@ -10,6 +10,7 @@ interface ScreenViewProps {
   spaced?: boolean;
   showScrollBar?: boolean;
   scrollBounce?: boolean;
+  scrollable?: boolean;
 }
 
 export const ScreenView: React.FC<ScreenViewProps> = ({
@@ -17,6 +18,7 @@ export const ScreenView: React.FC<ScreenViewProps> = ({
   spaced,
   showScrollBar = false,
   scrollBounce = true,
+  scrollable = true,
   styles,
   children,
 }) => {
@@ -34,6 +36,7 @@ export const ScreenView: React.FC<ScreenViewProps> = ({
       <ScrollView
         showsVerticalScrollIndicator={showScrollBar}
         alwaysBounceVertical={scrollBounce}
+        scrollEnabled={scrollable}
         contentContainerStyle={spaced ? ScrollStyle.isSpaced : ScrollStyle.notSpaced}>
         {children}
       </ScrollView>

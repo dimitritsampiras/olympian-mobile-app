@@ -1,16 +1,29 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import Body, { Muscle } from 'react-native-body-highlighter';
-import { ChevronRightIcon } from 'react-native-heroicons/solid';
+import { ChevronRightIcon, PlusIcon } from 'react-native-heroicons/solid';
+import { Button } from 'react-native-ui-lib';
 import theme from '../../theme';
 import { Card } from './Card';
 
 interface ExerciseProps {
   exerciseName: string;
   muscles: (Muscle & { slug: UIMuscleSlugs })[];
+  add: boolean;
 }
 
-export const Exercise: React.FC<ExerciseProps> = ({ muscles, exerciseName }) => {
+export const Exercise: React.FC<ExerciseProps> = ({ muscles, exerciseName, add = false }) => {
+  const endButton = add ? (
+    <Button
+      iconSource={PlusIcon}
+      outline
+      style={{ width: 45, height: 45 }}
+      borderRadius={0}
+      outlineColor={theme.colors.blue[800]}
+    />
+  ) : (
+    <ChevronRightIcon width={18} fill={theme.colors.gray[200]} />
+  );
   return (
     <Card style={{ display: 'flex', flexDirection: 'row' }}>
       <View
@@ -57,11 +70,8 @@ export const Exercise: React.FC<ExerciseProps> = ({ muscles, exerciseName }) => 
           ))}
         </View>
       </View>
-
       {/* chrevron column */}
-      <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-        <ChevronRightIcon width={18} fill={theme.colors.gray[200]} />
-      </View>
+      <View style={{ alignItems: 'center', justifyContent: 'center' }}>{endButton}</View>
     </Card>
   );
 };

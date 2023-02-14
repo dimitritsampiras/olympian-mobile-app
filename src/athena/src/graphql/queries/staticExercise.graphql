@@ -1,0 +1,5 @@
+# query StaticExercises($skip: Int!, $take: Int!) {
+#   staticExercises(skip: $skip, take: $take) {
+#     ...DiscoveryStaticExercise
+#   }
+# }
