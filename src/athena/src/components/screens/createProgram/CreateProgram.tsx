@@ -23,6 +23,7 @@ export const CreateProgramContext = createContext({
   setStep: (() => {}) as React.Dispatch<React.SetStateAction<number>>,
   program: {} as Partial<Program>,
   setProgram: (() => {}) as React.Dispatch<React.SetStateAction<Partial<Program>>>,
+  handleOnNext: () => {},
 });
 
 const PAGES = [ProgramName, ProgramPublicity, ProgramTags];
@@ -69,7 +70,7 @@ export const CreateProgram: React.FC<CreateProgramProps> = () => {
   };
 
   return (
-    <CreateProgramContext.Provider value={{ program, setProgram, step, setStep }}>
+    <CreateProgramContext.Provider value={{ program, setProgram, step, setStep, handleOnNext }}>
       <ScreenView type="form" spaced>
         <View>
           <View

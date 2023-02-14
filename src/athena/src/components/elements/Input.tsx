@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { View } from 'react-native';
+import { NativeSyntheticEvent, TextInputSubmitEditingEventData, View } from 'react-native';
 import { Animated, Easing, StyleSheet, TextInput, TextInputProps, TextStyle } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import theme from '../../theme';
@@ -21,6 +21,7 @@ export const Input: React.FC<InputProps> = ({
   placeholder,
   Icon,
   iconProps = { size: '18', fill: theme.colors.gray[400] },
+  onSubmitEditing,
   ...props
 }) => {
   const animatedTranslationX = useRef(new Animated.Value(1)).current;
@@ -45,6 +46,13 @@ export const Input: React.FC<InputProps> = ({
     }).start();
   };
 
+  const handleOnSubmitEditing = (e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => {
+    if (!onSubmitEditing) return;
+
+    onSubmitEditing(e); //()=>{console.log("e")
+    handleUnFocus();
+  };
+
   return (
     <Animated.View
       style={{
@@ -59,7 +67,8 @@ export const Input: React.FC<InputProps> = ({
           style={{ ...styles.input }}
           selectionColor={theme.colors.gray[900]}
           onPressIn={handleOnPressIn}
-          onSubmitEditing={handleUnFocus}
+          onSubmitEditing={handleOnSubmitEditing}
+          // onSubmitEditing={handleSubmit}
           placeholder={placeholder}
           placeholderTextColor={theme.colors.gray[400]}
           // autoCapitalize={'none'}

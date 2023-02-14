@@ -10,7 +10,7 @@ import { CreateProgramContext } from './CreateProgram';
 interface ProgramNameProps {}
 
 export const ProgramName: React.FC<ProgramNameProps> = () => {
-  const { program, setProgram } = useContext(CreateProgramContext);
+  const { program, setProgram, handleOnNext } = useContext(CreateProgramContext);
 
   const handleOnTextChange = (text: string) => {
     setProgram((prev) => ({ ...prev, name: text }));
@@ -26,6 +26,7 @@ export const ProgramName: React.FC<ProgramNameProps> = () => {
       <Input
         value={program.name}
         onChangeText={handleOnTextChange}
+        onSubmitEditing={handleOnNext}
         placeholder="push pull legs, upper lower, etc."
         style={{ marginBottom: 30 }}
       />
