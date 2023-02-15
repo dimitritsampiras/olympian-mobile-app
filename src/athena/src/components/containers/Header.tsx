@@ -3,6 +3,6 @@ import { View, ViewProps } from 'react-native';
 
 interface HeaderProps extends ViewProps {}
 
-export const Header: React.FC<HeaderProps> = ({ children }) => {
-  return <View style={{ paddingTop: 25, paddingBottom: 25 }}>{children}</View>;
+export const Header: React.FC<HeaderProps> = ({ style, children }) => {
+  return <View style={[{ marginTop: 25 }, style]}>{children}</View>;
 };
