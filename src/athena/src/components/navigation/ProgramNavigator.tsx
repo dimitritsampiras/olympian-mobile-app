@@ -3,6 +3,7 @@ import { ExerciseSearch } from '../screens/program/ExerciseSearch';
 import { Program } from '../screens/program/Program';
 import { StaticExercise } from '../screens/program/StaticExercise';
 import { Workout } from '../screens/program/Workout';
+import { DiscoverParamList } from './DiscoverNavigator';
 import { HomeParamList } from './HomeNavigator';
 import { MyProgramsParamList } from './MyProgramsNavigator';
 
@@ -14,7 +15,7 @@ export type ProgramParamList = {
 };
 
 type ProgramStackNavigatorProps = NativeStackScreenProps<
-  HomeParamList & MyProgramsParamList,
+  HomeParamList & MyProgramsParamList & DiscoverParamList,
   'ProgramNavigator'
 >;
 

@@ -1,12 +1,12 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 
 import { useTrendingProgramsQuery, usePopularProgramsQuery } from '../../lib/graphql';
 
 import { ScreenView } from '../containers/ScreenView';
 import { Heading } from '../elements/typography/Heading';
 import { UserContext } from '../providers';
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, View } from 'react-native';
 import { SubHeading } from '../elements/typography/SubHeading';
 import { HorizontalCardScroller } from '../containers/HorizontalCardScroller';
 import { Header } from '../containers/Header';
@@ -19,20 +19,22 @@ import { categories, FITNESS_CATEGORIES } from './Browse';
 import { TouchableOpacity } from 'react-native-ui-lib';
 // import SearchBar from 'react-native-dynamic-search-bar';
 
-interface DiscoverCatagoryProps extends NativeStackScreenProps<DiscoverParamList, 'Discover'> {
-  catName: typeof FITNESS_CATEGORIES[number];
-  catColour: ThemeColor;
-  catEmojiHex: string;
+interface DiscoverCatagoryProps extends NativeStackScreenProps<DiscoverParamList, 'Categorized'> {
+  // catName: typeof FITNESS_CATEGORIES[number];
+  // catColour: ThemeColor;
+  // catEmojiHex: string;
 }
 
 export const CategorizedBrowse: React.FC<DiscoverCatagoryProps> = ({
-  navigation,
   route,
-  catName = 'Yoga',
-  catColour = 'red',
-  catEmojiHex = '1F9D8',
+  navigation,
+  // catName = 'Yoga',
+  // catColour = 'red',
+  // catEmojiHex = '1F9D8',
 }) => {
-  const { user } = useContext(UserContext);
+  const catName = 'Yoga';
+  const catColour = 'red';
+  const catEmojiHex = '1F9D8';
 
   const trendingQuery = useTrendingProgramsQuery({
     variables: {
@@ -51,7 +53,7 @@ export const CategorizedBrowse: React.FC<DiscoverCatagoryProps> = ({
   return (
     <ScreenView>
       {/* TOD0: turn this into a header component */}
-      <Header>
+      <Header navigation={navigation}>
         <Heading style={{ width: 300 }}>
           {route.name} {catName} <Emoji unicode={catEmojiHex} style={{ fontSize: 30 }} />{' '}
         </Heading>
@@ -71,7 +73,7 @@ export const CategorizedBrowse: React.FC<DiscoverCatagoryProps> = ({
               square
               program={program}
               key={program.name}
-              style={{ backgroundColor: theme.colors[catColour][500] + '30' }}
+              style={{ backgroundColor: theme.colors[catColour][300], marginRight: 16 }}
             />
           ))}
         </HorizontalCardScroller>
@@ -84,13 +86,13 @@ export const CategorizedBrowse: React.FC<DiscoverCatagoryProps> = ({
               square
               program={program}
               key={program.name}
-              style={{ backgroundColor: theme.colors[catColour][500] + '30' }}
+              style={{ backgroundColor: theme.colors[catColour][300], marginRight: 16 }}
             />
           ))}
         </HorizontalCardScroller>
       </View>
       <View style={{ paddingTop: 10, paddingBottom: 10 }}>
-        <SubHeading>Categories</SubHeading>
+        <SubHeading>Other Categories</SubHeading>
         <FlatList
           data={categories.filter((cat) => cat.name !== catName)}
           numColumns={2}

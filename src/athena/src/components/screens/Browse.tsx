@@ -76,6 +76,7 @@ export const Discover: React.FC<DiscoverProps> = ({ navigation, route }) => {
           renderItem={({ item }) => (
             // <FitnessCategory category={item.name} color={item.color} emojiHex={item.emojiHex} />
             <TouchableOpacity
+              onPress={() => navigation.navigate('Categorized')}
               style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
@@ -199,13 +200,8 @@ export const categories: {
   },
   {
     name: 'Sports Performance',
-    color: 'trueGray',
+    color: 'blue',
     emojiHex: '26BD',
-  },
-  {
-    name: 'Stretching',
-    color: 'lime',
-    emojiHex: '1F93B',
   },
   {
     name: 'Recovery',
