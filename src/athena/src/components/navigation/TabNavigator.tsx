@@ -11,6 +11,8 @@ import { Profile } from '../screens/Profile';
 import { HomeNavigator } from './HomeNavigator';
 import { DiscoverNavigator } from './DiscoverNavigator';
 import { MyProgramsNavigator } from './MyProgramsNavigator';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { AuthParamList } from './AuthNavigation';
 
 export type TabParamList = {
   HomeNavigator: undefined;
@@ -20,9 +22,10 @@ export type TabParamList = {
   // StaticExercise: undefined;
 };
 const Tabs = createBottomTabNavigator<TabParamList>();
+type TabStackNavigatorProps = NativeStackScreenProps<AuthParamList, 'Tabs'>;
 
-export const TabNavigator: React.FC = (props) => {
-  console.log('props', props);
+export const TabNavigator: React.FC<TabStackNavigatorProps> = ({ route }) => {
+  console.log('props', route.params.routeName);
 
   return (
     <Tabs.Navigator
@@ -47,11 +50,6 @@ export const TabNavigator: React.FC = (props) => {
         options={{ tabBarIcon: BookOpenIcon }}
       />
       <Tabs.Screen name="Profile" component={Profile} options={{ tabBarIcon: UserIcon }} />
-      {/* <Tabs.Screen
-        name="StaticExercise"
-        component={StaticExercise}
-        options={{ tabBarIcon: BookOpenIcon }}
-      /> */}
     </Tabs.Navigator>
   );
 };

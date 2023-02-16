@@ -3,7 +3,7 @@ import { Text, TouchableOpacityProps, View, ViewProps } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { HeartIcon, GiftIcon } from 'react-native-heroicons/solid';
 
-import _ from 'lodash';
+import _, { sample } from 'lodash';
 
 import { Program, ProgramFragment, UserProgramsQuery } from '../../lib/graphql';
 import { specificityColor } from '../../lib/utils';
@@ -37,16 +37,14 @@ export const ProgramCard: React.FC<ProgramCardProps> = ({
       {...props}>
       <View>
         <ProgramImage size="md" style={{ marginBottom: 8 }} />
-        <Heading as={square ? 'h4' : 'h3'} noMargin>
-          {_.truncate(program.name, { length: 25 })}
-        </Heading>
+        <Heading as={square ? 'h4' : 'h3'}>{_.truncate(program.name, { length: 25 })}</Heading>
       </View>
 
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         {!userOwned ? (
           <>
             <HeartIcon width={16} fill={theme.colors.rose[600]} />
-            <Text style={{ marginLeft: 5 }}>{4}</Text>
+            <Text style={{ marginLeft: 5 }}>{sample([4, 15, 65, 23, 45, 26, 23, 12])}</Text>
           </>
         ) : (
           <>

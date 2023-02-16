@@ -8,5 +8,5 @@ interface BodyTextProps {
 }
 
 export const BodyText: React.FC<BodyTextProps> = ({ children, style }) => {
-  return <Text style={[{ color: theme.colors.gray[500] }, style]}>{children}</Text>;
+  return <Text style={[{ color: theme.colors.gray[500], lineHeight: 20 }, style]}>{children}</Text>;
 };

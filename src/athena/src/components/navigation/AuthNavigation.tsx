@@ -11,14 +11,16 @@ export type AuthParamList = {
   LandingPage: undefined;
   SignUp: undefined;
   Login: undefined;
-  Tabs: undefined;
+  Tabs: { routeName: string };
 };
 
 // authentication screen stack
 const AuthStack = createNativeStackNavigator<AuthParamList>();
 
 // navigator props
-interface AuthNavigatorProps {}
+interface AuthNavigatorProps {
+  routeName?: string;
+}
 
 /**
  * Authentation Navigator FC
@@ -27,7 +29,7 @@ interface AuthNavigatorProps {}
  * This renders all 3 auth screens: landing page, login page, signup page.
  * @param _ Object with isLoggedIn boolean and isLoggedIn setter
  */
-export const AuthNavigator: React.FC<AuthNavigatorProps> = () => {
+export const AuthNavigator: React.FC<AuthNavigatorProps> = ({ routeName }) => {
   const { user } = useContext(UserContext);
 
   return (
@@ -47,7 +49,12 @@ export const AuthNavigator: React.FC<AuthNavigatorProps> = () => {
           />
         </>
       ) : (
-        <AuthStack.Screen name="Tabs" component={TabNavigator} options={{ headerShown: false }} />
+        <AuthStack.Screen
+          name="Tabs"
+          component={TabNavigator}
+          options={{ headerShown: false }}
+          initialParams={{ routeName }}
+        />
       )}
     </AuthStack.Navigator>
   );

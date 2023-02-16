@@ -1,5 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { createContext, useContext, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { ArrowLongLeftIcon, XMarkIcon } from 'react-native-heroicons/solid';

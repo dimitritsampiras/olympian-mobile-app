@@ -45,9 +45,11 @@ enum Equipment {
 type Exercise {
   authorNotes: String
   id: ID!
+  number: Int!
   reps: Int
   rpe: Int
   sets: Int
+  staticExercise: StaticExercise!
 }
 
 input LoginInput {
@@ -100,6 +102,7 @@ enum Muscle {
 }
 
 type Mutation {
+  createExercise(staticExerciseId: String!, workoutId: String!): Exercise
   createProgram(input: CreateProgramInput!): Program
   createWorkout(programId: String!): Workout
   login(input: LoginInput!): String
@@ -136,6 +139,7 @@ type Query {
   popularPrograms(skip: Int!, take: Int!): [Program!]!
   program(programId: String!): Program
   staticExercise(staticExerciseId: String!): StaticExercise
+  staticExercises: [StaticExercise!]!
   trendingPrograms(skip: Int!, take: Int!): [Program!]!
   userPrograms: [Program!]!
   usernameExists(username: String!): Boolean
@@ -159,7 +163,7 @@ enum Specificity {
 
 type StaticExercise {
   createdAt: DateTime!
-  description: String
+  description: String!
   equipment: Equipment
   exercise: [Exercise!]!
   id: ID!

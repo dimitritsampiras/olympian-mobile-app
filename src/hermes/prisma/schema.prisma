@@ -78,6 +78,7 @@ model Workout {
 
 model Exercise {
   id               String         @id @default(cuid())
+  number           Int            @default(1)
   sets             Int?
   reps             Int?
   duration         Int?
@@ -85,8 +86,8 @@ model Exercise {
   authorNotes      String?
   staticExercise   StaticExercise @relation(fields: [staticExerciseId], references: [id])
   staticExerciseId String
-  workout          Workout?       @relation(fields: [workoutId], references: [id], onDelete: Cascade)
-  workoutId        String?
+  workout          Workout        @relation(fields: [workoutId], references: [id], onDelete: Cascade)
+  workoutId        String
   performedSet     PerformedSet[]
 }
 

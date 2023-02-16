@@ -1,39 +1,39 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { ScreenView } from '../../containers/ScreenView';
 import { DynamicButton, Heading } from '../../elements';
 import { PlusCircleIcon } from 'react-native-heroicons/outline';
 import theme from '../../../theme';
 import Body from 'react-native-body-highlighter';
-import { HorizontalCardScroller } from '../../containers/HorizontalCardScroller';
 import { Header } from '../../containers/Header';
-import { Muscle, useStaticExerciseFromIdQuery } from '../../../lib/graphql';
+import { useCreateExerciseMutation, useStaticExerciseFromIdQuery } from '../../../lib/graphql';
 import { MuscleChip } from '../../elements/display/MuscleChip';
 import { BodyText } from '../../elements/typography/BodyText';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { ProgramParamList } from '../../navigation/ProgramNavigator';
 
-interface StaticExerciseProps {
-  staticExerciseId: string;
-}
+type StaticExerciseProps = NativeStackScreenProps<ProgramParamList, 'StaticExercise'>;
 
-interface IStaticExerciseData {
-  name: string;
-  description: string;
-  muscleSlugs: UIMuscleSlugs[];
-}
-const dummyStaticExerciseData: IStaticExerciseData = {
-  name: 'BB Bench Press',
-  description: 'This is the description',
-  muscleSlugs: ['chest', 'head', 'forearm', 'triceps', 'neck'],
-};
-
-export const StaticExercise: React.FC<StaticExerciseProps> = ({
-  staticExerciseId = 'cle62wkl20078nfybmdwuoo5f',
-}) => {
+export const StaticExercise: React.FC<StaticExerciseProps> = ({ route, navigation }) => {
+  const { staticExerciseId, workoutId } = route.params;
   const [muscles, setMuscles] = useState<{ muscle: UIMuscleSlugs; intensity: 1 | 2 }[]>([]);
 
   const { data } = useStaticExerciseFromIdQuery({
     variables: { staticExerciseId },
   });
+
+  const [createExercise] = useCreateExerciseMutation();
+
+  const handleAddExercise = async () => {
+    await createExercise({
+      variables: {
+        staticExerciseId,
+        workoutId,
+      },
+    });
+    navigation.goBack();
+    navigation.goBack();
+  };
 
   useEffect(() => {
     const primary = data?.staticExercise?.primaryTargetMuscle;
@@ -61,11 +61,13 @@ export const StaticExercise: React.FC<StaticExerciseProps> = ({
     <ScreenView>
       {data?.staticExercise && (
         <>
-          <Header row style={{ paddingBottom: 44 }}>
+          <Header row navigation={navigation} style={{ paddingBottom: 44 }}>
             <Heading noMargin style={{ width: 250 }}>
               {data?.staticExercise?.name}
             </Heading>
-            <PlusCircleIcon width={22} style={{ marginTop: 4 }}></PlusCircleIcon>
+            <TouchableOpacity onPress={handleAddExercise}>
+              <PlusCircleIcon width={22} style={{ marginTop: 4 }}></PlusCircleIcon>
+            </TouchableOpacity>
           </Header>
           <View
             style={{
@@ -88,7 +90,7 @@ export const StaticExercise: React.FC<StaticExerciseProps> = ({
             <Body
               data={[]}
               scale={1}
-              backOnly
+              frontOnly
               colors={[theme.colors.blue[600], theme.colors.blue[300]]}
             />
           </View>
@@ -99,7 +101,7 @@ export const StaticExercise: React.FC<StaticExerciseProps> = ({
               </MuscleChip>
             ))}
           </View>
-          <View style={{ marginTop: 28 }}>
+          <View style={{ marginTop: 28, marginBottom: 208 }}>
             <Heading as="h3">Description</Heading>
             <BodyText>{data.staticExercise.description}</BodyText>
           </View>

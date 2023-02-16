@@ -19,6 +19,15 @@ fragment Workout on Workout {
   trainingLevel
 }
 
+fragment Exercise on Exercise {
+  authorNotes
+  id
+  reps
+  rpe
+  sets
+  number
+}
+
 fragment StaticExercise on StaticExercise {
   equipment
   id

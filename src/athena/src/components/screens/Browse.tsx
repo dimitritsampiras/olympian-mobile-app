@@ -54,7 +54,7 @@ export const Discover: React.FC<DiscoverProps> = ({ navigation, route }) => {
         <SubHeading>Trending Programs</SubHeading>
         <HorizontalCardScroller>
           {trendingQuery.data?.trendingPrograms.map((program) => (
-            <ProgramCard square program={program} key={program.name} />
+            <ProgramCard square program={program} key={program.id} style={{ marginRight: 16 }} />
           ))}
         </HorizontalCardScroller>
       </View>
@@ -62,7 +62,7 @@ export const Discover: React.FC<DiscoverProps> = ({ navigation, route }) => {
         <SubHeading>Popular</SubHeading>
         <HorizontalCardScroller>
           {popularQuery.data?.popularPrograms.map((program) => (
-            <ProgramCard square program={program} key={program.name} />
+            <ProgramCard square program={program} key={program.id} style={{ marginRight: 16 }} />
           ))}
         </HorizontalCardScroller>
       </View>
@@ -140,6 +140,26 @@ export const categories: {
   {
     name: 'CrossFit',
     color: 'brown',
+    emojiHex: '26F9',
+  },
+  {
+    name: 'Pilates',
+    color: 'coolGray',
+    emojiHex: '26F9',
+  },
+  {
+    name: 'Functional Training',
+    color: 'purple',
+    emojiHex: '26F9',
+  },
+  {
+    name: 'Sports Performance',
+    color: 'rose',
+    emojiHex: '26F9',
+  },
+  {
+    name: 'HIIT',
+    color: 'cyan',
     emojiHex: '26F9',
   },
 ];

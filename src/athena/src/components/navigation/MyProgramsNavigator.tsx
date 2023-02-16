@@ -6,7 +6,7 @@ import { TabParamList } from './TabNavigator';
 
 export type MyProgramsParamList = {
   MyPrograms: undefined;
-  ProgramNavigator: { programId: string };
+  ProgramNavigator: { programId: string; back: boolean };
 };
 
 const MyProgramsStack = createNativeStackNavigator<MyProgramsParamList>();
@@ -18,7 +18,11 @@ export const MyProgramsNavigator: React.FC<MyProgramsStackNavigatorProps> = ({ r
   return (
     <MyProgramsStack.Navigator initialRouteName="MyPrograms" screenOptions={{ headerShown: false }}>
       <MyProgramsStack.Screen name="MyPrograms" component={Programs} />
-      <MyProgramsStack.Screen name="ProgramNavigator" component={ProgramNavigator} />
+      <MyProgramsStack.Screen
+        name="ProgramNavigator"
+        component={ProgramNavigator}
+        initialParams={{ back: true }}
+      />
     </MyProgramsStack.Navigator>
   );
 };

@@ -43,29 +43,50 @@ export const ProgramMutation = extendType({
       type: nullable('Workout'),
       args: { programId: 'String' },
       resolve: async (_root, { programId }, { prisma }) => {
-        try {
-          // check if the profile exists
-          const program = await prisma.program.findUnique({
-            where: { id: programId },
-            include: { workouts: true },
-          });
-          // TODO: handle error
-          if (!program) return null;
+        // check if the profile exists
+        const program = await prisma.program.findUnique({
+          where: { id: programId },
+          include: { workouts: true },
+        });
+        // TODO: handle error
+        if (!program) return null;
 
-          const createdWorkout = await prisma.workout.create({
-            data: {
-              name: `Workout #${program.workouts.length + 1}`,
-              duration: DateTime.fromSeconds(0).toJSDate(),
-              trainingLevel: program.trainingLevel,
-              programId,
-            },
-          });
+        const createdWorkout = await prisma.workout.create({
+          data: {
+            name: `Workout #${program.workouts.length + 1}`,
+            duration: DateTime.fromSeconds(0).toJSDate(),
+            trainingLevel: program.trainingLevel,
+            programId,
+          },
+        });
 
-          return createdWorkout;
-        } catch (e) {
-          console.log(e);
-          return null;
-        }
+        return createdWorkout;
+      },
+    });
+    /**
+     *
+     * create exercise mutation
+     */
+    t.field('createExercise', {
+      type: nullable('Exercise'),
+      args: { workoutId: 'String', staticExerciseId: 'String' },
+      resolve: async (_root, { workoutId, staticExerciseId }, { prisma }) => {
+        // check if the profile exists
+        const workout = await prisma.workout.findUnique({
+          where: { id: workoutId },
+          include: { exercises: true },
+        });
+        const staticExercise = await prisma.staticExercise.findUnique({
+          where: { id: staticExerciseId },
+        });
+
+        // TODO: handle error
+        if (!workout || !staticExercise) return null;
+        console.log('here');
+
+        return await prisma.exercise.create({
+          data: { workoutId, staticExerciseId, number: workout.exercises.length + 1 },
+        });
       },
     });
   },

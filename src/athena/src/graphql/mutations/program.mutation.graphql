@@ -9,3 +9,9 @@ mutation CreateWorkout($programId: String!) {
     ...Workout
   }
 }
+
+mutation CreateExercise($workoutId: String!, $staticExerciseId: String!) {
+  createExercise(workoutId: $workoutId, staticExerciseId: $staticExerciseId) {
+    ...Exercise
+  }
+}

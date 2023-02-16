@@ -51,6 +51,8 @@ export const ExerciseType = objectType({
     t.field(Exercise.sets);
     t.field(Exercise.rpe);
     t.field(Exercise.authorNotes);
+    t.field(Exercise.number);
+    t.field(Exercise.staticExercise);
   },
 });
 

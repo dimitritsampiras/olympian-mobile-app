@@ -2,7 +2,6 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useContext, useState } from 'react';
 
 import { Button } from '../elements/Button';
-import { TabParamList } from '../navigation';
 import { ScreenView } from '../containers/ScreenView';
 import { Heading } from '../elements/typography/Heading';
 import { UserContext } from '../providers';
@@ -13,11 +12,18 @@ import theme from '../../theme';
 import { ActionSheet } from 'react-native-ui-lib';
 import { BodyText } from '../elements/typography/BodyText';
 import { HomeParamList } from '../navigation/HomeNavigator';
+import { TabParamList } from '../navigation';
+import { HorizontalCardScroller } from '../containers/HorizontalCardScroller';
+import { useStaticExercisesQuery } from '../../lib/graphql';
+import { Card } from '../containers/Card';
+import WeightIcon from '../../../assets/weight.svg';
+import WeightIconPurple from '../../../assets/weight2.svg';
 
-interface HomeProps extends NativeStackScreenProps<HomeParamList, 'Home'> {}
+interface HomeProps extends NativeStackScreenProps<HomeParamList & TabParamList, 'Home'> {}
 
 export const Home: React.FC<HomeProps> = ({ navigation }) => {
   const { user } = useContext(UserContext);
+  const { data } = useStaticExercisesQuery();
 
   const [visible, setVisible] = useState(false);
 
@@ -48,6 +54,41 @@ export const Home: React.FC<HomeProps> = ({ navigation }) => {
         </Button>
       </View>
       <SubHeading>Trending Exercises</SubHeading>
+      <HorizontalCardScroller>
+        {data?.staticExercises.map((exercise) => {
+          return (
+            <Card key={exercise.id} square style={{ marginRight: 16 }}>
+              <View style={{ justifyContent: 'flex-end' }}>
+                <WeightIcon />
+                <View style={{ marginTop: 8 }}>
+                  <Heading as="h4" style={{ marginBottom: 5 }}>
+                    {exercise.name}
+                  </Heading>
+                  <BodyText>5x5 @ 8 RPE</BodyText>
+                </View>
+              </View>
+            </Card>
+          );
+        })}
+      </HorizontalCardScroller>
+      <SubHeading style={{ marginTop: 32 }}>Workouts to Swap In</SubHeading>
+      <HorizontalCardScroller style={{ marginBottom: 150 }}>
+        {data?.staticExercises.map((exercise) => {
+          return (
+            <Card key={exercise.id} square style={{ marginRight: 16 }}>
+              <View style={{ justifyContent: 'flex-end' }}>
+                <WeightIconPurple />
+                <View style={{ marginTop: 8 }}>
+                  <Heading as="h4" style={{ marginBottom: 5 }}>
+                    {exercise.name}
+                  </Heading>
+                  <BodyText>5x5 @ 8 RPE</BodyText>
+                </View>
+              </View>
+            </Card>
+          );
+        })}
+      </HorizontalCardScroller>
 
       {/*
        *
@@ -66,7 +107,7 @@ export const Home: React.FC<HomeProps> = ({ navigation }) => {
             label: 'Create Program From Scratch',
             onPress: () => navigation.navigate('CreateProgram'),
           },
-          { label: 'Browse Programs', onPress: () => navigation.navigate('Discover') },
+          { label: 'Browse Programs', onPress: () => navigation.navigate('DiscoverNavigator') },
         ]}
       />
     </ScreenView>

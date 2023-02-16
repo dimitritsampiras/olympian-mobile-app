@@ -9,8 +9,7 @@ export const ProgramQuery = extendType({
       resolve: async (_root, { skip, take }, { prisma }) => {
         return prisma.program.findMany({
           skip,
-          take,
-          where: { publicity: 'public' },
+          take: 8,
         });
       },
     });
@@ -21,8 +20,7 @@ export const ProgramQuery = extendType({
         console.log(skip, take, prisma);
         return prisma.program.findMany({
           skip,
-          take,
-          where: { publicity: 'public' },
+          take: 8,
         });
       },
     });
@@ -33,7 +31,10 @@ export const ProgramQuery = extendType({
       resolve: async (_root, { programId }, { prisma }) => {
         const program = await prisma.program.findUnique({
           where: { id: programId },
-          include: { profile: { include: { user: { select: { username: true } } } } },
+          include: {
+            workouts: { include: { exercises: { select: { id: true } } } },
+            profile: { include: { user: { select: { username: true } } } },
+          },
         });
         return program;
       },
@@ -62,7 +63,10 @@ export const ProgramQuery = extendType({
       resolve: async (_root, { workoutId }, { prisma }) => {
         const workout = await prisma.workout.findUnique({
           where: { id: workoutId },
-          include: { program: { include: { profile: true } }, exercises: true },
+          include: {
+            program: { include: { profile: true } },
+            exercises: { include: { staticExercise: true } },
+          },
         });
         return workout;
       },
@@ -77,6 +81,19 @@ export const ProgramQuery = extendType({
       resolve: async (_root, { staticExerciseId }, { prisma }) => {
         const staticExercise = await prisma.staticExercise.findUnique({
           where: { id: staticExerciseId },
+        });
+        return staticExercise;
+      },
+    });
+    /**
+     *
+     * gets all programs that the user has
+     */
+    t.field('staticExercises', {
+      type: list('StaticExercise'),
+      resolve: async (_root, _args, { prisma }) => {
+        const staticExercise = await prisma.staticExercise.findMany({
+          orderBy: { name: 'asc' },
         });
         return staticExercise;
       },

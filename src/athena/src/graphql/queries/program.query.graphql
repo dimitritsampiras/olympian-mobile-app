@@ -1,6 +1,12 @@
 query ProgramFromId($programId: String!) {
   program(programId: $programId) {
     ...Program
+    workouts {
+      ...Workout
+      exercises {
+        id
+      }
+    }
     profile {
       user {
         username
@@ -13,13 +19,22 @@ query WorkoutFromId($workoutId: String!) {
   workout(workoutId: $workoutId) {
     ...Workout
     exercises {
-      id
+      ...Exercise
+      staticExercise {
+        ...StaticExercise
+      }
     }
   }
 }
 
 query StaticExerciseFromId($staticExerciseId: String!) {
   staticExercise(staticExerciseId: $staticExerciseId) {
+    ...StaticExercise
+  }
+}
+
+query StaticExercises {
+  staticExercises {
     ...StaticExercise
   }
 }

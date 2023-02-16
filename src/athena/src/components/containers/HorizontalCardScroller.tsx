@@ -1,19 +1,18 @@
 import React, { ReactNode } from 'react';
-import { ScrollView, ViewProps } from 'react-native';
+import { ScrollView, ScrollViewProps, ViewProps } from 'react-native';
 
-interface HorizontalCardScrollerProps {
+interface HorizontalCardScrollerProps extends ScrollViewProps {
   children: ReactNode[] | ReactNode;
-  styles?: ViewProps['style'];
   showScrollBar?: boolean;
 }
 
 export const HorizontalCardScroller: React.FC<HorizontalCardScrollerProps> = ({
-  styles,
+  style,
   children,
   showScrollBar = false,
 }) => {
   return (
-    <ScrollView horizontal={true} showsHorizontalScrollIndicator={showScrollBar} style={styles}>
+    <ScrollView horizontal={true} showsHorizontalScrollIndicator={showScrollBar} style={style}>
       {children}
     </ScrollView>
   );
