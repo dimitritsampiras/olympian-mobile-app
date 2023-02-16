@@ -13,14 +13,25 @@ import { Header } from '../containers/Header';
 import { ProgramCard } from '../containers/ProgramCard';
 import { ThemeColor } from '../../lib/types';
 import theme from '../../theme';
-import { TouchableOpacity } from 'react-native-ui-lib';
 import { Emoji } from '../elements/display/Emoji';
 import { DiscoverParamList } from '../navigation/DiscoverNavigator';
+import { categories, FITNESS_CATEGORIES } from './Browse';
+import { TouchableOpacity } from 'react-native-ui-lib';
 // import SearchBar from 'react-native-dynamic-search-bar';
 
-interface DiscoverProps extends NativeStackScreenProps<DiscoverParamList, 'Discover'> {}
+interface DiscoverCatagoryProps extends NativeStackScreenProps<DiscoverParamList, 'Discover'> {
+  catName: typeof FITNESS_CATEGORIES[number];
+  catColour: ThemeColor;
+  catEmojiHex: string;
+}
 
-export const Discover: React.FC<DiscoverProps> = ({ navigation, route }) => {
+export const CategorizedBrowse: React.FC<DiscoverCatagoryProps> = ({
+  navigation,
+  route,
+  catName = 'Yoga',
+  catColour = 'red',
+  catEmojiHex = '1F9D8',
+}) => {
   const { user } = useContext(UserContext);
 
   const trendingQuery = useTrendingProgramsQuery({
@@ -41,7 +52,9 @@ export const Discover: React.FC<DiscoverProps> = ({ navigation, route }) => {
     <ScreenView>
       {/* TOD0: turn this into a header component */}
       <Header>
-        <Heading style={{ width: 300 }}>{route.name}</Heading>
+        <Heading style={{ width: 300 }}>
+          {route.name} {catName} <Emoji unicode={catEmojiHex} style={{ fontSize: 30 }} />{' '}
+        </Heading>
       </Header>
       {/* <SearchBar
         // See docs: https://www.npmjs.com/package/react-native-dynamic-search-bar
@@ -51,25 +64,35 @@ export const Discover: React.FC<DiscoverProps> = ({ navigation, route }) => {
         onChangeText={(text) => console.log(text)}
       /> */}
       <View style={{ paddingTop: 10, paddingBottom: 10 }}>
-        <SubHeading>Trending Programs</SubHeading>
+        <SubHeading>Trending {catName} Programs</SubHeading>
         <HorizontalCardScroller>
           {trendingQuery.data?.trendingPrograms.map((program) => (
-            <ProgramCard square program={program} key={program.name} />
+            <ProgramCard
+              square
+              program={program}
+              key={program.name}
+              style={{ backgroundColor: theme.colors[catColour][500] + '30' }}
+            />
           ))}
         </HorizontalCardScroller>
       </View>
       <View style={{ paddingTop: 10, paddingBottom: 10 }}>
-        <SubHeading>Popular</SubHeading>
+        <SubHeading>Popular {catName} Programs</SubHeading>
         <HorizontalCardScroller>
           {popularQuery.data?.popularPrograms.map((program) => (
-            <ProgramCard square program={program} key={program.name} />
+            <ProgramCard
+              square
+              program={program}
+              key={program.name}
+              style={{ backgroundColor: theme.colors[catColour][500] + '30' }}
+            />
           ))}
         </HorizontalCardScroller>
       </View>
       <View style={{ paddingTop: 10, paddingBottom: 10 }}>
         <SubHeading>Categories</SubHeading>
         <FlatList
-          data={categories}
+          data={categories.filter((cat) => cat.name !== catName)}
           numColumns={2}
           columnWrapperStyle={{ justifyContent: 'space-between' }}
           ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
@@ -106,135 +129,3 @@ export const Discover: React.FC<DiscoverProps> = ({ navigation, route }) => {
     </ScreenView>
   );
 };
-
-export const categories: {
-  name: typeof FITNESS_CATEGORIES[number];
-  color: ThemeColor;
-  emojiHex: string;
-}[] = [
-  {
-    name: 'Cardio',
-    color: 'blue',
-    emojiHex: '1F3C3',
-  },
-  {
-    name: 'Yoga',
-    color: 'red',
-    emojiHex: '1F9D8',
-  },
-  {
-    name: 'Olympic Weightlifting',
-    color: 'amber',
-    emojiHex: '1F3CB',
-  },
-  {
-    name: 'Sports Performance',
-    color: 'emerald',
-    emojiHex: '26F9',
-  },
-  {
-    name: 'Calisthenics',
-    color: 'cyan',
-    emojiHex: '1F938',
-  },
-  {
-    name: 'CrossFit',
-    color: 'brown',
-    emojiHex: '1F3CB',
-  },
-  {
-    name: 'Boxing',
-    color: 'rose',
-    emojiHex: '1F94A',
-  },
-  {
-    name: 'Dance',
-    color: 'purple',
-    emojiHex: '1F57A',
-  },
-  {
-    name: 'Swimming',
-    color: 'orange',
-    emojiHex: '1F3CA',
-  },
-  {
-    name: 'Cycling',
-    color: 'warmGray',
-    emojiHex: '1F6B4',
-  },
-  {
-    name: 'Running',
-    color: 'coolGray',
-    emojiHex: '1F3C3',
-  },
-  {
-    name: 'Martial Arts',
-    color: 'violet',
-    emojiHex: '1F94B',
-  },
-  {
-    name: 'Rowing',
-    color: 'lightBlue',
-    emojiHex: '1F6A3',
-  },
-  {
-    name: 'Gymnastics',
-    color: 'teal',
-    emojiHex: '1F938',
-  },
-  {
-    name: 'Aerobics',
-    color: 'yellow',
-    emojiHex: '1F3CB',
-  },
-  {
-    name: 'Zumba',
-    color: 'gray',
-    emojiHex: '1F483',
-  },
-  {
-    name: 'Functional Training',
-    color: 'amber',
-    emojiHex: '1F9D7',
-  },
-  {
-    name: 'Sports Performance',
-    color: 'trueGray',
-    emojiHex: '26BD',
-  },
-  {
-    name: 'Stretching',
-    color: 'lime',
-    emojiHex: '1F93B',
-  },
-  {
-    name: 'Recovery',
-    color: 'green',
-    emojiHex: '1FA79',
-  },
-];
-
-export const FITNESS_CATEGORIES = [
-  'Cardio',
-  'Strength Training',
-  'Yoga',
-  'Pilates',
-  'HIIT',
-  'CrossFit',
-  'Boxing',
-  'Dance',
-  'Swimming',
-  'Cycling',
-  'Running',
-  'Martial Arts',
-  'Rowing',
-  'Gymnastics',
-  'Calisthenics',
-  'Aerobics',
-  'Zumba',
-  'Functional Training',
-  'Sports Performance',
-  'Olympic Weightlifting',
-  'Stretching',
-  'Recovery',
-] as const;
