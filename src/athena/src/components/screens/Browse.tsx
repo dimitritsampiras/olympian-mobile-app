@@ -203,11 +203,6 @@ export const categories: {
     emojiHex: '26BD',
   },
   {
-    name: 'Olympic Weightlifting',
-    color: 'indigo',
-    emojiHex: '1F3CB',
-  },
-  {
     name: 'Stretching',
     color: 'lime',
     emojiHex: '1F93B',
