@@ -9,8 +9,9 @@ import { ProgramCard } from '../containers/ProgramCard';
 import { ScreenView } from '../containers/ScreenView';
 import { Heading } from '../elements';
 import { TabParamList } from '../navigation';
+import { MyProgramsParamList } from '../navigation/MyProgramsNavigator';
 
-type ProgramsProps = NativeStackScreenProps<TabParamList, 'Programs'>;
+type ProgramsProps = NativeStackScreenProps<MyProgramsParamList, 'MyPrograms'>;
 
 export const Programs: React.FC<ProgramsProps> = ({ route, navigation }) => {
   const { data } = useUserProgramsQuery();

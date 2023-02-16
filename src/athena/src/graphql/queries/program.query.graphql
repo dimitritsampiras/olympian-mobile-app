@@ -18,6 +18,12 @@ query WorkoutFromId($workoutId: String!) {
   }
 }
 
+query StaticExerciseFromId($staticExerciseId: String!) {
+  staticExercise(staticExerciseId: $staticExerciseId) {
+    ...StaticExercise
+  }
+}
+
 query UserPrograms {
   userPrograms {
     ...Program
@@ -26,5 +32,17 @@ query UserPrograms {
         username
       }
     }
+  }
+}
+
+query TrendingPrograms($skip: Int!, $take: Int!) {
+  trendingPrograms(skip: $skip, take: $take) {
+    ...Program
+  }
+}
+
+query PopularPrograms($skip: Int!, $take: Int!) {
+  popularPrograms(skip: $skip, take: $take) {
+    ...Program
   }
 }

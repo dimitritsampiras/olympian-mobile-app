@@ -16,6 +16,8 @@ import {
 } from 'react-native-heroicons/solid';
 import { SettingsCard } from '../containers/SettingCard';
 import theme from '../../theme';
+import { ScreenView } from '../containers/ScreenView';
+import { Header } from '../containers/Header';
 
 interface ProfileProps extends NativeStackScreenProps<TabParamList, 'Profile'> {}
 
@@ -28,45 +30,42 @@ export const Profile: React.FC<ProfileProps> = ({ route }) => {
   };
 
   return (
-    <View style={styles.screen}>
-      <View
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          flexDirection: 'column',
-          height: '100%',
-        }}>
-        <Card style={styles.headerBox}>
-          <Avatar size={80} backgroundColor={theme.colors.gray[50]} name={user?.name} />
-          <Heading style={{ textAlign: 'center' }}>Welcome, {user?.name}!</Heading>
-          <Pressable>
-            <Text style={{ fontSize: 12, color: theme.colors.blue[500] }}>Edit Profile</Text>
-          </Pressable>
-        </Card>
-
-        <View style={{ flex: 1 }}>
-          <SettingsCard Icon={CogIcon}>
-            <Text>Settings</Text>
-          </SettingsCard>
-          <SettingsCard Icon={ChartBarSquareIcon}>
-            <Text>Statistics & Goals</Text>
-          </SettingsCard>
-          <SettingsCard Icon={UsersIcon}>
-            <Text>Friends</Text>
-          </SettingsCard>
-          <SettingsCard Icon={ClockIcon}>
-            <Text>Activity</Text>
-          </SettingsCard>
+    <ScreenView>
+      <Header style={{ flexDirection: 'row', marginBottom: 20 }}>
+        <Avatar size={60} backgroundColor={theme.colors.amber[200]} name={user?.name} />
+        <View style={{ marginLeft: 14, paddingVertical: 10 }}>
+          <Heading as="h3" noMargin style={{ marginBottom: 5 }}>
+            {user?.username}
+          </Heading>
+          <Text style={{ fontSize: 12 }}>
+            <Text style={{ fontWeight: '700' }}>2 </Text>followers •{' '}
+            <Text style={{ fontWeight: '700' }}>15 </Text>following
+          </Text>
         </View>
-        <SettingsCard
-          Icon={ArrowLeftOnRectangleIcon}
-          iconProps={{ size: 26, fill: 'red' }}
-          excludeChevron
-          onPress={handleLogout}>
-          <Text>Log Out</Text>
+      </Header>
+
+      <View style={{ flex: 1 }}>
+        <SettingsCard Icon={CogIcon}>
+          <Text>Settings</Text>
+        </SettingsCard>
+        <SettingsCard Icon={ChartBarSquareIcon}>
+          <Text>Statistics & Goals</Text>
+        </SettingsCard>
+        <SettingsCard Icon={UsersIcon}>
+          <Text>Friends</Text>
+        </SettingsCard>
+        <SettingsCard Icon={ClockIcon}>
+          <Text>Activity</Text>
         </SettingsCard>
       </View>
-    </View>
+      <SettingsCard
+        Icon={ArrowLeftOnRectangleIcon}
+        iconProps={{ size: 26, fill: 'red' }}
+        excludeChevron
+        onPress={handleLogout}>
+        <Text>Log Out</Text>
+      </SettingsCard>
+    </ScreenView>
   );
 };
 

@@ -1,5 +1,4 @@
-import { extendType, list, nonNull, nullable } from 'nexus';
-import { mockTrendingPrograms, mockPopularPrograms } from '../../../data/programs';
+import { extendType, list, nullable } from 'nexus';
 
 export const ProgramQuery = extendType({
   type: 'Query',
@@ -8,16 +7,11 @@ export const ProgramQuery = extendType({
       type: list('Program'),
       args: { skip: 'Int', take: 'Int' },
       resolve: async (_root, { skip, take }, { prisma }) => {
-        console.log(skip, take, prisma);
-        return mockTrendingPrograms;
-        //   return await prisma.program.findMany({
-        //     skip,
-        //     take,
-        //     orderBy: {
-        //       // "trendingness" Program field does not yet exist.
-        //       trendingness: 'desc',
-        //     },
-        //   });
+        return prisma.program.findMany({
+          skip,
+          take,
+          where: { publicity: 'public' },
+        });
       },
     });
     t.field('popularPrograms', {
@@ -25,15 +19,11 @@ export const ProgramQuery = extendType({
       args: { skip: 'Int', take: 'Int' },
       resolve: async (_root, { skip, take }, { prisma }) => {
         console.log(skip, take, prisma);
-        return mockPopularPrograms;
-        //   return await prisma.program.findMany({
-        //     skip,
-        //     take,
-        //     orderBy: {
-        //       // "popularity" Program field does not yet exist.
-        //       popularity: 'desc',
-        //     },
-        //   });
+        return prisma.program.findMany({
+          skip,
+          take,
+          where: { publicity: 'public' },
+        });
       },
     });
     // create program mutation
@@ -70,11 +60,25 @@ export const ProgramQuery = extendType({
       type: nullable('Workout'),
       args: { workoutId: 'String' },
       resolve: async (_root, { workoutId }, { prisma }) => {
-        const program = await prisma.workout.findUnique({
+        const workout = await prisma.workout.findUnique({
           where: { id: workoutId },
           include: { program: { include: { profile: true } }, exercises: true },
         });
-        return program;
+        return workout;
+      },
+    });
+    /**
+     *
+     * gets all programs that the user has
+     */
+    t.field('staticExercise', {
+      type: nullable('StaticExercise'),
+      args: { staticExerciseId: 'String' },
+      resolve: async (_root, { staticExerciseId }, { prisma }) => {
+        const staticExercise = await prisma.staticExercise.findUnique({
+          where: { id: staticExerciseId },
+        });
+        return staticExercise;
       },
     });
   },

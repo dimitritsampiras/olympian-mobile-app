@@ -1,5 +1,16 @@
 import { enumType, objectType } from 'nexus';
-import { Exercise, Program, Publicity, Specificity, TrainingLevel, Workout } from 'nexus-prisma';
+import {
+  Equipment,
+  Exercise,
+  Movement,
+  Muscle,
+  Program,
+  Publicity,
+  Specificity,
+  StaticExercise,
+  TrainingLevel,
+  Workout,
+} from 'nexus-prisma';
 
 // Session object type from prisma
 export const ProgramType = objectType({
@@ -39,11 +50,42 @@ export const ExerciseType = objectType({
     t.field(Exercise.reps);
     t.field(Exercise.sets);
     t.field(Exercise.rpe);
-    t.field(Exercise.description);
+    t.field(Exercise.authorNotes);
   },
 });
 
-// Session object type from prisma
+export const StaticExerciseType = objectType({
+  name: StaticExercise.$name,
+  definition(t) {
+    t.field(StaticExercise.id);
+    t.field(StaticExercise.name);
+    t.field(StaticExercise.createdAt);
+    t.field(StaticExercise.equipment);
+    t.field(StaticExercise.exercise);
+    t.field(StaticExercise.movement);
+    t.field(StaticExercise.description);
+    t.field(StaticExercise.primaryTargetMuscle);
+    t.field(StaticExercise.secondaryTargetMuscle);
+    t.field(StaticExercise.tertiaryTargetMuscle);
+    t.field(StaticExercise.updatedAt);
+  },
+});
+
+export const MovementEnum = enumType({
+  name: Movement.name,
+  members: Movement.members,
+});
+
+export const EquipmentEnum = enumType({
+  name: Equipment.name,
+  members: Equipment.members,
+});
+
+export const MuscleEnum = enumType({
+  name: Muscle.name,
+  members: Muscle.members,
+});
+
 export const PublicityEnum = enumType({
   name: Publicity.name,
   members: Publicity.members,

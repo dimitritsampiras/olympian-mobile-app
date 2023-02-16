@@ -1,10 +1,3 @@
-# This should be modified to include 
-fragment DiscoveryProgram on Program {
-  name
-  publicity
-  trainingLevel
-}
-
 fragment Program on Program {
   id
   name
@@ -24,4 +17,16 @@ fragment Workout on Workout {
   specificity
   tags
   trainingLevel
+}
+
+fragment StaticExercise on StaticExercise {
+  equipment
+  id
+  name
+  primaryTargetMuscle
+  secondaryTargetMuscle
+  tertiaryTargetMuscle
+  name
+  movement
+  description
 }

@@ -55,6 +55,8 @@ model Program {
   likes                    Int?
   profileImageDefaultColor String         @default("e0e7ff") @db.VarChar(7)
   profileImageDefaultEmoji String         @default("1F93C") @db.VarChar(5)
+  createdAt                DateTime       @default(now())
+  updatedAt                DateTime       @updatedAt
   workouts                 Workout[]
   profile                  Profile        @relation(fields: [profileId], references: [id])
   profileId                String
@@ -67,6 +69,8 @@ model Workout {
   trainingLevel TrainingLevel?
   tags          String[]
   duration      DateTime
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
   exercises     Exercise[]
   program       Program?       @relation(fields: [programId], references: [id], onDelete: Cascade)
   programId     String?
@@ -78,28 +82,36 @@ model Exercise {
   reps             Int?
   duration         Int?
   rpe              Int?
-  description      String
+  authorNotes      String?
   staticExercise   StaticExercise @relation(fields: [staticExerciseId], references: [id])
   staticExerciseId String
-  workout          Workout?       @relation(fields: [workoutId], references: [id])
+  workout          Workout?       @relation(fields: [workoutId], references: [id], onDelete: Cascade)
   workoutId        String?
+  performedSet     PerformedSet[]
+}
+
+model PerformedSet {
+  id         String   @id @default(cuid())
+  setNumber  Int?
+  weight     Float?
+  reps       Int?
+  duration   Int?
+  exercise   Exercise @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+  exerciseId String
 }
 
 model StaticExercise {
-  id            String     @id @default(cuid())
-  name          String
-  movement      Movement
-  targetMuscles Muscle[]
-  equipment     Equipment?
-  exercise      Exercise[]
-}
-
-model Muscle {
-  id               String          @id @default(cuid())
-  name             String
-  rank             MuscleRank
-  staticExercise   StaticExercise? @relation(fields: [staticExerciseId], references: [id])
-  staticExerciseId String?
+  id                    String     @id @default(cuid())
+  name                  String
+  movement              Movement
+  primaryTargetMuscle   Muscle
+  secondaryTargetMuscle Muscle?
+  tertiaryTargetMuscle  Muscle?
+  equipment             Equipment?
+  description           String
+  createdAt             DateTime   @default(now())
+  updatedAt             DateTime   @updatedAt
+  exercise              Exercise[]
 }
 
 enum Specificity {
@@ -127,9 +139,27 @@ enum Publicity {
   friends
 }
 
-enum MuscleRank {
-  primary
-  secondary
+enum Muscle {
+  trapezius
+  upper_back
+  lower_back
+  chest
+  biceps
+  triceps
+  forearm
+  back_deltoids
+  middle_deltoids
+  front_deltoids
+  abs
+  obliques
+  adductor
+  hamstring
+  quadriceps
+  abductors
+  calves
+  gluteal
+  head
+  neck
 }
 
 enum Movement {
@@ -145,13 +175,31 @@ enum Movement {
   extension
   internal_rotation
   external_rotation
-  elavation
+  elevation
+  rotation
+  anti_extension
+  anti_rotation
+  anti_lateral_flexion
+  explosive
 }
 
 enum Equipment {
   barbell
-  dumbell
+  dumbbell
   machine
   band
   ball
+  cable
+  kettlebell
+  resistance_band
+  suspension_trainer
+  bodyweight
+  bench
+  box
+  foam_roller
+  medicine_ball
+  sandbag
+  sled
+  trap_bar
+  weighted_vest
 }

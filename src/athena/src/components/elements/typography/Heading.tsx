@@ -3,7 +3,7 @@ import { StyleProp, Text, TextStyle } from 'react-native';
 import theme from '../../../theme';
 
 interface HeadingProps {
-  as?: 'title' | 'h1' | 'h2' | 'h3';
+  as?: 'title' | 'h1' | 'h2' | 'h3' | 'h4';
   children: ReactNode;
   style?: StyleProp<TextStyle>;
   noMargin?: boolean;
@@ -23,6 +23,9 @@ export const Heading: React.FC<HeadingProps> = ({ as = 'h1', children, style, no
       break;
     case 'h3':
       fontSize = 18;
+      break;
+    case 'h4':
+      fontSize = 14;
       break;
   }
 
@@ -45,7 +48,7 @@ export const Heading: React.FC<HeadingProps> = ({ as = 'h1', children, style, no
   return (
     <Text
       style={[
-        { fontSize, color: theme.colors.gray[900], fontWeight: '700', width: 250 },
+        { fontSize, color: theme.colors.gray[900], fontWeight: '700' },
         !noMargin && { marginBottom },
         style,
       ]}>

@@ -21,8 +21,29 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 """
 scalar DateTime
 
+enum Equipment {
+  ball
+  band
+  barbell
+  bench
+  bodyweight
+  box
+  cable
+  dumbbell
+  foam_roller
+  kettlebell
+  machine
+  medicine_ball
+  resistance_band
+  sandbag
+  sled
+  suspension_trainer
+  trap_bar
+  weighted_vest
+}
+
 type Exercise {
-  description: String!
+  authorNotes: String
   id: ID!
   reps: Int
   rpe: Int
@@ -32,6 +53,50 @@ type Exercise {
 input LoginInput {
   password: String!
   username: String!
+}
+
+enum Movement {
+  anti_extension
+  anti_lateral_flexion
+  anti_rotation
+  carry
+  elevation
+  explosive
+  extension
+  external_rotation
+  flexion
+  hip_dominant
+  horizontal_pull
+  horizontal_push
+  internal_rotation
+  isolation
+  knee_dominant
+  rotation
+  vertical_pull
+  vertical_push
+}
+
+enum Muscle {
+  abductors
+  abs
+  adductor
+  back_deltoids
+  biceps
+  calves
+  chest
+  forearm
+  front_deltoids
+  gluteal
+  hamstring
+  head
+  lower_back
+  middle_deltoids
+  neck
+  obliques
+  quadriceps
+  trapezius
+  triceps
+  upper_back
 }
 
 type Mutation {
@@ -70,6 +135,7 @@ type Query {
   me: User
   popularPrograms(skip: Int!, take: Int!): [Program!]!
   program(programId: String!): Program
+  staticExercise(staticExerciseId: String!): StaticExercise
   trendingPrograms(skip: Int!, take: Int!): [Program!]!
   userPrograms: [Program!]!
   usernameExists(username: String!): Boolean
@@ -89,6 +155,20 @@ enum Specificity {
   general
   hypertrophy
   strength
+}
+
+type StaticExercise {
+  createdAt: DateTime!
+  description: String
+  equipment: Equipment
+  exercise: [Exercise!]!
+  id: ID!
+  movement: Movement!
+  name: String!
+  primaryTargetMuscle: Muscle!
+  secondaryTargetMuscle: Muscle
+  tertiaryTargetMuscle: Muscle
+  updatedAt: DateTime!
 }
 
 enum TrainingLevel {

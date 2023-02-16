@@ -243,6 +243,8 @@ export default {
     },
   },
   radius: {
+    sm: 8,
+    md: 16,
     full: 9999,
   },
 } as const;

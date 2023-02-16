@@ -10,14 +10,15 @@ import { CreateProgramInput, Publicity, useCreateProgramMutation } from '../../.
 import theme from '../../../theme';
 import { ScreenView } from '../../containers/ScreenView';
 import { Button } from '../../elements';
-import { RootParamList } from '../../navigation';
 import { ProgramName } from './ProgramName';
 import { ProgramPublicity } from './ProgramPublicity';
 import { ProgramTags } from './ProgramTags';
 import { UserContext } from '../../providers';
 import { ProgramSpecificty } from './ProgramSpecificty';
+import { HomeParamList } from '../../navigation/HomeNavigator';
 
-type CreateProgramProps = NativeStackScreenProps<RootParamList, 'CreateProgram'>;
+type CreateProgramProps = NativeStackScreenProps<HomeParamList, 'CreateProgram'>;
+
 type CreateProgramInputWithoutUserId = Omit<CreateProgramInput, 'userId'>;
 
 export const CreateProgramContext = createContext({
@@ -33,8 +34,7 @@ const PAGES = [ProgramName, ProgramPublicity, ProgramSpecificty, ProgramTags];
  *
  * Create Program Multi-page form
  */
-export const CreateProgram: React.FC<CreateProgramProps> = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<RootParamList>>();
+export const CreateProgram: React.FC<CreateProgramProps> = ({ navigation }) => {
   const { user } = useContext(UserContext);
 
   // state
@@ -111,7 +111,6 @@ export const CreateProgram: React.FC<CreateProgramProps> = () => {
           <Button
             loading={loading}
             disabled={_.isEmpty(program.name)}
-            shadow={false}
             style={{ marginBottom: 24 }}
             onPress={handleOnNext}>
             {step >= PAGES.length - 1 ? 'Submit' : 'Next'}

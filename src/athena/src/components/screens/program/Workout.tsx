@@ -7,7 +7,7 @@ import { ScreenView } from '../../containers/ScreenView';
 import { Button, Heading } from '../../elements';
 
 import { BodyText } from '../../elements/typography/BodyText';
-import { ProgramParamList } from '../../navigation/ProgramNavigation';
+import { ProgramParamList } from '../../navigation/ProgramNavigator';
 
 type WorkoutProps = NativeStackScreenProps<ProgramParamList, 'Workout'>;
 

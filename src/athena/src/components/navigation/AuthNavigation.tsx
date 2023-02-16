@@ -4,14 +4,14 @@ import { UserContext } from '../providers';
 import { LandingPage } from '../screens/auth/LandingPage';
 import { Login } from '../screens/auth/Login';
 import theme from '../../theme';
-import { RootStackNavigator } from './RootNavigator';
 import { SignUp } from '../screens/auth/SignUp/SignUp';
+import { TabNavigator } from './TabNavigator';
 
 export type AuthParamList = {
   LandingPage: undefined;
   SignUp: undefined;
   Login: undefined;
-  Root: undefined;
+  Tabs: undefined;
 };
 
 // authentication screen stack
@@ -47,11 +47,7 @@ export const AuthNavigator: React.FC<AuthNavigatorProps> = () => {
           />
         </>
       ) : (
-        <AuthStack.Screen
-          name="Root"
-          component={RootStackNavigator}
-          options={{ headerShown: false }}
-        />
+        <AuthStack.Screen name="Tabs" component={TabNavigator} options={{ headerShown: false }} />
       )}
     </AuthStack.Navigator>
   );

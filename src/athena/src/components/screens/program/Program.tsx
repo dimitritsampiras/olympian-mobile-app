@@ -10,7 +10,7 @@ import { Button, Heading } from '../../elements';
 import { Badge } from '../../elements/display/Badge';
 import { ProgramImage } from '../../elements/display/ProgramImage';
 import { BodyText } from '../../elements/typography/BodyText';
-import { ProgramParamList } from '../../navigation/ProgramNavigation';
+import { ProgramParamList } from '../../navigation/ProgramNavigator';
 import { EllipsisHorizontalIcon } from 'react-native-heroicons/solid';
 
 type ProgramProps = NativeStackScreenProps<ProgramParamList, 'Program'>;
