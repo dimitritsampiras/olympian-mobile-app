@@ -17,16 +17,8 @@ import Animated, {
 } from 'react-native-reanimated';
 import theme from '../../theme';
 
-const FULL_GRADIENT = [theme.colors.blue[600], theme.colors.blue[700]];
-// const FLAT_GRADIENT = [theme.colors.blue[100], theme.colors.blue[200]];
-// const GHOST_GRADIENT = [theme.colors.gray[50], theme.colors.blue[100]];
-
-type ButtonVariant =
-  | { full?: true; flat?: never; ghost?: never }
-  | { full?: never; flat?: true; ghost?: never }
-  | { full?: never; flat?: never; ghost?: true };
-
 interface ButtonProps extends PressableProps {
+  variant?: 'full' | 'flat' | 'ghost';
   // button can't be pressed
   disabled?: boolean;
   // fit-content instead of full width
@@ -35,10 +27,9 @@ interface ButtonProps extends PressableProps {
   loading?: boolean;
   // disable button animations or now
   animated?: boolean;
-  // show shadow
-  shadow?: boolean;
   // container styles
   style?: ViewStyle;
+  colorScheme?: 'primary' | 'info';
   // single react node i.e. text or icon
   children: ReactNode;
 }
@@ -48,16 +39,14 @@ interface ButtonProps extends PressableProps {
  * @param ButtonProps properties of a button element
  * @returns JSX element
  */
-export const Button: React.FC<ButtonProps & ButtonVariant> = ({
-  full = true,
-  flat,
-  ghost,
+export const Button: React.FC<ButtonProps> = ({
+  variant = 'full',
   auto,
   style,
   disabled,
   loading,
   animated = true,
-  shadow = false,
+  colorScheme = 'primary',
   children,
   onPress,
   ...props
@@ -68,6 +57,7 @@ export const Button: React.FC<ButtonProps & ButtonVariant> = ({
 
   // handle the press in event
   const handleOnPressIn = () => {
+    if (!onPress) return;
     // guard press in if button is disabled
     if (disabled || loading) return;
     // haptic feedback
@@ -85,17 +75,16 @@ export const Button: React.FC<ButtonProps & ButtonVariant> = ({
     color.value = withSpring(1, { mass: 0.1 });
 
     // fire onPress property
-    onPress(event);
   };
 
   const animatedScaleStyle = useAnimatedStyle(() => {
-    const gradient = FULL_GRADIENT;
+    const gradient = colorSchemes[colorScheme][variant]['backgroundColor'];
 
     return {
       transform: [{ scale: interpolate(scale.value, [1, 0], [1, 0.98]) }],
       backgroundColor:
         disabled || loading
-          ? interpolateColor(color.value, [1, 0], [theme.colors.blue[300], theme.colors.blue[300]])
+          ? colorSchemes[colorScheme][variant]['disabledBackgroundColor']
           : interpolateColor(color.value, [1, 0], gradient),
     };
   });
@@ -103,13 +92,25 @@ export const Button: React.FC<ButtonProps & ButtonVariant> = ({
   return (
     <Pressable
       style={[auto && styles.auto, { ...style }]}
+      onPress={onPress}
       onPressIn={handleOnPressIn}
       onPressOut={handleOnPressOut}
       {...props}>
-      {({ pressed }) => (
+      {() => (
         <Animated.View style={[styles.button, animatedScaleStyle]}>
           {!loading ? (
-            <Text style={[styles.text, full && styles.fullText]}>{children}</Text>
+            <Text
+              style={[
+                styles.text,
+                {
+                  color:
+                    disabled || loading
+                      ? colorSchemes[colorScheme][variant].disabledColor
+                      : colorSchemes[colorScheme][variant].color,
+                },
+              ]}>
+              {children}
+            </Text>
           ) : (
             <ActivityIndicator color={'white'} />
           )}
@@ -132,43 +133,62 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     letterSpacing: 0.1,
   },
-  full: {
-    backgroundColor: theme.colors.blue[600],
-  },
-  fullDisabled: {
-    backgroundColor: theme.colors.blue[300],
-  },
-  fullText: {
-    color: '#fff',
-  },
-  ghost: {
-    backgroundColor: 'rgba(0, 0, 0, 0)',
-  },
-  ghostText: {
-    color: theme.colors.blue[700],
-  },
-  flat: {
-    backgroundColor: theme.colors.blue[100],
-  },
-  flatDisabled: {
-    backgroundColor: theme.colors.blue[50],
-  },
-  flatText: {
-    color: theme.colors.blue[700],
-  },
-  flatTextDisabled: {
-    color: theme.colors.blue[300],
-  },
   buttonShadowBase: {
-    shadowColor: theme.colors.blue[600],
     shadowRadius: 6,
     shadowOpacity: 0.35,
     shadowOffset: { height: 10, width: 0 },
-  },
-  disabled: {
-    backgroundColor: theme.colors.gray[200],
   },
   auto: {
     alignSelf: 'flex-start',
   },
 });
+
+const colorSchemes = {
+  primary: {
+    // full - solid color
+    full: {
+      color: 'white',
+      backgroundColor: [theme.colors.blue[600], theme.colors.blue[700]],
+      disabledColor: 'white',
+      disabledBackgroundColor: theme.colors.blue[300],
+    },
+    // flat - lighter color
+    flat: {
+      color: theme.colors.blue[600],
+      backgroundColor: [theme.colors.blue[100], theme.colors.blue[200]],
+      disabledColor: theme.colors.blue[300],
+      disabledBackgroundColor: theme.colors.blue[100],
+    },
+    // ghost - no background
+    ghost: {
+      color: theme.colors.blue[600],
+      backgroundColor: ['rgba(0,0,0,0)', theme.colors.gray[50]],
+      disabledColor: theme.colors.blue[300],
+      disabledBackgroundColor: 'rgba(0,0,0,0)',
+    },
+  },
+
+  // info color scheme
+  info: {
+    full: {
+      color: 'white',
+      backgroundColor: [theme.colors.gray[600], theme.colors.gray[700]],
+      disabledColor: 'white',
+      disabledBackgroundColor: theme.colors.gray[300],
+    },
+    // flat - lighter color
+    flat: {
+      color: theme.colors.gray[600],
+      backgroundColor: [theme.colors.gray[100], theme.colors.gray[200]],
+      disabledColor: theme.colors.gray[300],
+      disabledBackgroundColor: theme.colors.gray[100],
+    },
+    // ghost - no background
+    ghost: {
+      color: theme.colors.gray[600],
+      backgroundColor: ['rgba(0,0,0,0)', 'rgba(0,0,0,0)'],
+      disabledColor: theme.colors.gray[300],
+      disabledBackgroundColor: 'rgba(0,0,0,0)',
+    },
+  },
+} as const;
