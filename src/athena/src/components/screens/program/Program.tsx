@@ -55,7 +55,9 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
       <View>
         <Header navigation={route.params.back ? navigation : undefined}>
           <ProgramImage size="lg" style={{ marginBottom: 14 }} />
-          <Heading as="h2">{data?.program?.name}</Heading>
+          <Heading as="h2" onPress={async () => await refetch()}>
+            {data?.program?.name}
+          </Heading>
           <BodyText style={{ fontSize: 12, width: 200 }}>
             A sample program description since it was not implemented in the program form.
           </BodyText>
