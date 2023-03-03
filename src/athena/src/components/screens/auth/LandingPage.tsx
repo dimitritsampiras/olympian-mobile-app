@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button } from '../../elements/Button';
 import { AuthParamList } from '../../navigation/AuthNavigation';
+import TorchLogo from '../../../../assets/caution.svg';
 
 type LandingPageNav = NativeStackScreenProps<AuthParamList, 'LandingPage'>;
 
@@ -14,7 +15,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.innerContainer}>
         {/* heading section */}
-        <View>
+        <View style={{ alignItems: 'center' }}>
+          <TorchLogo width={56} height={82} style={{ marginBottom: 20 }}></TorchLogo>
           <Text style={styles.preHeading}>Welcome to</Text>
           <Text style={styles.heading1}>Olympian</Text>
         </View>
