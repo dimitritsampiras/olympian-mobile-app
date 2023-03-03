@@ -64,15 +64,192 @@ Date 2 & 1.1 & Notes\\
 
 This document ...
 
+\section{User Testing Summary}
+Unless Specified these tests were performed with a semi-structured interview where users were brought scenarios then asked questions relevant to that scenario. Most Scenarios followed the key use cases of the application.\\
+Examples include:
+\begin{enumerate}
+	\item Creating an Account.
+	\item Logging into an account.
+	\item Creating a Program.
+	\item Creating a Workout.
+	\item Creating an Exercise.
+	\item Searching for an Exercise.
+	\item Using the Discovery page to browse workouts and programs.
+	\item Finding new workouts from the Discovery page.
+	\item Starting a workout (as if the user were to use the application during their workout).
+\end{enumerate}
+
+
 \section{Functional Requirements Evaluation}
 
+\noindent During the user tests, users were asked to preform extra actions based on the FR test cases displayed in the VnV Plan.
+Some example actions included: \\
+\begin{enumerate}
+	\item During workout creation, could you make your workout private?
+	\item Could you try failing your password?
+	\item Asking the user to attempt all actions when starting a workout.
+\end{enumerate}
+
+\noindent As for the non-user tests, unit tests were preformed in order to measure metrics.
+
+\noindent The summary of the test cases are displayed below.
+
+\begin{enumerate}
+	
+\subsubsection{Workout Routine Tests}
+	\item{\textbf{test-WR-1}}:A Workout Routine can be created.\\
+	\textbf{Test result}:
+	
+	\item{\textbf{test-WR-2}}: Editing a Workout Routine.\\
+	\textbf{Test result}:
+	
+\subsubsection{Exercise Tests}
+	\item{\textbf{test-EX-1}}:Adding an Exercise to a Workout Routine.\\
+	\textbf{Test result}:
+	
+	\item{\textbf{test-EX-2}}:Removing an Exercise from a Workout Routine.\\
+	\textbf{Test result}:
+	
+	\item{\textbf{test-EX-3}}:Limiting Exercises to a Workout Routine.\\
+	\textbf{Test result}:
+	
+\subsubsection{Quantifier Tests}
+	\item{\textbf{test-QT-1}}:Adding Quantifiers to an Exercise.\\
+	\textbf{Test result}:
+	
+	\item{\textbf{test-QT-2}}:Removing Quantifiers from an Exercise.\\
+	\textbf{Test result}:
+	
+	\item{\textbf{test-QT-3}}:Editing Quantifiers of an Exercise.\\
+	\textbf{Test result}:
+	
+\subsubsection{Publicity Tests}
+	\item{\textbf{test-PB-1}}:Publicizing a Workout Routine.\\
+	\textbf{Test result}:
+	
+	\item{\textbf{test-PB-2}}:Privatizing a Workout Routine.\\
+	\textbf{Test result}:
+	
+\subsubsection{Workout Routine Saving Tests}
+	\item{\textbf{test-WS-1}}:Saving a Public Workout Routine.\\
+	\textbf{Test result}:
+	
+\subsubsection{Browsing Workout Routine Tests}
+	\item{\textbf{test-BS-1}}:Browsing Workout Routines.\\
+	\textbf{Test result}:
+	
+	\item{\textbf{test-BS-2}}:Search Workout Routines.\\
+	\textbf{Test result}:
+	
+\subsubsection{User Profile Tests}
+	\item{\textbf{test-UP-1}}:Creating a User Profile.\\
+	\textbf{Test result}:
+	
+	\item{\textbf{test-UP-2}}:Viewing Other User Profile.\\
+	\textbf{Test result}:
+	
+\subsubsection{Fitness Goal Tests}
+	\item{\textbf{test-FG-1}}:Creating a Fitness Goal.\\
+	\textbf{Test result}:
+	
+	\item{\textbf{test-FG-2}}:Progressing a Fitness Goal.\\
+	\textbf{Test result}:
+	
+	
+\end{enumerate}
 \section{Nonfunctional Requirements Evaluation}
 
-\subsection{Usability}
-		
-\subsection{Performance}
+\noindent After users were brought through the test case scenarios they were asked questions based on the NFR test cases displayed in the VnV Plan.
+Some example questions included: \\
+\begin{enumerate}
+	\item How did you find the speed of the application? Did you notice any latency or lagging?
+	\item Any time the application prompted you to do an action such as find an exercise, was it clear on what to do?
+	\item Considering the navigation of this program was it hard to locate various operations and actions from any given point?
+\end{enumerate}
 
-\subsection{etc.}
+\noindent As for the non-user tests, unit tests were preformed in order to measure metrics based on the application performance.
+
+\noindent The summary of the test cases are displayed below.
+
+\subsection{Look and Feel Testing}
+\begin{enumerate}
+	\item{\textbf{test-LF-1}}: Style.\\
+	\textbf{Test result}:
+	
+\subsubsection{Usability and Humanity Tests}
+	\item{\textbf{test-UH-1}}: Text Sizing and Visibility.\\
+	\textbf{Test result}:
+	
+	\item{\textbf{test-UH-2}}: Text Language.\\
+	\textbf{Test result}:
+	
+	\item{\textbf{test-UH-3}}: Learnability.\\
+	\textbf{Test result}:
+	
+	\item{\textbf{test-UH-4}}: Understandability.\\
+	\textbf{Test result}:
+	
+	\item{\textbf{test-UH-5}}: Hearing and Audio considerations.\\
+	\textbf{Test result}:
+	
+	\item{\textbf{test-UH-6}}: Use of Colour and Contrast.\\
+	\textbf{Test result}:
+	
+\subsubsection{Performance Tests}
+	\item{\textbf{test-PF-1}}: Speed and Latency.\\
+	\textbf{Test result}:
+	
+	\item{\textbf{test-PF-2}}: Accuracy and Precision of Quantifiers.\\
+	\textbf{Test result}:
+	
+	\item{\textbf{test-PF-3}}: Availability and Uptime.\\
+	\textbf{Test result}:
+	
+	\item{\textbf{test-PF-4}}: User Capacity.\\
+	\textbf{Test result}:
+	
+	\item{\textbf{test-PF-5}}: Scalability of User Capacity.\\
+	\textbf{Test result}:
+	
+\subsubsection{Operational and Environment Tests}
+	\item{\textbf{test-OE-1}}: Supported Systems.\\
+	\textbf{Test result}:
+	
+\subsubsection{Maintainability and Support Tests}
+	\item{\textbf{test-MS-1}}: Maintenance.\\
+	\textbf{Test result}:
+	
+\subsubsection{Security Tests}
+	\item{\textbf{test-SEC-1}}: Private and Public Details.\\
+	\textbf{Test result}:
+	
+	\item{\textbf{test-SEC-2}}: Passwords.\\
+	\textbf{Test result}:
+	
+	\item{\textbf{test-SEC-3}}: Client Server Privacy.\\
+	\textbf{Test result}:
+	
+	\item{\textbf{test-SEC-4}}: Data storage and logging.\\
+	\textbf{Test result}:
+	
+	\item{\textbf{test-SEC-5}}: Data Backups.\\
+	\textbf{Test result}:
+	
+\subsubsection{Cultural Requirements Tests}
+	\item{\textbf{test-CR-1}}: Profanity and Inappropriate Language.\\
+	\textbf{Test result}:
+	
+	\item{\textbf{test-CR-2}}: Reporting Offensive Language.\\
+	\textbf{Test result}:
+	
+\subsubsection{Legal Requirements Tests}
+	\item{\textbf{test-LR-1}}: Age and Gender Use.\\
+	\textbf{Test result}:
+	
+	\item{\textbf{test-LR-2}}: Data Protection.\\
+	\textbf{Test result}:
+	
+\end{enumerate}
 	
 \section{Comparison to Existing Implementation}	
 
