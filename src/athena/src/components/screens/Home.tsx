@@ -5,7 +5,7 @@ import { Button } from '../elements/Button';
 import { ScreenView } from '../containers/ScreenView';
 import { Heading } from '../elements/typography/Heading';
 import { UserContext } from '../providers';
-import { StyleSheet, Text, View, ViewStyle } from 'react-native';
+import { StyleSheet, View, ViewStyle } from 'react-native';
 import { SubHeading } from '../elements/typography/SubHeading';
 import { Header } from '../containers/Header';
 import theme from '../../theme';
@@ -33,6 +33,33 @@ export const Home: React.FC<HomeProps> = ({ navigation }) => {
 
   const handleOnDismiss = () => {
     setVisible(false);
+  };
+
+  //dummy data to be replaced by result of graphql query
+  const ExercisesForYou = [
+    {
+      id: 'exercise1',
+      name: 'Bench Grips',
+      description: 'test exercise 1',
+      sets: 5,
+      reps: 4,
+      rpe: 10,
+      muscles: ['neck'],
+    },
+    {
+      id: 'exercise2',
+      name: 'Jumping Jacks',
+      description: 'test exercise 2',
+      sets: 5,
+      reps: 4,
+      rpe: 10,
+      muscles: ['forearm', 'head'],
+    },
+  ];
+
+  const handleExerciseCardPress = (exerciseId: string) => {
+    //change this to route to exercise page
+    console.log(exerciseId);
   };
 
   return (

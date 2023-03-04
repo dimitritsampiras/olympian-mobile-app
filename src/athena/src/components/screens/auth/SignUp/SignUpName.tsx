@@ -5,7 +5,7 @@ import { Input } from '../../../elements/Input';
 import theme from '../../../../theme';
 import { Formik } from 'formik';
 import { Button } from '../../../elements/Button';
-import SampleSvg from '../../../../../assets/caution.svg';
+import TorchLogo from '../../../../../assets/TorchLogo.svg';
 import { PageControl } from 'react-native-ui-lib';
 import { object, string } from 'yup';
 import { SignUpInput } from '../../../../lib/graphql';
@@ -39,12 +39,12 @@ export const SignUpName: React.FC<SignUpNameProps> = () => {
             <View style={styles.container}>
               <View style={styles.innerContainer}>
                 {/* Sample SVG to be replaced with the actual torch once we have it*/}
-                <SampleSvg width={56} height={82} fill={'black'}></SampleSvg>
+                <TorchLogo width={56} height={82}></TorchLogo>
                 <Heading noMargin style={{ textAlign: 'center' }}>
                   Sign Up
                 </Heading>
                 <BodyText style={{ textAlign: 'center' }}>
-                  Why don't you start by telling us your name? This won't be displayed publicly.
+                  {"Why don't you start by telling us your name? This won't be displayed publicly."}
                 </BodyText>
                 <Input
                   placeholder="name"

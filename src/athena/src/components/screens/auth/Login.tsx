@@ -2,14 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Formik } from 'formik';
 import React, { useContext, useState } from 'react';
-import {
-  Text,
-  TouchableWithoutFeedback,
-  Keyboard,
-  KeyboardAvoidingView,
-  StyleSheet,
-  View,
-} from 'react-native';
+import { Text, TouchableWithoutFeedback, Keyboard, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AuthParamList } from '../../navigation';
 import { LoginInput, useLoginMutation } from '../../../lib/graphql';
@@ -17,6 +10,8 @@ import { AUTH_TOKEN } from '../../../lib/constants';
 import { Input } from '../../elements/Input';
 import { Button } from '../../elements/Button';
 import { UserContext } from '../../providers';
+import { UserCircleIcon, LockClosedIcon } from 'react-native-heroicons/solid';
+import theme from '../../../theme';
 
 type ParamList = NativeStackScreenProps<AuthParamList, 'Login'>;
 interface LoginProps extends ParamList {}
@@ -26,7 +21,7 @@ const initialValues: LoginInput = {
   password: '',
 };
 
-export const Login: React.FC<LoginProps> = ({ navigation }) => {
+export const Login: React.FC<LoginProps> = () => {
   // context
   const { refetch } = useContext(UserContext);
 
@@ -92,7 +87,7 @@ export const Login: React.FC<LoginProps> = ({ navigation }) => {
     <SafeAreaView>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.screen}>
-          <KeyboardAvoidingView style={styles.keyboardView} behavior={'padding'}>
+          <View style={styles.keyboardView}>
             <Text style={{ ...styles.heading2, marginBottom: 20 }}>Login</Text>
             <Formik initialValues={initialValues} onSubmit={onSubmit} validate={clearErrors}>
               {({ handleChange, handleSubmit, values }) => (
@@ -105,6 +100,11 @@ export const Login: React.FC<LoginProps> = ({ navigation }) => {
                     autoCapitalize="none"
                     error={!!errors.username}
                     style={{ marginBottom: 14 }}
+                    Icon={UserCircleIcon}
+                    iconProps={{
+                      size: 20,
+                      fill: errors.username ? 'red' : theme.colors.gray[400],
+                    }}
                   />
                   <Input
                     value={values.password}
@@ -116,6 +116,11 @@ export const Login: React.FC<LoginProps> = ({ navigation }) => {
                     secureTextEntry={true}
                     error={!!errors.password}
                     style={{ marginBottom: 24 }}
+                    Icon={LockClosedIcon}
+                    iconProps={{
+                      size: 20,
+                      fill: errors.password ? 'red' : theme.colors.gray[400],
+                    }}
                   />
                   <View style={{ minHeight: 16, marginBottom: 30 }}>
                     <Text style={styles.errorMessageStyle}>{errors.errorMessage}</Text>
@@ -126,7 +131,7 @@ export const Login: React.FC<LoginProps> = ({ navigation }) => {
                 </>
               )}
             </Formik>
-          </KeyboardAvoidingView>
+          </View>
         </View>
       </TouchableWithoutFeedback>
     </SafeAreaView>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View, ViewProps } from 'react-native';
-import { ThemeColor } from '../../../lib/types';
 import theme from '../../../theme';
 
 interface MuscleChipProps extends ViewProps {

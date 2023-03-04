@@ -7,11 +7,11 @@ import { Input } from '../../../elements/Input';
 import theme from '../../../../theme';
 import { Formik } from 'formik';
 import { Button } from '../../../elements/Button';
-import SampleSvg from '../../../../../assets/caution.svg';
+import TorchLogo from '../../../../../assets/TorchLogo.svg';
 import { PageControl } from 'react-native-ui-lib';
 import { object, ref, string } from 'yup';
 import { SignUpInput } from '../../../../lib/graphql';
-import { KeyIcon, ClipboardDocumentCheckIcon, LockClosedIcon } from 'react-native-heroicons/solid';
+import { ClipboardDocumentCheckIcon, LockClosedIcon } from 'react-native-heroicons/solid';
 import { useSignUpMutation } from '../../../../lib/graphql';
 import { Heading } from '../../../elements/typography/Heading';
 import { BodyText } from '../../../elements/typography/BodyText';
@@ -71,12 +71,12 @@ export const SignUpPassword: React.FC<SignUpPasswordProps> = ({ navigation }) =>
             <View style={styles.container}>
               <View style={styles.innerContainer}>
                 {/* Sample SVG to be replaced with the actual torch once we have it*/}
-                <SampleSvg width={56} height={82} fill={'black'}></SampleSvg>
+                <TorchLogo width={56} height={82} fill={'black'}></TorchLogo>
                 <Heading noMargin style={{ textAlign: 'center' }}>
                   Password...Shhh
                 </Heading>
                 <BodyText style={{ textAlign: 'center' }}>
-                  Enter a strong password. Don't worry, you can recover it if you forget.
+                  {"Enter a strong password. Don't worry, you can recover it if you forget."}
                 </BodyText>
                 <Input
                   placeholder="password"
