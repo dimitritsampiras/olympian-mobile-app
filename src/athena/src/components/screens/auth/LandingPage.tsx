@@ -15,7 +15,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.innerContainer}>
         {/* heading section */}
-
         <View style={{ alignItems: 'center' }}>
           <TorchLogo width={56} height={82} style={{ marginBottom: 20 }}></TorchLogo>
           <Text style={styles.preHeading}>Welcome to</Text>

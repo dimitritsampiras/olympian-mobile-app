@@ -44,7 +44,7 @@ export const SignUpName: React.FC<SignUpNameProps> = () => {
                   Sign Up
                 </Heading>
                 <BodyText style={{ textAlign: 'center' }}>
-                  Why don't you start by telling us your name? This won't be displayed publicly.
+                  {"Why don't you start by telling us your name? This won't be displayed publicly."}
                 </BodyText>
                 <Input
                   placeholder="name"

@@ -7,6 +7,7 @@ export const UserQuery = extendType({
     t.field('me', {
       type: nullable('User'),
       resolve: async (_root, _args, { prisma, userId }) => {
+        if (!userId) return null;
         return await prisma.user.findUnique({ where: { id: userId } });
       },
     });

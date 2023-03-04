@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
-import { StyleSheet, ScrollView, ViewProps } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { StyleSheet, ScrollView, ViewProps, View } from 'react-native';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import theme from '../../theme';
 
 interface ScreenViewProps {
@@ -20,33 +20,30 @@ export const ScreenView: React.FC<ScreenViewProps> = ({
   styles,
   children,
 }) => {
+  const insets = useSafeAreaInsets();
+
   return (
-    <SafeAreaView
+    <View
       style={[
         {
           flex: 1,
           paddingHorizontal: 24,
+          paddingTop: insets.top,
+          paddingBottom: type === 'form' ? insets.bottom : 0,
           backgroundColor: type === 'form' ? theme.colors.white : theme.colors.gray[50],
         },
-        spaced && { justifyContent: 'space-between' },
+        type === 'form' && spaced && { justifyContent: 'space-between' },
         styles,
       ]}>
-      <ScrollView
-        showsVerticalScrollIndicator={showScrollBar}
-        alwaysBounceVertical={scrollBounce}
-        contentContainerStyle={spaced ? ScrollStyle.isSpaced : ScrollStyle.notSpaced}>
-        {children}
-      </ScrollView>
-    </SafeAreaView>
+      {type === 'main' ? (
+        <ScrollView
+          showsVerticalScrollIndicator={showScrollBar}
+          alwaysBounceVertical={scrollBounce}>
+          {children}
+        </ScrollView>
+      ) : (
+        children
+      )}
+    </View>
   );
 };
-
-const ScrollStyle = StyleSheet.create({
-  notSpaced: {
-    flex: 1,
-  },
-  isSpaced: {
-    flex: 1,
-    justifyContent: 'space-between',
-  },
-});

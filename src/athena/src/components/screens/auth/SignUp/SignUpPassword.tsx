@@ -11,7 +11,7 @@ import TorchLogo from '../../../../../assets/TorchLogo.svg';
 import { PageControl } from 'react-native-ui-lib';
 import { object, ref, string } from 'yup';
 import { SignUpInput } from '../../../../lib/graphql';
-import { KeyIcon, ClipboardDocumentCheckIcon, LockClosedIcon } from 'react-native-heroicons/solid';
+import { ClipboardDocumentCheckIcon, LockClosedIcon } from 'react-native-heroicons/solid';
 import { useSignUpMutation } from '../../../../lib/graphql';
 import { Heading } from '../../../elements/typography/Heading';
 import { BodyText } from '../../../elements/typography/BodyText';
@@ -76,7 +76,7 @@ export const SignUpPassword: React.FC<SignUpPasswordProps> = ({ navigation }) =>
                   Password...Shhh
                 </Heading>
                 <BodyText style={{ textAlign: 'center' }}>
-                  Enter a strong password. Don't worry, you can recover it if you forget.
+                  {"Enter a strong password. Don't worry, you can recover it if you forget."}
                 </BodyText>
                 <Input
                   placeholder="password"

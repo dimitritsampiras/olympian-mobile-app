@@ -1,41 +1,62 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacityProps, View, ViewProps } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { HeartIcon, GiftIcon } from 'react-native-heroicons/solid';
-import { Program } from '../../lib/graphql';
+
+import _, { sample } from 'lodash';
+
+import { Program, ProgramFragment, UserProgramsQuery } from '../../lib/graphql';
+import { specificityColor } from '../../lib/utils';
 import theme from '../../theme';
+import { Heading } from '../elements';
+import { Badge } from '../elements/display/Badge';
 import { ProgramImage } from '../elements/display/ProgramImage';
 import { Card } from './Card';
 
-interface ProgramCardProps {
-  program: Program;
+interface ProgramCardProps extends ViewProps {
+  program: ProgramFragment;
+  userOwned?: boolean;
+  square?: boolean;
+  to?: string;
+  onPress?: () => void;
 }
 
-export const ProgramCard: React.FC<ProgramCardProps> = ({ program }) => {
-  // TODO : Replace with Program props
-  const likes = 32;
-  const programName = program.name;
-  const icon = <ProgramImage size={'small'}></ProgramImage>;
-  // END TODO
+export const ProgramCard: React.FC<ProgramCardProps> = ({
+  program,
+  square = false,
+  userOwned = false,
+  style,
+  onPress,
+  ...props
+}) => {
   return (
     <Card
-      style={{
-        width: 150,
-        height: 150,
-        borderRadius: 25,
-        marginHorizontal: 5,
-      }}>
-      {/* Icon */}
-      {icon}
-
-      {/* Title */}
-      <View style={{ flex: 1 }}>
-        <Text style={{ fontWeight: '900', fontSize: 16 }}>{programName}</Text>
+      square={square}
+      onPress={onPress}
+      style={[{ justifyContent: 'space-between' }, style]}
+      {...props}>
+      <View>
+        <ProgramImage size="md" style={{ marginBottom: 8 }} />
+        <Heading as={square ? 'h4' : 'h3'}>{_.truncate(program.name, { length: 25 })}</Heading>
       </View>
 
-      {/* Hearts */}
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <HeartIcon width={20} fill={theme.colors.rose[300]} />
-        <Text>{likes}</Text>
+        {!userOwned ? (
+          <>
+            <HeartIcon width={16} fill={theme.colors.rose[600]} />
+            <Text style={{ marginLeft: 5 }}>{sample([4, 15, 65, 23, 45, 26, 23, 12])}</Text>
+          </>
+        ) : (
+          <>
+            {program.specificity.map((spec) => {
+              return (
+                <Badge key={spec} colorScheme={specificityColor(spec)} style={{ marginRight: 6 }}>
+                  {spec}
+                </Badge>
+              );
+            })}
+          </>
+        )}
       </View>
     </Card>
   );

@@ -1,15 +1,20 @@
 import React, { ReactNode } from 'react';
-import { StyleProp, Text, TextStyle } from 'react-native';
+import { Text, TextProps } from 'react-native';
 import theme from '../../../theme';
 
-interface HeadingProps {
-  as?: 'title' | 'h1' | 'h2' | 'h3';
+interface HeadingProps extends TextProps {
+  as?: 'title' | 'h1' | 'h2' | 'h3' | 'h4';
   children: ReactNode;
-  style?: StyleProp<TextStyle>;
   noMargin?: boolean;
 }
 
-export const Heading: React.FC<HeadingProps> = ({ as = 'h1', children, style, noMargin }) => {
+export const Heading: React.FC<HeadingProps> = ({
+  as = 'h1',
+  children,
+  style,
+  noMargin,
+  ...props
+}) => {
   let fontSize;
   switch (as) {
     case 'title':
@@ -22,7 +27,10 @@ export const Heading: React.FC<HeadingProps> = ({ as = 'h1', children, style, no
       fontSize = 26;
       break;
     case 'h3':
-      fontSize = 20;
+      fontSize = 18;
+      break;
+    case 'h4':
+      fontSize = 14;
       break;
   }
 
@@ -35,20 +43,24 @@ export const Heading: React.FC<HeadingProps> = ({ as = 'h1', children, style, no
       marginBottom = 22;
       break;
     case 'h2':
-      marginBottom = 18;
+      marginBottom = 14;
       break;
     case 'h3':
       marginBottom = 14;
+      break;
+    case 'h4':
+      marginBottom = 0;
       break;
   }
 
   return (
     <Text
       style={[
-        { fontSize, color: theme.colors.gray[900], fontWeight: '700', width: 250 },
+        { fontSize, color: theme.colors.gray[900], fontWeight: '700' },
         !noMargin && { marginBottom },
         style,
-      ]}>
+      ]}
+      {...props}>
       {children}
     </Text>
   );

@@ -2,14 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Formik } from 'formik';
 import React, { useContext, useState } from 'react';
-import {
-  Text,
-  TouchableWithoutFeedback,
-  Keyboard,
-  KeyboardAvoidingView,
-  StyleSheet,
-  View,
-} from 'react-native';
+import { Text, TouchableWithoutFeedback, Keyboard, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AuthParamList } from '../../navigation';
 import { LoginInput, useLoginMutation } from '../../../lib/graphql';
@@ -28,7 +21,7 @@ const initialValues: LoginInput = {
   password: '',
 };
 
-export const Login: React.FC<LoginProps> = ({ navigation }) => {
+export const Login: React.FC<LoginProps> = () => {
   // context
   const { refetch } = useContext(UserContext);
 
@@ -110,7 +103,7 @@ export const Login: React.FC<LoginProps> = ({ navigation }) => {
                     Icon={UserCircleIcon}
                     iconProps={{
                       size: 20,
-                      fill: !!errors.username ? 'red' : theme.colors.gray[400],
+                      fill: errors.username ? 'red' : theme.colors.gray[400],
                     }}
                   />
                   <Input
@@ -126,7 +119,7 @@ export const Login: React.FC<LoginProps> = ({ navigation }) => {
                     Icon={LockClosedIcon}
                     iconProps={{
                       size: 20,
-                      fill: !!errors.password ? 'red' : theme.colors.gray[400],
+                      fill: errors.password ? 'red' : theme.colors.gray[400],
                     }}
                   />
                   <View style={{ minHeight: 16, marginBottom: 30 }}>

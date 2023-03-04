@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View, ViewProps } from 'react-native';
-import { ThemeColor } from '../../../lib/types';
 import theme from '../../../theme';
 
 interface MuscleChipProps extends ViewProps {
@@ -13,11 +12,11 @@ export const MuscleChip: React.FC<MuscleChipProps> = ({ intensity, style, childr
       style={[
         styles.container,
         {
-          backgroundColor: intensity === 1 ? theme.colors.blue[400] : theme.colors.blue[200],
+          backgroundColor: intensity === 1 ? theme.colors.blue[500] : theme.colors.blue[300],
         },
         style,
       ]}>
-      <Text style={[styles.text]}>{children}</Text>
+      <Text style={[styles.text]}>{children?.toString().replace('-', ' ')}</Text>
     </View>
   );
 };

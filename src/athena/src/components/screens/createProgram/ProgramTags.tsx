@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import { Incubator } from 'react-native-ui-lib';
 
 import { Heading } from '../../elements';

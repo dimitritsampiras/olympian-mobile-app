@@ -242,4 +242,9 @@ export default {
       900: '#111827',
     },
   },
-};
+  radius: {
+    sm: 8,
+    md: 16,
+    full: 9999,
+  },
+} as const;

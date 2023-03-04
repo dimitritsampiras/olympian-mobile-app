@@ -1,5 +1,7 @@
 import { makeSchema } from 'nexus';
 import path from 'path';
+import { makeExecutableSchema } from '@graphql-tools/schema';
+import { DateTimeResolver, DateTimeTypeDefinition } from 'graphql-scalars';
 
 import * as UserSchema from './User';
 import * as ProfileSchema from './Profile';
@@ -10,6 +12,13 @@ import * as ProgramSchema from './Program';
 export const schema = makeSchema({
   // types and resolvers
   types: [UserSchema, ErrorSchema, ProgramSchema, ProfileSchema],
+  mergeSchema: {
+    schema: makeExecutableSchema({
+      typeDefs: [DateTimeTypeDefinition],
+      resolvers: [{ DateTime: DateTimeResolver }],
+    }),
+  },
+
   // output paths of schema
   outputs: {
     schema: path.join(__dirname, '../../../schema.graphql'),

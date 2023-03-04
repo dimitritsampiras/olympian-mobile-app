@@ -1,6 +1,12 @@
 query ProgramFromId($programId: String!) {
   program(programId: $programId) {
     ...Program
+    workouts {
+      ...Workout
+      exercises {
+        id
+      }
+    }
     profile {
       user {
         username
@@ -9,9 +15,49 @@ query ProgramFromId($programId: String!) {
   }
 }
 
+query WorkoutFromId($workoutId: String!) {
+  workout(workoutId: $workoutId) {
+    ...Workout
+    exercises {
+      ...Exercise
+      staticExercise {
+        ...StaticExercise
+      }
+    }
+  }
+}
+
+query StaticExerciseFromId($staticExerciseId: String!) {
+  staticExercise(staticExerciseId: $staticExerciseId) {
+    ...StaticExercise
+  }
+}
+
+query StaticExercises {
+  staticExercises {
+    ...StaticExercise
+  }
+}
 
 query UserPrograms {
   userPrograms {
+    ...Program
+    profile {
+      user {
+        username
+      }
+    }
+  }
+}
+
+query TrendingPrograms($skip: Int!, $take: Int!) {
+  trendingPrograms(skip: $skip, take: $take) {
+    ...Program
+  }
+}
+
+query PopularPrograms($skip: Int!, $take: Int!) {
+  popularPrograms(skip: $skip, take: $take) {
     ...Program
   }
 }

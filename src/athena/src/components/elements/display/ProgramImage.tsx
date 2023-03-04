@@ -2,28 +2,28 @@ import React from 'react';
 import { Text, View, ViewProps } from 'react-native';
 import theme from '../../../theme';
 import _ from 'lodash';
+import { Emoji } from './Emoji';
 
 interface ProgramImageProps extends ViewProps {
-  size?: 'small' | 'medium' | 'large';
-  placeholder?: string;
+  size?: 'sm' | 'md' | 'lg';
+  emojiCode?: string;
+  bgColor?: string;
 }
 
-const colors = Object.entries(theme.colors).reduce<string[]>((accum, current) => {
-  const value = current[1];
-  if (typeof value === 'string') return accum;
-  return [...accum, value[200]];
-}, []);
+const SM_SIZE = 32;
+const MD_SIZE = 48;
+const LG_SIZE = 64;
 
 /**
  *
  *
  */
 export const ProgramImage: React.FC<ProgramImageProps> = ({
-  size = 'medium',
-  placeholder = '🦖',
+  size = 'md',
+  emojiCode = '1F93D',
   style,
 }) => {
-  const dimension = size === 'small' ? 32 : size === 'medium' ? 64 : 128;
+  const dimension = size === 'sm' ? SM_SIZE : size === 'md' ? MD_SIZE : LG_SIZE;
   return (
     <View
       style={[
@@ -34,11 +34,11 @@ export const ProgramImage: React.FC<ProgramImageProps> = ({
           alignItems: 'center',
           justifyContent: 'center',
           overflow: 'hidden',
-          backgroundColor: _.sample(colors),
+          backgroundColor: theme.colors.violet[100],
         },
         style,
       ]}>
-      <Text style={{ fontSize: dimension / 2.2, textAlign: 'center' }}>{placeholder}</Text>
+      <Emoji style={{ fontSize: dimension / 2.2, textAlign: 'center' }} unicode={emojiCode} />
     </View>
   );
 };
