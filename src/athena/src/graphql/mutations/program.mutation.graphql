@@ -15,3 +15,21 @@ mutation CreateExercise($workoutId: String!, $staticExerciseId: String!) {
     ...Exercise
   }
 }
+
+mutation UpdateSetRpe($setId: String!, $rpe: Int!) {
+  updateSetRpe(setId: $setId, rpe: $rpe) {
+    number
+  }
+}
+
+mutation UpdateSetReps($setId: String!, $reps: Int!) {
+  updateSetReps(setId: $setId, reps: $reps) {
+    number
+  }
+}
+
+mutation CreateSet($exerciseId: String!) {
+  createSet(exerciseId: $exerciseId) {
+    number
+  }
+}

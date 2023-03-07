@@ -1,4 +1,5 @@
 import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
+import { Exercise } from '../screens/program/Exercise';
 import { ExerciseSearch } from '../screens/program/ExerciseSearch';
 import { Program } from '../screens/program/Program';
 import { StaticExercise } from '../screens/program/StaticExercise';
@@ -12,6 +13,7 @@ export type ProgramParamList = {
   Workout: { workoutId: string };
   ExerciseSearch: { workoutId: string };
   StaticExercise: { workoutId: string; staticExerciseId: string };
+  Exercise: { exerciseId: string };
 };
 
 type ProgramStackNavigatorProps = NativeStackScreenProps<
@@ -34,7 +36,7 @@ export const ProgramNavigator: React.FC<ProgramStackNavigatorProps> = ({ route }
         <ProgramStack.Screen name="Workout" component={Workout} />
         <ProgramStack.Screen name="ExerciseSearch" component={ExerciseSearch} />
         <ProgramStack.Screen name="StaticExercise" component={StaticExercise} />
-        {/* <ProgramStack.Screen name="Workout" component={Workout} /> */}
+        <ProgramStack.Screen name="Exercise" component={Exercise} />
       </ProgramStack.Navigator>
     </>
   );

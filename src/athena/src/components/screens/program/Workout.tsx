@@ -1,3 +1,4 @@
+import { useIsFocused } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect } from 'react';
 import { ActivityIndicator, Text, TouchableOpacity, View } from 'react-native';
@@ -17,30 +18,20 @@ type WorkoutProps = NativeStackScreenProps<ProgramParamList, 'Workout'>;
 
 export const Workout: React.FC<WorkoutProps> = ({ route, navigation }) => {
   const { workoutId } = route.params;
-  // data
+  const isFocused = useIsFocused();
+
   const { data, loading, error, refetch } = useWorkoutFromIdQuery({
     variables: { workoutId },
   });
 
-  // const [createWorkout, { loading: cwLoading }] = useCreateWorkoutMutation();
-
   // create new blank workout on add workout button press
   const handleAddExercise = async () => {
-    // if (!data?.program) return;
-    // const workout = await createWorkout({
-    //   variables: { programId },
-    // }).then(({ data }) => data?.createWorkout);
-    // if (!workout) return;
     navigation.navigate('ExerciseSearch', { workoutId });
   };
 
   useEffect(() => {
-    (async () => {
-      await refetch({
-        workoutId,
-      });
-    })();
-  }, []);
+    isFocused && (async () => await refetch({ workoutId }))();
+  }, [isFocused]);
 
   if (error) {
     return <BodyText>There was an error</BodyText>;
@@ -54,9 +45,7 @@ export const Workout: React.FC<WorkoutProps> = ({ route, navigation }) => {
     <ScreenView>
       <View>
         <Header navigation={navigation}>
-          <Heading as="h2" onPress={async () => await refetch()}>
-            {data?.workout?.name}
-          </Heading>
+          <Heading as="h2">{data?.workout?.name}</Heading>
           <BodyText style={{ fontSize: 12, width: 200 }}>A sample workout description.</BodyText>
         </Header>
       </View>
@@ -65,7 +54,11 @@ export const Workout: React.FC<WorkoutProps> = ({ route, navigation }) => {
         {data?.workout?.exercises.map((exercise) => (
           <TouchableOpacity
             key={exercise.id}
-            // onPress={() => navigation.navigate('Workout', { workoutId: exercise.id })}
+            onPress={() =>
+              navigation.navigate('Exercise', {
+                exerciseId: exercise.id,
+              })
+            }
             style={{
               backgroundColor: 'white',
               borderRadius: 18,
@@ -79,7 +72,7 @@ export const Workout: React.FC<WorkoutProps> = ({ route, navigation }) => {
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <View
                 style={{
-                  backgroundColor: exerciseNumToColor[(exercise.number % 7) as 1 | 2][50],
+                  backgroundColor: exerciseOrderToColor[(exercise.order % 7) as 1 | 2][50],
                   height: 30,
                   width: 30,
                   alignItems: 'center',
@@ -89,10 +82,10 @@ export const Workout: React.FC<WorkoutProps> = ({ route, navigation }) => {
                 }}>
                 <Text
                   style={{
-                    color: exerciseNumToColor[(exercise.number % 7) as 1][500],
+                    color: exerciseOrderToColor[(exercise.order % 7) as 1][500],
                     fontWeight: '600',
                   }}>
-                  {exercise.number}
+                  {exercise.order}
                 </Text>
               </View>
               <Text style={{ fontWeight: '600', marginRight: 14, width: 120 }}>
@@ -108,9 +101,9 @@ export const Workout: React.FC<WorkoutProps> = ({ route, navigation }) => {
                   justifyContent: 'space-between',
                   marginRight: 14,
                 }}>
-                <Text>{5}</Text>
+                <Text>{exercise.sets.length || '-'}</Text>
                 <XMarkIcon size={16} fill={theme.colors.gray[400]} />
-                <Text>{5}</Text>
+                <Text>{exercise.sets[0]?.reps || '-'}</Text>
               </View>
               <ChevronRightIcon fill={theme.colors.gray[300]} size={18} />
             </View>
@@ -124,7 +117,7 @@ export const Workout: React.FC<WorkoutProps> = ({ route, navigation }) => {
   );
 };
 
-const exerciseNumToColor = {
+const exerciseOrderToColor = {
   0: theme.colors.purple,
   1: theme.colors.violet,
   2: theme.colors.rose,

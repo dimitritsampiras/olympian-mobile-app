@@ -11,8 +11,8 @@ type AppError {
 input CreateProgramInput {
   name: String!
   publicity: Publicity!
-  specificity: [Specificity!]!
   tags: [String!]!
+  trainingType: [TrainingType!]!
   userId: String!
 }
 
@@ -45,11 +45,10 @@ enum Equipment {
 type Exercise {
   authorNotes: String
   id: ID!
-  number: Int!
-  reps: Int
-  rpe: Int
-  sets: Int
+  order: Int!
+  sets: [Set!]!
   staticExercise: StaticExercise!
+  supersetOrder: String
 }
 
 input LoginInput {
@@ -104,9 +103,12 @@ enum Muscle {
 type Mutation {
   createExercise(staticExerciseId: String!, workoutId: String!): Exercise
   createProgram(input: CreateProgramInput!): Program
+  createSet(exerciseId: String!): Set
   createWorkout(programId: String!): Workout
   login(input: LoginInput!): String
   signup(input: SignUpInput!): Boolean
+  updateSetReps(reps: Int!, setId: String!): Set
+  updateSetRpe(rpe: Int!, setId: String!): Set
 }
 
 type Profile {
@@ -121,9 +123,9 @@ type Program {
   name: String!
   profile: Profile!
   publicity: Publicity!
-  specificity: [Specificity!]!
   tags: [String!]!
   trainingLevel: TrainingLevel
+  trainingType: [TrainingType!]!
   workouts: [Workout!]!
 }
 
@@ -135,15 +137,25 @@ enum Publicity {
 
 type Query {
   emailExists(email: String!): Boolean
+  exercise(exerciseId: String!): Exercise
   me: User
-  popularPrograms(skip: Int!, take: Int!): [Program!]!
+  popularPrograms(skip: Int!, take: Int!, trainingType: [TrainingType!]): [Program!]!
   program(programId: String!): Program
   staticExercise(staticExerciseId: String!): StaticExercise
   staticExercises: [StaticExercise!]!
-  trendingPrograms(skip: Int!, take: Int!): [Program!]!
+  trainingTypes: [TrainingType!]!
+  trendingPrograms(skip: Int!, take: Int!, trainingType: [TrainingType!]): [Program!]!
   userPrograms: [Program!]!
   usernameExists(username: String!): Boolean
   workout(workoutId: String!): Workout
+}
+
+type Set {
+  exercise: Exercise!
+  id: ID!
+  number: Int!
+  reps: Int!
+  rpe: Int!
 }
 
 input SignUpInput {
@@ -151,14 +163,6 @@ input SignUpInput {
   name: String!
   password: String!
   username: String!
-}
-
-enum Specificity {
-  athleticism
-  cardio
-  general
-  hypertrophy
-  strength
 }
 
 type StaticExercise {
@@ -181,6 +185,30 @@ enum TrainingLevel {
   intermediate
 }
 
+enum TrainingType {
+  aerobics
+  boxing
+  calisthenics
+  cardio
+  crossfit
+  cycling
+  functional_training
+  gymnastics
+  hiit
+  hypertrophy
+  martial_arts
+  olympic_weightlifting
+  pilates
+  recovery
+  rowing
+  running
+  sports_performance
+  strength
+  stretching
+  swimming
+  wellness
+}
+
 type User {
   email: String!
   id: ID!
@@ -201,7 +229,7 @@ type Workout {
   id: ID!
   name: String!
   programId: String
-  specificity: [Specificity!]!
   tags: [String!]!
   trainingLevel: TrainingLevel
+  trainingType: [TrainingType!]!
 }

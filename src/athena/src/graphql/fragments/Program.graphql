@@ -3,7 +3,7 @@ fragment Program on Program {
   name
   publicity
   complimentary
-  specificity
+  trainingType
   tags
   trainingLevel
   workouts {
@@ -14,7 +14,7 @@ fragment Program on Program {
 fragment Workout on Workout {
   id
   name
-  specificity
+  trainingType
   tags
   trainingLevel
 }
@@ -22,10 +22,8 @@ fragment Workout on Workout {
 fragment Exercise on Exercise {
   authorNotes
   id
-  reps
-  rpe
-  sets
-  number
+  order
+  supersetOrder
 }
 
 fragment StaticExercise on StaticExercise {
@@ -38,4 +36,11 @@ fragment StaticExercise on StaticExercise {
   name
   movement
   description
+}
+
+fragment Set on Set {
+  id
+  number
+  reps
+  rpe
 }

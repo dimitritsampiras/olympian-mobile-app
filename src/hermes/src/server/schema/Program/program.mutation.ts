@@ -13,7 +13,7 @@ export const ProgramMutation = extendType({
       type: nullable('Program'),
       args: { input: 'CreateProgramInput' },
       resolve: async (_root, { input }, { prisma }) => {
-        const { name, publicity, tags, specificity, userId } = input;
+        const { name, publicity, tags, trainingType, userId } = input;
         // check if the profile exists
         const profile = await prisma.profile.findUnique({
           where: { userId },
@@ -27,7 +27,7 @@ export const ProgramMutation = extendType({
             name,
             publicity,
             tags,
-            specificity,
+            trainingType,
             profile: { connect: { userId } },
           },
         });
@@ -82,10 +82,74 @@ export const ProgramMutation = extendType({
 
         // TODO: handle error
         if (!workout || !staticExercise) return null;
-        console.log('here');
 
         return await prisma.exercise.create({
-          data: { workoutId, staticExerciseId, number: workout.exercises.length + 1 },
+          data: {
+            workoutId,
+            staticExerciseId,
+            order: workout.exercises.length + 1,
+            sets: {
+              create: {
+                number: 1,
+                reps: 0,
+                rpe: 1,
+              },
+            },
+          },
+        });
+      },
+    });
+    /**
+     *
+     * create exercise mutation
+     */
+    t.field('createSet', {
+      type: nullable('Set'),
+      args: { exerciseId: 'String' },
+      resolve: async (_root, { exerciseId }, { prisma }) => {
+        // check if the profile exists
+        const exercise = await prisma.exercise.findUnique({
+          where: { id: exerciseId },
+          include: { sets: true },
+        });
+
+        if (!exercise) return null;
+
+        return await prisma.set.create({
+          data: {
+            exerciseId,
+            number: exercise.sets.length + 1,
+            reps: exercise.sets[exercise.sets.length - 1]?.reps || 0,
+            rpe: exercise.sets[exercise.sets.length - 1]?.rpe || 0,
+          },
+        });
+      },
+    });
+    /**
+     *
+     * updates the reps of a set
+     */
+    t.field('updateSetReps', {
+      type: nullable('Set'),
+      args: { setId: 'String', reps: 'Int' },
+      resolve: async (_root, { setId, reps }, { prisma }) => {
+        return await prisma.set.update({
+          where: { id: setId },
+          data: { reps },
+        });
+      },
+    });
+    /**
+     *
+     * updates the reps of a set
+     */
+    t.field('updateSetRpe', {
+      type: nullable('Set'),
+      args: { setId: 'String', rpe: 'Int' },
+      resolve: async (_root, { setId, rpe }, { prisma }) => {
+        return await prisma.set.update({
+          where: { id: setId },
+          data: { rpe },
         });
       },
     });
@@ -98,7 +162,7 @@ export const CreateProgramInput = inputObjectType({
     t.field('name', { type: 'String' });
     t.field('publicity', { type: 'Publicity' });
     t.field('tags', { type: list('String') });
-    t.field('specificity', { type: list('Specificity') });
+    t.field('trainingType', { type: list('TrainingType') });
     t.field('userId', { type: 'String' });
   },
 });

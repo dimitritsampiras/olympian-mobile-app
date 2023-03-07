@@ -10,6 +10,7 @@ query ProgramFromId($programId: String!) {
     profile {
       user {
         username
+        name
       }
     }
   }
@@ -20,9 +21,24 @@ query WorkoutFromId($workoutId: String!) {
     ...Workout
     exercises {
       ...Exercise
+      sets {
+        ...Set
+      }
       staticExercise {
         ...StaticExercise
       }
+    }
+  }
+}
+
+query ExerciseFromId($exerciseId: String!) {
+  exercise(exerciseId: $exerciseId) {
+    ...Exercise
+    sets {
+      ...Set
+    }
+    staticExercise {
+      ...StaticExercise
     }
   }
 }
@@ -50,14 +66,18 @@ query UserPrograms {
   }
 }
 
-query TrendingPrograms($skip: Int!, $take: Int!) {
-  trendingPrograms(skip: $skip, take: $take) {
+query TrendingPrograms($skip: Int!, $take: Int!, $trainingType: [TrainingType!]) {
+  trendingPrograms(skip: $skip, take: $take, trainingType: $trainingType) {
     ...Program
   }
 }
 
-query PopularPrograms($skip: Int!, $take: Int!) {
-  popularPrograms(skip: $skip, take: $take) {
+query PopularPrograms($skip: Int!, $take: Int!, $trainingType: [TrainingType!]) {
+  popularPrograms(skip: $skip, take: $take, trainingType: $trainingType) {
     ...Program
   }
+}
+
+query TrainingTypes {
+  trainingTypes
 }

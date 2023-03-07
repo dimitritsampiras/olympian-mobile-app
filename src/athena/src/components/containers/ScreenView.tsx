@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
-import { StyleSheet, ScrollView, ViewProps, View } from 'react-native';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ScrollView, ViewProps, TouchableWithoutFeedback, Keyboard, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import theme from '../../theme';
 
 interface ScreenViewProps {
@@ -23,27 +23,29 @@ export const ScreenView: React.FC<ScreenViewProps> = ({
   const insets = useSafeAreaInsets();
 
   return (
-    <View
-      style={[
-        {
-          flex: 1,
-          paddingHorizontal: 24,
-          paddingTop: insets.top,
-          paddingBottom: type === 'form' ? insets.bottom : 0,
-          backgroundColor: type === 'form' ? theme.colors.white : theme.colors.gray[50],
-        },
-        type === 'form' && spaced && { justifyContent: 'space-between' },
-        styles,
-      ]}>
-      {type === 'main' ? (
-        <ScrollView
-          showsVerticalScrollIndicator={showScrollBar}
-          alwaysBounceVertical={scrollBounce}>
-          {children}
-        </ScrollView>
-      ) : (
-        children
-      )}
-    </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View
+        style={[
+          {
+            flex: 1,
+            paddingHorizontal: 24,
+            paddingTop: insets.top,
+            paddingBottom: type === 'form' ? insets.bottom : 0,
+            backgroundColor: type === 'form' ? theme.colors.white : theme.colors.gray[50],
+          },
+          type === 'form' && spaced && { justifyContent: 'space-between' },
+          styles,
+        ]}>
+        {type === 'main' ? (
+          <ScrollView
+            showsVerticalScrollIndicator={showScrollBar}
+            alwaysBounceVertical={scrollBounce}>
+            {children}
+          </ScrollView>
+        ) : (
+          children
+        )}
+      </View>
+    </TouchableWithoutFeedback>
   );
 };

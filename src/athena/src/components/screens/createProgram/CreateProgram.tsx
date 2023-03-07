@@ -11,9 +11,9 @@ import { ScreenView } from '../../containers/ScreenView';
 import { Button } from '../../elements';
 import { ProgramName } from './ProgramName';
 import { ProgramPublicity } from './ProgramPublicity';
-import { ProgramTags } from './ProgramTags';
+
 import { UserContext } from '../../providers';
-import { ProgramSpecificty } from './ProgramSpecificty';
+import { ProgramTrainingType } from './ProgramTrainingType';
 import { HomeParamList } from '../../navigation/HomeNavigator';
 
 type CreateProgramProps = NativeStackScreenProps<HomeParamList, 'CreateProgram'>;
@@ -27,7 +27,7 @@ export const CreateProgramContext = createContext({
   setProgram: (() => {}) as React.Dispatch<React.SetStateAction<CreateProgramInputWithoutUserId>>,
 });
 
-const PAGES = [ProgramName, ProgramPublicity, ProgramSpecificty, ProgramTags];
+const PAGES = [ProgramName, ProgramPublicity, ProgramTrainingType];
 
 /**
  *
@@ -42,7 +42,7 @@ export const CreateProgram: React.FC<CreateProgramProps> = ({ navigation }) => {
     name: '',
     publicity: Publicity.Private,
     tags: [],
-    specificity: [],
+    trainingType: [],
   });
 
   const [createProgram, { loading }] = useCreateProgramMutation();
@@ -59,7 +59,7 @@ export const CreateProgram: React.FC<CreateProgramProps> = ({ navigation }) => {
           name: program.name,
           publicity: program.publicity,
           tags: program.tags,
-          specificity: program.specificity,
+          trainingType: program.trainingType,
           userId: user.id,
         },
       },

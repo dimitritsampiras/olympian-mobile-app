@@ -19,17 +19,17 @@ export default function App() {
     <ApolloClientProvider>
       <UserProvider>
         <NavigationContainer
-          ref={ref}
-          // onReady={() => {
-          //   console.log('ref', ref.getCurrentOptions());
+        // ref={ref}
+        // onReady={() => {
+        //   console.log('ref', ref.getCurrentOptions());
 
-          //   setRouteName(ref.getCurrentRoute()?.name);
-          // }}
-          // onStateChange={async () => {
-          //   const currentRouteName = ref.getCurrentRoute()?.name;
-          //   console.log('ref2', ref.getCurrentOptions());
-          //   setRouteName(currentRouteName);
-          // }}>
+        //   setRouteName(ref.getCurrentRoute()?.name);
+        // }}
+        // onStateChange={async () => {
+        //   const currentRouteName = ref.getCurrentRoute()?.name;
+        //   console.log('ref2', ref.getCurrentOptions());
+        //   setRouteName(currentRouteName);
+        // }}>
         >
           <SafeAreaProvider>
             <AuthNavigator routeName={routeName} />

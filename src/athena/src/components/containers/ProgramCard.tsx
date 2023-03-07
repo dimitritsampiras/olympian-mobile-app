@@ -6,7 +6,6 @@ import { HeartIcon, GiftIcon } from 'react-native-heroicons/solid';
 import _, { sample } from 'lodash';
 
 import { Program, ProgramFragment, UserProgramsQuery } from '../../lib/graphql';
-import { specificityColor } from '../../lib/utils';
 import theme from '../../theme';
 import { Heading } from '../elements';
 import { Badge } from '../elements/display/Badge';
@@ -48,13 +47,13 @@ export const ProgramCard: React.FC<ProgramCardProps> = ({
           </>
         ) : (
           <>
-            {program.specificity.map((spec) => {
+            {/* {program.specificity.map((spec) => {
               return (
                 <Badge key={spec} colorScheme={specificityColor(spec)} style={{ marginRight: 6 }}>
                   {spec}
                 </Badge>
               );
-            })}
+            })} */}
           </>
         )}
       </View>

@@ -1,3 +1,4 @@
+import { TrainingType } from '@prisma/client';
 import { extendType, list, nullable } from 'nexus';
 
 export const ProgramQuery = extendType({
@@ -5,22 +6,23 @@ export const ProgramQuery = extendType({
   definition(t) {
     t.field('trendingPrograms', {
       type: list('Program'),
-      args: { skip: 'Int', take: 'Int' },
-      resolve: async (_root, { skip, take }, { prisma }) => {
+      args: { skip: 'Int', take: 'Int', trainingType: nullable(list('TrainingType')) },
+      resolve: async (_root, { skip, take, trainingType }, { prisma }) => {
         return prisma.program.findMany({
           skip,
-          take: 8,
+          take,
+          where: { trainingType: { hasSome: trainingType || [] }, publicity: 'public' },
         });
       },
     });
     t.field('popularPrograms', {
       type: list('Program'),
-      args: { skip: 'Int', take: 'Int' },
-      resolve: async (_root, { skip, take }, { prisma }) => {
-        console.log(skip, take, prisma);
+      args: { skip: 'Int', take: 'Int', trainingType: nullable(list('TrainingType')) },
+      resolve: async (_root, { skip, take, trainingType }, { prisma }) => {
         return prisma.program.findMany({
           skip,
-          take: 8,
+          take: take,
+          where: { trainingType: { hasSome: trainingType || [] }, publicity: 'public' },
         });
       },
     });
@@ -73,6 +75,24 @@ export const ProgramQuery = extendType({
     });
     /**
      *
+     * gets the exercise form id
+     */
+    t.field('exercise', {
+      type: nullable('Exercise'),
+      args: { exerciseId: 'String' },
+      resolve: async (_root, { exerciseId }, { prisma }) => {
+        const workout = await prisma.exercise.findUnique({
+          where: { id: exerciseId },
+          include: {
+            staticExercise: true,
+            sets: true,
+          },
+        });
+        return workout;
+      },
+    });
+    /**
+     *
      * gets all programs that the user has
      */
     t.field('staticExercise', {
@@ -87,7 +107,7 @@ export const ProgramQuery = extendType({
     });
     /**
      *
-     * gets all programs that the user has
+     * gets all static exercises in databas
      */
     t.field('staticExercises', {
       type: list('StaticExercise'),
@@ -96,6 +116,16 @@ export const ProgramQuery = extendType({
           orderBy: { name: 'asc' },
         });
         return staticExercise;
+      },
+    });
+    /**
+     *
+     * gets all programs that the user has
+     */
+    t.field('trainingTypes', {
+      type: list('TrainingType'),
+      resolve: async (_root, _args, _ctx) => {
+        return Object.values(TrainingType);
       },
     });
   },

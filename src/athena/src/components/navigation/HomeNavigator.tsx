@@ -21,7 +21,11 @@ export const HomeNavigator: React.FC<HomeStackNavigatorProps> = ({ route }) => {
     <HomeStack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
       <HomeStack.Screen name="Home" component={Home} />
       <HomeStack.Screen name="CreateProgram" component={CreateProgram} />
-      <HomeStack.Screen name="ProgramNavigator" component={ProgramNavigator} />
+      <HomeStack.Screen
+        name="ProgramNavigator"
+        component={ProgramNavigator}
+        initialParams={{ programId: '' }}
+      />
     </HomeStack.Navigator>
   );
 };

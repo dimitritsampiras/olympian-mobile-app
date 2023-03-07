@@ -5,7 +5,7 @@ const programs: Prisma.ProgramCreateInput[] = [
   {
     name: 'Beginner Push Pull Legs',
     complimentary: false,
-    specificity: ['hypertrophy'],
+    // specificity: ['hypertrophy'],
     trainingLevel: 'beginner',
     tags: ['full body', 'beginner', 'strength', 'hypertrophy'],
     publicity: 'public',
