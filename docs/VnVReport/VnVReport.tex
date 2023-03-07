@@ -98,61 +98,146 @@ Some example actions included: \\
 	
 \subsubsection{Workout Routine Tests}
 	\item{\textbf{test-WR-1}}:A Workout Routine can be created.\\
+	
+	Input: User inputs required data for a workout routine.
+	
+	Expected Output: A workout routine is stored in the database and is accessible to the user that created it. If the user determined that the workout to be public then it should be publicly visible.
+	
 	\textbf{Test result}:
 	
 	\item{\textbf{test-WR-2}}: Editing a Workout Routine.\\
+	
+	Input: User edits a workout routine with new values.
+	
+	Expected Output: A workout routine is updated with new values in the database and new values are visible to accessible users.
+	
 	\textbf{Test result}:
 	
 \subsubsection{Exercise Tests}
 	\item{\textbf{test-EX-1}}:Adding an Exercise to a Workout Routine.\\
+	
+	Input: A user created exercise with the parameters required for the exercise.
+	
+	Expected Output: The workout routine should include the added exercise.
+	
 	\textbf{Test result}:
 	
 	\item{\textbf{test-EX-2}}:Removing an Exercise from a Workout Routine.\\
+	
+	Input: The user chooses to remove an exercise.
+	
+	Expected Output: Some feedback indicating that an exercise has been removed. The workout routine no longer contains the removed exercise.
+	
 	\textbf{Test result}:
 	
 	\item{\textbf{test-EX-3}}:Limiting Exercises to a Workout Routine.\\
+	
+	Input: The number of exercises required to reach the limit of exercises per workout routine. 
+	
+	Expected Output: A notification to the user, before the limiting exercise notifying them of the limit, and preventing them from adding another exercise.
+	
 	\textbf{Test result}:
 	
 \subsubsection{Quantifier Tests}
 	\item{\textbf{test-QT-1}}:Adding Quantifiers to an Exercise.\\
+	
+	Input: A number and unit of measurement describing an exercise.
+	
+	Expected Output: The exercise now holds the given quantifier and is displayed to the user.
+	
 	\textbf{Test result}:
 	
 	\item{\textbf{test-QT-2}}:Removing Quantifiers from an Exercise.\\
+	
+	Input: Removal of a quantifier.
+	
+	Expected Output: The exercise no longer holds a quantifier and is not displayed to the user.
+	
 	\textbf{Test result}:
 	
 	\item{\textbf{test-QT-3}}:Editing Quantifiers of an Exercise.\\
+	
+	Input: A number and unit of measurement describing an exercise.
+	
+	Expected Output: The exercise now holds the updated quantifier.
+	
 	\textbf{Test result}:
 	
 \subsubsection{Publicity Tests}
 	\item{\textbf{test-PB-1}}:Publicizing a Workout Routine.\\
+	
+	Input: An edit or addition to a workout routine to make it public.
+	
+	Expected Output: The workout routine is declared public in the database and is now visible to all users.
+	
 	\textbf{Test result}:
 	
 	\item{\textbf{test-PB-2}}:Privatizing a Workout Routine.\\
+	
+	Input: An edit or addition to a workout routine to make is private.
+	
+	Expected Output: The workout routine is declared private in the database and is no longer visible to any user except the creator.
+	
 	\textbf{Test result}:
 	
 \subsubsection{Workout Routine Saving Tests}
 	\item{\textbf{test-WS-1}}:Saving a Public Workout Routine.\\
+	
+	Input: The other user workout routine is saved.
+	
+	Expected Output: The workout routine is now visible and accessible under the saved workout routines.
+	
 	\textbf{Test result}:
 	
 \subsubsection{Browsing Workout Routine Tests}
 	\item{\textbf{test-BS-1}}:Browsing Workout Routines.\\
+	
+	Input: navigation movements to view the public workout routines.
+	
+	Expected Output: Multiple public workout routines should be displayed. 
+	
 	\textbf{Test result}:
 	
 	\item{\textbf{test-BS-2}}:Search Workout Routines.\\
+	
+	Input: Search string inputs to view the public workout routines.
+	
+	Expected Output: Public workout routines that match the search criteria should be displayed. 
+	
 	\textbf{Test result}:
 	
 \subsubsection{User Profile Tests}
 	\item{\textbf{test-UP-1}}:Creating a User Profile.\\
+	
+	Input: The required parameters for creating a profile.
+	
+	Expected Output: The created profile is stored in a user database and the user should be logged into their profile.
+	
 	\textbf{Test result}:
 	
 	\item{\textbf{test-UP-2}}:Viewing Other User Profile.\\
+	
+	Input: Search criteria for the searched user profile.
+	
+	Expected Output: A user profile is displayed with their public routines, fitness goals, and other public profile data.
+	
 	\textbf{Test result}:
 	
 \subsubsection{Fitness Goal Tests}
 	\item{\textbf{test-FG-1}}:Creating a Fitness Goal.\\
+	
+	Input: A string parameter for a fitness goal and publicity options for the goal.
+	
+	Expected Output: The fitness goal for the user is now updated in the database and is saved under their profile.
+	
 	\textbf{Test result}:
 	
 	\item{\textbf{test-FG-2}}:Progressing a Fitness Goal.\\
+	
+	Input: Progress points towards a given fitness goal at a given date.
+	
+	Expected Output: The progress displayed towards a fitness goal should be visually updated and numerically updated in the database with a date
+	
 	\textbf{Test result}:
 	
 	
@@ -266,7 +351,7 @@ Another user suggestion was that when logging into the application from a point 
 \subsection{Styling}
 There were many positive reviews with the looks and styling of the application, However one of the minor changes that was mentioned was that some of the designed were 'too close together'. Taking in this feedback, the visual components may need to be spaced out more or even re-formatted in such a way that everything is less squashed together.
 \subsection{Tracking user Fitness Goals}
-Tracking Fitness goals has always been a stretch goal of this application. Some users asked to see a visual representation such as a graph over time or a numerical increment to help them see progress. This change will help users visually see and track their fitness goals and progress easier.
+Tracking Fitness goals  has always been a stretch goal of this application. Some users asked to see a visual representation such as a graph over time or a numerical increment to help them see progress. This change will help users visually see and track their fitness goals and progress easier.
 
 \section{Automated Testing}
 		
@@ -286,8 +371,22 @@ The information in this section will be used to evaluate the team members on the
 graduate attribute of Lifelong Learning.  Please answer the following questions:
 
 \begin{enumerate}
-  \item 
-  \item 
+	\item \textbf{Question} 
+	
+	In what ways was the Verification and Validation (VnV) Plan different
+	from the activities that were actually conducted for VnV?  If there were
+	differences, what changes required the modification in the plan?  Why did
+	these changes occur?  Would you be able to anticipate these changes in future
+	projects?  If there weren't any differences, how was your team able to clearly
+	predict a feasible amount of effort and the right tasks needed to build the
+	evidence that demonstrates the required quality?  (It is expected that most
+	teams will have had to deviate from their original VnV Plan.)
+	
+	\item \textbf{Answer}
+	
+	The VnV plan differed from the actual activities that were performed in many ways, most notably the user testing. During user testing some actions that were a part of the test plan e.g. create a workout, the user may not know where to go. This seemed to be from a lack of software to user communications but this caused some of the testing to be performed a little differently. Occasionally we as testers would have to step in and assist the user (which is not what we wanted) to help them out.
+	 
+	In the VnV plan we stated that we would conduct surveys on some of the 'Aesthetics' of the design, however this was very tedious to do as a tester so we ended up asking the individuals we tested on about the look and feel of the application. As for looking at modifications towards the VnV plan and future plans, we should focus on the feasibility of what we say we are going to do vs what will actually be done. To give our team the benefit of the doubt there were many midterms and course work load build ups during this time that we did not anticipate for as well. Another way we deviated from the VnV plan was that large data-management testing is very difficult and takes some time. We were not able to complete certain tests such as data backups due to the complexity that this requires. 
 \end{enumerate}
 
 \end{document}
