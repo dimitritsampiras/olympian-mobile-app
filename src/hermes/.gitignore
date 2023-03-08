@@ -6,3 +6,4 @@ src/lib/types/nexus.ts
 
 dist
 schema.graphql
+prisma/migrations
