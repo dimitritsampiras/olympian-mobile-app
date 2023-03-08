@@ -25,7 +25,7 @@ export const TrainingTypeCard: React.FC<TrainingTypeCardProps> = ({ trainingType
       }}
       {...props}>
       <Heading as="h4" noMargin style={{ color: 'white', width: 60, textTransform: 'capitalize' }}>
-        {trainingType.replaceAll('_', ' ').replaceAll(' ', '\n')}
+        {trainingType.split('_').join(' ').split(' ').join('\n')}
       </Heading>
       <View
         style={{

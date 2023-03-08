@@ -49,7 +49,7 @@ export const ProgramTrainingType: React.FC = () => {
             selected={program.trainingType.includes(trainingType)}
             disabled={isDisabled(trainingType)}
             style={{ marginRight: 6, marginBottom: 6 }}>
-            {trainingType.replaceAll('_', ' ')}
+            {trainingType.split('_').join(' ')}
           </SelectableBadge>
         ))}
       </View>
