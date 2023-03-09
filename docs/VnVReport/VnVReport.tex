@@ -404,6 +404,31 @@ Ratings given were on a 5 point scale.
 %This section will not be appropriate for every project.
 
 \section{Unit Testing}
+\begin{enumerate}
+	\item Test: UT1 \\
+	Purpose: Verify that the passwords are hashed \\
+	Input: "hello" (String representing the password)\\
+	Expected Output: A random hash\\
+	Test Result:  Output was a hash and not the inputted password (Success)\\
+
+  \item Test: UT2 \\
+	Purpose: To check whether a user sign up accurately adds a user to the database\\
+	Input: User sign up fields (name, password, email, username)\\
+	Expected Output: signUpUser function returns true indicating user is signed up\\
+	Test Result:  Output was true indicating user was signed up (Success)\\
+
+  \item Test: UT3 \\
+	Purpose: To verify that an incorrect username input won't login a user \\
+	Input: Incorrect username into login field \\
+	Expected Output: Null user token\\
+	Test Result: Null user token (Success)\\
+
+  \item Test: UT4 \\
+	Purpose: To verify that a correct username input will login a user \\
+	Input: Correct username into login field \\
+	Expected Output: User token\\
+	Test Result: User token (Success)\\
+\end{enumerate}
 
 \section{Changes Due to Testing}
 Listed below are some of the changes that are planned (some implemented) as a result of the testing and user testing.
