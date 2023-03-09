@@ -3,6 +3,8 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
+\usepackage{changepage}
+\usepackage{float}
 \hypersetup{
     colorlinks,
     citecolor=black,
@@ -271,7 +273,74 @@ Tracking Fitness goals has always been a stretch goal of this application. Some 
 \section{Automated Testing}
 		
 \section{Trace to Requirements}
+Below is the link from requirements to test cases.
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+		\hline
+		& R1 & R2 & R3 & R4 & R5 & R6 & R7 & R8 & R9 & R10 & R11 \\ \hline
+		WR1 &X & & & & & & & & & & \\ \hline
+		WR2 &X & & & & & & & & & & \\ \hline
+		EX1 & &X & & & & & & & & & \\ \hline 
+		EX2 & &X & & & & & & & & & \\ \hline
+		EX3 & &X & & & & & & & & &\\ \hline 
+		QT1 & & &X & & & & & & & & \\ \hline 
+		QT2 & & &X & & & & & & & & \\ \hline 
+		QT3 & & &X & & & & & & & & \\ \hline 
+		PB1 & & & &X & & & & & & & \\ \hline 
+		PB2 & & & &X & & & & & & & \\ \hline 
+		WS1 & & & & &X & & & & & & \\ \hline 
+		BS1 & & & & & &X & & & & & \\ \hline 
+		BS2 & & & & & &X & & & & & \\ \hline 
+		UP1 & & & & & & &X & & & & \\ \hline 
+		UP2 & & & & & & & &X & & & \\ \hline 
+		FG1 & & & & & & & & &X & & \\ \hline 
+		FG2 & & & & & & & & & &X &X \\ \hline 	
+	\end{tabular}
+	\caption{Functional System Tests to Functional Requirement Matrix}
+	\label{Table:R_trace}
+\end{table}
+
+\begin{table}[H]
+	\begin{adjustwidth}{-3cm}{-5cm}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+			\hline
+			& NFR1 & NFR2 & NFR3 & NFR4 & NFR5 & NFR6 & NFR7 & NFR8 & NFR9 & NFR10 & NFR11 \\ \hline
+			LF1 &X & & & & & & & & & & \\ \hline
+			UH1 & &X & & & & & & & & & \\ \hline
+			UH2 & & &X & & & & & & & & \\ \hline
+			UH3 & & & &X & & & & & & & \\ \hline 
+			UH4 & & & & &X & & & & & & \\ \hline 
+			UH5 & & & & & &X & & & & & \\ \hline 
+			UH6 & & & & & & &X & & & & \\ \hline 
+			PF1 & & & & & & & &X & & & \\ \hline 
+			PF2 & & & & & & & & &X & & \\ \hline 
+			PF3 & & & & & & & & & &X & \\ \hline
+			PF4 & & & & & & & & & & &X \\ \hline  
+		\end{tabular}
+		\caption{Non-Functional System Tests to Non-Functional Requirement Matrix}
+		\label{Table:R_trace}
 		
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+			\hline
+			& NFR12 & NFR13 & NFR14 & NFR15 & NFR16 & NFR17 & NFR18 & NFR19 & NFR20 & NFR21 & NFR22 \\ \hline
+			PF5 &X & & & & & & & & & & \\ \hline
+			OE1 & &X & & & & & & & & & \\ \hline
+			MS1 & & &X & & & & & & & & \\ \hline
+			SEC1 & & & &X & & & & & & & \\ \hline 
+			SEC2 & & & & &X & & & & & & \\ \hline 
+			SEC3 & & & & & &X & & & & & \\ \hline 
+			SEC4 & & & & & &X & & & & & \\ \hline 
+			SEC5 & & & & & & &X & & & & \\ \hline 
+			CR1 & & & & & & & &X & & & \\ \hline 
+			CR2 & & & & & & & & &X & & \\ \hline 
+			LR1 & & & & & & & & & &X & \\ \hline 
+			LR2 & & & & & & & & & & &X \\ \hline 
+		\end{tabular}
+		\caption{Non-Functional System Tests to Non-Functional Requirement Matrix}
+		\label{Table:R_trace}
+	\end{adjustwidth}
+\end{table}
 \section{Trace to Modules}		
 
 \section{Code Coverage Metrics}
