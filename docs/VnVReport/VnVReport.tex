@@ -79,84 +79,93 @@ Examples include:
 	\item Starting a workout (as if the user were to use the application during their workout).
 \end{enumerate}
 
-
 \section{Functional Requirements Evaluation}
+
 
 \noindent During the user tests, users were asked to preform extra actions based on the FR test cases displayed in the VnV Plan.
 Some example actions included: \\
 \begin{enumerate}
-	\item During workout creation, could you make your workout private?
-	\item Could you try failing your password?
-	\item Asking the user to attempt all actions when starting a workout.
+    \item During workout creation, could you make your workout private?
+    \item Could you try failing your password?
+    \item Asking the user to attempt all actions when starting a workout.
 \end{enumerate}
 
-\noindent As for the non-user tests, unit tests were preformed in order to measure metrics.
+
+\noindent As for the non-user tests, manual unit tests were preformed in order to measure metrics.
+
 
 \noindent The summary of the test cases are displayed below.
 
+
 \begin{enumerate}
-	
+   
 \subsubsection{Workout Routine Tests}
-	\item{\textbf{test-WR-1}}:A Workout Routine can be created.\\
-	\textbf{Test result}:
-	
-	\item{\textbf{test-WR-2}}: Editing a Workout Routine.\\
-	\textbf{Test result}:
-	
+    \item{\textbf{test-WR-1}}:A Workout Routine can be created.\\
+    \textbf{Test result}: Workout routines can be created and are added to an existing Program.
+   
+    \item{\textbf{test-WR-2}}: Editing a Workout Routine.\\
+    \textbf{Test result}: Workout routines can be edited, including changing the names, tags, and amending and removing exercises.
+   
 \subsubsection{Exercise Tests}
-	\item{\textbf{test-EX-1}}:Adding an Exercise to a Workout Routine.\\
-	\textbf{Test result}:
-	
-	\item{\textbf{test-EX-2}}:Removing an Exercise from a Workout Routine.\\
-	\textbf{Test result}:
-	
-	\item{\textbf{test-EX-3}}:Limiting Exercises to a Workout Routine.\\
-	\textbf{Test result}:
-	
+    \item{\textbf{test-EX-1}}:Adding an Exercise to a Workout Routine.\\
+    \textbf{Test result}: Users can add Exercises to Workout Routines and customize reps and sets.
+   
+    \item{\textbf{test-EX-2}}:Removing an Exercise from a Workout Routine.\\
+    \textbf{Test result}: Users can remove exercises from Workout Routines.
+   
+    \item{\textbf{test-EX-3}}:Limiting Exercises to a Workout Routine.\\
+    \textbf{Test result}: Users cannot limit exercises to workout routines.
+   
 \subsubsection{Quantifier Tests}
-	\item{\textbf{test-QT-1}}:Adding Quantifiers to an Exercise.\\
-	\textbf{Test result}:
-	
-	\item{\textbf{test-QT-2}}:Removing Quantifiers from an Exercise.\\
-	\textbf{Test result}:
-	
-	\item{\textbf{test-QT-3}}:Editing Quantifiers of an Exercise.\\
-	\textbf{Test result}:
-	
+    \item{\textbf{test-QT-1}}:Adding Quantifiers to an Exercise.\\
+    \textbf{Test result}: Users can add quantifiers to their exercises.
+   
+    \item{\textbf{test-QT-2}}:Removing Quantifiers from an Exercise.\\
+    \textbf{Test result}: Users cannot remove their quantifiers from their exercises. These come as default.
+   
+    \item{\textbf{test-QT-3}}:Editing Quantifiers of an Exercise.\\
+    \textbf{Test result}: Users can edit their quantifiers.
+   
 \subsubsection{Publicity Tests}
-	\item{\textbf{test-PB-1}}:Publicizing a Workout Routine.\\
-	\textbf{Test result}:
-	
-	\item{\textbf{test-PB-2}}:Privatizing a Workout Routine.\\
-	\textbf{Test result}:
-	
+    \item{\textbf{test-PB-1}}:Publicizing a Workout Routine.\\
+    \textbf{Test result}: Users can publicize a workout routine.
+   
+    \item{\textbf{test-PB-2}}:Privatizing a Workout Routine.\\
+    \textbf{Test result}: Users can privatize a workout routine.
+   
 \subsubsection{Workout Routine Saving Tests}
-	\item{\textbf{test-WS-1}}:Saving a Public Workout Routine.\\
-	\textbf{Test result}:
-	
+    \item{\textbf{test-WS-1}}:Saving a Public Workout Routine.\\
+    \textbf{Test result}: Users can save a public workout routine.
+   
 \subsubsection{Browsing Workout Routine Tests}
-	\item{\textbf{test-BS-1}}:Browsing Workout Routines.\\
-	\textbf{Test result}:
-	
-	\item{\textbf{test-BS-2}}:Search Workout Routines.\\
-	\textbf{Test result}:
-	
+    \item{\textbf{test-BS-1}}:Browsing Workout Routines.\\
+    \textbf{Test result}: Users can browse public programs according to specific categories.
+   
+    \item{\textbf{test-BS-2}}:Search Workout Routines.\\
+    \textbf{Test result}: Users can search publicly published routines using custom search text.
+   
 \subsubsection{User Profile Tests}
-	\item{\textbf{test-UP-1}}:Creating a User Profile.\\
-	\textbf{Test result}:
-	
-	\item{\textbf{test-UP-2}}:Viewing Other User Profile.\\
-	\textbf{Test result}:
-	
+    \item{\textbf{test-UP-1}}:Creating a User Profile.\\
+    \textbf{Test result}: Users can create their profiles when signing up.
+   
+    \item{\textbf{test-UP-2}}:Viewing Other User Profile.\\
+    \textbf{Test result}: Users cannot view other user profiles.
+   
 \subsubsection{Fitness Goal Tests}
-	\item{\textbf{test-FG-1}}:Creating a Fitness Goal.\\
-	\textbf{Test result}:
-	
-	\item{\textbf{test-FG-2}}:Progressing a Fitness Goal.\\
-	\textbf{Test result}:
-	
-	
+    \item{\textbf{test-FG-1}}:Creating a Fitness Goal.\\
+    \textbf{Test result}: Users cannot create a fitness goal.
+   
+    \item{\textbf{test-FG-2}}:Progressing a Fitness Goal.\\
+    \textbf{Test result}: Users cannot progress fitness goals.
+      
 \end{enumerate}
+
+\subsection{Functional Requirements Results}
+
+Tests Passed: 12\\
+Tests Failed: 5\\
+Total Tests: 17\\
+
 \section{Nonfunctional Requirements Evaluation}
 
 \noindent After users were brought through the test case scenarios they were asked questions based on the NFR test cases displayed in the VnV Plan.
