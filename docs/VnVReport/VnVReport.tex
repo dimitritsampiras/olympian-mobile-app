@@ -3,6 +3,8 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
+\usepackage{changepage}
+\usepackage{float}
 \hypersetup{
     colorlinks,
     citecolor=black,
@@ -79,169 +81,161 @@ Examples include:
 	\item Starting a workout (as if the user were to use the application during their workout).
 \end{enumerate}
 
-
 \section{Functional Requirements Evaluation}
+
 
 \noindent During the user tests, users were asked to preform extra actions based on the FR test cases displayed in the VnV Plan.
 Some example actions included: \\
 \begin{enumerate}
-	\item During workout creation, could you make your workout private?
-	\item Could you try failing your password?
-	\item Asking the user to attempt all actions when starting a workout.
+    \item During workout creation, could you make your workout private?
+    \item Could you try failing your password?
+    \item Asking the user to attempt all actions when starting a workout.
 \end{enumerate}
 
-\noindent As for the non-user tests, unit tests were preformed in order to measure metrics.
+
+\noindent As for the non-user tests, manual unit tests were preformed in order to measure metrics.
+
 
 \noindent The summary of the test cases are displayed below.
 
+
 \begin{enumerate}
-	
+   
 \subsubsection{Workout Routine Tests}
-	\item{\textbf{test-WR-1}}:A Workout Routine can be created.\\
+    \item{\textbf{test-WR-1}}:A Workout Routine can be created.\\
+    Input: User inputs required data for a workout routine.
 	
-	Input: User inputs required data for a workout routine.
+    Expected Output: A workout routine is stored in the database and is accessible to the user that created it. If the user determined that the workout to be public then it should be publicly visible.
+    
+    \textbf{Test result}: Workout routines can be created and are added to an existing Program.
+   
+    \item{\textbf{test-WR-2}}: Editing a Workout Routine.\\
+    Input: User edits a workout routine with new values.
 	
-	Expected Output: A workout routine is stored in the database and is accessible to the user that created it. If the user determined that the workout to be public then it should be publicly visible.
-	
-	\textbf{Test result}:
-	
-	\item{\textbf{test-WR-2}}: Editing a Workout Routine.\\
-	
-	Input: User edits a workout routine with new values.
-	
-	Expected Output: A workout routine is updated with new values in the database and new values are visible to accessible users.
-	
-	\textbf{Test result}:
-	
+    Expected Output: A workout routine is updated with new values in the database and new values are visible to accessible users.
+    
+    \textbf{Test result}: Workout routines can be edited, including changing the names, tags, and amending and removing exercises.
+   
 \subsubsection{Exercise Tests}
-	\item{\textbf{test-EX-1}}:Adding an Exercise to a Workout Routine.\\
+    \item{\textbf{test-EX-1}}:Adding an Exercise to a Workout Routine.\\
+    	
+    Input: A user created exercise with the parameters required for the exercise.
+
+    Expected Output: The workout routine should include the added exercise.
+    \textbf{Test result}: Users can add Exercises to Workout Routines and customize reps and sets.
+   
+    \item{\textbf{test-EX-2}}:Removing an Exercise from a Workout Routine.\\
+    Input: The user chooses to remove an exercise.
 	
-	Input: A user created exercise with the parameters required for the exercise.
+    Expected Output: Some feedback indicating that an exercise has been removed. The workout routine no longer contains the removed exercise.
+    
+    \textbf{Test result}: Users can remove exercises from Workout Routines.
+   
+    \item{\textbf{test-EX-3}}:Limiting Exercises to a Workout Routine.\\
+    Input: The number of exercises required to reach the limit of exercises per workout routine. 
 	
-	Expected Output: The workout routine should include the added exercise.
-	
-	\textbf{Test result}:
-	
-	\item{\textbf{test-EX-2}}:Removing an Exercise from a Workout Routine.\\
-	
-	Input: The user chooses to remove an exercise.
-	
-	Expected Output: Some feedback indicating that an exercise has been removed. The workout routine no longer contains the removed exercise.
-	
-	\textbf{Test result}:
-	
-	\item{\textbf{test-EX-3}}:Limiting Exercises to a Workout Routine.\\
-	
-	Input: The number of exercises required to reach the limit of exercises per workout routine. 
-	
-	Expected Output: A notification to the user, before the limiting exercise notifying them of the limit, and preventing them from adding another exercise.
-	
-	\textbf{Test result}:
-	
+    Expected Output: A notification to the user, before the limiting exercise notifying them of the limit, and preventing them from adding another exercise.
+    
+    \textbf{Test result}: Users cannot limit exercises to workout routines.
+   
 \subsubsection{Quantifier Tests}
-	\item{\textbf{test-QT-1}}:Adding Quantifiers to an Exercise.\\
+    \item{\textbf{test-QT-1}}:Adding Quantifiers to an Exercise.\\
+    Input: A number and unit of measurement describing an exercise.
 	
-	Input: A number and unit of measurement describing an exercise.
+    Expected Output: The exercise now holds the given quantifier and is displayed to the user.
+    
+    \textbf{Test result}: Users can add quantifiers to their exercises.
+   
+    \item{\textbf{test-QT-2}}:Removing Quantifiers from an Exercise.\\
+    Input: Removal of a quantifier.
 	
-	Expected Output: The exercise now holds the given quantifier and is displayed to the user.
-	
-	\textbf{Test result}:
-	
-	\item{\textbf{test-QT-2}}:Removing Quantifiers from an Exercise.\\
-	
-	Input: Removal of a quantifier.
-	
-	Expected Output: The exercise no longer holds a quantifier and is not displayed to the user.
-	
-	\textbf{Test result}:
-	
-	\item{\textbf{test-QT-3}}:Editing Quantifiers of an Exercise.\\
-	
-	Input: A number and unit of measurement describing an exercise.
-	
-	Expected Output: The exercise now holds the updated quantifier.
-	
-	\textbf{Test result}:
-	
+    Expected Output: The exercise no longer holds a quantifier and is not displayed to the user.
+    
+    \textbf{Test result}: Users cannot remove their quantifiers from their exercises. These come as default.
+   
+    \item{\textbf{test-QT-3}}:Editing Quantifiers of an Exercise.\\
+    Input: A number and unit of measurement describing an exercise.
+
+    Expected Output: The exercise now holds the updated quantifier.
+    
+    \textbf{Test result}: Users can edit their quantifiers.
+   
 \subsubsection{Publicity Tests}
-	\item{\textbf{test-PB-1}}:Publicizing a Workout Routine.\\
+    \item{\textbf{test-PB-1}}:Publicizing a Workout Routine.\\
+    Input: An edit or addition to a workout routine to make it public.
 	
-	Input: An edit or addition to a workout routine to make it public.
+    Expected Output: The workout routine is declared public in the database and is now visible to all users.
+    
+    \textbf{Test result}: Users can publicize a workout routine.
+   
+    \item{\textbf{test-PB-2}}:Privatizing a Workout Routine.\\
+    Input: An edit or addition to a workout routine to make is private.
 	
-	Expected Output: The workout routine is declared public in the database and is now visible to all users.
-	
-	\textbf{Test result}:
-	
-	\item{\textbf{test-PB-2}}:Privatizing a Workout Routine.\\
-	
-	Input: An edit or addition to a workout routine to make is private.
-	
-	Expected Output: The workout routine is declared private in the database and is no longer visible to any user except the creator.
-	
-	\textbf{Test result}:
-	
+    Expected Output: The workout routine is declared private in the database and is no longer visible to any user except the creator.
+    
+    \textbf{Test result}: Users can privatize a workout routine.
+   
 \subsubsection{Workout Routine Saving Tests}
-	\item{\textbf{test-WS-1}}:Saving a Public Workout Routine.\\
+    \item{\textbf{test-WS-1}}:Saving a Public Workout Routine.\\
+    Input: The other user workout routine is saved.
 	
-	Input: The other user workout routine is saved.
-	
-	Expected Output: The workout routine is now visible and accessible under the saved workout routines.
-	
-	\textbf{Test result}:
-	
+    Expected Output: The workout routine is now visible and accessible under the saved workout routines.
+    
+    \textbf{Test result}: Users can save a public workout routine.
+   
 \subsubsection{Browsing Workout Routine Tests}
-	\item{\textbf{test-BS-1}}:Browsing Workout Routines.\\
+    \item{\textbf{test-BS-1}}:Browsing Workout Routines.\\
+    Input: navigation movements to view the public workout routines.
 	
-	Input: navigation movements to view the public workout routines.
+    Expected Output: Multiple public workout routines should be displayed.
+     
+    \textbf{Test result}: Users can browse public programs according to specific categories.
+   
+    \item{\textbf{test-BS-2}}:Search Workout Routines.\\
+    Input: Search string inputs to view the public workout routines.
 	
-	Expected Output: Multiple public workout routines should be displayed. 
-	
-	\textbf{Test result}:
-	
-	\item{\textbf{test-BS-2}}:Search Workout Routines.\\
-	
-	Input: Search string inputs to view the public workout routines.
-	
-	Expected Output: Public workout routines that match the search criteria should be displayed. 
-	
-	\textbf{Test result}:
-	
+    Expected Output: Public workout routines that match the search criteria should be displayed. 
+    
+    \textbf{Test result}: Users can search publicly published routines using custom search text.
+   
 \subsubsection{User Profile Tests}
-	\item{\textbf{test-UP-1}}:Creating a User Profile.\\
+    \item{\textbf{test-UP-1}}:Creating a User Profile.\\
+    Input: The required parameters for creating a profile.
 	
-	Input: The required parameters for creating a profile.
+    Expected Output: The created profile is stored in a user database and the user should be logged into their profile.
+    
+    \textbf{Test result}: Users can create their profiles when signing up.
+   
+    \item{\textbf{test-UP-2}}:Viewing Other User Profile.\\
+    Input: Search criteria for the searched user profile.
 	
-	Expected Output: The created profile is stored in a user database and the user should be logged into their profile.
-	
-	\textbf{Test result}:
-	
-	\item{\textbf{test-UP-2}}:Viewing Other User Profile.\\
-	
-	Input: Search criteria for the searched user profile.
-	
-	Expected Output: A user profile is displayed with their public routines, fitness goals, and other public profile data.
-	
-	\textbf{Test result}:
-	
+    Expected Output: A user profile is displayed with their public routines, fitness goals, and other public profile data.
+    
+    \textbf{Test result}: Users cannot view other user profiles.
+   
 \subsubsection{Fitness Goal Tests}
-	\item{\textbf{test-FG-1}}:Creating a Fitness Goal.\\
+    \item{\textbf{test-FG-1}}:Creating a Fitness Goal.\\
+    Input: Progress points towards a given fitness goal at a given date.
 	
-	Input: A string parameter for a fitness goal and publicity options for the goal.
+    Expected Output: The progress displayed towards a fitness goal should be visually updated and numerically updated in the database with a date
+    
+    \textbf{Test result}: Users cannot create a fitness goal.
+   
+    \item{\textbf{test-FG-2}}:Progressing a Fitness Goal.\\
+    Input: Progress points towards a given fitness goal at a given date.
 	
-	Expected Output: The fitness goal for the user is now updated in the database and is saved under their profile.
-	
-	\textbf{Test result}:
-	
-	\item{\textbf{test-FG-2}}:Progressing a Fitness Goal.\\
-	
-	Input: Progress points towards a given fitness goal at a given date.
-	
-	Expected Output: The progress displayed towards a fitness goal should be visually updated and numerically updated in the database with a date
-	
-	\textbf{Test result}:
-	
-	
+    Expected Output: The progress displayed towards a fitness goal should be visually updated and numerically updated in the database with a date
+    
+    \textbf{Test result}: Users cannot progress fitness goals.
+ 
 \end{enumerate}
+
+\subsection{Functional Requirements Results}
+
+Tests Passed: 12\\
+Tests Failed: 5\\
+Total Tests: 17\\
+
 \section{Nonfunctional Requirements Evaluation}
 
 \noindent After users were brought through the test case scenarios they were asked questions based on the NFR test cases displayed in the VnV Plan.
@@ -356,7 +350,74 @@ Tracking Fitness goals  has always been a stretch goal of this application. Some
 \section{Automated Testing}
 		
 \section{Trace to Requirements}
+Below is the link from requirements to test cases.
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+		\hline
+		& R1 & R2 & R3 & R4 & R5 & R6 & R7 & R8 & R9 & R10 & R11 \\ \hline
+		WR1 &X & & & & & & & & & & \\ \hline
+		WR2 &X & & & & & & & & & & \\ \hline
+		EX1 & &X & & & & & & & & & \\ \hline 
+		EX2 & &X & & & & & & & & & \\ \hline
+		EX3 & &X & & & & & & & & &\\ \hline 
+		QT1 & & &X & & & & & & & & \\ \hline 
+		QT2 & & &X & & & & & & & & \\ \hline 
+		QT3 & & &X & & & & & & & & \\ \hline 
+		PB1 & & & &X & & & & & & & \\ \hline 
+		PB2 & & & &X & & & & & & & \\ \hline 
+		WS1 & & & & &X & & & & & & \\ \hline 
+		BS1 & & & & & &X & & & & & \\ \hline 
+		BS2 & & & & & &X & & & & & \\ \hline 
+		UP1 & & & & & & &X & & & & \\ \hline 
+		UP2 & & & & & & & &X & & & \\ \hline 
+		FG1 & & & & & & & & &X & & \\ \hline 
+		FG2 & & & & & & & & & &X &X \\ \hline 	
+	\end{tabular}
+	\caption{Functional System Tests to Functional Requirement Matrix}
+	\label{Table:R_trace}
+\end{table}
+
+\begin{table}[H]
+	\begin{adjustwidth}{-3cm}{-5cm}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+			\hline
+			& NFR1 & NFR2 & NFR3 & NFR4 & NFR5 & NFR6 & NFR7 & NFR8 & NFR9 & NFR10 & NFR11 \\ \hline
+			LF1 &X & & & & & & & & & & \\ \hline
+			UH1 & &X & & & & & & & & & \\ \hline
+			UH2 & & &X & & & & & & & & \\ \hline
+			UH3 & & & &X & & & & & & & \\ \hline 
+			UH4 & & & & &X & & & & & & \\ \hline 
+			UH5 & & & & & &X & & & & & \\ \hline 
+			UH6 & & & & & & &X & & & & \\ \hline 
+			PF1 & & & & & & & &X & & & \\ \hline 
+			PF2 & & & & & & & & &X & & \\ \hline 
+			PF3 & & & & & & & & & &X & \\ \hline
+			PF4 & & & & & & & & & & &X \\ \hline  
+		\end{tabular}
+		\caption{Non-Functional System Tests to Non-Functional Requirement Matrix}
+		\label{Table:R_trace}
 		
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+			\hline
+			& NFR12 & NFR13 & NFR14 & NFR15 & NFR16 & NFR17 & NFR18 & NFR19 & NFR20 & NFR21 & NFR22 \\ \hline
+			PF5 &X & & & & & & & & & & \\ \hline
+			OE1 & &X & & & & & & & & & \\ \hline
+			MS1 & & &X & & & & & & & & \\ \hline
+			SEC1 & & & &X & & & & & & & \\ \hline 
+			SEC2 & & & & &X & & & & & & \\ \hline 
+			SEC3 & & & & & &X & & & & & \\ \hline 
+			SEC4 & & & & & &X & & & & & \\ \hline 
+			SEC5 & & & & & & &X & & & & \\ \hline 
+			CR1 & & & & & & & &X & & & \\ \hline 
+			CR2 & & & & & & & & &X & & \\ \hline 
+			LR1 & & & & & & & & & &X & \\ \hline 
+			LR2 & & & & & & & & & & &X \\ \hline 
+		\end{tabular}
+		\caption{Non-Functional System Tests to Non-Functional Requirement Matrix}
+		\label{Table:R_trace}
+	\end{adjustwidth}
+\end{table}
 \section{Trace to Modules}		
 
 \section{Code Coverage Metrics}
