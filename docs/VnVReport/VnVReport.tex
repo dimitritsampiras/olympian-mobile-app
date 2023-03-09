@@ -105,14 +105,14 @@ Some example actions included: \\
 	
     Expected Output: A workout routine is stored in the database and is accessible to the user that created it. If the user determined that the workout to be public then it should be publicly visible.
     
-    \textbf{Test result}: Workout routines can be created and are added to an existing Program.
+    \textbf{Test result}: Workout routines can be created and are added to an existing Program. [Passed]
    
     \item{\textbf{test-WR-2}}: Editing a Workout Routine.\\
     Input: User edits a workout routine with new values.
 	
     Expected Output: A workout routine is updated with new values in the database and new values are visible to accessible users.
     
-    \textbf{Test result}: Workout routines can be edited, including changing the names, tags, and amending and removing exercises.
+    \textbf{Test result}: Workout routines can be edited, including changing the names, tags, and amending and removing exercises. [Passed]
    
 \subsubsection{Exercise Tests}
     \item{\textbf{test-EX-1}}:Adding an Exercise to a Workout Routine.\\
@@ -120,21 +120,21 @@ Some example actions included: \\
 
     Expected Output: The workout routine should include the added exercise.
     
-    \textbf{Test result}: Users can add Exercises to Workout Routines and customize reps and sets.
+    \textbf{Test result}: Users can add Exercises to Workout Routines and customize reps and sets. [Passed]
    
     \item{\textbf{test-EX-2}}:Removing an Exercise from a Workout Routine.\\
     Input: The user chooses to remove an exercise.
 	
     Expected Output: Some feedback indicating that an exercise has been removed. The workout routine no longer contains the removed exercise.
     
-    \textbf{Test result}: Users can remove exercises from Workout Routines.
+    \textbf{Test result}: Users can remove exercises from Workout Routines. [Passed]
    
     \item{\textbf{test-EX-3}}:Limiting Exercises to a Workout Routine.\\
     Input: The number of exercises required to reach the limit of exercises per workout routine. 
 	
     Expected Output: A notification to the user, before the limiting exercise notifying them of the limit, and preventing them from adding another exercise.
     
-    \textbf{Test result}: Users cannot limit exercises to workout routines.
+    \textbf{Test result}: Users cannot limit exercises to workout routines. [Failed]
    
 \subsubsection{Quantifier Tests}
     \item{\textbf{test-QT-1}}:Adding Quantifiers to an Exercise.\\
@@ -142,21 +142,21 @@ Some example actions included: \\
 	
     Expected Output: The exercise now holds the given quantifier and is displayed to the user.
     
-    \textbf{Test result}: Users can add quantifiers to their exercises.
+    \textbf{Test result}: Users can add quantifiers to their exercises. [Passed]
    
     \item{\textbf{test-QT-2}}:Removing Quantifiers from an Exercise.\\
     Input: Removal of a quantifier.
 	
     Expected Output: The exercise no longer holds a quantifier and is not displayed to the user.
     
-    \textbf{Test result}: Users cannot remove their quantifiers from their exercises. These come as default.
+    \textbf{Test result}: Users cannot remove their quantifiers from their exercises. [Failed]
    
     \item{\textbf{test-QT-3}}:Editing Quantifiers of an Exercise.\\
     Input: A number and unit of measurement describing an exercise.
 
     Expected Output: The exercise now holds the updated quantifier.
     
-    \textbf{Test result}: Users can edit their quantifiers.
+    \textbf{Test result}: Users can edit their quantifiers. [Passed]
    
 \subsubsection{Publicity Tests}
     \item{\textbf{test-PB-1}}:Publicizing a Workout Routine.\\
@@ -164,14 +164,14 @@ Some example actions included: \\
 	
     Expected Output: The workout routine is declared public in the database and is now visible to all users.
     
-    \textbf{Test result}: Users can publicize a workout routine.
+    \textbf{Test result}: Users can publicize a workout routine. [Passed]
    
     \item{\textbf{test-PB-2}}:Privatizing a Workout Routine.\\
     Input: An edit or addition to a workout routine to make is private.
 	
     Expected Output: The workout routine is declared private in the database and is no longer visible to any user except the creator.
     
-    \textbf{Test result}: Users can privatize a workout routine.
+    \textbf{Test result}: Users can privatize a workout routine. [Passed]
    
 \subsubsection{Workout Routine Saving Tests}
     \item{\textbf{test-WS-1}}:Saving a Public Workout Routine.\\
@@ -179,7 +179,7 @@ Some example actions included: \\
 	
     Expected Output: The workout routine is now visible and accessible under the saved workout routines.
     
-    \textbf{Test result}: Users can save a public workout routine.
+    \textbf{Test result}: Users can save a public workout routine. [Passed]
    
 \subsubsection{Browsing Workout Routine Tests}
     \item{\textbf{test-BS-1}}:Browsing Workout Routines.\\
@@ -187,14 +187,14 @@ Some example actions included: \\
 	
     Expected Output: Multiple public workout routines should be displayed.
      
-    \textbf{Test result}: Users can browse public programs according to specific categories.
+    \textbf{Test result}: Users can browse public programs according to specific categories. [Passed]
    
     \item{\textbf{test-BS-2}}:Search Workout Routines.\\
     Input: Search string inputs to view the public workout routines.
 	
     Expected Output: Public workout routines that match the search criteria should be displayed. 
     
-    \textbf{Test result}: Users can search publicly published routines using custom search text.
+    \textbf{Test result}: Users can search publicly published routines using custom search text. [Passed]
    
 \subsubsection{User Profile Tests}
     \item{\textbf{test-UP-1}}:Creating a User Profile.\\
@@ -202,14 +202,14 @@ Some example actions included: \\
 	
     Expected Output: The created profile is stored in a user database and the user should be logged into their profile.
     
-    \textbf{Test result}: Users can create their profiles when signing up.
+    \textbf{Test result}: Users can create their profiles when signing up. [Passed]
    
     \item{\textbf{test-UP-2}}:Viewing Other User Profile.\\
     Input: Search criteria for the searched user profile.
 	
     Expected Output: A user profile is displayed with their public routines, fitness goals, and other public profile data.
     
-    \textbf{Test result}: Users cannot view other user profiles.
+    \textbf{Test result}: Users cannot view other user profiles. [Failed]
    
 \subsubsection{Fitness Goal Tests}
     \item{\textbf{test-FG-1}}:Creating a Fitness Goal.\\
@@ -217,14 +217,14 @@ Some example actions included: \\
 	
     Expected Output: The progress displayed towards a fitness goal should be visually updated and numerically updated in the database with a date
     
-    \textbf{Test result}: Users cannot create a fitness goal.
+    \textbf{Test result}: Users cannot create a fitness goal. [Failed]
    
     \item{\textbf{test-FG-2}}:Progressing a Fitness Goal.\\
     Input: Progress points towards a given fitness goal at a given date.
 	
     Expected Output: The progress displayed towards a fitness goal should be visually updated and numerically updated in the database with a date
     
-    \textbf{Test result}: Users cannot progress fitness goals.
+    \textbf{Test result}: Users cannot progress fitness goals. [Failed]
  
 \end{enumerate}
 
@@ -261,9 +261,9 @@ Ratings given were on a 5 point scale.
 		  \hline
 		  User 1 & 3 & Color scheme is reminiscent of other popular apps. \\ 
 		  \hline
-		  User 2 & 5 &  \\ 
+		  User 2 & 5 & None. \\ 
 		  \hline
-		  User 3 & 5 &  \\ 
+		  User 3 & 5 & None. \\ 
 		  \hline
 		\end{tabular}
 	\end{center}
@@ -276,11 +276,11 @@ Ratings given were on a 5 point scale.
 		  \hline
 		  User & Rating & Notes \\ 
 		  \hline
-		  User 1 & 5 & \\ 
+		  User 1 & 5 & None.\\ 
 		  \hline
-		  User 2 & 5 &  \\ 
+		  User 2 & 5 & None.\\ 
 		  \hline
-		  User 3 & 5 &  \\ 
+		  User 3 & 5 & None. \\ 
 		  \hline
 		\end{tabular}
 	\end{center}
@@ -316,9 +316,9 @@ Ratings given were on a 5 point scale.
 		  \hline
 		  User 1 & 2 & It is hard to understand how programs are connected to exercises. \\ 
 		  \hline
-		  User 2 & 5 & \\ 
+		  User 2 & 5 & None. \\ 
 		  \hline
-		  User 3 & 5 & \\ 
+		  User 3 & 5 & None. \\ 
 		  \hline
 		\end{tabular}
 	\end{center}
@@ -348,7 +348,7 @@ Ratings given were on a 5 point scale.
 	\textbf{Test result}: Did not utilize a testing framework.
 	
 	\item{\textbf{test-PF-2}}: Accuracy and Precision of Quantifiers.\\
-	\textbf{Test result}: 
+	\textbf{Test result}: Success.
 	
 	\item{\textbf{test-PF-3}}: Availability and Uptime.\\
 	\textbf{Test result}: Success.
@@ -405,25 +405,25 @@ Ratings given were on a 5 point scale.
 
 \section{Unit Testing}
 \begin{enumerate}
-	\item Test: UT1 \\
+	\item Test: UT-1 \\
 	Purpose: Verify that the passwords are hashed \\
 	Input: "hello" (String representing the password)\\
 	Expected Output: A random hash\\
 	Test Result:  Output was a hash and not the inputted password (Success)\\
 
-  \item Test: UT2 \\
+  \item Test: UT-2 \\
 	Purpose: To check whether a user sign up accurately adds a user to the database\\
 	Input: User sign up fields (name, password, email, username)\\
 	Expected Output: signUpUser function returns true indicating user is signed up\\
 	Test Result:  Output was true indicating user was signed up (Success)\\
 
-  \item Test: UT3 \\
+  \item Test: UT-3 \\
 	Purpose: To verify that an incorrect username input won't login a user \\
 	Input: Incorrect username into login field \\
 	Expected Output: Null user token\\
 	Test Result: Null user token (Success)\\
 
-  \item Test: UT4 \\
+  \item Test: UT-4 \\
 	Purpose: To verify that a correct username input will login a user \\
 	Input: Correct username into login field \\
 	Expected Output: User token\\
@@ -441,8 +441,6 @@ There were many positive reviews with the looks and styling of the application, 
 \subsection{Tracking user Fitness Goals}
 Tracking Fitness goals  has always been a stretch goal of this application. Some users asked to see a visual representation such as a graph over time or a numerical increment to help them see progress. This change will help users visually see and track their fitness goals and progress easier.
 
-\section{Automated Testing}
-		
 \section{Trace to Requirements}
 Below is the link from requirements to test cases.
 \begin{table}[H]
@@ -520,8 +518,8 @@ Below is the link from requirements to test cases.
 		Exercise Module & EX-1, QT-1, QT-2, QT-3  \\\hline
 		Workout Module & \\\hline
 		Workout Routine Module & WR-1, EX-1, EX-2, EX-3, PB-1, PB-2, WS-1\\\hline
-		User Login Module & SEC-2 \\\hline
-		User Registration Module & SEC-2\\\hline
+		User Login Module & SEC-2, UT-1, UT-3, UT-4 \\\hline
+		User Registration Module & SEC-2, UT-1, UT-2\\\hline
 		User Profile Module & WS-1, UP-1, UP-2, FG-1, FG-2\\\hline
 		User Fitness Goal Module & FG-1, FG-2\\\hline
 		Workout Browser Module & PB-1, PB-2, WS-1, BS-1, BS-2\\\hline
