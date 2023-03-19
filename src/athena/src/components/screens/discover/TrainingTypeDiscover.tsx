@@ -49,7 +49,7 @@ export const TrainingTypeDiscover: React.FC<TrainingTypeDiscoverProps> = ({
           style={{ fontSize: 30, marginTop: 14 }}
         />
         <Heading style={{ width: 300, textTransform: 'capitalize' }}>
-          {trainingType.replaceAll('_', ' ')}
+          {trainingType.split('_').join(' ')}
         </Heading>
       </Header>
       {/* <SearchBar
