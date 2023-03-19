@@ -84,7 +84,7 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
                   justifyContent: 'space-between',
                   marginTop: 16,
                 }}>
-                <ProfileName profile={data.program.profile} />
+                {data.program.authors[0] && <ProfileName profile={data.program.authors[0]} />}
 
                 <TouchableOpacity onPress={handleOnMenuPress}>
                   <EllipsisHorizontalIcon fill="black" />

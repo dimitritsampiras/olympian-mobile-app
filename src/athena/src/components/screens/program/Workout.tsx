@@ -1,10 +1,13 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { ActivityIndicator, Text, TouchableOpacity, View } from 'react-native';
 import { XMarkIcon } from 'react-native-heroicons/mini';
-import { ChevronRightIcon } from 'react-native-heroicons/solid';
-import { useWorkoutFromIdQuery } from '../../../lib/graphql';
+import { ChevronRightIcon, PlayIcon, StopIcon } from 'react-native-heroicons/solid';
+import { ACTIVE_WORKOUT_ID } from '../../../lib/constants';
+import { ActiveWorkoutContext } from '../../../lib/context';
+import { useStartWorkoutMutation, useWorkoutFromIdQuery } from '../../../lib/graphql';
 import theme from '../../../theme';
 import { Header } from '../../containers/Header';
 
@@ -19,7 +22,10 @@ type WorkoutProps = NativeStackScreenProps<ProgramParamList, 'Workout'>;
 export const Workout: React.FC<WorkoutProps> = ({ route, navigation }) => {
   const { workoutId } = route.params;
   const isFocused = useIsFocused();
+  const { activeWorkout, refetch: refetchActiveQuery } = useContext(ActiveWorkoutContext);
 
+  // gql mutations and queries
+  const [startWorkout] = useStartWorkoutMutation({ variables: { workoutId } });
   const { data, loading, error, refetch } = useWorkoutFromIdQuery({
     variables: { workoutId },
   });
@@ -41,19 +47,52 @@ export const Workout: React.FC<WorkoutProps> = ({ route, navigation }) => {
     return <ActivityIndicator />;
   }
 
+  const handleStartWorkout = async () => {
+    await startWorkout();
+    await refetchActiveQuery();
+  };
+
   return (
     <ScreenView>
       <View>
         <Header navigation={navigation}>
-          <Heading as="h2">{data?.workout?.name}</Heading>
-          <BodyText style={{ fontSize: 12, width: 200 }}>A sample workout description.</BodyText>
+          <View
+            style={{
+              display: 'flex',
+              alignItems: 'flex-end',
+              justifyContent: 'space-between',
+              flexDirection: 'row',
+            }}>
+            <View>
+              <Heading as="h2">{data?.workout?.name}</Heading>
+              <BodyText style={{ fontSize: 12, width: 200 }}>
+                A sample workout description.
+              </BodyText>
+            </View>
+            <TouchableOpacity
+              disabled={data?.workout?.exercises.length === 0}
+              onPress={handleStartWorkout}
+              style={{
+                marginRight: 2,
+                backgroundColor:
+                  workoutId !== activeWorkout?.id ? theme.colors.blue[500] : theme.colors.gray[200],
+                padding: 10,
+                borderRadius: theme.radius.full,
+              }}>
+              {workoutId !== activeWorkout?.workout.id ? (
+                <PlayIcon color="white" size={20} />
+              ) : (
+                <StopIcon color="white" size={20} />
+              )}
+            </TouchableOpacity>
+          </View>
         </Header>
       </View>
 
       <View style={{ marginTop: 40, marginBottom: 150 }}>
-        {data?.workout?.exercises.map((exercise) => (
+        {data?.workout?.exercises.map((exercise, i) => (
           <TouchableOpacity
-            key={exercise.id}
+            key={`${i}`}
             onPress={() =>
               navigation.navigate('Exercise', {
                 exerciseId: exercise.id,

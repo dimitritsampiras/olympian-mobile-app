@@ -9,9 +9,9 @@ import { LoginInput, useLoginMutation } from '../../../lib/graphql';
 import { AUTH_TOKEN } from '../../../lib/constants';
 import { Input } from '../../elements/Input';
 import { Button } from '../../elements/Button';
-import { UserContext } from '../../providers';
 import { UserCircleIcon, LockClosedIcon } from 'react-native-heroicons/solid';
 import theme from '../../../theme';
+import { UserContext } from '../../../lib/context';
 
 type ParamList = NativeStackScreenProps<AuthParamList, 'Login'>;
 interface LoginProps extends ParamList {}

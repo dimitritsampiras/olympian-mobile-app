@@ -2,11 +2,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useContext } from 'react';
 import { TabParamList } from '../navigation';
-import { UserContext } from '../providers';
-import { Card } from '../containers/Card';
-import { View, StyleSheet, Text, Pressable } from 'react-native';
+import { View, Text } from 'react-native';
 import { Avatar } from 'react-native-ui-lib';
-import { Heading, SubHeading } from '../elements';
+import { Heading } from '../elements';
 import {
   CogIcon,
   ChartBarSquareIcon,
@@ -18,10 +16,11 @@ import { SettingsCard } from '../containers/SettingCard';
 import theme from '../../theme';
 import { ScreenView } from '../containers/ScreenView';
 import { Header } from '../containers/Header';
+import { UserContext } from '../../lib/context';
 
 interface ProfileProps extends NativeStackScreenProps<TabParamList, 'Profile'> {}
 
-export const Profile: React.FC<ProfileProps> = ({ route }) => {
+export const Profile: React.FC<ProfileProps> = () => {
   const { user, refetch } = useContext(UserContext);
 
   const handleLogout = async () => {
@@ -32,10 +31,10 @@ export const Profile: React.FC<ProfileProps> = ({ route }) => {
   return (
     <ScreenView>
       <Header style={{ flexDirection: 'row', marginBottom: 20 }}>
-        <Avatar size={60} backgroundColor={theme.colors.amber[200]} name={user?.name} />
+        <Avatar size={60} backgroundColor={theme.colors.amber[200]} name={user?.profile?.name} />
         <View style={{ marginLeft: 14, paddingVertical: 10 }}>
           <Heading as="h3" noMargin style={{ marginBottom: 5 }}>
-            {user?.username}
+            {user?.profile?.username}
           </Heading>
           <Text style={{ fontSize: 12 }}>
             <Text style={{ fontWeight: '700' }}>2 </Text>followers •{' '}
@@ -70,29 +69,5 @@ export const Profile: React.FC<ProfileProps> = ({ route }) => {
 };
 
 export const removeToken = async () => {
-  try {
-    await AsyncStorage.removeItem('AUTH_TOKEN');
-  } catch (err) {
-    console.error(err);
-  }
+  await AsyncStorage.removeItem('AUTH_TOKEN').catch((e) => e);
 };
-
-const styles = StyleSheet.create({
-  headerBox: {
-    height: '30%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  screen: {
-    backgroundColor: theme.colors.gray[50],
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    padding: '10%',
-  },
-});

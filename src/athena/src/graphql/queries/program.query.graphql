@@ -7,11 +7,9 @@ query ProgramFromId($programId: String!) {
         id
       }
     }
-    profile {
-      user {
-        username
-        name
-      }
+    authors {
+      username
+      name
     }
   }
 }
@@ -58,10 +56,11 @@ query StaticExercises {
 query UserPrograms {
   userPrograms {
     ...Program
-    profile {
-      user {
-        username
-      }
+    authors {
+      username
+    }
+    workouts {
+      ...Workout
     }
   }
 }
@@ -80,4 +79,38 @@ query PopularPrograms($skip: Int!, $take: Int!, $trainingType: [TrainingType!]) 
 
 query TrainingTypes {
   trainingTypes
+}
+
+query ActiveWorkout {
+  activeWorkout {
+    workout {
+      ...Workout
+    }
+    program {
+      name
+    }
+    active
+    createdAt
+    duration
+    id
+    notes
+    performedExercises {
+      ...PerformedExercise
+      exercise {
+        authorNotes
+        id
+        order
+        supersetOrder
+        staticExercise {
+          ...StaticExercise
+        }
+      }
+      performedSets {
+        ...PerformedSet
+        set {
+          ...Set
+        }
+      }
+    }
+  }
 }

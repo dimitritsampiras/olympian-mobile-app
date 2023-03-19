@@ -10,9 +10,7 @@ import { MyProgramsParamList } from '../navigation/MyProgramsNavigator';
 type ProgramsProps = NativeStackScreenProps<MyProgramsParamList, 'MyPrograms'>;
 
 export const Programs: React.FC<ProgramsProps> = ({ navigation }) => {
-  const { data } = useUserProgramsQuery({
-    fetchPolicy: 'no-cache',
-  });
+  const { data } = useUserProgramsQuery({ fetchPolicy: 'no-cache' });
 
   const navigateToProgram = (programId: string) => {
     navigation.navigate('ProgramNavigator', { programId, back: true });
@@ -23,6 +21,7 @@ export const Programs: React.FC<ProgramsProps> = ({ navigation }) => {
       <Header>
         <Heading>My Programs</Heading>
       </Header>
+      {/* TODO: render no programs */}
       {data?.userPrograms.map((program) => (
         <ProgramCard
           userOwned

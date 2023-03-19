@@ -1,6 +1,5 @@
 fragment User on User {
-  id
-  name
-  username
   email
+  id
+  password
 }

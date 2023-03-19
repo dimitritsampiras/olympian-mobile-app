@@ -6,7 +6,7 @@ import theme from '../../theme';
 interface ScreenViewProps {
   children: ReactNode[] | ReactNode;
   type?: 'main' | 'form';
-  styles?: ViewProps['style'];
+  style?: ViewProps['style'];
   spaced?: boolean;
   showScrollBar?: boolean;
   scrollBounce?: boolean;
@@ -17,7 +17,7 @@ export const ScreenView: React.FC<ScreenViewProps> = ({
   spaced,
   showScrollBar = false,
   scrollBounce = true,
-  styles,
+  style,
   children,
 }) => {
   const insets = useSafeAreaInsets();
@@ -30,11 +30,11 @@ export const ScreenView: React.FC<ScreenViewProps> = ({
             flex: 1,
             paddingHorizontal: 24,
             paddingTop: insets.top,
-            paddingBottom: type === 'form' ? insets.bottom : 0,
+            // paddingBottom: type === 'form' ? insets.bottom : 0,
             backgroundColor: type === 'form' ? theme.colors.white : theme.colors.gray[50],
           },
           type === 'form' && spaced && { justifyContent: 'space-between' },
-          styles,
+          style,
         ]}>
         {type === 'main' ? (
           <ScrollView

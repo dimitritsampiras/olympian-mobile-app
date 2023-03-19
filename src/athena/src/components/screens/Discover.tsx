@@ -9,7 +9,6 @@ import {
 
 import { ScreenView } from '../containers/ScreenView';
 import { Heading } from '../elements/typography/Heading';
-import { UserContext } from '../providers';
 import { View } from 'react-native';
 import { SubHeading } from '../elements/typography/SubHeading';
 import { HorizontalCardScroller } from '../containers/HorizontalCardScroller';
@@ -23,8 +22,6 @@ import { TrainingTypeCard } from '../containers/TrainingTypeCard';
 interface DiscoverProps extends NativeStackScreenProps<DiscoverParamList, 'Discover'> {}
 
 export const Discover: React.FC<DiscoverProps> = ({ navigation, route }) => {
-  const { user } = useContext(UserContext);
-
   const trainingTypesQuery = useTrainingTypesQuery();
 
   const trendingQuery = useTrendingProgramsQuery({

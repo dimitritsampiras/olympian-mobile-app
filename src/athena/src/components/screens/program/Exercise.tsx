@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useState } from 'react';
+import React from 'react';
 import { Text, View } from 'react-native';
 import { useCreateSetMutation, useExerciseFromIdQuery } from '../../../lib/graphql';
 import theme from '../../../theme';
@@ -60,9 +60,11 @@ export const Exercise: React.FC<ExerciseProps> = ({ navigation, route }) => {
             </View>
           </Header>
           <View>
-            {data.exercise.sets.map((set) => {
-              return <SetCard key={set.id} set={set} style={{ marginBottom: 8 }} />;
-            })}
+            {[...data.exercise.sets]
+              .sort((a, b) => a.number - b.number)
+              .map((set) => {
+                return <SetCard key={set.id} set={set} style={{ marginBottom: 8 }} />;
+              })}
 
             <Button
               variant="flat"

@@ -1,6 +1,10 @@
 query Me {
   me {
     ...User
+    profile {
+      username
+      name
+    }
   }
 }
 

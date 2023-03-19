@@ -1,31 +1,24 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { createContext, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { ArrowLongLeftIcon, XMarkIcon } from 'react-native-heroicons/solid';
 import { PageControl } from 'react-native-ui-lib';
 import _ from 'lodash';
 
-import { CreateProgramInput, Publicity, useCreateProgramMutation } from '../../../lib/graphql';
+import { Publicity, useCreateProgramMutation } from '../../../lib/graphql';
 import theme from '../../../theme';
 import { ScreenView } from '../../containers/ScreenView';
 import { Button } from '../../elements';
 import { ProgramName } from './ProgramName';
 import { ProgramPublicity } from './ProgramPublicity';
 
-import { UserContext } from '../../providers';
 import { ProgramTrainingType } from './ProgramTrainingType';
 import { HomeParamList } from '../../navigation/HomeNavigator';
+import { CreateProgramContext, UserContext } from '../../../lib/context';
+import { CreateProgramInputWithoutUserId } from '../../../lib/types';
+import { useIsFocused } from '@react-navigation/native';
 
 type CreateProgramProps = NativeStackScreenProps<HomeParamList, 'CreateProgram'>;
-
-type CreateProgramInputWithoutUserId = Omit<CreateProgramInput, 'userId'>;
-
-export const CreateProgramContext = createContext({
-  step: 0,
-  setStep: (() => {}) as React.Dispatch<React.SetStateAction<number>>,
-  program: {} as CreateProgramInputWithoutUserId,
-  setProgram: (() => {}) as React.Dispatch<React.SetStateAction<CreateProgramInputWithoutUserId>>,
-});
 
 const PAGES = [ProgramName, ProgramPublicity, ProgramTrainingType];
 
@@ -33,8 +26,10 @@ const PAGES = [ProgramName, ProgramPublicity, ProgramTrainingType];
  *
  * Create Program Multi-page form
  */
-export const CreateProgram: React.FC<CreateProgramProps> = ({ navigation }) => {
+export const CreateProgram: React.FC<CreateProgramProps> = ({ navigation, route }) => {
   const { user } = useContext(UserContext);
+  const focused = useIsFocused();
+  console.log(focused, route.name);
 
   // state
   const [step, setStep] = useState(0);

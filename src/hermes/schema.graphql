@@ -51,6 +51,11 @@ type Exercise {
   supersetOrder: String
 }
 
+enum Gender {
+  female
+  male
+}
+
 input LoginInput {
   password: String!
   username: String!
@@ -105,25 +110,72 @@ type Mutation {
   createProgram(input: CreateProgramInput!): Program
   createSet(exerciseId: String!): Set
   createWorkout(programId: String!): Workout
+  finishWorkout(performedWorkoutId: String!): PerformedWorkout
   login(input: LoginInput!): String
   signup(input: SignUpInput!): Boolean
+  startWorkout(workoutId: String!): PerformedWorkout
+  updateCompletionStatus(currentStatus: Boolean!, performedSetId: String!): PerformedSet
   updateSetReps(reps: Int!, setId: String!): Set
   updateSetRpe(rpe: Int!, setId: String!): Set
 }
 
-type Profile {
+type PerformedExercise {
+  exercise: Exercise!
   id: ID!
-  programs: [Program!]!
+  notes: String!
+  performedSets: [PerformedSet!]!
+  performedWorkout: PerformedWorkout!
+}
+
+type PerformedSet {
+  completed: Boolean!
+  completedAt: DateTime
+  duration: Int
+  id: ID!
+  performedExercise: PerformedExercise
+  reps: Int
+  set: Set!
+  weight: Float
+}
+
+type PerformedWorkout {
+  active: Boolean!
+  createdAt: DateTime!
+  duration: Int!
+  id: ID!
+  notes: String!
+  performedExercises: [PerformedExercise!]!
+  program: Program!
+  tonnage: Float!
+  workout: Workout!
+}
+
+type Profile {
+  authoredPrograms: [Program!]!
+  createdAt: DateTime!
+  dateOfBirth: DateTime
+  gender: Gender
+  goals: [TrainingType!]!
+  height: Int
+  id: ID!
+  name: String!
+  performedWorkouts: [PerformedWorkout!]!
+  programLibrary: [Program!]!
+  trainingAge: TrainingLevel
+  updatedAt: DateTime!
   user: User!
+  username: String!
+  weight: Int
 }
 
 type Program {
+  authors: [Profile!]!
   complimentary: Boolean
   id: ID!
+  inLibraryOf: [Profile!]!
   name: String!
-  profile: Profile!
+  performedWorkouts: [PerformedWorkout!]!
   publicity: Publicity!
-  tags: [String!]!
   trainingLevel: TrainingLevel
   trainingType: [TrainingType!]!
   workouts: [Workout!]!
@@ -136,6 +188,7 @@ enum Publicity {
 }
 
 type Query {
+  activeWorkout: PerformedWorkout
   emailExists(email: String!): Boolean
   exercise(exerciseId: String!): Exercise
   me: User
@@ -212,10 +265,8 @@ enum TrainingType {
 type User {
   email: String!
   id: ID!
-  name: String!
   password: String!
   profile: Profile
-  username: String!
 }
 
 type UserResponse {
@@ -224,12 +275,10 @@ type UserResponse {
 }
 
 type Workout {
-  duration: DateTime!
   exercises: [Exercise!]!
   id: ID!
   name: String!
   programId: String
-  tags: [String!]!
   trainingLevel: TrainingLevel
   trainingType: [TrainingType!]!
 }

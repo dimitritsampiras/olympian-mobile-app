@@ -35,7 +35,7 @@ export const ProgramQuery = extendType({
           where: { id: programId },
           include: {
             workouts: { include: { exercises: { select: { id: true } } } },
-            profile: { include: { user: { select: { username: true } } } },
+            authors: true,
           },
         });
         return program;
@@ -48,16 +48,28 @@ export const ProgramQuery = extendType({
     t.field('userPrograms', {
       type: list('Program'),
       resolve: async (_root, _args, { prisma, userId }) => {
+        if (!userId) return [];
         const programs = await prisma.program.findMany({
-          where: { profile: { userId } },
-          include: { profile: { include: { user: { select: { username: true } } } } },
+          where: {
+            OR: [
+              {
+                inLibraryOf: { some: { userId } },
+              },
+              { authors: { some: { userId } } },
+            ],
+          },
+          // inLibraryOf: { some: { userId } }, authors: { some: { userId } }
+          include: {
+            workouts: { include: { exercises: { select: { id: true } } } },
+            authors: true,
+          },
         });
         return programs;
       },
     });
     /**
      *
-     * gets all programs that the user has
+     * returns the workout
      */
     t.field('workout', {
       type: nullable('Workout'),
@@ -66,7 +78,7 @@ export const ProgramQuery = extendType({
         const workout = await prisma.workout.findUnique({
           where: { id: workoutId },
           include: {
-            program: { include: { profile: true } },
+            program: true,
             exercises: { include: { staticExercise: true } },
           },
         });
@@ -126,6 +138,28 @@ export const ProgramQuery = extendType({
       type: list('TrainingType'),
       resolve: async (_root, _args, _ctx) => {
         return Object.values(TrainingType);
+      },
+    });
+    /**
+     *
+     * gets all static exercises in databas
+     */
+    t.field('activeWorkout', {
+      type: nullable('PerformedWorkout'),
+      resolve: async (_root, _args, { prisma, userId }) => {
+        const activeWorkouts = await prisma.performedWorkout.findMany({
+          where: { profile: { userId }, active: true },
+          include: {
+            performedExercises: {
+              include: { performedSets: true, exercise: { include: { staticExercise: true } } },
+            },
+            workout: true,
+            program: true,
+          },
+        });
+
+        if (activeWorkouts.length > 1) return null;
+        return activeWorkouts[0];
       },
     });
   },

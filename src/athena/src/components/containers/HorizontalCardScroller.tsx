@@ -12,7 +12,11 @@ export const HorizontalCardScroller: React.FC<HorizontalCardScrollerProps> = ({
   showScrollBar = false,
 }) => {
   return (
-    <ScrollView horizontal={true} showsHorizontalScrollIndicator={showScrollBar} style={style}>
+    <ScrollView
+      horizontal={true}
+      contentContainerStyle={{ flexGrow: 1 }}
+      showsHorizontalScrollIndicator={showScrollBar}
+      style={style}>
       {children}
     </ScrollView>
   );

@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
 import { View } from 'react-native';
+import { CreateProgramContext } from '../../../lib/context';
 import { BROWSE_CATGEORIES } from '../../../lib/data';
 import { TrainingType } from '../../../lib/graphql';
 import { Heading } from '../../elements';
 import { SelectableBadge } from '../../elements/form/SelectableBadge';
 import { BodyText } from '../../elements/typography/BodyText';
-
-import { CreateProgramContext } from './CreateProgram';
 
 const TRAINING_TYPE_LIMIT = 4;
 

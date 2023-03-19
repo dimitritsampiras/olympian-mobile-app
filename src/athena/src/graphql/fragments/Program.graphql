@@ -1,22 +1,18 @@
 fragment Program on Program {
+  complimentary
   id
   name
   publicity
-  complimentary
-  trainingType
-  tags
   trainingLevel
-  workouts {
-    ...Workout
-  }
+  trainingType
 }
 
 fragment Workout on Workout {
   id
   name
-  trainingType
-  tags
+  programId
   trainingLevel
+  trainingType
 }
 
 fragment Exercise on Exercise {
@@ -43,4 +39,27 @@ fragment Set on Set {
   number
   reps
   rpe
+}
+
+fragment PerfomedWorkout on PerformedWorkout {
+  active
+  createdAt
+  duration
+  id
+  notes
+  tonnage
+}
+
+fragment PerformedExercise on PerformedExercise {
+  id
+  notes
+}
+
+fragment PerformedSet on PerformedSet {
+  completedAt
+  completed
+  duration
+  id
+  reps
+  weight
 }

@@ -33,3 +33,21 @@ mutation CreateSet($exerciseId: String!) {
     number
   }
 }
+
+mutation StartWorkout($workoutId: String!) {
+  startWorkout(workoutId: $workoutId) {
+    id
+  }
+}
+
+mutation FinishWorkout($performedWorkoutId: String!) {
+  finishWorkout(performedWorkoutId: $performedWorkoutId) {
+    id
+  }
+}
+
+mutation UpdateCompletionStatus($performedSetId: String!, $currentStatus: Boolean!) {
+  updateCompletionStatus(performedSetId: $performedSetId, currentStatus: $currentStatus) {
+    id
+  }
+}

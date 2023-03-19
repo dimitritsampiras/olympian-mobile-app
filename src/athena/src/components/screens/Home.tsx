@@ -2,7 +2,6 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useContext, useState } from 'react';
 
 import { ScreenView } from '../containers/ScreenView';
-import { UserContext } from '../providers';
 import { StyleSheet, View, ViewStyle } from 'react-native';
 import { Header } from '../containers/Header';
 import theme from '../../theme';
@@ -15,6 +14,7 @@ import { Card } from '../containers/Card';
 import WeightIcon from '../../../assets/weight.svg';
 import WeightIconPurple from '../../../assets/weight2.svg';
 import { BodyText, Button, Heading, SubHeading } from '../elements';
+import { UserContext } from '../../lib/context';
 
 interface HomeProps extends NativeStackScreenProps<HomeParamList & TabParamList, 'Home'> {}
 
@@ -37,10 +37,11 @@ export const Home: React.FC<HomeProps> = ({ navigation }) => {
       <Header>
         <Heading style={{ width: 300 }}>
           Welcome back, {'\n'}
-          {user?.name.split(' ')[0]} 👋
+          {user?.profile?.name.split(' ')[0]} 👋
         </Heading>
       </Header>
 
+      {/* TODO: render most recent Performed Workout instead this if there is one */}
       <View style={[styles.infoContainer]}>
         <BodyText style={{ marginBottom: 12 }}>
           You have no active programs. Click the button to get started.

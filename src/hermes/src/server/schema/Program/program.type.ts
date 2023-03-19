@@ -11,6 +11,9 @@ import {
   Workout,
   TrainingType,
   Set,
+  PerformedWorkout,
+  PerformedExercise,
+  PerformedSet,
 } from 'nexus-prisma';
 
 // Session object type from prisma
@@ -22,10 +25,11 @@ export const ProgramType = objectType({
     t.field(Program.complimentary);
     t.field(Program.publicity);
     t.field(Program.trainingType);
-    t.field(Program.tags);
     t.field(Program.trainingLevel);
     t.field(Program.workouts);
-    t.field(Program.profile);
+    t.field(Program.authors);
+    t.field(Program.inLibraryOf);
+    t.field(Program.performedWorkouts);
   },
 });
 
@@ -35,9 +39,7 @@ export const WorkoutType = objectType({
   definition(t) {
     t.field(Workout.id);
     t.field(Workout.name);
-    t.field(Workout.duration);
     t.field(Workout.trainingType);
-    t.field(Workout.tags);
     t.field(Workout.trainingLevel);
     t.field(Workout.exercises);
     t.field(Workout.programId);
@@ -64,6 +66,48 @@ export const SetType = objectType({
     t.field(Set.rpe);
     t.field(Set.number);
     t.field(Set.exercise);
+  },
+});
+
+// Session object type from prisma
+export const PerformedWorkoutType = objectType({
+  name: PerformedWorkout.$name,
+  definition(t) {
+    t.field(PerformedWorkout.id);
+    t.field(PerformedWorkout.active);
+    t.field(PerformedWorkout.createdAt);
+    t.field(PerformedWorkout.duration);
+    t.field(PerformedWorkout.notes);
+    t.field(PerformedWorkout.tonnage);
+    t.field(PerformedWorkout.performedExercises);
+    t.field(PerformedWorkout.program);
+    t.field(PerformedWorkout.workout);
+  },
+});
+
+export const PerformedExerciseType = objectType({
+  name: PerformedExercise.$name,
+  definition(t) {
+    t.field(PerformedExercise.id);
+    t.field(PerformedExercise.exercise);
+    t.field(PerformedExercise.notes);
+    t.field(PerformedExercise.performedWorkout);
+    t.field(PerformedExercise.performedSets);
+    t.field(PerformedExercise.exercise);
+  },
+});
+
+export const PerformedSetType = objectType({
+  name: PerformedSet.$name,
+  definition(t) {
+    t.field(PerformedSet.id);
+    t.field(PerformedSet.completedAt);
+    t.field(PerformedSet.completed);
+    t.field(PerformedSet.duration);
+    t.field(PerformedSet.weight);
+    t.field(PerformedSet.reps);
+    t.field(PerformedSet.set);
+    t.field(PerformedSet.performedExercise);
   },
 });
 
