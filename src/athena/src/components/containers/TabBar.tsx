@@ -38,7 +38,8 @@ const TAB_BAR_HIDDEN_ROUTES: Array<
 
 export const TabBar: React.FC<BottomTabBarProps> = ({ descriptors, navigation, state }) => {
   const { routeName } = useContext(RouteContext);
-  const { activeWorkout, completed, toComplete, finishWorkout } = useContext(ActiveWorkoutContext);
+  const { activeWorkout, completed, toComplete, finishWorkout, index } =
+    useContext(ActiveWorkoutContext);
 
   const [hideBar, setHideBar] = useState(
     TAB_BAR_HIDDEN_ROUTES.includes(routeName as typeof TAB_BAR_HIDDEN_ROUTES[0])
@@ -155,6 +156,7 @@ export const TabBar: React.FC<BottomTabBarProps> = ({ descriptors, navigation, s
               completed={completed}
               finishWorkout={finishWorkout}
               toComplete={toComplete}
+              index={index}
             />
           </Animated.View>
         </Animated.View>

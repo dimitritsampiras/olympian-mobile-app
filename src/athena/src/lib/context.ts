@@ -13,8 +13,8 @@ export const ActiveWorkoutContext = createContext({
   completed: 0,
   // default value
   toComplete: 99,
-  currentExerciseNumber: 1,
-  navigateCurrentExercise: (direction: 'forward' | 'back') => {},
+  index: 0,
+  setIndex: (() => {}) as React.Dispatch<React.SetStateAction<number>>,
 });
 
 export const UserContext = createContext({

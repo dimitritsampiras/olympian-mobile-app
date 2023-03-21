@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Swiper from 'react-native-swiper';
@@ -8,30 +8,57 @@ import { ActiveWorkoutContext } from '../../lib/context';
 
 import { CurrentExercise } from './CurrentExercise';
 
+import { useExerciseHistoryQuery } from '../../lib/graphql';
+
 interface PlayerProps {
   onPress?: () => void;
 }
 
 export const Player: React.FC<PlayerProps> = () => {
   const insets = useSafeAreaInsets();
-  const { activeWorkout, currentExerciseNumber } = useContext(ActiveWorkoutContext);
+  const { activeWorkout, index, setIndex } = useContext(ActiveWorkoutContext);
 
-  const currentExercise = activeWorkout?.performedExercises.find(
-    (pe) => pe.exercise.order === currentExerciseNumber
-  );
+  // const [currentExercise, setCurrentExercise] = useState(activeWorkout?.performedExercises[index]);
+
+  // const currentExercise = activeWorkout?.performedExercises.find(
+  //   (pe) => pe.exercise.order === currentExerciseNumber
+  // );
+
+  const { data: ehData, refetch } = useExerciseHistoryQuery({
+    variables: {
+      exerciseId: activeWorkout?.performedExercises[index]?.exercise.id || '',
+      currentPerformedExercise: activeWorkout?.performedExercises[index]?.id,
+    },
+  });
+
+  const handleIndexChange = async (index: number) => {
+    setIndex(index);
+    await refetch({
+      exerciseId: activeWorkout?.performedExercises[index]?.exercise.id || '',
+      currentPerformedExercise: activeWorkout?.performedExercises[index]?.id,
+    });
+  };
 
   return (
     <View style={[styles.player, { paddingTop: insets.top }]}>
-      {activeWorkout && currentExercise && (
-        <View style={{ justifyContent: 'space-between', height: '100%' }}>
+      {activeWorkout && activeWorkout?.performedExercises[index] && (
+        <View style={{ height: '100%' }}>
           <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
             <View style={styles.progress} />
           </View>
           <View style={{ marginTop: 14, flex: 1 }}>
             <Text style={styles.workoutTitle}>{activeWorkout.workout.name}</Text>
-            <Swiper loop={false}>
+            <Swiper
+              loop={false}
+              showsPagination={false}
+              index={index}
+              onIndexChanged={handleIndexChange}>
               {activeWorkout.performedExercises.map((pe) => (
-                <CurrentExercise currentExercise={pe} key={pe.id} />
+                <CurrentExercise
+                  currentExercise={pe}
+                  key={pe.id}
+                  exerciseHistory={ehData?.exerciseHistory}
+                />
               ))}
             </Swiper>
           </View>

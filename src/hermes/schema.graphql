@@ -191,6 +191,7 @@ type Query {
   activeWorkout: PerformedWorkout
   emailExists(email: String!): Boolean
   exercise(exerciseId: String!): Exercise
+  exerciseHistory(currentPerformedExercise: String, exerciseId: String!): [PerformedExercise!]!
   me: User
   popularPrograms(skip: Int!, take: Int!, trainingType: [TrainingType!]): [Program!]!
   program(programId: String!): Program

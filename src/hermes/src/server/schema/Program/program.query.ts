@@ -162,5 +162,20 @@ export const ProgramQuery = extendType({
         return activeWorkouts[0];
       },
     });
+    /**
+     *
+     * exercise history
+     */
+    t.field('exerciseHistory', {
+      type: list('PerformedExercise'),
+      args: { exerciseId: 'String', currentPerformedExercise: nullable('String') },
+      resolve: async (_root, { exerciseId }, { prisma, userId }) => {
+        const previousPerformedExercises = await prisma.performedExercise.findMany({
+          where: { exerciseId, id: { not: exerciseId }, performedWorkout: { profile: { userId } } },
+        });
+
+        return previousPerformedExercises;
+      },
+    });
   },
 });

@@ -114,3 +114,12 @@ query ActiveWorkout {
     }
   }
 }
+
+query ExerciseHistory($exerciseId: String!, $currentPerformedExercise: String) {
+  exerciseHistory(exerciseId: $exerciseId, currentPerformedExercise: $currentPerformedExercise) {
+    ...PerformedExercise
+    performedSets {
+      ...PerformedSet
+    }
+  }
+}

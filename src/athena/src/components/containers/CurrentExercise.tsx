@@ -1,17 +1,26 @@
 import React, { useContext, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { ActiveWorkoutContext } from '../../lib/context';
-import { ActiveWorkoutQuery, useUpdateCompletionStatusMutation } from '../../lib/graphql';
+import {
+  ActiveWorkoutQuery,
+  ExerciseHistoryQuery,
+  useUpdateCompletionStatusMutation,
+} from '../../lib/graphql';
 import theme from '../../theme';
-import { Heading } from '../elements';
+import { Heading, SubHeading } from '../elements';
 import { ExerciseOrder } from '../elements/display/ExerciseOrder';
+import { Card } from './Card';
 import { PerformedSet } from './PerformedSet';
 
 interface CurrentExerciseProps {
   currentExercise: NonNullable<ActiveWorkoutQuery['activeWorkout']>['performedExercises'][0];
+  exerciseHistory?: ExerciseHistoryQuery['exerciseHistory'];
 }
 
-export const CurrentExercise: React.FC<CurrentExerciseProps> = ({ currentExercise }) => {
+export const CurrentExercise: React.FC<CurrentExerciseProps> = ({
+  currentExercise,
+  exerciseHistory,
+}) => {
   const [expandedSetId, setExpandedSetId] = useState<string>();
   const { refetch } = useContext(ActiveWorkoutContext);
   const [completeSet] = useUpdateCompletionStatusMutation();
@@ -50,6 +59,32 @@ export const CurrentExercise: React.FC<CurrentExerciseProps> = ({ currentExercis
                 />
               </>
             ))}
+        </View>
+        <View
+          style={{
+            width: '100%',
+            height: 1,
+            backgroundColor: theme.colors.gray[100],
+            marginVertical: 12,
+          }}
+        />
+        <View style={{ marginTop: 22 }}>
+          <SubHeading>History</SubHeading>
+          <View style={{ overflow: 'hidden' }}>
+            {exerciseHistory?.map((pe) => (
+              <Card
+                key={pe.id}
+                style={{
+                  backgroundColor: theme.colors.gray[50],
+                  marginBottom: 10,
+                  flexDirection: 'row',
+                }}>
+                <Text>{pe.performedSets.map((e) => `${e.reps}, `)}</Text>
+                <Text> @ </Text>
+                <Text>{pe.performedSets.map((e) => `${e.weight}, `)}</Text>
+              </Card>
+            ))}
+          </View>
         </View>
       </View>
     </View>

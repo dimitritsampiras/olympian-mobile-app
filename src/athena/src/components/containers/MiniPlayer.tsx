@@ -26,6 +26,7 @@ interface MiniPlayerProps extends PressableProps {
   completed: number;
   toComplete: number;
   finishWorkout: () => Promise<void>;
+  index: number;
 }
 
 const screenWidth = Dimensions.get('window').width;
@@ -36,6 +37,7 @@ export const MiniPlayer: React.FC<MiniPlayerProps> = ({
   completed,
   toComplete,
   finishWorkout,
+  index,
   ...props
 }) => {
   const progressWidthStyle = useAnimatedStyle(() => {
@@ -74,6 +76,9 @@ export const MiniPlayer: React.FC<MiniPlayerProps> = ({
           <XMarkIcon size={22} color={theme.colors.gray[600]} />
         </TouchableOpacity>
         <Text style={styles.workoutName}>{activeWorkout?.workout.name}</Text>
+        <Text style={styles.exerciseName}>
+          · {activeWorkout?.performedExercises[index]?.exercise.staticExercise.name}
+        </Text>
       </View>
       <View
         style={{
@@ -101,5 +106,10 @@ const styles = StyleSheet.create({
   workoutName: {
     fontWeight: '600',
     marginLeft: 4,
+  },
+  exerciseName: {
+    fontWeight: '400',
+    marginLeft: 6,
+    color: theme.colors.gray[500],
   },
 });
