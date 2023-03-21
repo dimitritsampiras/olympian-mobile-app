@@ -4,11 +4,13 @@ import { CreateProgram } from '../screens/createProgram/CreateProgram';
 
 import { ProgramNavigator } from './ProgramNavigator';
 import { TabParamList } from './TabNavigator';
+import { FriendsActivity } from '../screens/friendsActivity/FriendsActivity';
 
 export type HomeParamList = {
   Home: undefined;
   CreateProgram: undefined;
   ProgramNavigator: { programId: string };
+  FriendsActivity: undefined;
 };
 
 const HomeStack = createNativeStackNavigator<HomeParamList>();
@@ -26,6 +28,7 @@ export const HomeNavigator: React.FC<HomeStackNavigatorProps> = ({ route }) => {
         component={ProgramNavigator}
         initialParams={{ programId: '' }}
       />
+      <HomeStack.Screen name="FriendsActivity" component={FriendsActivity} />
     </HomeStack.Navigator>
   );
 };

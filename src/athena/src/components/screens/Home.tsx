@@ -2,7 +2,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useContext, useState } from 'react';
 
 import { ScreenView } from '../containers/ScreenView';
-import { StyleSheet, View, ViewStyle } from 'react-native';
+import { StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { Header } from '../containers/Header';
 import theme from '../../theme';
 import { ActionSheet } from 'react-native-ui-lib';
@@ -15,6 +15,7 @@ import WeightIcon from '../../../assets/weight.svg';
 import WeightIconPurple from '../../../assets/weight2.svg';
 import { BodyText, Button, Heading, SubHeading } from '../elements';
 import { UserContext } from '../../lib/context';
+import { BellIcon } from 'react-native-heroicons/solid';
 
 interface HomeProps extends NativeStackScreenProps<HomeParamList & TabParamList, 'Home'> {}
 
@@ -34,11 +35,22 @@ export const Home: React.FC<HomeProps> = ({ navigation }) => {
 
   return (
     <ScreenView>
-      <Header>
-        <Heading style={{ width: 300 }}>
+      <Header
+        style={{
+          display: 'flex',
+          flexWrap: 'nowrap',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+        }}>
+        <Heading>
           Welcome back, {'\n'}
           {user?.profile?.name.split(' ')[0]} 👋
         </Heading>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('FriendsActivity')}
+          style={{ marginBottom: 10, paddingTop: 10 }}>
+          <BellIcon fill={theme.colors.blue[700]} />
+        </TouchableOpacity>
       </Header>
 
       {/* TODO: render most recent Performed Workout instead this if there is one */}
