@@ -19,6 +19,8 @@ export const ProfileType = objectType({
     t.field(Profile.weight);
     t.field(Profile.goals);
     t.field(Profile.user);
+    t.field(Profile.followedBy);
+    t.field(Profile.following);
     t.field(Profile.authoredPrograms);
   },
 });

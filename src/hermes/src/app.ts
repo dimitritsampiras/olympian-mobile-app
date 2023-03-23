@@ -2,6 +2,8 @@ import { PrismaClient } from '@prisma/client';
 import express from 'express';
 
 import config from './config';
+import { seedStaticExercises } from './database/seedStaticExercises';
+import { seedUsers } from './database/seedUsers';
 import { createApolloServer } from './server/createServer';
 
 const prisma = new PrismaClient();

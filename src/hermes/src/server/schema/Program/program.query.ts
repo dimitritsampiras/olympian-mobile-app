@@ -107,6 +107,29 @@ export const ProgramQuery = extendType({
      *
      * gets all programs that the user has
      */
+    t.field('profilePrograms', {
+      type: list('Program'),
+      args: { profileId: 'String' },
+      resolve: async (_root, { profileId }, { prisma }) => {
+        const profile = await prisma.profile.findUnique({
+          where: { id: profileId },
+          // inLibraryOf: { some: { userId } }, authors: { some: { userId } }
+          include: {
+            authoredPrograms: {
+              include: {
+                workouts: { include: { exercises: { select: { id: true } } } },
+                authors: true,
+              },
+            },
+          },
+        });
+        return profile?.authoredPrograms || [];
+      },
+    });
+    /**
+     *
+     * gets all programs that the user has
+     */
     t.field('staticExercise', {
       type: nullable('StaticExercise'),
       args: { staticExerciseId: 'String' },

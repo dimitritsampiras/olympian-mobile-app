@@ -123,3 +123,5 @@ query ExerciseHistory($exerciseId: String!, $currentPerformedExercise: String) {
     }
   }
 }
+
+

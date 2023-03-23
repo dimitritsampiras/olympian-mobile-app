@@ -8,6 +8,8 @@ type AppError {
   name: String!
 }
 
+union BrowseResponseTypeUnion = Exercise | Profile | Program | Workout
+
 input CreateProgramInput {
   name: String!
   publicity: Publicity!
@@ -111,9 +113,11 @@ type Mutation {
   createSet(exerciseId: String!): Set
   createWorkout(programId: String!): Workout
   finishWorkout(performedWorkoutId: String!): PerformedWorkout
+  follow(profileId: String!): Profile
   login(input: LoginInput!): String
   signup(input: SignUpInput!): Boolean
   startWorkout(workoutId: String!): PerformedWorkout
+  unfollow(profileId: String!): Profile
   updateCompletionStatus(currentStatus: Boolean!, performedSetId: String!): PerformedSet
   updateSetReps(reps: Int!, setId: String!): Set
   updateSetRpe(rpe: Int!, setId: String!): Set
@@ -154,6 +158,8 @@ type Profile {
   authoredPrograms: [Program!]!
   createdAt: DateTime!
   dateOfBirth: DateTime
+  followedBy: [Profile!]!
+  following: [Profile!]!
   gender: Gender
   goals: [TrainingType!]!
   height: Int
@@ -173,6 +179,7 @@ type Program {
   complimentary: Boolean
   id: ID!
   inLibraryOf: [Profile!]!
+  likes: Int
   name: String!
   performedWorkouts: [PerformedWorkout!]!
   publicity: Publicity!
@@ -189,11 +196,19 @@ enum Publicity {
 
 type Query {
   activeWorkout: PerformedWorkout
+  browseSearch(keyword: String!): [BrowseResponseTypeUnion!]!
   emailExists(email: String!): Boolean
   exercise(exerciseId: String!): Exercise
   exerciseHistory(currentPerformedExercise: String, exerciseId: String!): [PerformedExercise!]!
   me: User
+  myFollowers: [Profile!]!
+  myFollowersCount: Int!
+  myFollows: [Profile!]!
+  myFollowsCount: Int!
+  myProfile: Profile
   popularPrograms(skip: Int!, take: Int!, trainingType: [TrainingType!]): [Program!]!
+  profileFromId(id: String!): Profile
+  profilePrograms(profileId: String!): [Program!]!
   program(programId: String!): Program
   staticExercise(staticExerciseId: String!): StaticExercise
   staticExercises: [StaticExercise!]!
@@ -279,6 +294,7 @@ type Workout {
   exercises: [Exercise!]!
   id: ID!
   name: String!
+  program: Program
   programId: String
   trainingLevel: TrainingLevel
   trainingType: [TrainingType!]!

@@ -9,6 +9,7 @@ export const seedStaticExercises = async (prisma: PrismaClient) => {
         primaryTargetMuscle: 'chest',
         secondaryTargetMuscle: 'triceps',
         equipment: 'barbell',
+        description: 'the barbell bench press is a',
       },
       {
         name: 'Deadlift',
@@ -17,6 +18,7 @@ export const seedStaticExercises = async (prisma: PrismaClient) => {
         secondaryTargetMuscle: 'gluteal',
         tertiaryTargetMuscle: 'lower_back',
         equipment: 'barbell',
+        description: 'the barbell bench press is a',
       },
       {
         name: 'Pull-up',
@@ -24,6 +26,7 @@ export const seedStaticExercises = async (prisma: PrismaClient) => {
         primaryTargetMuscle: 'back_deltoids',
         secondaryTargetMuscle: 'biceps',
         equipment: 'bodyweight',
+        description: 'the barbell bench press is a',
       },
       {
         name: 'Squats',
@@ -32,6 +35,7 @@ export const seedStaticExercises = async (prisma: PrismaClient) => {
         secondaryTargetMuscle: 'gluteal',
         tertiaryTargetMuscle: 'hamstring',
         equipment: 'barbell',
+        description: 'the barbell bench press is a',
       },
       {
         name: 'Pull Ups',
@@ -40,6 +44,7 @@ export const seedStaticExercises = async (prisma: PrismaClient) => {
         secondaryTargetMuscle: 'biceps',
         tertiaryTargetMuscle: 'back_deltoids',
         equipment: 'bodyweight',
+        description: 'the barbell bench press is a',
       },
       {
         name: 'Shoulder Press',
@@ -48,6 +53,7 @@ export const seedStaticExercises = async (prisma: PrismaClient) => {
         secondaryTargetMuscle: 'triceps',
         tertiaryTargetMuscle: 'chest',
         equipment: 'dumbbell',
+        description: 'the barbell bench press is a',
       },
       {
         name: 'Deadlift',
@@ -56,6 +62,7 @@ export const seedStaticExercises = async (prisma: PrismaClient) => {
         secondaryTargetMuscle: 'gluteal',
         tertiaryTargetMuscle: 'lower_back',
         equipment: 'barbell',
+        description: 'the barbell bench press is a',
       },
     ],
     skipDuplicates: true,

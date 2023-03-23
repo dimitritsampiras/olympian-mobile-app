@@ -20,6 +20,7 @@ import { HomeParamList } from '../navigation/HomeNavigator';
 import { ProgramParamList } from '../navigation/ProgramNavigator';
 import { DiscoverParamList, TabParamList } from '../navigation';
 import { MyProgramsParamList } from '../navigation/MyProgramsNavigator';
+import { Fader } from 'react-native-ui-lib';
 
 const { height, width } = Dimensions.get('window');
 const TABBAR_HEIGHT = 98;
@@ -137,30 +138,32 @@ export const TabBar: React.FC<BottomTabBarProps> = ({ descriptors, navigation, s
 
   return (
     <Animated.View style={[hideTabBarAnimatedStyle]}>
-      <PanGestureHandler onGestureEvent={gestureHandler}>
-        <Animated.View style={[translateYAnimatedStyle]}>
-          <Animated.View
-            style={[
-              StyleSheet.absoluteFillObject,
-              { height, width },
-              { transform: [{ translateY: -TABBAR_HEIGHT }] },
-              playerOpacityStyle,
-            ]}>
-            <Player />
+      {activeWorkout && (
+        <PanGestureHandler onGestureEvent={gestureHandler}>
+          <Animated.View style={[translateYAnimatedStyle]}>
+            <Animated.View
+              style={[
+                StyleSheet.absoluteFillObject,
+                { height, width },
+                { transform: [{ translateY: -TABBAR_HEIGHT }] },
+                playerOpacityStyle,
+              ]}>
+              <Player />
+            </Animated.View>
+            <Animated.View style={[miniPlayerOpacityStyle, hideMinimizedPlayerAnimatedStyle]}>
+              <MiniPlayer
+                style={{ height: MINIMIZED_PLAYER_HEIGHT, bottom: TABBAR_HEIGHT }}
+                activeWorkout={activeWorkout}
+                onPress={handleMiniPlayerPress}
+                completed={completed}
+                finishWorkout={finishWorkout}
+                toComplete={toComplete}
+                index={index}
+              />
+            </Animated.View>
           </Animated.View>
-          <Animated.View style={[miniPlayerOpacityStyle, hideMinimizedPlayerAnimatedStyle]}>
-            <MiniPlayer
-              style={{ height: MINIMIZED_PLAYER_HEIGHT, bottom: TABBAR_HEIGHT }}
-              activeWorkout={activeWorkout}
-              onPress={handleMiniPlayerPress}
-              completed={completed}
-              finishWorkout={finishWorkout}
-              toComplete={toComplete}
-              index={index}
-            />
-          </Animated.View>
-        </Animated.View>
-      </PanGestureHandler>
+        </PanGestureHandler>
+      )}
 
       <Animated.View style={[style.bar, bottomTabBarAnimatedStyle]}>
         {state.routes.map((route, index) => {

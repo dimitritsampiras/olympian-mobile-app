@@ -30,6 +30,7 @@ export const ProgramType = objectType({
     t.field(Program.authors);
     t.field(Program.inLibraryOf);
     t.field(Program.performedWorkouts);
+    t.field(Program.likes);
   },
 });
 
@@ -42,6 +43,7 @@ export const WorkoutType = objectType({
     t.field(Workout.trainingType);
     t.field(Workout.trainingLevel);
     t.field(Workout.exercises);
+    t.field(Workout.program);
     t.field(Workout.programId);
   },
 });

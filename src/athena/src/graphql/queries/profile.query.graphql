@@ -1,0 +1,50 @@
+query MyProfile {
+  myProfile {
+    ...Profile
+    following {
+      id
+      username
+    }
+  }
+}
+
+query ProfileFromId($id: String!) {
+  profileFromId(id: $id) {
+    ...Profile
+    followedBy {
+      id
+    }
+  }
+}
+
+query MyFollowersCount {
+  myFollowersCount
+}
+
+query MyFollowsCount {
+  myFollowsCount
+}
+
+query MyFollows {
+  myFollows {
+    ...Profile
+    followedBy {
+      ...Profile
+    }
+  }
+}
+
+query MyFollowers {
+  myFollowers {
+    ...Profile
+    followedBy {
+      ...Profile
+    }
+  }
+}
+
+query ProfilePrograms($profileId: String!) {
+  profilePrograms(profileId: $profileId) {
+    ...Program
+  }
+}
