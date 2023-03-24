@@ -71,8 +71,8 @@ export const FollowersList: React.FC<FollowersListProps> = ({ navigation }) => {
           </TouchableOpacity>
         ))
       ) : (
-        <View style={{ backgroundColor: 'white' }}>
-          <Text>no followers</Text>
+        <View style={styles.noFollowers}>
+          <Text style={{ color: theme.colors.gray[600] }}>no followers</Text>
         </View>
       )}
     </ScreenView>
@@ -89,5 +89,11 @@ const styles = StyleSheet.create({
     borderBottomColor: theme.colors.gray[100],
     borderBottomWidth: 1,
     justifyContent: 'space-between',
+  },
+  noFollowers: {
+    backgroundColor: theme.colors.gray[100],
+    alignItems: 'center',
+    padding: 22,
+    borderRadius: 12,
   },
 });
