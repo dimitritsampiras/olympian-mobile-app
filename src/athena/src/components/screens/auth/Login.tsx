@@ -2,7 +2,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Formik } from 'formik';
 import React, { useContext, useState } from 'react';
-import { Text, TouchableWithoutFeedback, Keyboard, StyleSheet, View } from 'react-native';
+import {
+  Text,
+  TouchableWithoutFeedback,
+  Keyboard,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AuthParamList } from '../../navigation';
 import { LoginInput, useLoginMutation } from '../../../lib/graphql';
@@ -12,7 +19,8 @@ import { Button } from '../../elements/Button';
 import { UserCircleIcon, LockClosedIcon } from 'react-native-heroicons/solid';
 import theme from '../../../theme';
 import { UserContext } from '../../../lib/context';
-
+import TorchLogo from '../../../../assets/TorchLogo.svg';
+import { ArrowLongLeftIcon } from 'react-native-heroicons/solid';
 type ParamList = NativeStackScreenProps<AuthParamList, 'Login'>;
 interface LoginProps extends ParamList {}
 
@@ -21,7 +29,7 @@ const initialValues: LoginInput = {
   password: '',
 };
 
-export const Login: React.FC<LoginProps> = () => {
+export const Login: React.FC<LoginProps> = ({ navigation }) => {
   // context
   const { refetch } = useContext(UserContext);
 
@@ -87,7 +95,18 @@ export const Login: React.FC<LoginProps> = () => {
     <SafeAreaView>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.screen}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('LandingPage')}
+            style={{ marginBottom: 10, paddingTop: 0 }}>
+            <ArrowLongLeftIcon stroke={theme.colors.gray[700]} />
+          </TouchableOpacity>
           <View style={styles.keyboardView}>
+            <TorchLogo
+              width={56}
+              height={82}
+              fill={'black'}
+              style={{ marginBottom: 24 }}></TorchLogo>
+
             <Text style={{ ...styles.heading2, marginBottom: 20 }}>Login</Text>
             <Formik initialValues={initialValues} onSubmit={onSubmit} validate={clearErrors}>
               {({ handleChange, handleSubmit, values }) => (
@@ -140,16 +159,20 @@ export const Login: React.FC<LoginProps> = () => {
 
 const styles = StyleSheet.create({
   screen: {
-    height: '100%',
+    backgroundColor: theme.colors.gray[50],
     width: '100%',
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    padding: '10%',
   },
   keyboardView: {
     display: 'flex',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
     width: '100%',
-    paddingHorizontal: 24,
   },
   heading2: {
     fontSize: 20,

@@ -17,7 +17,6 @@ import { SignUpName } from './SignUpName';
 import { SignUpUsername } from './SignUpUsername';
 import { SignUpPassword } from './SignUpPassword';
 import { SignUpEmail } from './SignUpEmail';
-import { Header } from '../../../containers/Header';
 
 type ParamList = NativeStackScreenProps<AuthParamList, 'SignUp'>;
 
