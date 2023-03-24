@@ -5,6 +5,7 @@ import config from './config';
 import { seedStaticExercises } from './database/seedStaticExercises';
 import { seedUsers } from './database/seedUsers';
 import { createApolloServer } from './server/createServer';
+import { getRandomDefaultProfileColor } from './server/schema/User/helpers/getRandomDefaultProfileColor';
 
 const prisma = new PrismaClient();
 

@@ -22,6 +22,7 @@ export const ProfileType = objectType({
     t.field(Profile.followedBy);
     t.field(Profile.following);
     t.field(Profile.authoredPrograms);
+    t.field(Profile.profileInitialsDefaultColor);
   },
 });
 

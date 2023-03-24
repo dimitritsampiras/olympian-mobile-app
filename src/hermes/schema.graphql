@@ -166,6 +166,7 @@ type Profile {
   id: ID!
   name: String!
   performedWorkouts: [PerformedWorkout!]!
+  profileInitialsDefaultColor: String!
   programLibrary: [Program!]!
   trainingAge: TrainingLevel
   updatedAt: DateTime!

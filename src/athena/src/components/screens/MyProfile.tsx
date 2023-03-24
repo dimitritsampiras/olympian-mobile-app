@@ -18,7 +18,11 @@ import { ScreenView } from '../containers/ScreenView';
 import { Header } from '../containers/Header';
 import { UserContext } from '../../lib/context';
 import { ProfileParamList } from '../navigation/ProfileNavigator';
-import { useMyFollowersCountQuery, useMyFollowsCountQuery } from '../../lib/graphql';
+import {
+  useMyFollowersCountQuery,
+  useMyFollowsCountQuery,
+  useMyProfileQuery,
+} from '../../lib/graphql';
 import { useIsFocused } from '@react-navigation/native';
 
 interface ProfileProps extends NativeStackScreenProps<ProfileParamList, 'MyProfile'> {}
@@ -49,6 +53,9 @@ const profileOptions = [
 export const MyProfile: React.FC<ProfileProps> = ({ navigation }) => {
   const isFocused = useIsFocused();
   const { user, refetch } = useContext(UserContext);
+  const { data: profileData, refetch: refetchProfile } = useMyProfileQuery();
+  const profileInitialsDefaultColor =
+    profileData?.myProfile?.profileInitialsDefaultColor || '#000000';
 
   const { data: followersCount, refetch: fsRefetch } = useMyFollowersCountQuery();
   const { data: followCount, refetch: fRefetch } = useMyFollowsCountQuery();
@@ -62,13 +69,18 @@ export const MyProfile: React.FC<ProfileProps> = ({ navigation }) => {
     (async () => {
       await fsRefetch();
       await fRefetch();
+      await refetchProfile();
     })();
   }, [isFocused]);
 
   return (
     <ScreenView>
       <Header style={{ flexDirection: 'row', marginBottom: 20 }}>
-        <Avatar size={60} backgroundColor={theme.colors.amber[200]} name={user?.profile?.name} />
+        <Avatar
+          size={60}
+          backgroundColor={profileInitialsDefaultColor}
+          name={user?.profile?.name}
+        />
         <View style={{ marginLeft: 14, paddingVertical: 10 }}>
           <Heading as="h3" noMargin style={{ marginBottom: 5 }}>
             {user?.profile?.username}

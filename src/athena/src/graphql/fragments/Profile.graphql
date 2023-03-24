@@ -10,4 +10,5 @@ fragment Profile on Profile {
   updatedAt
   username
   weight
+  profileInitialsDefaultColor
 }
