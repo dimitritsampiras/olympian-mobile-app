@@ -129,6 +129,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: 'red',
     // Fix the lineHeight to prevent bumping when the text comes in
-    lineHeight: 14,
+    lineHeight: 13,
   },
 });

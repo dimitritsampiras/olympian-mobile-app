@@ -23,7 +23,7 @@ export const SignUpEmail: React.FC<SignUpEmailProps> = () => {
   const emailSchema = object({
     email: string()
       .required('Cannot have an empty email address.')
-      .email('Please enter a valid email address\n(e.g. johndoe@example.com)')
+      .email('Please enter a valid email address.')
       .max(maxLength, `Please enter a maximum of ${maxLength} characters.`)
       .test('', 'Email is already used on another account.', async (email) => {
         const { data } = await findemail({ variables: { email: email || '' } });
@@ -67,7 +67,9 @@ export const SignUpEmail: React.FC<SignUpEmailProps> = () => {
                     fill: touched.email && !!errors.email ? 'red' : theme.colors.gray[400],
                   }}
                 />
-                <Text style={styles.errorMessageStyle}>{touched.email && errors.email}</Text>
+                <Text style={styles.errorMessageStyle}>
+                  {(touched.email && errors.email) || ''}
+                </Text>
               </View>
               <View style={styles.footer}>
                 <PageControl
@@ -124,6 +126,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: 'red',
     // Fix the lineHeight to prevent bumping when the text comes in
-    lineHeight: 14,
+    lineHeight: 13,
   },
 });

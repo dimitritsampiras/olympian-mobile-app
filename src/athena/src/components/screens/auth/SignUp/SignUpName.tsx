@@ -12,7 +12,6 @@ import { SignUpInput } from '../../../../lib/graphql';
 import { UserIcon } from 'react-native-heroicons/solid';
 import { Heading } from '../../../elements/typography/Heading';
 import { BodyText } from '../../../elements/typography/BodyText';
-
 interface SignUpNameProps {}
 
 export const SignUpName: React.FC<SignUpNameProps> = () => {
@@ -117,6 +116,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: 'red',
     // Fix the lineHeight to prevent bumping when the text comes in
-    lineHeight: 14,
+    lineHeight: 13,
   },
 });

@@ -8,16 +8,16 @@ import {
   View,
   TouchableWithoutFeedback,
   Keyboard,
-  KeyboardAvoidingView,
+  TouchableOpacity,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import theme from '../../../../theme';
-import { ChevronLeftIcon } from 'react-native-heroicons/solid';
-
+import { ArrowLongLeftIcon } from 'react-native-heroicons/solid';
 import { SignUpName } from './SignUpName';
 import { SignUpUsername } from './SignUpUsername';
 import { SignUpPassword } from './SignUpPassword';
 import { SignUpEmail } from './SignUpEmail';
+import { Header } from '../../../containers/Header';
 
 type ParamList = NativeStackScreenProps<AuthParamList, 'SignUp'>;
 
@@ -44,12 +44,21 @@ export const SignUp: React.FC<SignUpProps> = ({ navigation, route }) => {
       <SafeAreaView>
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
           <View style={styles.screen}>
-            {/* This header should be a component */}
-            <View style={styles.header}>
-              <Pressable onPress={() => setStep((prev) => prev - Number(prev > 0))}>
-                <ChevronLeftIcon size="20" {...{ fill: theme.colors.gray[600] }} />
-              </Pressable>
-            </View>
+            {/* We only want stack navigation for the first one. Else, the back button should return to previous steps in the process*/}
+            {step === 0 && (
+              <TouchableOpacity
+                onPress={() => navigation.goBack()}
+                style={{ marginBottom: 10, paddingTop: 0 }}>
+                <ArrowLongLeftIcon stroke={theme.colors.gray[700]} />
+              </TouchableOpacity>
+            )}
+            {step > 0 && (
+              <TouchableOpacity
+                onPress={() => setStep(step - 1)}
+                style={{ marginBottom: 10, paddingTop: 0 }}>
+                <ArrowLongLeftIcon stroke={theme.colors.gray[700]} />
+              </TouchableOpacity>
+            )}
             {step === 0 && <SignUpName />}
             {step === 1 && <SignUpEmail />}
             {step === 2 && <SignUpUsername />}
