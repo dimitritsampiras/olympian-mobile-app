@@ -10,7 +10,7 @@ import { MyProgramsParamList } from './MyProgramsNavigator';
 
 export type ProgramParamList = {
   Program: { programId: string; back?: boolean };
-  Workout: { workoutId: string };
+  Workout: { workoutId: string; editable?: boolean };
   ExerciseSearch: { workoutId: string };
   StaticExercise: { workoutId: string; staticExerciseId: string };
   Exercise: { exerciseId: string };
