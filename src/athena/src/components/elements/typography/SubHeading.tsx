@@ -17,7 +17,7 @@ export const SubHeading: React.FC<SubHeadingProps> = ({ as = 'h1', style, childr
       fontSize = 16;
       break;
     case 'h3':
-      fontSize = 12;
+      fontSize = 14;
       break;
   }
 

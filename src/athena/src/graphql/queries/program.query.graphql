@@ -7,10 +7,10 @@ query ProgramFromId($programId: String!) {
         id
       }
     }
-    profile {
-      user {
-        username
-      }
+    authors {
+      id
+      username
+      name
     }
   }
 }
@@ -20,9 +20,24 @@ query WorkoutFromId($workoutId: String!) {
     ...Workout
     exercises {
       ...Exercise
+      sets {
+        ...Set
+      }
       staticExercise {
         ...StaticExercise
       }
+    }
+  }
+}
+
+query ExerciseFromId($exerciseId: String!) {
+  exercise(exerciseId: $exerciseId) {
+    ...Exercise
+    sets {
+      ...Set
+    }
+    staticExercise {
+      ...StaticExercise
     }
   }
 }
@@ -42,22 +57,72 @@ query StaticExercises {
 query UserPrograms {
   userPrograms {
     ...Program
-    profile {
-      user {
-        username
+    authors {
+      username
+    }
+    workouts {
+      ...Workout
+    }
+  }
+}
+
+query TrendingPrograms($skip: Int!, $take: Int!, $trainingType: [TrainingType!]) {
+  trendingPrograms(skip: $skip, take: $take, trainingType: $trainingType) {
+    ...Program
+  }
+}
+
+query PopularPrograms($skip: Int!, $take: Int!, $trainingType: [TrainingType!]) {
+  popularPrograms(skip: $skip, take: $take, trainingType: $trainingType) {
+    ...Program
+  }
+}
+
+query TrainingTypes {
+  trainingTypes
+}
+
+query ActiveWorkout {
+  activeWorkout {
+    workout {
+      ...Workout
+    }
+    program {
+      name
+    }
+    active
+    createdAt
+    duration
+    id
+    notes
+    performedExercises {
+      ...PerformedExercise
+      exercise {
+        authorNotes
+        id
+        order
+        supersetOrder
+        staticExercise {
+          ...StaticExercise
+        }
+      }
+      performedSets {
+        ...PerformedSet
+        set {
+          ...Set
+        }
       }
     }
   }
 }
 
-query TrendingPrograms($skip: Int!, $take: Int!) {
-  trendingPrograms(skip: $skip, take: $take) {
-    ...Program
+query ExerciseHistory($exerciseId: String!, $currentPerformedExercise: String) {
+  exerciseHistory(exerciseId: $exerciseId, currentPerformedExercise: $currentPerformedExercise) {
+    ...PerformedExercise
+    performedSets {
+      ...PerformedSet
+    }
   }
 }
 
-query PopularPrograms($skip: Int!, $take: Int!) {
-  popularPrograms(skip: $skip, take: $take) {
-    ...Program
-  }
-}
+

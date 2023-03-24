@@ -1,0 +1,11 @@
+mutation Unfollow($profileId: String!) {
+  unfollow(profileId: $profileId) {
+   ...Profile 
+  }
+}
+
+mutation Follow($profileId: String!) {
+  follow(profileId: $profileId) {
+   ...Profile 
+  }
+}

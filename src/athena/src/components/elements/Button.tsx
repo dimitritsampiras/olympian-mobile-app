@@ -29,7 +29,7 @@ interface ButtonProps extends PressableProps {
   animated?: boolean;
   // container styles
   style?: ViewStyle;
-  colorScheme?: 'primary' | 'info';
+  colorScheme?: 'primary' | 'info' | 'success';
   // single react node i.e. text or icon
   children: ReactNode;
 }
@@ -45,7 +45,6 @@ export const Button: React.FC<ButtonProps> = ({
   style,
   disabled,
   loading,
-  animated = true,
   colorScheme = 'primary',
   children,
   onPress,
@@ -188,6 +187,29 @@ const colorSchemes = {
       color: theme.colors.gray[600],
       backgroundColor: ['rgba(0,0,0,0)', 'rgba(0,0,0,0)'],
       disabledColor: theme.colors.gray[300],
+      disabledBackgroundColor: 'rgba(0,0,0,0)',
+    },
+  },
+  success: {
+    // full - solid color
+    full: {
+      color: 'white',
+      backgroundColor: [theme.colors.emerald[400], theme.colors.emerald[500]],
+      disabledColor: 'white',
+      disabledBackgroundColor: theme.colors.emerald[300],
+    },
+    // flat - lighter color
+    flat: {
+      color: theme.colors.emerald[500],
+      backgroundColor: [theme.colors.emerald[100], theme.colors.emerald[200]],
+      disabledColor: theme.colors.emerald[300],
+      disabledBackgroundColor: theme.colors.emerald[100],
+    },
+    // ghost - no background
+    ghost: {
+      color: theme.colors.emerald[500],
+      backgroundColor: ['rgba(0,0,0,0)', theme.colors.emerald[50]],
+      disabledColor: theme.colors.emerald[300],
       disabledBackgroundColor: 'rgba(0,0,0,0)',
     },
   },

@@ -1,15 +1,12 @@
 import React from 'react';
-import { Text, TouchableOpacityProps, View, ViewProps } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { HeartIcon, GiftIcon } from 'react-native-heroicons/solid';
+import { Text, View, ViewProps } from 'react-native';
+import { HeartIcon } from 'react-native-heroicons/solid';
 
 import _, { sample } from 'lodash';
 
-import { Program, ProgramFragment, UserProgramsQuery } from '../../lib/graphql';
-import { specificityColor } from '../../lib/utils';
+import { ProgramFragment } from '../../lib/graphql';
 import theme from '../../theme';
 import { Heading } from '../elements';
-import { Badge } from '../elements/display/Badge';
 import { ProgramImage } from '../elements/display/ProgramImage';
 import { Card } from './Card';
 
@@ -48,13 +45,13 @@ export const ProgramCard: React.FC<ProgramCardProps> = ({
           </>
         ) : (
           <>
-            {program.specificity.map((spec) => {
+            {/* {program.specificity.map((spec) => {
               return (
                 <Badge key={spec} colorScheme={specificityColor(spec)} style={{ marginRight: 6 }}>
                   {spec}
                 </Badge>
               );
-            })}
+            })} */}
           </>
         )}
       </View>

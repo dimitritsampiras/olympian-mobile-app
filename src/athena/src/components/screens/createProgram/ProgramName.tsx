@@ -1,12 +1,10 @@
 import React, { useContext } from 'react';
-import { Incubator, TextField } from 'react-native-ui-lib';
+import { CreateProgramContext } from '../../../lib/context';
 
 import { Heading } from '../../elements';
 
 import { Input } from '../../elements/Input';
 import { BodyText } from '../../elements/typography/BodyText';
-
-import { CreateProgramContext } from './CreateProgram';
 
 interface ProgramNameProps {}
 

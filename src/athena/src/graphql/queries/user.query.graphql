@@ -1,6 +1,11 @@
 query Me {
   me {
     ...User
+    profile {
+      id
+      username
+      name
+    }
   }
 }
 
@@ -10,4 +15,41 @@ query UserExists($username: String!) {
 
 query EmailExists($email: String!) {
   emailExists(email: $email)
+}
+
+query BrowseSearch($keyword: String!) {
+  browseSearch(keyword: $keyword) {
+    ... on Profile {
+      id
+      name
+      username
+      followedBy {
+        id
+      }
+    }
+    ... on Exercise {
+      id
+      staticExercise {
+        name
+      }
+      sets {
+        reps
+      }
+    }
+    ... on Workout {
+      id
+      name
+      program {
+        name
+      }
+    }
+    ... on Program {
+      id
+      name
+      inLibraryOf {
+        id
+      }
+      likes
+    }
+  }
 }

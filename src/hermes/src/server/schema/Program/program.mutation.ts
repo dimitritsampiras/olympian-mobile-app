@@ -1,4 +1,4 @@
-import { DateTime } from 'luxon';
+import { Prisma } from '@prisma/client';
 import { extendType, inputObjectType, list, nullable } from 'nexus';
 
 // All mutations for User graphql object type
@@ -7,13 +7,14 @@ export const ProgramMutation = extendType({
   definition(t) {
     /**
      *
-     * create program mutation
+     * mutation for creating a program
+     * connects as profile/users authored program
      */
     t.field('createProgram', {
       type: nullable('Program'),
       args: { input: 'CreateProgramInput' },
       resolve: async (_root, { input }, { prisma }) => {
-        const { name, publicity, tags, specificity, userId } = input;
+        const { name, publicity, trainingType, userId } = input;
         // check if the profile exists
         const profile = await prisma.profile.findUnique({
           where: { userId },
@@ -26,9 +27,8 @@ export const ProgramMutation = extendType({
           data: {
             name,
             publicity,
-            tags,
-            specificity,
-            profile: { connect: { userId } },
+            trainingType,
+            authors: { connect: { userId } },
           },
         });
 
@@ -54,7 +54,6 @@ export const ProgramMutation = extendType({
         const createdWorkout = await prisma.workout.create({
           data: {
             name: `Workout #${program.workouts.length + 1}`,
-            duration: DateTime.fromSeconds(0).toJSDate(),
             trainingLevel: program.trainingLevel,
             programId,
           },
@@ -82,11 +81,150 @@ export const ProgramMutation = extendType({
 
         // TODO: handle error
         if (!workout || !staticExercise) return null;
-        console.log('here');
 
         return await prisma.exercise.create({
-          data: { workoutId, staticExerciseId, number: workout.exercises.length + 1 },
+          data: {
+            workoutId,
+            staticExerciseId,
+            order: workout.exercises.length + 1,
+            sets: {
+              create: {
+                number: 1,
+                reps: 0,
+                rpe: 1,
+              },
+            },
+          },
         });
+      },
+    });
+    /**
+     *
+     * create exercise mutation
+     */
+    t.field('createSet', {
+      type: nullable('Set'),
+      args: { exerciseId: 'String' },
+      resolve: async (_root, { exerciseId }, { prisma }) => {
+        // check if the profile exists
+        const exercise = await prisma.exercise.findUnique({
+          where: { id: exerciseId },
+          include: { sets: true },
+        });
+
+        if (!exercise) return null;
+
+        return await prisma.set.create({
+          data: {
+            exerciseId,
+            number: exercise.sets.length + 1,
+            reps: exercise.sets[exercise.sets.length - 1]?.reps || 0,
+            rpe: exercise.sets[exercise.sets.length - 1]?.rpe || 0,
+          },
+        });
+      },
+    });
+    /**
+     *
+     * updates the reps of a set
+     */
+    t.field('updateSetReps', {
+      type: nullable('Set'),
+      args: { setId: 'String', reps: 'Int' },
+      resolve: async (_root, { setId, reps }, { prisma }) => {
+        return await prisma.set.update({
+          where: { id: setId },
+          data: { reps },
+        });
+      },
+    });
+    /**
+     *
+     * updates the reps of a set
+     */
+    t.field('updateCompletionStatus', {
+      type: nullable('PerformedSet'),
+      args: { performedSetId: 'String', currentStatus: 'Boolean' },
+      resolve: async (_root, { performedSetId, currentStatus }, { prisma }) => {
+        return await prisma.performedSet.update({
+          where: { id: performedSetId },
+          data: { completed: !currentStatus },
+        });
+      },
+    });
+    /**
+     *
+     * updates the reps of a set
+     */
+    t.field('updateSetRpe', {
+      type: nullable('Set'),
+      args: { setId: 'String', rpe: 'Int' },
+      resolve: async (_root, { setId, rpe }, { prisma }) => {
+        return await prisma.set.update({
+          where: { id: setId },
+          data: { rpe },
+        });
+      },
+    });
+    /**
+     *
+     * when the user starts a workout
+     */
+    t.field('startWorkout', {
+      type: nullable('PerformedWorkout'),
+      args: { workoutId: 'String' },
+      resolve: async (_root, { workoutId }, { prisma, userId }) => {
+        await prisma.performedWorkout.updateMany({
+          where: { profile: { userId }, workoutId },
+          data: { active: false },
+        });
+        const workout = await prisma.workout.findUnique({
+          where: { id: workoutId },
+          include: { exercises: { include: { sets: true } } },
+        });
+
+        if (!workout?.programId) return null;
+
+        return await prisma.performedWorkout.create({
+          data: {
+            active: true,
+            profile: { connect: { userId } },
+            notes: '',
+            duration: 0,
+            workout: { connect: { id: workoutId } },
+            program: { connect: { id: workout.programId } },
+            performedExercises: {
+              create: workout.exercises.map((exercise) => ({
+                exerciseId: exercise.id,
+                notes: '',
+                performedSets: {
+                  create: exercise.sets.map<Prisma.PerformedSetCreateWithoutPerformedExerciseInput>(
+                    (set) => ({
+                      set: { connect: { id: set.id } },
+                      reps: set.reps,
+                      weight: 50,
+                    })
+                  ),
+                },
+              })),
+            },
+          },
+        });
+      },
+    });
+    /**
+     *
+     * when the user starts a workout
+     */
+    t.field('finishWorkout', {
+      type: nullable('PerformedWorkout'),
+      args: { performedWorkoutId: 'String' },
+      resolve: async (_root, { performedWorkoutId }, { prisma }) => {
+        const performedWorkout = await prisma.performedWorkout.update({
+          where: { id: performedWorkoutId },
+          data: { active: false },
+        });
+        return performedWorkout;
       },
     });
   },
@@ -98,7 +236,7 @@ export const CreateProgramInput = inputObjectType({
     t.field('name', { type: 'String' });
     t.field('publicity', { type: 'Publicity' });
     t.field('tags', { type: list('String') });
-    t.field('specificity', { type: list('Specificity') });
+    t.field('trainingType', { type: list('TrainingType') });
     t.field('userId', { type: 'String' });
   },
 });

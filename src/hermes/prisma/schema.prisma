@@ -16,89 +16,127 @@ datasource db {
 
 model User {
   id       String   @id @default(cuid())
-  name     String
   email    String   @unique
-  username String   @unique
   password String
   profile  Profile?
 }
 
 model Profile {
-  id          String         @id @default(cuid())
-  dateOfBirth DateTime?
-  gender      Gender?
-  weight      Int?
-  height      Int?
-  createdAt   DateTime       @default(now())
-  updatedAt   DateTime       @updatedAt
-  trainingAge TrainingLevel?
-  goals       Specificity[]
-  programs    Program[]
-  user        User           @relation(fields: [userId], references: [id])
-  userId      String         @unique
+  id                String             @id @default(cuid())
+  name              String
+  username          String             @unique
+  dateOfBirth       DateTime?
+  gender            Gender?
+  weight            Int?
+  height            Int?
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  trainingAge       TrainingLevel?
+  goals             TrainingType[]
+  // relations
+  authoredPrograms  Program[]          @relation("ProgramAuthor")
+  programLibrary    Program[]          @relation("ProgramUser")
+  followedBy        Profile[]          @relation("UserFollows")
+  following         Profile[]          @relation("UserFollows")
+  user              User               @relation(fields: [userId], references: [id])
+  userId            String             @unique
+  performedWorkouts PerformedWorkout[]
 }
 
 model Program {
-  id                       String         @id @default(cuid())
+  id                       String             @id @default(cuid())
   name                     String
-  // complimentary to other programs. for searching purposes
-  // i.e. stretch routine etc. 
   complimentary            Boolean?
-  // type of training for searching purposes
-  specificity              Specificity[]
-  // optionally provide training level recommended for program
+  trainingType             TrainingType[]
   trainingLevel            TrainingLevel?
-  // list of tags for search purposes
-  tags                     String[]
   publicity                Publicity
-  // public stuff
   likes                    Int?
-  profileImageDefaultColor String         @default("e0e7ff") @db.VarChar(7)
-  profileImageDefaultEmoji String         @default("1F93C") @db.VarChar(5)
-  createdAt                DateTime       @default(now())
-  updatedAt                DateTime       @updatedAt
+  profileImageDefaultColor String             @default("e0e7ff") @db.VarChar(7)
+  profileImageDefaultEmoji String             @default("1F93C") @db.VarChar(5)
+  createdAt                DateTime           @default(now())
+  updatedAt                DateTime           @updatedAt
   workouts                 Workout[]
-  profile                  Profile        @relation(fields: [profileId], references: [id])
-  profileId                String
+  authors                  Profile[]          @relation("ProgramAuthor")
+  inLibraryOf              Profile[]          @relation("ProgramUser")
+  performedWorkouts        PerformedWorkout[]
 }
 
 model Workout {
-  id            String         @id @default(cuid())
-  name          String
-  specificity   Specificity[]
-  trainingLevel TrainingLevel?
-  tags          String[]
-  duration      DateTime
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  exercises     Exercise[]
-  program       Program?       @relation(fields: [programId], references: [id], onDelete: Cascade)
-  programId     String?
+  id                String             @id @default(cuid())
+  name              String
+  trainingType      TrainingType[]
+  trainingLevel     TrainingLevel?
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  exercises         Exercise[]
+  program           Program?           @relation(fields: [programId], references: [id], onDelete: Cascade)
+  programId         String?
+  performedWorkouts PerformedWorkout[]
 }
 
 model Exercise {
-  id               String         @id @default(cuid())
-  number           Int            @default(1)
-  sets             Int?
-  reps             Int?
-  duration         Int?
-  rpe              Int?
-  authorNotes      String?
-  staticExercise   StaticExercise @relation(fields: [staticExerciseId], references: [id])
-  staticExerciseId String
-  workout          Workout        @relation(fields: [workoutId], references: [id], onDelete: Cascade)
-  workoutId        String
-  performedSet     PerformedSet[]
+  id                String              @id @default(cuid())
+  order             Int                 @default(1)
+  supersetOrder     String?             @db.VarChar(1)
+  authorNotes       String?
+  staticExercise    StaticExercise      @relation(fields: [staticExerciseId], references: [id])
+  staticExerciseId  String
+  workout           Workout             @relation(fields: [workoutId], references: [id], onDelete: Cascade)
+  workoutId         String
+  sets              Set[]
+  performedExercise PerformedExercise[]
+
+  @@unique([id, order])
+}
+
+model Set {
+  id           String         @id @default(cuid())
+  number       Int
+  reps         Int
+  rpe          Int
+  exercise     Exercise       @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+  exerciseId   String
+  performedSet PerformedSet[]
+}
+
+model PerformedWorkout {
+  id                 String              @id @default(cuid())
+  active             Boolean
+  duration           Int
+  notes              String
+  tonnage            Float               @default(0)
+  createdAt          DateTime            @default(now())
+  // relations
+  workout            Workout             @relation(fields: [workoutId], references: [id], onDelete: Cascade)
+  workoutId          String
+  program            Program             @relation(fields: [programId], references: [id])
+  programId          String
+  profile            Profile             @relation(fields: [profileId], references: [id])
+  performedExercises PerformedExercise[]
+  profileId          String
+}
+
+model PerformedExercise {
+  id                 String           @id @default(cuid())
+  notes              String
+  performedSets      PerformedSet[]
+  exercise           Exercise         @relation(fields: [exerciseId], references: [id])
+  exerciseId         String
+  performedWorkout   PerformedWorkout @relation(fields: [performedWorkoutId], references: [id], onDelete: Cascade)
+  performedWorkoutId String
 }
 
 model PerformedSet {
-  id         String   @id @default(cuid())
-  setNumber  Int?
-  weight     Float?
-  reps       Int?
-  duration   Int?
-  exercise   Exercise @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
-  exerciseId String
+  id                  String             @id @default(cuid())
+  completed           Boolean            @default(false)
+  completedAt         DateTime?
+  weight              Float?
+  reps                Int?
+  duration            Int?
+  set                 Set                @relation(fields: [setId], references: [id])
+  setId               String
+  performedExercise   PerformedExercise? @relation(fields: [performedExerciseId], references: [id], onDelete: Cascade)
+  performedExerciseId String?
 }
 
 model StaticExercise {
@@ -113,14 +151,6 @@ model StaticExercise {
   createdAt             DateTime   @default(now())
   updatedAt             DateTime   @updatedAt
   exercise              Exercise[]
-}
-
-enum Specificity {
-  general
-  strength
-  hypertrophy
-  athleticism
-  cardio
 }
 
 enum Gender {
@@ -203,4 +233,31 @@ enum Equipment {
   sled
   trap_bar
   weighted_vest
+}
+
+enum TrainingType {
+  cardio
+  // yoga
+  olympic_weightlifting
+  sports_performance
+  calisthenics
+  crossfit
+  boxing
+  // dance
+  swimming
+  cycling
+  running
+  martial_arts
+  rowing
+  gymnastics
+  aerobics
+  // zumba
+  functional_training
+  recovery
+  pilates
+  hiit
+  hypertrophy
+  strength
+  wellness
+  stretching
 }

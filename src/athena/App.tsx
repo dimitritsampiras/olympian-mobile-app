@@ -4,7 +4,8 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { UserProvider, ApolloClientProvider } from './src/components/providers';
 
 import { AuthNavigator } from './src/components/navigation';
-import { useState } from 'react';
+import { ActiveWorkoutProvider } from './src/components/providers/ActiveWorkout';
+import { NavigatorProvider } from './src/components/providers/NavigatorProvider';
 
 const ref = createNavigationContainerRef();
 
@@ -13,29 +14,26 @@ const ref = createNavigationContainerRef();
  * root of app
  */
 export default function App() {
-  const [routeName, setRouteName] = useState<string>();
-
   return (
     <ApolloClientProvider>
       <UserProvider>
-        <NavigationContainer
+        {/* <NavigationContainer
           ref={ref}
-          // onReady={() => {
-          //   console.log('ref', ref.getCurrentOptions());
-
-          //   setRouteName(ref.getCurrentRoute()?.name);
-          // }}
-          // onStateChange={async () => {
-          //   const currentRouteName = ref.getCurrentRoute()?.name;
-          //   console.log('ref2', ref.getCurrentOptions());
-          //   setRouteName(currentRouteName);
-          // }}>
-        >
-          <SafeAreaProvider>
-            <AuthNavigator routeName={routeName} />
-          </SafeAreaProvider>
+          onReady={() => {
+            console.log(ref.getCurrentRoute()?.name);
+          }}
+          onStateChange={async () => {
+            console.log(ref.getCurrentRoute()?.name);
+          }}> */}
+        <NavigatorProvider>
+          <ActiveWorkoutProvider>
+            <SafeAreaProvider>
+              <AuthNavigator />
+            </SafeAreaProvider>
+          </ActiveWorkoutProvider>
           <StatusBar style="auto" />
-        </NavigationContainer>
+        </NavigatorProvider>
+        {/* </NavigationContainer> */}
       </UserProvider>
     </ApolloClientProvider>
   );

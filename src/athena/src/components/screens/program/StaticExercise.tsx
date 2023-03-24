@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { ScreenView } from '../../containers/ScreenView';
-import { DynamicButton, Heading } from '../../elements';
+import { Heading } from '../../elements';
 import { PlusCircleIcon } from 'react-native-heroicons/outline';
 import theme from '../../../theme';
 import Body from 'react-native-body-highlighter';
@@ -30,9 +30,13 @@ export const StaticExercise: React.FC<StaticExerciseProps> = ({ route, navigatio
         staticExerciseId,
         workoutId,
       },
+    }).then(({ data }) => {
+      if (data?.createExercise) {
+        navigation.goBack();
+        navigation.goBack();
+        navigation.navigate('Exercise', { exerciseId: data?.createExercise?.id });
+      }
     });
-    navigation.goBack();
-    navigation.goBack();
   };
 
   useEffect(() => {

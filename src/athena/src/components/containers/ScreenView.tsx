@@ -1,12 +1,19 @@
 import React, { ReactNode } from 'react';
-import { StyleSheet, ScrollView, ViewProps, View } from 'react-native';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import {
+  ScrollView,
+  ViewProps,
+  TouchableWithoutFeedback,
+  Keyboard,
+  View,
+  StyleSheet,
+} from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import theme from '../../theme';
 
 interface ScreenViewProps {
   children: ReactNode[] | ReactNode;
   type?: 'main' | 'form';
-  styles?: ViewProps['style'];
+  style?: ViewProps['style'];
   spaced?: boolean;
   showScrollBar?: boolean;
   scrollBounce?: boolean;
@@ -17,33 +24,42 @@ export const ScreenView: React.FC<ScreenViewProps> = ({
   spaced,
   showScrollBar = false,
   scrollBounce = true,
-  styles,
+  style,
   children,
 }) => {
   const insets = useSafeAreaInsets();
 
+  if (type === 'form') {
+    return (
+      <View
+        style={[
+          {
+            flex: 1,
+            paddingHorizontal: 24,
+            paddingTop: insets.top,
+            paddingBottom: insets.bottom,
+            backgroundColor: 'white',
+          },
+          type === 'form' && spaced && { justifyContent: 'space-between' },
+          style,
+        ]}>
+        {children}
+      </View>
+    );
+  }
+
   return (
-    <View
-      style={[
-        {
-          flex: 1,
-          paddingHorizontal: 24,
-          paddingTop: insets.top,
-          paddingBottom: type === 'form' ? insets.bottom : 0,
-          backgroundColor: type === 'form' ? theme.colors.white : theme.colors.gray[50],
-        },
-        type === 'form' && spaced && { justifyContent: 'space-between' },
-        styles,
-      ]}>
-      {type === 'main' ? (
-        <ScrollView
-          showsVerticalScrollIndicator={showScrollBar}
-          alwaysBounceVertical={scrollBounce}>
-          {children}
-        </ScrollView>
-      ) : (
-        children
-      )}
-    </View>
+    <ScrollView
+      showsVerticalScrollIndicator={showScrollBar}
+      alwaysBounceVertical={scrollBounce}
+      style={{
+        backgroundColor: theme.colors.gray[50],
+        flex: 1,
+        paddingHorizontal: 24,
+        paddingTop: insets.top,
+        paddingBottom: insets.bottom,
+      }}>
+      {children}
+    </ScrollView>
   );
 };

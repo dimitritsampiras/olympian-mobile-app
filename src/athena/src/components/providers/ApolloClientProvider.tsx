@@ -26,20 +26,19 @@ export const ApolloClientProvider: React.FC<ApolloClientProviderProps> = ({ chil
 };
 
 const createApolloClient = () => {
-  const uri = `http://${IP_ADDRESS}:${PORT}/graphql`;
+  // const uri = `http://${IP_ADDRESS}:${PORT}/graphql`;
+  const uri = `http://${'localhost'}:${PORT}/graphql`;
 
   // servers links
   const httpLink = createHttpLink({ uri });
 
   // global handle errors
-  const errorLink = onError(({ graphQLErrors, networkError, response }) => {
+  const errorLink = onError(({ graphQLErrors, networkError }) => {
     // handle graphql erros if there are any
     if (graphQLErrors) handleGqlErrors(graphQLErrors);
 
     // handle network errors if there are any
     if (networkError) handleNetworkErrors(networkError);
-
-    console.log('res', response?.data?.errors);
   });
 
   const authLink = setContext(async (_req, { headers }) => {

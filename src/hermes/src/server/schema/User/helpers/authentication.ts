@@ -58,10 +58,12 @@ export const loginUser = async (
 ): Promise<string | null> => {
   const { username, password } = input;
 
-  const user = await prisma.user.findUnique({ where: { username } });
+  const profile = await prisma.profile.findUnique({ where: { username }, include: { user: true } });
 
   // user does not exist guard clause
-  if (!user) return null;
+  if (!profile?.user) return null;
+
+  const { user } = profile;
 
   const isVerified = await argon2.verify(user.password, password);
 
@@ -89,10 +91,14 @@ export const signUpUser = async (prisma: PrismaClient, input: SignUpInput) => {
 
   const user = await prisma.user.create({
     data: {
-      name,
-      username,
       email,
       password: await createPassword(password),
+      profile: {
+        create: {
+          name,
+          username,
+        },
+      },
     },
   });
 

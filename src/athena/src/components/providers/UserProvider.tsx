@@ -1,20 +1,6 @@
-import { ApolloQueryResult } from '@apollo/client';
-import React, { createContext } from 'react';
-import { Exact, MeQuery, useMeQuery, User } from '../../lib/graphql';
-
-// type annotation for apollo client me query refetch function
-type Refetch = (
-  variables?: Partial<Exact<{ [key: string]: never }>> | undefined
-) => Promise<ApolloQueryResult<MeQuery>>;
-
-/**
- *
- * user context
- */
-export const UserContext = createContext({
-  user: {} as User | null,
-  refetch: (async () => ({})) as Refetch,
-});
+import React from 'react';
+import { UserContext } from '../../lib/context';
+import { useMeQuery } from '../../lib/graphql';
 
 /**
  *
@@ -34,8 +20,6 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const { data, refetch } = useMeQuery();
 
   return (
-    <UserContext.Provider value={{ user: data?.me as User | null, refetch }}>
-      {children}
-    </UserContext.Provider>
+    <UserContext.Provider value={{ user: data?.me, refetch }}>{children}</UserContext.Provider>
   );
 };

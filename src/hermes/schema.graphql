@@ -8,11 +8,13 @@ type AppError {
   name: String!
 }
 
+union BrowseResponseTypeUnion = Exercise | Profile | Program | Workout
+
 input CreateProgramInput {
   name: String!
   publicity: Publicity!
-  specificity: [Specificity!]!
   tags: [String!]!
+  trainingType: [TrainingType!]!
   userId: String!
 }
 
@@ -45,11 +47,15 @@ enum Equipment {
 type Exercise {
   authorNotes: String
   id: ID!
-  number: Int!
-  reps: Int
-  rpe: Int
-  sets: Int
+  order: Int!
+  sets: [Set!]!
   staticExercise: StaticExercise!
+  supersetOrder: String
+}
+
+enum Gender {
+  female
+  male
 }
 
 input LoginInput {
@@ -104,26 +110,81 @@ enum Muscle {
 type Mutation {
   createExercise(staticExerciseId: String!, workoutId: String!): Exercise
   createProgram(input: CreateProgramInput!): Program
+  createSet(exerciseId: String!): Set
   createWorkout(programId: String!): Workout
+  finishWorkout(performedWorkoutId: String!): PerformedWorkout
+  follow(profileId: String!): Profile
   login(input: LoginInput!): String
   signup(input: SignUpInput!): Boolean
+  startWorkout(workoutId: String!): PerformedWorkout
+  unfollow(profileId: String!): Profile
+  updateCompletionStatus(currentStatus: Boolean!, performedSetId: String!): PerformedSet
+  updateSetReps(reps: Int!, setId: String!): Set
+  updateSetRpe(rpe: Int!, setId: String!): Set
+}
+
+type PerformedExercise {
+  exercise: Exercise!
+  id: ID!
+  notes: String!
+  performedSets: [PerformedSet!]!
+  performedWorkout: PerformedWorkout!
+}
+
+type PerformedSet {
+  completed: Boolean!
+  completedAt: DateTime
+  duration: Int
+  id: ID!
+  performedExercise: PerformedExercise
+  reps: Int
+  set: Set!
+  weight: Float
+}
+
+type PerformedWorkout {
+  active: Boolean!
+  createdAt: DateTime!
+  duration: Int!
+  id: ID!
+  notes: String!
+  performedExercises: [PerformedExercise!]!
+  program: Program!
+  tonnage: Float!
+  workout: Workout!
 }
 
 type Profile {
+  authoredPrograms: [Program!]!
+  createdAt: DateTime!
+  dateOfBirth: DateTime
+  followedBy: [Profile!]!
+  following: [Profile!]!
+  gender: Gender
+  goals: [TrainingType!]!
+  height: Int
   id: ID!
-  programs: [Program!]!
+  name: String!
+  performedWorkouts: [PerformedWorkout!]!
+  programLibrary: [Program!]!
+  trainingAge: TrainingLevel
+  updatedAt: DateTime!
   user: User!
+  username: String!
+  weight: Int
 }
 
 type Program {
+  authors: [Profile!]!
   complimentary: Boolean
   id: ID!
+  inLibraryOf: [Profile!]!
+  likes: Int
   name: String!
-  profile: Profile!
+  performedWorkouts: [PerformedWorkout!]!
   publicity: Publicity!
-  specificity: [Specificity!]!
-  tags: [String!]!
   trainingLevel: TrainingLevel
+  trainingType: [TrainingType!]!
   workouts: [Workout!]!
 }
 
@@ -134,16 +195,36 @@ enum Publicity {
 }
 
 type Query {
+  activeWorkout: PerformedWorkout
+  browseSearch(keyword: String!): [BrowseResponseTypeUnion!]!
   emailExists(email: String!): Boolean
+  exercise(exerciseId: String!): Exercise
+  exerciseHistory(currentPerformedExercise: String, exerciseId: String!): [PerformedExercise!]!
   me: User
-  popularPrograms(skip: Int!, take: Int!): [Program!]!
+  myFollowers: [Profile!]!
+  myFollowersCount: Int!
+  myFollows: [Profile!]!
+  myFollowsCount: Int!
+  myProfile: Profile
+  popularPrograms(skip: Int!, take: Int!, trainingType: [TrainingType!]): [Program!]!
+  profileFromId(id: String!): Profile
+  profilePrograms(profileId: String!): [Program!]!
   program(programId: String!): Program
   staticExercise(staticExerciseId: String!): StaticExercise
   staticExercises: [StaticExercise!]!
-  trendingPrograms(skip: Int!, take: Int!): [Program!]!
+  trainingTypes: [TrainingType!]!
+  trendingPrograms(skip: Int!, take: Int!, trainingType: [TrainingType!]): [Program!]!
   userPrograms: [Program!]!
   usernameExists(username: String!): Boolean
   workout(workoutId: String!): Workout
+}
+
+type Set {
+  exercise: Exercise!
+  id: ID!
+  number: Int!
+  reps: Int!
+  rpe: Int!
 }
 
 input SignUpInput {
@@ -151,14 +232,6 @@ input SignUpInput {
   name: String!
   password: String!
   username: String!
-}
-
-enum Specificity {
-  athleticism
-  cardio
-  general
-  hypertrophy
-  strength
 }
 
 type StaticExercise {
@@ -181,13 +254,35 @@ enum TrainingLevel {
   intermediate
 }
 
+enum TrainingType {
+  aerobics
+  boxing
+  calisthenics
+  cardio
+  crossfit
+  cycling
+  functional_training
+  gymnastics
+  hiit
+  hypertrophy
+  martial_arts
+  olympic_weightlifting
+  pilates
+  recovery
+  rowing
+  running
+  sports_performance
+  strength
+  stretching
+  swimming
+  wellness
+}
+
 type User {
   email: String!
   id: ID!
-  name: String!
   password: String!
   profile: Profile
-  username: String!
 }
 
 type UserResponse {
@@ -196,12 +291,11 @@ type UserResponse {
 }
 
 type Workout {
-  duration: DateTime!
   exercises: [Exercise!]!
   id: ID!
   name: String!
+  program: Program
   programId: String
-  specificity: [Specificity!]!
-  tags: [String!]!
   trainingLevel: TrainingLevel
+  trainingType: [TrainingType!]!
 }

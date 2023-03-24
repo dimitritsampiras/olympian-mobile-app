@@ -1,14 +1,13 @@
 import * as Haptics from 'expo-haptics';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Pressable, PressableProps, StyleSheet, View, Text } from 'react-native';
 import { GlobeAltIcon, UserGroupIcon, UserIcon } from 'react-native-heroicons/solid';
+import { CreateProgramContext } from '../../../lib/context';
 
 import { Publicity } from '../../../lib/graphql';
 import theme from '../../../theme';
 import { Heading } from '../../elements';
 import { BodyText } from '../../elements/typography/BodyText';
-
-import { CreateProgramContext } from './CreateProgram';
 
 interface ProgramPublicityProps {}
 

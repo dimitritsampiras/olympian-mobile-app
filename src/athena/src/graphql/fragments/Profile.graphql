@@ -1,0 +1,13 @@
+fragment Profile on Profile {
+  createdAt
+  dateOfBirth
+  gender
+  goals
+  height
+  id
+  name
+  trainingAge
+  updatedAt
+  username
+  weight
+}

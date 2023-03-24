@@ -22,7 +22,6 @@ export const Card: React.FC<CardProps> = ({ style, square, onPress, children }) 
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'space-between',
     backgroundColor: theme.colors.white,
     borderRadius: 22,
     padding: 18,

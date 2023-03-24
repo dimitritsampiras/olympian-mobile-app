@@ -71,7 +71,7 @@ export const Input: React.FC<InputProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    height: 50,
+    paddingVertical: 3,
     paddingLeft: 10,
     borderRadius: 18,
     backgroundColor: theme.colors.gray[100],
