@@ -29,7 +29,10 @@ export const AuthNavigator: React.FC = () => {
 
   return (
     <AuthStack.Navigator
-      screenOptions={{ contentStyle: { backgroundColor: theme.colors.gray[50] } }}>
+      screenOptions={{
+        contentStyle: { backgroundColor: theme.colors.gray[50] },
+        headerShown: false,
+      }}>
       {user === null || user === undefined ? (
         <>
           <AuthStack.Screen name="LandingPage" component={LandingPage} />
