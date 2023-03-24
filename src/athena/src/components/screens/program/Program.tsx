@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ActivityIndicator, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { ActionSheet, ButtonProps } from 'react-native-ui-lib';
 import { useCreateWorkoutMutation, useProgramFromIdQuery } from '../../../lib/graphql';
@@ -14,20 +14,32 @@ import { Header } from '../../containers/Header';
 import { ChevronRightIcon } from 'react-native-heroicons/solid';
 import { ProfileName } from '../../elements/display/ProfileName';
 import { Card } from '../../containers/Card';
-import { UserPlusIcon, PencilIcon, ShareIcon } from 'react-native-heroicons/outline';
+import {
+  UserPlusIcon,
+  PencilIcon,
+  ShareIcon,
+  DocumentDuplicateIcon,
+} from 'react-native-heroicons/outline';
 import { useIsFocused } from '@react-navigation/native';
+import { UserContext } from '../../../lib/context';
 
 type ProgramProps = NativeStackScreenProps<ProgramParamList, 'Program'>;
 
 export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
   const { programId } = route.params;
+  const { user } = useContext(UserContext);
 
   const [menuVisible, setMenuVisible] = useState(false);
+  const [canEdit, setCanEdit] = useState(false);
   const isFocused = useIsFocused();
   // data
   const { data, loading, error, refetch } = useProgramFromIdQuery({
     variables: { programId },
     fetchPolicy: 'no-cache',
+    onCompleted: (data) =>
+      setCanEdit(
+        data?.program?.authors.map(({ id }) => id).includes(user?.profile?.id || '') || false
+      ),
   });
 
   const [createWorkout, { loading: cwLoading }] = useCreateWorkoutMutation();
@@ -52,6 +64,9 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
 
   useEffect(() => {
     isFocused && (async () => await refetch())();
+    setCanEdit(
+      data?.program?.authors.map(({ id }) => id).includes(user?.profile?.id || '') || false
+    );
   }, [isFocused]);
 
   if (error) {
@@ -84,7 +99,16 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
                   justifyContent: 'space-between',
                   marginTop: 16,
                 }}>
-                {data.program.authors[0] && <ProfileName profile={data.program.authors[0]} />}
+                {data.program.authors[0]?.id && (
+                  <ProfileName
+                    profile={data.program.authors[0]}
+                    onPress={() => {
+                      navigation.navigate('Profile', {
+                        profileId: data.program?.authors[0]?.id || '',
+                      });
+                    }}
+                  />
+                )}
 
                 <TouchableOpacity onPress={handleOnMenuPress}>
                   <EllipsisHorizontalIcon fill="black" />
@@ -113,13 +137,15 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
                 <ChevronRightIcon fill={theme.colors.gray[300]} size={18} />
               </Card>
             ))}
-            <Button
-              colorScheme="info"
-              variant="flat"
-              onPress={handleAddWorkout}
-              loading={cwLoading}>
-              Add Workout
-            </Button>
+            {canEdit && (
+              <Button
+                colorScheme="info"
+                variant="flat"
+                onPress={handleAddWorkout}
+                loading={cwLoading}>
+                Add Workout
+              </Button>
+            )}
             {/*
              *
              *
@@ -129,7 +155,6 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
               // title={'Program Options'}
               visible={menuVisible}
               onDismiss={handleOnMenuDismiss}
-              cancelButtonIndex={3}
               destructiveButtonIndex={0}
               containerStyle={{ paddingBottom: 20 } as ViewStyle}
               renderAction={(option: ButtonProps) => (
@@ -141,7 +166,6 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
                     flexDirection: 'row',
                     alignItems: 'center',
                   }}>
-                  {/* <UserPlusIcon stroke={theme.colors.gray[800]} /> */}
                   <ProgramOptionsIcon item={option.label} />
                   <Text style={{ marginLeft: 12 }}>{option.label}</Text>
                 </TouchableOpacity>
@@ -159,7 +183,13 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
                   label: 'Share',
                   onPress: () => {},
                 },
-              ]}
+                {
+                  label: 'Duplicate',
+                  onPress: () => {},
+                },
+              ].filter(({ label }) =>
+                !canEdit ? ['Edit', 'Add Collaborators'].includes(label) : true
+              )}
             />
           </View>
         </>
@@ -175,5 +205,7 @@ export const ProgramOptionsIcon: React.FC<{
     return <UserPlusIcon size={22} stroke={theme.colors.gray[800]} />;
   if (item === 'Edit') return <PencilIcon size={22} stroke={theme.colors.gray[800]} />;
   if (item === 'Share') return <ShareIcon size={22} stroke={theme.colors.gray[800]} />;
+  if (item === 'Duplicate')
+    return <DocumentDuplicateIcon size={22} stroke={theme.colors.gray[800]} />;
   return <PencilIcon stroke={theme.colors.gray[800]} />;
 };

@@ -21,27 +21,27 @@ import { ProfileParamList } from '../navigation/ProfileNavigator';
 import { useMyFollowersCountQuery, useMyFollowsCountQuery } from '../../lib/graphql';
 import { useIsFocused } from '@react-navigation/native';
 
-interface ProfileProps extends NativeStackScreenProps<ProfileParamList, 'Profile'> {}
+interface ProfileProps extends NativeStackScreenProps<ProfileParamList, 'MyProfile'> {}
 
 const profileOptions = [
   {
     option: 'Statistics and Goals',
-    screen: 'Goals' as keyof ProfileParamList,
+    screen: 'Goals',
     Icon: ChartBarIcon,
   },
   {
     option: 'Social',
-    screen: 'Socials' as keyof ProfileParamList,
+    screen: 'Socials',
     Icon: UsersIcon,
   },
   {
     option: 'Activity',
-    screen: 'Activity' as keyof ProfileParamList,
+    screen: 'Activity',
     Icon: ClockIcon,
   },
   {
     option: 'Account',
-    screen: 'Account' as keyof ProfileParamList,
+    screen: 'Account',
     Icon: ChartBarIcon,
   },
 ] as const;

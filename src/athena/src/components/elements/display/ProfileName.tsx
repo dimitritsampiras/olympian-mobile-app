@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { Avatar } from 'react-native-ui-lib';
 import { ProfileFragment } from '../../../lib/graphql';
 import theme from '../../../theme';
@@ -9,11 +9,15 @@ interface ProfileNameProps {
     name: ProfileFragment['name'];
     username: ProfileFragment['username'];
   };
+  onPress?: () => void;
 }
 
-export const ProfileName: React.FC<ProfileNameProps> = ({ profile }) => {
+export const ProfileName: React.FC<ProfileNameProps> = ({ profile, onPress }) => {
   return (
-    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+    <TouchableOpacity
+      style={{ flexDirection: 'row', alignItems: 'center' }}
+      disabled={!onPress}
+      onPress={onPress}>
       <Avatar size={24} name={profile.name} backgroundColor={theme.colors.amber[100]} />
       <Text
         style={{
@@ -24,6 +28,6 @@ export const ProfileName: React.FC<ProfileNameProps> = ({ profile }) => {
         }}>
         {profile.username}
       </Text>
-    </View>
+    </TouchableOpacity>
   );
 };

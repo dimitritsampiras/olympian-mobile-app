@@ -42,7 +42,10 @@ export const FollowersList: React.FC<FollowersListProps> = ({ navigation }) => {
       </Header>
       {data?.myFollowers.length !== 0 ? (
         data?.myFollowers.map((follower) => (
-          <View key={follower.id} style={styles.followProfile}>
+          <TouchableOpacity
+            key={follower.id}
+            style={styles.followProfile}
+            onPress={() => navigation.navigate('Profile', { profileId: follower.id })}>
             <View style={{ flexDirection: 'row' }}>
               <Avatar size={34} name={follower.name} containerStyle={{ marginRight: 12 }} />
               <View>
@@ -65,7 +68,7 @@ export const FollowersList: React.FC<FollowersListProps> = ({ navigation }) => {
                 <CheckCircleIcon size={20} color={theme.colors.emerald[400]} />
               </TouchableOpacity>
             )}
-          </View>
+          </TouchableOpacity>
         ))
       ) : (
         <View style={{ backgroundColor: 'white' }}>

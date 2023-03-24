@@ -5,6 +5,13 @@ fragment Program on Program {
   publicity
   trainingLevel
   trainingType
+  likes
+  inLibraryOf {
+    id
+  }
+  workouts {
+    id
+  }
 }
 
 fragment Workout on Workout {

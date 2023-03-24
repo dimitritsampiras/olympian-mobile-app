@@ -1,5 +1,12 @@
 import React, { ReactNode } from 'react';
-import { ScrollView, ViewProps, TouchableWithoutFeedback, Keyboard, View } from 'react-native';
+import {
+  ScrollView,
+  ViewProps,
+  TouchableWithoutFeedback,
+  Keyboard,
+  View,
+  StyleSheet,
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import theme from '../../theme';
 
@@ -22,30 +29,37 @@ export const ScreenView: React.FC<ScreenViewProps> = ({
 }) => {
   const insets = useSafeAreaInsets();
 
-  return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+  if (type === 'form') {
+    return (
       <View
         style={[
           {
             flex: 1,
             paddingHorizontal: 24,
             paddingTop: insets.top,
-            // paddingBottom: type === 'form' ? insets.bottom : 0,
-            backgroundColor: type === 'form' ? theme.colors.white : theme.colors.gray[50],
+            paddingBottom: insets.bottom,
+            backgroundColor: 'white',
           },
           type === 'form' && spaced && { justifyContent: 'space-between' },
           style,
         ]}>
-        {type === 'main' ? (
-          <ScrollView
-            showsVerticalScrollIndicator={showScrollBar}
-            alwaysBounceVertical={scrollBounce}>
-            {children}
-          </ScrollView>
-        ) : (
-          children
-        )}
+        {children}
       </View>
-    </TouchableWithoutFeedback>
+    );
+  }
+
+  return (
+    <ScrollView
+      showsVerticalScrollIndicator={showScrollBar}
+      alwaysBounceVertical={scrollBounce}
+      style={{
+        backgroundColor: theme.colors.gray[50],
+        flex: 1,
+        paddingHorizontal: 24,
+        paddingTop: insets.top,
+        paddingBottom: insets.bottom,
+      }}>
+      {children}
+    </ScrollView>
   );
 };

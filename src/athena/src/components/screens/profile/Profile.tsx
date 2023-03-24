@@ -19,14 +19,22 @@ import {
 } from '../../../lib/graphql';
 import { UserPlusIcon } from 'react-native-heroicons/outline';
 import { CheckCircleIcon } from 'react-native-heroicons/solid';
+import { useIsFocused } from '@react-navigation/native';
+import { MyProgramsParamList } from '../../navigation/MyProgramsNavigator';
+import { ProgramParamList } from '../../navigation/ProgramNavigator';
 
-interface ProfileProps extends NativeStackScreenProps<DiscoverParamList, 'Profile'> {}
+interface ProfileProps
+  extends NativeStackScreenProps<
+    DiscoverParamList | MyProgramsParamList | ProgramParamList,
+    'Profile'
+  > {}
 
 export const Profile: React.FC<ProfileProps> = ({ navigation, route }) => {
+  const isFocused = useIsFocused();
   const { profileId } = route.params;
   const { data, refetch } = useProfileFromIdQuery({ variables: { id: profileId } });
   const { data: mpData, refetch: mpRefetch } = useMyProfileQuery();
-  const { data: pgData } = useProfileProgramsQuery({
+  const { data: pgData, refetch: pgRefetch } = useProfileProgramsQuery({
     variables: { profileId },
   });
 
@@ -36,9 +44,10 @@ export const Profile: React.FC<ProfileProps> = ({ navigation, route }) => {
   useEffect(() => {
     (async () => {
       await refetch();
+      await pgRefetch();
       await mpRefetch();
     })();
-  }, [followData, unfollowData]);
+  }, [isFocused, followData, unfollowData]);
 
   return (
     <ScreenView>
@@ -92,11 +101,23 @@ export const Profile: React.FC<ProfileProps> = ({ navigation, route }) => {
           {/*  */}
           <View style={{ marginTop: 22 }}>
             <SubHeading as="h2">Authored Programs</SubHeading>
-            {pgData?.profilePrograms.length !== 0 ? (
+            {pgData?.profilePrograms && pgData?.profilePrograms.length > 0 ? (
               pgData?.profilePrograms.map((program) => (
-                <View key={program.id}>
+                <TouchableOpacity
+                  key={program.id}
+                  style={{ flexDirection: 'row', alignItems: 'center' }}
+                  onPress={() => {
+                    console.log('hereeeee', program.id);
+                    navigation.navigate('ProgramNavigator', { programId: program.id });
+                  }}>
                   <ProgramImage />
-                </View>
+                  <View style={{ marginLeft: 12 }}>
+                    <Heading as="h4">{program.name}</Heading>
+                    <Text style={{ color: theme.colors.gray[700], marginTop: 2, fontSize: 12 }}>
+                      {program.inLibraryOf.length} users · {program.likes || 0} likes
+                    </Text>
+                  </View>
+                </TouchableOpacity>
               ))
             ) : (
               <View>

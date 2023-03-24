@@ -1,4 +1,5 @@
 import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
+import { Profile } from '../screens/profile/Profile';
 import { Programs } from '../screens/Programs';
 
 import { ProgramNavigator } from './ProgramNavigator';
@@ -7,6 +8,7 @@ import { TabParamList } from './TabNavigator';
 export type MyProgramsParamList = {
   MyPrograms: undefined;
   ProgramNavigator: { programId: string; back: boolean };
+  Profile: { profileId: string };
 };
 
 const MyProgramsStack = createNativeStackNavigator<MyProgramsParamList>();
