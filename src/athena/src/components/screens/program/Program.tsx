@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ActivityIndicator, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { ActionSheet, ButtonProps } from 'react-native-ui-lib';
 import { useCreateWorkoutMutation, useProgramFromIdQuery } from '../../../lib/graphql';
@@ -9,13 +9,14 @@ import { Button, Heading } from '../../elements';
 import { ProgramImage } from '../../elements/display/ProgramImage';
 import { BodyText } from '../../elements/typography/BodyText';
 import { ProgramParamList } from '../../navigation/ProgramNavigator';
-import { EllipsisHorizontalIcon } from 'react-native-heroicons/solid';
+import { EllipsisHorizontalIcon, EyeIcon } from 'react-native-heroicons/solid';
 import { Header } from '../../containers/Header';
 import { ChevronRightIcon } from 'react-native-heroicons/solid';
 import { ProfileName } from '../../elements/display/ProfileName';
 import { Card } from '../../containers/Card';
 import { UserPlusIcon, PencilIcon, ShareIcon } from 'react-native-heroicons/outline';
 import { useIsFocused } from '@react-navigation/native';
+import { UserContext } from '../../../lib/context';
 
 type ProgramProps = NativeStackScreenProps<ProgramParamList, 'Program'>;
 
@@ -24,6 +25,8 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
 
   const [menuVisible, setMenuVisible] = useState(false);
   const isFocused = useIsFocused();
+  const { user } = useContext(UserContext);
+
   // data
   const { data, loading, error, refetch } = useProgramFromIdQuery({
     variables: { programId },
@@ -32,6 +35,22 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
 
   const [createWorkout, { loading: cwLoading }] = useCreateWorkoutMutation();
 
+  const canEdit = () => {
+    console.log('user:', user);
+    console.log('authors:', data?.program?.authors);
+    let edits = false;
+    if (data?.program?.authors) {
+      data?.program?.authors.map((author) => {
+        if (author.username === user?.profile?.username) {
+          edits = true;
+        }
+      });
+    }
+    return edits;
+  };
+
+  const editable = canEdit();
+
   // create new blank workout on add workout button press
   const handleAddWorkout = async () => {
     if (!data?.program) return;
@@ -39,7 +58,7 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
       variables: { programId },
     }).then(({ data }) => data?.createWorkout);
     if (!workout) return;
-    navigation.navigate('Workout', { workoutId: workout.id });
+    navigation.navigate('Workout', { workoutId: workout.id, editable: editable });
   };
 
   const handleOnMenuPress = () => {
@@ -97,7 +116,9 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
             {data?.program?.workouts.map((workout) => (
               <Card
                 key={workout.name}
-                onPress={() => navigation.navigate('Workout', { workoutId: workout.id })}
+                onPress={() =>
+                  navigation.navigate('Workout', { workoutId: workout.id, editable: editable })
+                }
                 style={{
                   flexDirection: 'row',
                   justifyContent: 'space-between',
@@ -113,13 +134,15 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
                 <ChevronRightIcon fill={theme.colors.gray[300]} size={18} />
               </Card>
             ))}
-            <Button
-              colorScheme="info"
-              variant="flat"
-              onPress={handleAddWorkout}
-              loading={cwLoading}>
-              Add Workout
-            </Button>
+            {editable && (
+              <Button
+                colorScheme="info"
+                variant="flat"
+                onPress={handleAddWorkout}
+                loading={cwLoading}>
+                Add Workout
+              </Button>
+            )}
             {/*
              *
              *

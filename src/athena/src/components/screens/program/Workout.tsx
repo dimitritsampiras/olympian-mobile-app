@@ -20,7 +20,7 @@ import { ProgramParamList } from '../../navigation/ProgramNavigator';
 type WorkoutProps = NativeStackScreenProps<ProgramParamList, 'Workout'>;
 
 export const Workout: React.FC<WorkoutProps> = ({ route, navigation }) => {
-  const { workoutId } = route.params;
+  const { workoutId, editable = false } = route.params;
   const isFocused = useIsFocused();
   const { activeWorkout, refetch: refetchActiveQuery } = useContext(ActiveWorkoutContext);
 
@@ -148,9 +148,11 @@ export const Workout: React.FC<WorkoutProps> = ({ route, navigation }) => {
             </View>
           </TouchableOpacity>
         ))}
-        <Button variant="flat" colorScheme="info" onPress={handleAddExercise}>
-          Add Exercise
-        </Button>
+        {editable && (
+          <Button variant="flat" colorScheme="info" onPress={handleAddExercise}>
+            Add Exercise
+          </Button>
+        )}
       </View>
     </ScreenView>
   );
