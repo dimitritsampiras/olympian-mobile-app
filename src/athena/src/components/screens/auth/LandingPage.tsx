@@ -22,7 +22,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ navigation }) => {
         </View>
         {/* buttons */}
         <View style={{ width: '100%' }}>
-          <Button style={{ marginBottom: 17 }} onPress={() => navigation.navigate('SignUp')}>
+          <Button
+            style={{ marginBottom: 17 }}
+            onPress={() => navigation.navigate('SignUpNavigator')}>
             Sign Up
           </Button>
           <Button onPress={() => navigation.navigate('Login')}>Log In</Button>

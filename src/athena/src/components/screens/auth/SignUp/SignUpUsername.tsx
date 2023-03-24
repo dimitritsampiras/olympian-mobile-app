@@ -13,10 +13,12 @@ import { UserCircleIcon } from 'react-native-heroicons/solid';
 import { useUserExistsLazyQuery } from '../../../../lib/graphql';
 import { Heading } from '../../../elements/typography/Heading';
 import { BodyText } from '../../../elements/typography/BodyText';
+import { AuthParamList } from '../../../navigation/AuthNavigation';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-interface SignUpUsernameProps {}
+type SignUpUsernameProps = NativeStackScreenProps<AuthParamList, 'Username'>;
 
-export const SignUpUsername: React.FC<SignUpUsernameProps> = () => {
+export const SignUpUsername: React.FC<SignUpUsernameProps> = ({ navigation }) => {
   const [findusername] = useUserExistsLazyQuery();
   const { setSignUpInput, step, setStep } = useContext(SignUpContext);
   const maxLength = 16;
@@ -37,6 +39,7 @@ export const SignUpUsername: React.FC<SignUpUsernameProps> = () => {
   const handleOnNext = (values: Partial<SignUpInput>) => {
     setSignUpInput((previousValues) => ({ ...previousValues, username: values.username }));
     setStep(step + Number(step + 1 < 4));
+    navigation.navigate('Email');
   };
 
   return (

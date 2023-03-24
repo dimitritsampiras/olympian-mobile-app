@@ -12,10 +12,12 @@ import { SignUpInput } from '../../../../lib/graphql';
 import { UserIcon } from 'react-native-heroicons/solid';
 import { Heading } from '../../../elements/typography/Heading';
 import { BodyText } from '../../../elements/typography/BodyText';
+import { AuthParamList } from '../../../navigation/AuthNavigation';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-interface SignUpNameProps {}
+type SignUpNameProps = NativeStackScreenProps<AuthParamList, 'Name'>;
 
-export const SignUpName: React.FC<SignUpNameProps> = () => {
+export const SignUpName: React.FC<SignUpNameProps> = ({ navigation }) => {
   const { setSignUpInput, step, setStep } = useContext(SignUpContext);
   const maxLength = 16;
   const nameSchema = object({
@@ -29,6 +31,7 @@ export const SignUpName: React.FC<SignUpNameProps> = () => {
   const handleOnNext = (values: Partial<SignUpInput>) => {
     setSignUpInput((previousValues) => ({ ...previousValues, name: values.name }));
     setStep(step + Number(step < 4));
+    navigation.navigate('Username');
   };
 
   return (

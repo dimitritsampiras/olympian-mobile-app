@@ -13,10 +13,12 @@ import { AtSymbolIcon } from 'react-native-heroicons/solid';
 import { useEmailExistsLazyQuery } from '../../../../lib/graphql';
 import { Heading } from '../../../elements/typography/Heading';
 import { BodyText } from '../../../elements/typography/BodyText';
+import { AuthParamList } from '../../../navigation/AuthNavigation';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-interface SignUpEmailProps {}
+type SignUpEmailProps = NativeStackScreenProps<AuthParamList, 'Email'>;
 
-export const SignUpEmail: React.FC<SignUpEmailProps> = () => {
+export const SignUpEmail: React.FC<SignUpEmailProps> = ({ navigation }) => {
   const { signUpInput, setSignUpInput, step, setStep } = useContext(SignUpContext);
   const [findemail] = useEmailExistsLazyQuery();
   const maxLength = 32;
@@ -34,6 +36,7 @@ export const SignUpEmail: React.FC<SignUpEmailProps> = () => {
   const handleOnNext = (values: Partial<SignUpInput>) => {
     setSignUpInput((previousValues) => ({ ...previousValues, email: values.email }));
     setStep(step + Number(step + 1 < 4));
+    navigation.navigate('Password');
   };
 
   return (

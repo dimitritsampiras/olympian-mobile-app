@@ -16,9 +16,7 @@ import { useSignUpMutation } from '../../../../lib/graphql';
 import { Heading } from '../../../elements/typography/Heading';
 import { BodyText } from '../../../elements/typography/BodyText';
 
-// This page will be doing navigating
-type ParamList = NativeStackScreenProps<AuthParamList, 'SignUp'>;
-interface SignUpPasswordProps extends ParamList {}
+type SignUpPasswordProps = NativeStackScreenProps<AuthParamList, 'Password'>;
 
 interface SignUpInputConfirmPass extends SignUpInput {
   confirm_password: string;
