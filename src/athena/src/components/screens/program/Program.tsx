@@ -55,7 +55,7 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
   };
 
   const handleDone = async () => {
-    navigation.goBack();
+    navigation.navigate('Home');
   };
 
   const handleOnMenuPress = () => {
@@ -87,7 +87,7 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
         <>
           <View>
             <Header navigation={route.params.back ? navigation : undefined}>
-                <ProgramImage size="lg" style={{ marginBottom: 14 }} />
+              <ProgramImage size="lg" style={{ marginBottom: 14 }} />
               <Heading as="h2" onPress={async () => await refetch()}>
                 {data?.program?.name}
               </Heading>
@@ -155,7 +155,7 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
               variant="flat"
               onPress={handleDone}
               loading={cwLoading}
-              style={{paddingTop: 10}}>
+              style={{ paddingTop: 10 }}>
               Done
             </Button>
             {/*
