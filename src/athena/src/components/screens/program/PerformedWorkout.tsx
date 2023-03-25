@@ -1,12 +1,12 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { Program, usePerformedWorkoutFromIdQuery } from '../../../lib/graphql';
 import theme from '../../../theme';
 import { Header } from '../../containers/Header';
 import { InlineProgram } from '../../containers/InlineProgram';
 import { ScreenView } from '../../containers/ScreenView';
-import { Heading } from '../../elements';
+import { Heading, SubHeading } from '../../elements';
 import { Calendar } from '../../elements/display/Calendar';
 import { HomeParamList } from '../../navigation/HomeNavigator';
 
@@ -44,15 +44,20 @@ export const PerformedWorkout: React.FC<PerformedWorkoutProps> = ({ navigation, 
           </View>
           <View>
             {data.performedWorkoutFromId.performedExercises.map((pe, i) => (
-              <View key={i} style={{ marginBottom: 20 }}>
-                <Text>{pe.exercise.staticExercise.name}</Text>
-                <Text>
-                  {pe.exercise.order} of {data.performedWorkoutFromId?.performedExercises.length}
-                </Text>
+              <View key={i} style={{ marginBottom: 20, ...styles.exerciseCard }}>
+                <Heading as="h4">
+                  {pe.exercise.staticExercise.name}
+                  <SubHeading as="h3">
+                    {' '}
+                    {pe.exercise.order} of {data.performedWorkoutFromId?.performedExercises.length}
+                  </SubHeading>
+                </Heading>
+
                 {pe.performedSets.map((set, i) => (
-                  <View key={i}>
-                    <Text>Reps {set.reps}</Text>
-                    <Text>Weight {set.weight}</Text>
+                  <View key={i} style={styles.setCard}>
+                    <Text>Set: {i + 1}</Text>
+                    <Text>Reps: {set.reps}</Text>
+                    <Text>Weight: {set.weight}</Text>
                   </View>
                 ))}
               </View>
@@ -65,3 +70,20 @@ export const PerformedWorkout: React.FC<PerformedWorkoutProps> = ({ navigation, 
     </ScreenView>
   );
 };
+
+const styles = StyleSheet.create({
+  exerciseCard: {
+    backgroundColor: theme.colors.white,
+    borderRadius: 22,
+    padding: 10,
+  },
+  setCard: {
+    backgroundColor: theme.colors.gray[100],
+    borderRadius: 22,
+    padding: 5,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginBottom: 5,
+  },
+});
