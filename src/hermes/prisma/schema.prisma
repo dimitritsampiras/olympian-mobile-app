@@ -31,6 +31,7 @@ model Profile {
   height            Int?
   createdAt         DateTime           @default(now())
   updatedAt         DateTime           @updatedAt
+  profileInitialsDefaultColor  String        @default("#45818e") @db.VarChar(7)
   trainingAge       TrainingLevel?
   goals             TrainingType[]
   // relations

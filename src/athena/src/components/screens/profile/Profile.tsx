@@ -63,7 +63,7 @@ export const Profile: React.FC<ProfileProps> = ({ navigation, route }) => {
               <View style={{ flexDirection: 'row' }}>
                 <Avatar
                   size={60}
-                  backgroundColor={theme.colors.amber[200]}
+                  backgroundColor={mpData?.myProfile?.profileInitialsDefaultColor || '#ffffff'}
                   name={data?.profileFromId?.name}
                 />
                 <View style={{ marginLeft: 14, paddingVertical: 10 }}>
