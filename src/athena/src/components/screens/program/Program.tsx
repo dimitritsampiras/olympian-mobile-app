@@ -2,7 +2,11 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useContext, useEffect, useState } from 'react';
 import { ActivityIndicator, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { ActionSheet, ButtonProps } from 'react-native-ui-lib';
-import { useCreateWorkoutMutation, useProgramFromIdQuery } from '../../../lib/graphql';
+import {
+  useCreateWorkoutMutation,
+  useMyProfileQuery,
+  useProgramFromIdQuery,
+} from '../../../lib/graphql';
 import theme from '../../../theme';
 import { ScreenView } from '../../containers/ScreenView';
 import { Button, Heading } from '../../elements';
@@ -42,6 +46,8 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
       ),
   });
 
+  const { data: mpData, refetch: mpRefetch } = useMyProfileQuery();
+
   const [createWorkout, { loading: cwLoading }] = useCreateWorkoutMutation();
 
   // create new blank workout on add workout button press
@@ -55,6 +61,7 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
   };
 
   const handleIconPress = () => {
+    if (!data?.program?.authors.find(({ id }) => id === mpData?.myProfile?.id)) return;
     navigation.navigate('IconSelect', { programId: programId });
   };
 
@@ -67,7 +74,11 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
   };
 
   useEffect(() => {
-    isFocused && (async () => await refetch())();
+    isFocused &&
+      (async () => {
+        await refetch();
+        await mpRefetch();
+      })();
     setCanEdit(
       data?.program?.authors.map(({ id }) => id).includes(user?.profile?.id || '') || false
     );
