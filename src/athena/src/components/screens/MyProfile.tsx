@@ -11,6 +11,7 @@ import {
   ClockIcon,
   ChartBarIcon,
   ChevronRightIcon,
+  UserCircleIcon,
 } from 'react-native-heroicons/solid';
 
 import theme from '../../theme';
@@ -46,7 +47,7 @@ const profileOptions = [
   {
     option: 'Account',
     screen: 'Account',
-    Icon: ChartBarIcon,
+    Icon: UserCircleIcon,
   },
 ] as const;
 
