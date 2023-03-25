@@ -66,6 +66,7 @@ export const CreateProgram: React.FC<CreateProgramProps> = ({ navigation, route 
   };
 
   const handleOnNext = async () => {
+    if (!program.name) return;
     if (step >= PAGES.length - 1) {
       await handleSubmit();
     } else setStep(step + 1);
