@@ -4,11 +4,12 @@ import { FollowingList } from '../screens/profile/FollowingList';
 import { FollowersList } from '../screens/profile/FollowersList';
 
 import { Socials } from '../screens/profile/Socials';
-import { Goals } from '../screens/profile/Goals'
-import { NewGoalExerciseSearch } from '../screens/profile/NewGoal'
+import { Goals } from '../screens/profile/Goals';
+import { NewGoalExerciseSearch } from '../screens/profile/NewGoal';
 import { TabParamList } from './TabNavigator';
 import { Profile } from '../screens/profile/Profile';
 import { ProgramNavigator } from './ProgramNavigator';
+import { SetGoal } from '../screens/profile/SetGoal';
 
 export type ProfileParamList = {
   MyProfile: undefined;
@@ -37,6 +38,7 @@ export const ProfileNavigator: React.FC<ProfileNavigatorProps> = () => {
       <ProfileStack.Screen name="Socials" component={Socials} />
       <ProfileStack.Screen name="Goals" component={Goals} />
       <ProfileStack.Screen name="NewGoal" component={NewGoalExerciseSearch} />
+      <ProfileStack.Screen name="SetGoal" component={SetGoal} />
       <ProfileStack.Screen name="FollowingList" component={FollowingList} />
       <ProfileStack.Screen name="FollowersList" component={FollowersList} />
       <ProfileStack.Screen name="Profile" component={Profile} />
