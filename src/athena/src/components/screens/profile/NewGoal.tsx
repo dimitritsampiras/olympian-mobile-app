@@ -12,10 +12,16 @@ import { ChevronRightIcon } from 'react-native-heroicons/solid';
 
 interface NewGoalExerciseSearchProps extends NativeStackScreenProps<ProfileParamList, 'NewGoal'> {}
 
-export const NewGoalExerciseSearch: React.FC<NewGoalExerciseSearchProps> = ({ navigation, route }) => {
+export const NewGoalExerciseSearch: React.FC<NewGoalExerciseSearchProps> = ({
+  navigation,
+  route,
+}) => {
   const { data } = useStaticExercisesQuery({
     fetchPolicy: 'no-cache',
   });
+  const handleSetGoal = (staticExerciseId: string) => {
+    navigation.navigate('SetGoal');
+  };
   return (
     <ScreenView>
       <Header navigation={navigation}>
@@ -32,8 +38,7 @@ export const NewGoalExerciseSearch: React.FC<NewGoalExerciseSearchProps> = ({ na
           return (
             <TouchableOpacity
               key={exercise.id}
-              onPress={() => {
-              }}
+              onPress={() => handleSetGoal(exercise.id)}
               style={{
                 backgroundColor: 'white',
                 borderRadius: 18,
@@ -61,7 +66,7 @@ export const NewGoalExerciseSearch: React.FC<NewGoalExerciseSearchProps> = ({ na
                     scale={0.6}
                     data={muscles.map((m) => ({
                       color: theme.colors.blue[600],
-                      slug: m.replaceAll('_', '-'),
+                      slug: m.split('_').join('-'),
                       intensity: 1,
                     }))}
                     frontOnly
