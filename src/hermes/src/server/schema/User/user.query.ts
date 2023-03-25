@@ -98,8 +98,6 @@ export const BrowseResponseTypeUnion = unionType({
     t.members('Profile', 'Program', 'Workout', 'Exercise');
   },
   resolveType: (res) => {
-    console.log(res);
-
     if ((res as Profile).gender) return 'Profile';
     if ((res as Program).name) return 'Program';
     if ((res as Exercise).staticExerciseId) return 'Exercise';

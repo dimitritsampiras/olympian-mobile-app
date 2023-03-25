@@ -144,7 +144,10 @@ export const BrowseModal: React.FC<BrowseModalProps> = ({ isOpen, close, navigat
                         key={i}
                         program={searchResult as Program}
                         onPress={() => {
-                          navigation.navigate('Profile', { profileId: searchResult.id });
+                          navigation.navigate('ProgramNavigator', {
+                            programId: searchResult.id,
+                            back: true,
+                          });
                           close();
                         }}
                       />
