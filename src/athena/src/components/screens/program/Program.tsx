@@ -54,6 +54,10 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
     navigation.navigate('Workout', { workoutId: workout.id });
   };
 
+  const handleDone = async () => {
+    navigation.goBack();
+  };
+
   const handleOnMenuPress = () => {
     setMenuVisible(true);
   };
@@ -83,7 +87,7 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
         <>
           <View>
             <Header navigation={route.params.back ? navigation : undefined}>
-              <ProgramImage size="lg" style={{ marginBottom: 14 }} />
+                <ProgramImage size="lg" style={{ marginBottom: 14 }} />
               <Heading as="h2" onPress={async () => await refetch()}>
                 {data?.program?.name}
               </Heading>
@@ -146,6 +150,14 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
                 Add Workout
               </Button>
             )}
+            <Button
+              colorScheme="primary"
+              variant="flat"
+              onPress={handleDone}
+              loading={cwLoading}
+              style={{paddingTop: 10}}>
+              Done
+            </Button>
             {/*
              *
              *
