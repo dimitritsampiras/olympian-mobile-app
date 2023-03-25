@@ -122,7 +122,6 @@ export const Profile: React.FC<ProfileProps> = ({ navigation, route }) => {
                 <InlineProgram
                   key={program.id}
                   program={program as Program}
-                  style={{ flexDirection: 'row', alignItems: 'center' }}
                   onPress={() => {
                     navigation.navigate('ProgramNavigator', { programId: program.id });
                   }}

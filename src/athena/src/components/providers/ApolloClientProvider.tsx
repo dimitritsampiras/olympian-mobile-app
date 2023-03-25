@@ -26,8 +26,8 @@ export const ApolloClientProvider: React.FC<ApolloClientProviderProps> = ({ chil
 };
 
 const createApolloClient = () => {
-const uri = `http://${IP_ADDRESS}:${PORT}/graphql`;
- // const uri = `http://${'localhost'}:${PORT}/graphql`;
+  // const uri = `http://${IP_ADDRESS}:${PORT}/graphql`;
+  const uri = `http://${'localhost'}:${PORT}/graphql`;
 
   // servers links
   const httpLink = createHttpLink({ uri });

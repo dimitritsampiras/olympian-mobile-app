@@ -171,6 +171,8 @@ export const ProgramQuery = extendType({
     t.field('activeWorkout', {
       type: nullable('PerformedWorkout'),
       resolve: async (_root, _args, { prisma, userId }) => {
+        console.log(await prisma.profile.findUnique({ where: { userId } }));
+
         const activeWorkouts = await prisma.performedWorkout.findMany({
           where: { profile: { userId }, active: true },
           include: {

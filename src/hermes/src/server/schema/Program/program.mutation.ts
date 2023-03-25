@@ -177,7 +177,7 @@ export const ProgramMutation = extendType({
       resolve: async (_root, { performedSetId, currentStatus }, { prisma }) => {
         return await prisma.performedSet.update({
           where: { id: performedSetId },
-          data: { completed: !currentStatus },
+          data: { completed: !currentStatus, completedAt: new Date() },
         });
       },
     });
@@ -254,6 +254,21 @@ export const ProgramMutation = extendType({
           data: { active: false },
         });
         return performedWorkout;
+      },
+    });
+    /**
+     *
+     * when the user starts a workout
+     */
+    t.field('updateWorkoutName', {
+      type: nullable('Workout'),
+      args: { name: 'String', workoutId: 'String' },
+      resolve: async (_root, { workoutId, name }, { prisma }) => {
+        const workout = await prisma.workout.update({
+          where: { id: workoutId },
+          data: { name },
+        });
+        return workout;
       },
     });
   },

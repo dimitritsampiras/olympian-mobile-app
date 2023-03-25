@@ -17,7 +17,7 @@ export const InlineProgram: React.FC<InlineProgramProps> = ({ program, onPress }
       style={{
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 4,
+        marginBottom: 10,
         justifyContent: 'space-between',
       }}
       onPress={onPress}>

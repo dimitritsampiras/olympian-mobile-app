@@ -86,6 +86,7 @@ export const PerformedWorkoutType = objectType({
     t.field(PerformedWorkout.performedExercises);
     t.field(PerformedWorkout.program);
     t.field(PerformedWorkout.workout);
+    t.field(PerformedWorkout.profile);
   },
 });
 

@@ -49,4 +49,116 @@ query ProfilePrograms($profileId: String!) {
   }
 }
 
+query ActiveFollowers {
+  activeFollowers {
+    workout {
+      ...Workout
+    }
+    program {
+      name
+    }
+    active
+    createdAt
+    duration
+    id
+    notes
+    profile {
+      username
+      name
+    }
+    performedExercises {
+      ...PerformedExercise
+      exercise {
+        authorNotes
+        id
+        order
+        supersetOrder
+        staticExercise {
+          ...StaticExercise
+        }
+      }
+      performedSets {
+        ...PerformedSet
+        set {
+          ...Set
+        }
+      }
+    }
+  }
+}
 
+query FollowerWorkoutActivity {
+  followerWorkoutActivity {
+    workout {
+      ...Workout
+    }
+    program {
+      name
+    }
+    active
+    createdAt
+    duration
+    id
+    notes
+    profile {
+      username
+      name
+    }
+    performedExercises {
+      ...PerformedExercise
+      exercise {
+        authorNotes
+        id
+        order
+        supersetOrder
+        staticExercise {
+          ...StaticExercise
+        }
+      }
+      performedSets {
+        ...PerformedSet
+        set {
+          ...Set
+        }
+      }
+    }
+  }
+}
+
+query ProgramActivity($programId: String!) {
+  programActivity(programId: $programId) {
+    workout {
+      ...Workout
+    }
+    program {
+      name
+    }
+    active
+    createdAt
+    duration
+    id
+    notes
+    profile {
+      username
+      name
+    }
+    performedExercises {
+      ...PerformedExercise
+      exercise {
+        authorNotes
+        id
+        order
+        supersetOrder
+        staticExercise {
+          ...StaticExercise
+        }
+      }
+      performedSets {
+        ...PerformedSet
+        set {
+          ...Set
+        }
+      }
+    }
+  }
+}

@@ -152,6 +152,7 @@ type PerformedWorkout {
   id: ID!
   notes: String!
   performedExercises: [PerformedExercise!]!
+  profile: Profile!
   program: Program!
   tonnage: Float!
   workout: Workout!
@@ -201,11 +202,13 @@ enum Publicity {
 }
 
 type Query {
+  activeFollowers: [PerformedWorkout!]!
   activeWorkout: PerformedWorkout
   browseSearch(keyword: String!): [BrowseResponseTypeUnion!]!
   emailExists(email: String!): Boolean
   exercise(exerciseId: String!): Exercise
   exerciseHistory(currentPerformedExercise: String, exerciseId: String!): [PerformedExercise!]!
+  followerWorkoutActivity: [PerformedWorkout!]!
   lastPerformedWorkout: PerformedWorkout
   me: User
   myFollowers: [Profile!]!
@@ -218,6 +221,7 @@ type Query {
   profileFromId(id: String!): Profile
   profilePrograms(profileId: String!): [Program!]!
   program(programId: String!): Program
+  programActivity(programId: String!): [PerformedWorkout!]!
   staticExercise(staticExerciseId: String!): StaticExercise
   staticExercises: [StaticExercise!]!
   trainingTypes: [TrainingType!]!

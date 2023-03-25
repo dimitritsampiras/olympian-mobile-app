@@ -97,13 +97,13 @@ export const Login: React.FC<LoginProps> = ({ navigation }) => {
         <View style={styles.screen}>
           <TouchableOpacity
             onPress={() => navigation.navigate('LandingPage')}
-            style={{ marginBottom: 10, paddingTop: 0 }}>
+            style={{ marginBottom: 0, paddingTop: 0 }}>
             <ArrowLongLeftIcon stroke={theme.colors.gray[700]} />
           </TouchableOpacity>
           <View style={styles.keyboardView}>
             <TorchLogo
               width={56}
-              height={82}
+              height={65}
               fill={'black'}
               style={{ marginBottom: 24 }}></TorchLogo>
 

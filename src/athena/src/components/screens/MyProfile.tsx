@@ -139,7 +139,7 @@ export const MyProfile: React.FC<ProfileProps> = ({ navigation }) => {
 };
 
 export const removeToken = async () => {
-  await AsyncStorage.removeItem('AUTH_TOKEN').catch((e) => e);
+  await AsyncStorage.removeItem('AUTH_TOKEN').catch((e) => console.log(e));
 };
 
 const styles = StyleSheet.create({

@@ -62,5 +62,46 @@ export const ProfileQuery = extendType({
         return count;
       },
     });
+    t.field('activeFollowers', {
+      type: list('PerformedWorkout'),
+      resolve: async (_root, _args, { userId, prisma }) => {
+        const profile = await prisma.profile.findUnique({
+          where: { userId },
+          include: { following: true },
+        });
+
+        const activeWorkouts = await prisma.performedWorkout.findMany({
+          where: { active: true, profileId: { in: profile?.following.map(({ id }) => id) } },
+          include: { profile: true },
+        });
+        return activeWorkouts;
+      },
+    });
+    t.field('followerWorkoutActivity', {
+      type: list('PerformedWorkout'),
+      resolve: async (_root, _args, { userId, prisma }) => {
+        const profile = await prisma.profile.findUnique({
+          where: { userId },
+          include: { following: true },
+        });
+
+        const followerWorkoutActivity = await prisma.performedWorkout.findMany({
+          where: { profileId: { in: profile?.following.map(({ id }) => id) } },
+          include: { profile: true, performedExercises: { include: { performedSets: true } } },
+        });
+        return followerWorkoutActivity;
+      },
+    });
+    t.field('programActivity', {
+      type: list('PerformedWorkout'),
+      args: { programId: 'String' },
+      resolve: async (_root, { programId }, { prisma }) => {
+        const programActivity = await prisma.performedWorkout.findMany({
+          where: { programId },
+          include: { profile: true, performedExercises: { include: { performedSets: true } } },
+        });
+        return programActivity;
+      },
+    });
   },
 });

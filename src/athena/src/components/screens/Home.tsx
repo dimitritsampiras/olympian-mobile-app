@@ -17,6 +17,7 @@ import { BodyText, Button, Heading, SubHeading } from '../elements';
 import { UserContext } from '../../lib/context';
 import { ChevronRightIcon } from 'react-native-heroicons/solid';
 import { Calendar } from '../elements/display/Calendar';
+import { BellIcon } from 'react-native-heroicons/outline';
 
 interface HomeProps extends NativeStackScreenProps<HomeParamList & TabParamList, 'Home'> { }
 
@@ -39,10 +40,15 @@ export const Home: React.FC<HomeProps> = ({ navigation }) => {
   return (
     <ScreenView>
       <Header>
-        <Heading style={{ width: 300 }}>
-          Welcome back, {'\n'}
-          {user?.profile?.name.split(' ')[0]} 👋
-        </Heading>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Heading style={{ width: 300 }}>
+            Welcome back, {'\n'}
+            {user?.profile?.name.split(' ')[0]} 👋
+          </Heading>
+          <TouchableOpacity onPress={() => navigation.navigate('Socials')}>
+            <BellIcon color={theme.colors.gray[900]} />
+          </TouchableOpacity>
+        </View>
       </Header>
 
       {/* TODO: render most recent Performed Workout instead this if there is one */}

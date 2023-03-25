@@ -120,6 +120,7 @@ model PerformedWorkout {
 model PerformedExercise {
   id                 String           @id @default(cuid())
   notes              String
+  updatedAt          DateTime?        @updatedAt
   performedSets      PerformedSet[]
   exercise           Exercise         @relation(fields: [exerciseId], references: [id])
   exerciseId         String

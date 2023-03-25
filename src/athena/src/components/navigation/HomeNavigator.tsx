@@ -1,6 +1,7 @@
 import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Home } from '../screens';
 import { CreateProgram } from '../screens/createProgram/CreateProgram';
+import { Socials } from '../screens/profile/Socials';
 import { PerformedWorkout } from '../screens/program/PerformedWorkout';
 
 import { ProgramNavigator } from './ProgramNavigator';
@@ -11,6 +12,7 @@ export type HomeParamList = {
   CreateProgram: undefined;
   ProgramNavigator: { programId: string; back?: boolean };
   PerformedWorkout: { performedWorkoutId: string };
+  Socials: undefined;
 };
 
 const HomeStack = createNativeStackNavigator<HomeParamList>();
@@ -33,6 +35,7 @@ export const HomeNavigator: React.FC<HomeStackNavigatorProps> = ({ route }) => {
         component={PerformedWorkout}
         initialParams={{ performedWorkoutId: '' }}
       />
+      <HomeStack.Screen name="Socials" component={Socials} />
     </HomeStack.Navigator>
   );
 };
