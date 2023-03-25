@@ -11,10 +11,12 @@ import { HomeParamList } from './HomeNavigator';
 import { MyProgramsParamList } from './MyProgramsNavigator';
 import { ProfileParamList } from './ProfileNavigator';
 import { IconSelect } from '../screens/program/IconSelect';
+import { WorkoutEdit } from '../screens/program/WorkoutEdit';
 
 export type ProgramParamList = {
   Program: { programId: string; back?: boolean };
   Workout: { workoutId: string };
+  WorkoutEdit: {workoutId: string};
   ExerciseSearch: { workoutId: string };
   StaticExercise: { workoutId: string; staticExerciseId: string };
   Exercise: { exerciseId: string };
@@ -41,6 +43,7 @@ export const ProgramNavigator: React.FC<ProgramStackNavigatorProps> = ({ route }
           initialParams={{ programId, back }}
         />
         <ProgramStack.Screen name="Workout" component={Workout} />
+        <ProgramStack.Screen name="WorkoutEdit" component={WorkoutEdit} />
         <ProgramStack.Screen name="ExerciseSearch" component={ExerciseSearch} />
         <ProgramStack.Screen name="StaticExercise" component={StaticExercise} />
         <ProgramStack.Screen name="Exercise" component={Exercise} />

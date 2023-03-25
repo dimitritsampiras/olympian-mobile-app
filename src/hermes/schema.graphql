@@ -123,6 +123,7 @@ type Mutation {
   updateProgramIcon(programId: String!, programImageDefaultEmoji: String!): Program
   updateSetReps(reps: Int!, setId: String!): Set
   updateSetRpe(rpe: Int!, setId: String!): Set
+  updateWorkoutName(name: String!, workoutId: String!): Workout
 }
 
 type PerformedExercise {
