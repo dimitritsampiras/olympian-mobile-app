@@ -171,6 +171,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: 150,
     flex: 1,
     width: '100%',
   },
