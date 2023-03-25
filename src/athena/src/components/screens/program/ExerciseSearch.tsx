@@ -64,7 +64,7 @@ export const ExerciseSearch: React.FC<ExerciseSearchProps> = ({ navigation, rout
                     scale={0.6}
                     data={muscles.map((m) => ({
                       color: theme.colors.blue[600],
-                      slug: m.replaceAll('_', '-'),
+                      slug: m.split('_').join('-'),
                       intensity: 1,
                     }))}
                     frontOnly
