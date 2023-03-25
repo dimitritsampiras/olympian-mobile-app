@@ -119,6 +119,7 @@ type Mutation {
   startWorkout(workoutId: String!): PerformedWorkout
   unfollow(profileId: String!): Profile
   updateCompletionStatus(currentStatus: Boolean!, performedSetId: String!): PerformedSet
+  updateProgramIcon(programId: String!, programImageDefaultEmoji: String!): Program
   updateSetReps(reps: Int!, setId: String!): Set
   updateSetRpe(rpe: Int!, setId: String!): Set
 }
@@ -183,6 +184,8 @@ type Program {
   likes: Int
   name: String!
   performedWorkouts: [PerformedWorkout!]!
+  programImageDefaultColor: String!
+  programImageDefaultEmoji: String!
   publicity: Publicity!
   trainingLevel: TrainingLevel
   trainingType: [TrainingType!]!

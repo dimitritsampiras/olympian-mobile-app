@@ -10,6 +10,7 @@ import { DiscoverParamList } from './DiscoverNavigator';
 import { HomeParamList } from './HomeNavigator';
 import { MyProgramsParamList } from './MyProgramsNavigator';
 import { ProfileParamList } from './ProfileNavigator';
+import { IconSelect } from '../screens/program/IconSelect';
 
 export type ProgramParamList = {
   Program: { programId: string; back?: boolean };
@@ -19,6 +20,7 @@ export type ProgramParamList = {
   Exercise: { exerciseId: string };
   MyProfile: undefined;
   Profile: { profileId: string };
+  IconSelect: { programId: string };
 };
 
 type ProgramStackNavigatorProps = NativeStackScreenProps<
@@ -43,6 +45,7 @@ export const ProgramNavigator: React.FC<ProgramStackNavigatorProps> = ({ route }
         <ProgramStack.Screen name="StaticExercise" component={StaticExercise} />
         <ProgramStack.Screen name="Exercise" component={Exercise} />
         <ProgramStack.Screen name="Profile" component={Profile} />
+        <ProgramStack.Screen name="IconSelect" component={IconSelect} />
       </ProgramStack.Navigator>
     </>
   );

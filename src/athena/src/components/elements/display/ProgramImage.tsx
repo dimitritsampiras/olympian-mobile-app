@@ -21,6 +21,7 @@ const LG_SIZE = 64;
 export const ProgramImage: React.FC<ProgramImageProps> = ({
   size = 'md',
   emojiCode = '1F93D',
+  bgColor = theme.colors.violet[100],
   style,
 }) => {
   const dimension = size === 'sm' ? SM_SIZE : size === 'md' ? MD_SIZE : LG_SIZE;
@@ -34,7 +35,7 @@ export const ProgramImage: React.FC<ProgramImageProps> = ({
           alignItems: 'center',
           justifyContent: 'center',
           overflow: 'hidden',
-          backgroundColor: theme.colors.violet[100],
+          backgroundColor: bgColor,
         },
         style,
       ]}>

@@ -7,7 +7,14 @@ import { Profile } from '../../lib/graphql';
 import theme from '../../theme';
 
 interface ProfileFollowCardProps {
-  profile: Profile | { name: string; username: string; followedBy: { id: string }[] };
+  profile:
+    | Profile
+    | {
+        name: string;
+        username: string;
+        followedBy: { id: string }[];
+        profileInitialsDefaultColor: string;
+      };
   styles?: ViewProps['style'];
   onPress?: () => void;
 }
@@ -16,7 +23,12 @@ export const ProfileFollowCard: React.FC<ProfileFollowCardProps> = ({ profile, o
   return (
     <TouchableOpacity style={styles.followProfile} onPress={onPress}>
       <View style={{ flexDirection: 'row' }}>
-        <Avatar size={34} name={profile.name} containerStyle={{ marginRight: 12 }} />
+        <Avatar
+          backgroundColor={profile.profileInitialsDefaultColor}
+          size={34}
+          name={profile.name}
+          containerStyle={{ marginRight: 12 }}
+        />
         <View>
           <Text>{profile.username}</Text>
           <Text style={{ marginTop: 4, fontSize: 12, color: theme.colors.gray[500] }}>

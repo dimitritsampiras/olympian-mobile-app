@@ -4,6 +4,12 @@ mutation CreateProgram($input: CreateProgramInput!) {
   }
 }
 
+mutation UpdateProgramIcon($programId: String!, $programImageDefaultEmoji: String!) {
+  updateProgramIcon(programId: $programId, programImageDefaultEmoji: $programImageDefaultEmoji) {
+    ...Program
+  }
+}
+
 mutation CreateWorkout($programId: String!) {
   createWorkout(programId: $programId) {
     ...Workout
