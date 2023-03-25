@@ -4,7 +4,6 @@ import { TrainingType } from '../../lib/graphql';
 import { Discover } from '../screens/Discover';
 import { TrainingTypeDiscover } from '../screens/discover/TrainingTypeDiscover';
 import { Profile } from '../screens/profile/Profile';
-import { Program } from '../screens/program/Program';
 import { ProgramNavigator } from './ProgramNavigator';
 import { TabParamList } from './TabNavigator';
 

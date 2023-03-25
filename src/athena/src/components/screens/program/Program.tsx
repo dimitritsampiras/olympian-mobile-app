@@ -1,10 +1,10 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useContext, useEffect, useState } from 'react';
 import { ActivityIndicator, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
-import { ActionSheet, ButtonProps } from 'react-native-ui-lib';
+import { ActionSheet, ButtonProps, Incubator } from 'react-native-ui-lib';
 import {
+  useAddProgramToLibraryMutation,
   useCreateWorkoutMutation,
-  useMyProfileQuery,
   useProgramFromIdQuery,
 } from '../../../lib/graphql';
 import theme from '../../../theme';
@@ -23,6 +23,8 @@ import {
   PencilIcon,
   ShareIcon,
   DocumentDuplicateIcon,
+  BookOpenIcon,
+  GlobeAltIcon,
 } from 'react-native-heroicons/outline';
 import { useIsFocused } from '@react-navigation/native';
 import { UserContext } from '../../../lib/context';
@@ -36,6 +38,8 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [canEdit, setCanEdit] = useState(false);
   const isFocused = useIsFocused();
+
+  const [addProgramToLibrary] = useAddProgramToLibraryMutation();
   // data
   const { data, loading, error, refetch } = useProgramFromIdQuery({
     variables: { programId },
@@ -45,8 +49,6 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
         data?.program?.authors.map(({ id }) => id).includes(user?.profile?.id || '') || false
       ),
   });
-
-  const { data: mpData, refetch: mpRefetch } = useMyProfileQuery();
 
   const [createWorkout, { loading: cwLoading }] = useCreateWorkoutMutation();
 
@@ -61,8 +63,7 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
   };
 
   const handleIconPress = () => {
-    if (!data?.program?.authors.find(({ id }) => id === mpData?.myProfile?.id)) return;
-    navigation.navigate('IconSelect', { programId: programId });
+    if (canEdit) navigation.navigate('IconSelect', { programId: programId });
   };
 
   const handleOnMenuPress = () => {
@@ -74,11 +75,7 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
   };
 
   useEffect(() => {
-    isFocused &&
-      (async () => {
-        await refetch();
-        await mpRefetch();
-      })();
+    isFocused && (async () => await refetch())();
     setCanEdit(
       data?.program?.authors.map(({ id }) => id).includes(user?.profile?.id || '') || false
     );
@@ -96,7 +93,7 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
       {data?.program && (
         <>
           <View>
-            <Header navigation={route.params.back ? navigation : undefined}>
+            <Header navigation={navigation}>
               <View onTouchStart={handleIconPress}>
                 <ProgramImage
                   bgColor={data.program.programImageDefaultColor}
@@ -106,9 +103,7 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
                 />
               </View>
 
-              <Heading as="h2" onPress={async () => await refetch()}>
-                {data?.program?.name}
-              </Heading>
+              <Heading as="h2">{data?.program?.name}</Heading>
               <BodyText style={{ fontSize: 12, width: 200 }}>
                 A sample program description since it was not implemented in the program form.
               </BodyText>
@@ -117,20 +112,31 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
               <View
                 style={{
                   flexDirection: 'row',
-                  alignItems: 'center',
+                  alignItems: 'flex-end',
                   justifyContent: 'space-between',
                   marginTop: 16,
                 }}>
-                {data.program.authors[0]?.id && (
-                  <ProfileName
-                    profile={data.program.authors[0]}
-                    onPress={() => {
-                      navigation.navigate('Profile', {
-                        profileId: data.program?.authors[0]?.id || '',
-                      });
-                    }}
-                  />
-                )}
+                <View>
+                  {data.program.authors[0]?.id && (
+                    <ProfileName
+                      profile={data.program.authors[0]}
+                      onPress={() => {
+                        navigation.navigate('Profile', {
+                          profileId: data.program?.authors[0]?.id || '',
+                        });
+                      }}
+                    />
+                  )}
+
+                  {!canEdit && (
+                    <View style={{ marginTop: 10, flexDirection: 'row', alignItems: 'center' }}>
+                      <GlobeAltIcon color={theme.colors.gray[500]} size={14} />
+                      <Text style={{ fontSize: 12, color: theme.colors.gray[500] }}>
+                        {'  '}• {data.program.inLibraryOf.length} users
+                      </Text>
+                    </View>
+                  )}
+                </View>
 
                 <TouchableOpacity onPress={handleOnMenuPress}>
                   <EllipsisHorizontalIcon fill="black" />
@@ -209,8 +215,19 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
                   label: 'Duplicate',
                   onPress: () => {},
                 },
+                {
+                  label: 'Add to Library',
+                  onPress: async () => {
+                    if (!data.program?.id) return;
+                    await addProgramToLibrary({
+                      variables: { programId: data.program.id },
+                    });
+                  },
+                },
               ].filter(({ label }) =>
-                !canEdit ? ['Edit', 'Add Collaborators'].includes(label) : true
+                !canEdit
+                  ? !['Edit', 'Add Collaborators', 'Duplicate'].includes(label)
+                  : !['Add to Library'].includes(label)
               )}
             />
           </View>
@@ -229,5 +246,6 @@ export const ProgramOptionsIcon: React.FC<{
   if (item === 'Share') return <ShareIcon size={22} stroke={theme.colors.gray[800]} />;
   if (item === 'Duplicate')
     return <DocumentDuplicateIcon size={22} stroke={theme.colors.gray[800]} />;
+  if (item === 'Add to Library') return <BookOpenIcon size={22} stroke={theme.colors.gray[800]} />;
   return <PencilIcon stroke={theme.colors.gray[800]} />;
 };

@@ -16,6 +16,12 @@ mutation CreateWorkout($programId: String!) {
   }
 }
 
+mutation UpdateWorkoutName($name: String!, $workoutId: String!) {
+  updateWorkoutName(name: $name, workoutId: $workoutId) {
+    ...Workout
+  }
+}
+
 mutation CreateExercise($workoutId: String!, $staticExerciseId: String!) {
   createExercise(workoutId: $workoutId, staticExerciseId: $staticExerciseId) {
     ...Exercise
@@ -54,6 +60,12 @@ mutation FinishWorkout($performedWorkoutId: String!) {
 
 mutation UpdateCompletionStatus($performedSetId: String!, $currentStatus: Boolean!) {
   updateCompletionStatus(performedSetId: $performedSetId, currentStatus: $currentStatus) {
+    id
+  }
+}
+
+mutation AddProgramToLibrary($programId: String!) {
+  addProgramToLibrary(programId: $programId) {
     id
   }
 }

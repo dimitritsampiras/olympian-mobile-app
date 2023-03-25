@@ -22,26 +22,26 @@ model User {
 }
 
 model Profile {
-  id                String             @id @default(cuid())
-  name              String
-  username          String             @unique
-  dateOfBirth       DateTime?
-  gender            Gender?
-  weight            Int?
-  height            Int?
-  createdAt         DateTime           @default(now())
-  updatedAt         DateTime           @updatedAt
-  profileInitialsDefaultColor  String        @default("#45818e") @db.VarChar(7)
-  trainingAge       TrainingLevel?
-  goals             TrainingType[]
+  id                          String             @id @default(cuid())
+  name                        String
+  username                    String             @unique
+  dateOfBirth                 DateTime?
+  gender                      Gender?
+  weight                      Int?
+  height                      Int?
+  createdAt                   DateTime           @default(now())
+  updatedAt                   DateTime           @updatedAt
+  profileInitialsDefaultColor String             @default("#45818e") @db.VarChar(7)
+  trainingAge                 TrainingLevel?
+  goals                       TrainingType[]
   // relations
-  authoredPrograms  Program[]          @relation("ProgramAuthor")
-  programLibrary    Program[]          @relation("ProgramUser")
-  followedBy        Profile[]          @relation("UserFollows")
-  following         Profile[]          @relation("UserFollows")
-  user              User               @relation(fields: [userId], references: [id])
-  userId            String             @unique
-  performedWorkouts PerformedWorkout[]
+  authoredPrograms            Program[]          @relation("ProgramAuthor")
+  programLibrary              Program[]          @relation("ProgramUser")
+  followedBy                  Profile[]          @relation("UserFollows")
+  following                   Profile[]          @relation("UserFollows")
+  user                        User               @relation(fields: [userId], references: [id])
+  userId                      String             @unique
+  performedWorkouts           PerformedWorkout[]
 }
 
 model Program {

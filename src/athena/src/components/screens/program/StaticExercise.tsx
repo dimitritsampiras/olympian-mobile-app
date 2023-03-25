@@ -70,7 +70,7 @@ export const StaticExercise: React.FC<StaticExerciseProps> = ({ route, navigatio
               {data?.staticExercise?.name}
             </Heading>
             <TouchableOpacity onPress={handleAddExercise}>
-              <PlusCircleIcon width={22} style={{ marginTop: 4 }}></PlusCircleIcon>
+              <PlusCircleIcon size={50} style={{ marginTop: 4 }}></PlusCircleIcon>
             </TouchableOpacity>
           </Header>
           <View

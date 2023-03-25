@@ -4,7 +4,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useContext, useEffect } from 'react';
 import { ActivityIndicator, Text, TouchableOpacity, View } from 'react-native';
 import { XMarkIcon } from 'react-native-heroicons/mini';
-import { ChevronRightIcon, PlayIcon, StopIcon } from 'react-native-heroicons/solid';
+import { ChevronRightIcon, PlayIcon, StopIcon, PencilIcon } from 'react-native-heroicons/solid';
 import { ACTIVE_WORKOUT_ID } from '../../../lib/constants';
 import { ActiveWorkoutContext } from '../../../lib/context';
 import { useStartWorkoutMutation, useWorkoutFromIdQuery } from '../../../lib/graphql';
@@ -68,7 +68,13 @@ export const Workout: React.FC<WorkoutProps> = ({ route, navigation }) => {
               flexDirection: 'row',
             }}>
             <View>
-              <Heading as="h2">{data?.workout?.name}</Heading>
+              <View style={{ flex: 1, flexDirection: 'row' }}>
+                <Heading as="h2">{data?.workout?.name}</Heading>
+                <TouchableOpacity onPress={() => navigation.navigate('WorkoutEdit', {workoutId})}>
+                <PencilIcon style={{marginLeft:5}}size={24} fill={'black'}/>
+                </TouchableOpacity>
+              </View>
+
               <BodyText style={{ fontSize: 12, width: 200 }}>
                 A sample workout description.
               </BodyText>

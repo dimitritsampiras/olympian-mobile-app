@@ -78,6 +78,20 @@ export const ProgramMutation = extendType({
       },
     });
     /**
+     * update workout name mutation
+     */
+    t.field('updateWorkoutName', {
+      type: nullable('Workout'),
+      args: { name: 'String', workoutId: 'String' },
+      resolve: async (_root, { workoutId, name }, { prisma }) => {
+        const workout = await prisma.workout.update({
+          where: { id: workoutId },
+          data: { name },
+        });
+        return workout;
+      },
+    });
+    /**
      *
      * create exercise mutation
      */

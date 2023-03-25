@@ -59,6 +59,7 @@ query UserPrograms {
   userPrograms {
     ...Program
     authors {
+      id
       username
     }
     workouts {
@@ -122,6 +123,64 @@ query ExerciseHistory($exerciseId: String!, $currentPerformedExercise: String) {
     ...PerformedExercise
     performedSets {
       ...PerformedSet
+    }
+  }
+}
+
+query LastPerformedWorkout {
+  lastPerformedWorkout {
+    workout {
+      name
+    }
+    active
+    createdAt
+    duration
+    id
+    notes
+    performedExercises {
+      id
+    }
+    program {
+      name
+    }
+  }
+}
+
+query PerformedWorkoutFromId($id: String!) {
+  performedWorkoutFromId(id: $id) {
+    program {
+      id
+      name
+      inLibraryOf {
+        id
+      }
+      programImageDefaultColor
+      programImageDefaultEmoji
+    }
+    workout {
+      name
+    }
+    active
+    createdAt
+    duration
+    id
+    performedExercises {
+      performedSets {
+        reps
+        weight
+        set {
+          number
+        }
+      }
+      exercise {
+        staticExercise {
+          name
+          primaryTargetMuscle
+          secondaryTargetMuscle
+          tertiaryTargetMuscle
+        }
+        order
+      }
     }
   }
 }

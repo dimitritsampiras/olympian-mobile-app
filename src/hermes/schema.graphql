@@ -108,6 +108,7 @@ enum Muscle {
 }
 
 type Mutation {
+  addProgramToLibrary(programId: String!): Profile
   createExercise(staticExerciseId: String!, workoutId: String!): Exercise
   createProgram(input: CreateProgramInput!): Program
   createSet(exerciseId: String!): Set
@@ -122,6 +123,7 @@ type Mutation {
   updateProgramIcon(programId: String!, programImageDefaultEmoji: String!): Program
   updateSetReps(reps: Int!, setId: String!): Set
   updateSetRpe(rpe: Int!, setId: String!): Set
+  updateWorkoutName(name: String!, workoutId: String!): Workout
 }
 
 type PerformedExercise {
@@ -204,12 +206,14 @@ type Query {
   emailExists(email: String!): Boolean
   exercise(exerciseId: String!): Exercise
   exerciseHistory(currentPerformedExercise: String, exerciseId: String!): [PerformedExercise!]!
+  lastPerformedWorkout: PerformedWorkout
   me: User
   myFollowers: [Profile!]!
   myFollowersCount: Int!
   myFollows: [Profile!]!
   myFollowsCount: Int!
   myProfile: Profile
+  performedWorkoutFromId(id: String!): PerformedWorkout
   popularPrograms(skip: Int!, take: Int!, trainingType: [TrainingType!]): [Program!]!
   profileFromId(id: String!): Profile
   profilePrograms(profileId: String!): [Program!]!

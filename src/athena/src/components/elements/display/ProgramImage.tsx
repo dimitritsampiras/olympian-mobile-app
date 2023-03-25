@@ -35,7 +35,7 @@ export const ProgramImage: React.FC<ProgramImageProps> = ({
           alignItems: 'center',
           justifyContent: 'center',
           overflow: 'hidden',
-          backgroundColor: bgColor,
+          backgroundColor: bgColor.includes('#') ? bgColor : `#${bgColor}`,
         },
         style,
       ]}>
