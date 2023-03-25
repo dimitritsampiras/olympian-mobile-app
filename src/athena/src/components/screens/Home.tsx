@@ -18,7 +18,7 @@ import { UserContext } from '../../lib/context';
 import { ChevronRightIcon } from 'react-native-heroicons/solid';
 import { Calendar } from '../elements/display/Calendar';
 
-interface HomeProps extends NativeStackScreenProps<HomeParamList & TabParamList, 'Home'> {}
+interface HomeProps extends NativeStackScreenProps<HomeParamList & TabParamList, 'Home'> { }
 
 export const Home: React.FC<HomeProps> = ({ navigation }) => {
   const { user } = useContext(UserContext);
@@ -77,6 +77,13 @@ export const Home: React.FC<HomeProps> = ({ navigation }) => {
             </View>
             <ChevronRightIcon color={theme.colors.gray[300]} size={18} />
           </TouchableOpacity>
+          <Button
+            style={{ paddingBottom: 20 }}
+            colorScheme="primary"
+            variant="flat"
+            onPress={handleOnGetStartedPress}>
+            New Program
+          </Button>
         </>
       )}
 
