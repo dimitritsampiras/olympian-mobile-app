@@ -52,6 +52,10 @@ export const Workout: React.FC<WorkoutProps> = ({ route, navigation }) => {
     await refetchActiveQuery();
   };
 
+  const isPlayable = () => data!.workout!.exercises.length > 0;
+
+  const isActive = () => workoutId !== activeWorkout?.workout.id;
+
   return (
     <ScreenView>
       <View>
@@ -70,16 +74,15 @@ export const Workout: React.FC<WorkoutProps> = ({ route, navigation }) => {
               </BodyText>
             </View>
             <TouchableOpacity
-              disabled={data?.workout?.exercises.length === 0}
+              disabled={!isPlayable()}
               onPress={handleStartWorkout}
               style={{
                 marginRight: 2,
-                backgroundColor:
-                  workoutId !== activeWorkout?.id ? theme.colors.blue[500] : theme.colors.gray[200],
+                backgroundColor: isPlayable() ? theme.colors.blue[500] : theme.colors.gray[200],
                 padding: 10,
                 borderRadius: theme.radius.full,
               }}>
-              {workoutId !== activeWorkout?.workout.id ? (
+              {isActive() ? (
                 <PlayIcon color="white" size={20} />
               ) : (
                 <StopIcon color="white" size={20} />
