@@ -27,5 +27,21 @@ export const ProfileMutation = extendType({
         });
       },
     });
+    t.field('addProgramToLibrary', {
+      type: nullable('Profile'),
+      args: { programId: 'String' },
+      resolve: async (_root, { programId }, { userId, prisma }) => {
+        return await prisma.profile.update({
+          where: { userId },
+          data: {
+            programLibrary: {
+              connect: {
+                id: programId,
+              },
+            },
+          },
+        });
+      },
+    });
   },
 });

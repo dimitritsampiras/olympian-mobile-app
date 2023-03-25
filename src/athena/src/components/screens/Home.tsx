@@ -2,25 +2,29 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useContext, useState } from 'react';
 
 import { ScreenView } from '../containers/ScreenView';
-import { StyleSheet, View, ViewStyle } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { Header } from '../containers/Header';
 import theme from '../../theme';
 import { ActionSheet } from 'react-native-ui-lib';
 import { HomeParamList } from '../navigation/HomeNavigator';
 import { TabParamList } from '../navigation';
 import { HorizontalCardScroller } from '../containers/HorizontalCardScroller';
-import { useStaticExercisesQuery, useUserProgramsQuery } from '../../lib/graphql';
+import { useLastPerformedWorkoutQuery, useStaticExercisesQuery } from '../../lib/graphql';
 import { Card } from '../containers/Card';
 import WeightIcon from '../../../assets/weight.svg';
 import WeightIconPurple from '../../../assets/weight2.svg';
 import { BodyText, Button, Heading, SubHeading } from '../elements';
 import { UserContext } from '../../lib/context';
+import { ChevronRightIcon } from 'react-native-heroicons/solid';
+import { Calendar } from '../elements/display/Calendar';
 
 interface HomeProps extends NativeStackScreenProps<HomeParamList & TabParamList, 'Home'> {}
 
 export const Home: React.FC<HomeProps> = ({ navigation }) => {
   const { user } = useContext(UserContext);
   const { data } = useStaticExercisesQuery();
+
+  const { data: lastData } = useLastPerformedWorkoutQuery();
 
   const [visible, setVisible] = useState(false);
 
@@ -31,8 +35,6 @@ export const Home: React.FC<HomeProps> = ({ navigation }) => {
   const handleOnDismiss = () => {
     setVisible(false);
   };
-
-  const programData = useUserProgramsQuery({ fetchPolicy: 'no-cache' });
 
   return (
     <ScreenView>
@@ -45,7 +47,7 @@ export const Home: React.FC<HomeProps> = ({ navigation }) => {
 
       {/* TODO: render most recent Performed Workout instead this if there is one */}
 
-      {programData.data && programData.data.userPrograms.length <= 0 ? (
+      {!lastData?.lastPerformedWorkout ? (
         <View style={[styles.infoContainer]}>
           <BodyText style={{ marginBottom: 12 }}>
             You have no active programs. Click the button to get started.
@@ -55,13 +57,27 @@ export const Home: React.FC<HomeProps> = ({ navigation }) => {
           </Button>
         </View>
       ) : (
-        <Button
-          style={{ paddingBottom: 20 }}
-          colorScheme="primary"
-          variant="flat"
-          onPress={handleOnGetStartedPress}>
-          Create Program
-        </Button>
+        <>
+          <SubHeading as="h3">Last Workout</SubHeading>
+          <TouchableOpacity
+            style={[styles.lastWorkoutCard, { marginBottom: 18 }]}
+            onPress={() =>
+              navigation.navigate('PerformedWorkout', {
+                performedWorkoutId: lastData.lastPerformedWorkout?.id || '',
+              })
+            }>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Calendar iso={lastData.lastPerformedWorkout.createdAt} />
+              <View style={{ marginLeft: 10 }}>
+                <Heading as="h4">{lastData.lastPerformedWorkout.workout.name}</Heading>
+                <Text style={{ color: theme.colors.gray[400] }}>
+                  {lastData.lastPerformedWorkout.program.name}
+                </Text>
+              </View>
+            </View>
+            <ChevronRightIcon color={theme.colors.gray[300]} size={18} />
+          </TouchableOpacity>
+        </>
       )}
 
       <SubHeading>Trending Exercises</SubHeading>
@@ -132,4 +148,21 @@ const styles = StyleSheet.create({
     borderRadius: theme.radius.md,
     marginBottom: 24,
   },
+  lastWorkoutCard: {
+    backgroundColor: 'white',
+    borderRadius: 18,
+    paddingVertical: 14,
+    paddingHorizontal: 14,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
 });
+
+const toWeekday = (iso: string) => {
+  return new Date(iso).toLocaleString('en-US', { weekday: 'short' });
+};
+
+const toDay = (iso: string) => {
+  return new Date(iso).toLocaleString('en-US', { day: 'numeric' });
+};

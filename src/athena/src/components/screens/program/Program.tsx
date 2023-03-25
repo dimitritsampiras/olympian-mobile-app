@@ -3,8 +3,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { ActivityIndicator, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { ActionSheet, ButtonProps } from 'react-native-ui-lib';
 import {
+  useAddProgramToLibraryMutation,
   useCreateWorkoutMutation,
-  useMyProfileQuery,
   useProgramFromIdQuery,
 } from '../../../lib/graphql';
 import theme from '../../../theme';
@@ -23,6 +23,7 @@ import {
   PencilIcon,
   ShareIcon,
   DocumentDuplicateIcon,
+  BookOpenIcon,
 } from 'react-native-heroicons/outline';
 import { useIsFocused } from '@react-navigation/native';
 import { UserContext } from '../../../lib/context';
@@ -36,6 +37,8 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [canEdit, setCanEdit] = useState(false);
   const isFocused = useIsFocused();
+
+  const [addProgramToLibrary] = useAddProgramToLibraryMutation();
   // data
   const { data, loading, error, refetch } = useProgramFromIdQuery({
     variables: { programId },
@@ -45,8 +48,6 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
         data?.program?.authors.map(({ id }) => id).includes(user?.profile?.id || '') || false
       ),
   });
-
-  const { data: mpData, refetch: mpRefetch } = useMyProfileQuery();
 
   const [createWorkout, { loading: cwLoading }] = useCreateWorkoutMutation();
 
@@ -61,7 +62,6 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
   };
 
   const handleIconPress = () => {
-    if (!data?.program?.authors.find(({ id }) => id === mpData?.myProfile?.id)) return;
     navigation.navigate('IconSelect', { programId: programId });
   };
 
@@ -74,11 +74,7 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
   };
 
   useEffect(() => {
-    isFocused &&
-      (async () => {
-        await refetch();
-        await mpRefetch();
-      })();
+    isFocused && (async () => await refetch())();
     setCanEdit(
       data?.program?.authors.map(({ id }) => id).includes(user?.profile?.id || '') || false
     );
@@ -96,7 +92,7 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
       {data?.program && (
         <>
           <View>
-            <Header navigation={route.params.back ? navigation : undefined}>
+            <Header navigation={navigation}>
               <View onTouchStart={handleIconPress}>
                 <ProgramImage
                   bgColor={data.program.programImageDefaultColor}
@@ -209,8 +205,12 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
                   label: 'Duplicate',
                   onPress: () => {},
                 },
+                {
+                  label: 'Add to Library',
+                  onPress: () => {},
+                },
               ].filter(({ label }) =>
-                !canEdit ? ['Edit', 'Add Collaborators'].includes(label) : true
+                !canEdit ? !['Edit', 'Add Collaborators', 'Duplicate'].includes(label) : true
               )}
             />
           </View>
@@ -229,5 +229,6 @@ export const ProgramOptionsIcon: React.FC<{
   if (item === 'Share') return <ShareIcon size={22} stroke={theme.colors.gray[800]} />;
   if (item === 'Duplicate')
     return <DocumentDuplicateIcon size={22} stroke={theme.colors.gray[800]} />;
+  if (item === 'Add to Library') return <BookOpenIcon size={22} stroke={theme.colors.gray[800]} />;
   return <PencilIcon stroke={theme.colors.gray[800]} />;
 };

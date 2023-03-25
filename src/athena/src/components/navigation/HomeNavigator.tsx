@@ -1,6 +1,7 @@
 import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Home } from '../screens';
 import { CreateProgram } from '../screens/createProgram/CreateProgram';
+import { PerformedWorkout } from '../screens/program/PerformedWorkout';
 
 import { ProgramNavigator } from './ProgramNavigator';
 import { TabParamList } from './TabNavigator';
@@ -8,7 +9,8 @@ import { TabParamList } from './TabNavigator';
 export type HomeParamList = {
   Home: undefined;
   CreateProgram: undefined;
-  ProgramNavigator: { programId: string };
+  ProgramNavigator: { programId: string; back?: boolean };
+  PerformedWorkout: { performedWorkoutId: string };
 };
 
 const HomeStack = createNativeStackNavigator<HomeParamList>();
@@ -25,6 +27,11 @@ export const HomeNavigator: React.FC<HomeStackNavigatorProps> = ({ route }) => {
         name="ProgramNavigator"
         component={ProgramNavigator}
         initialParams={{ programId: '' }}
+      />
+      <HomeStack.Screen
+        name="PerformedWorkout"
+        component={PerformedWorkout}
+        initialParams={{ performedWorkoutId: '' }}
       />
     </HomeStack.Navigator>
   );

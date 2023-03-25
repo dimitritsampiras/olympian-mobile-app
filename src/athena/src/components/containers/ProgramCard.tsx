@@ -26,6 +26,8 @@ export const ProgramCard: React.FC<ProgramCardProps> = ({
   onPress,
   ...props
 }) => {
+  console.log('color', program.programImageDefaultColor);
+
   return (
     <Card
       square={square}

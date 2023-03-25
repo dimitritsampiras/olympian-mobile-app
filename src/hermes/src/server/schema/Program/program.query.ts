@@ -201,5 +201,40 @@ export const ProgramQuery = extendType({
         return previousPerformedExercises;
       },
     });
+    /**
+     *
+     * exercise history
+     */
+    t.field('lastPerformedWorkout', {
+      type: nullable('PerformedWorkout'),
+      resolve: async (_root, _args, { prisma, userId }) => {
+        const previousPerformedWorkout = await prisma.performedWorkout.findFirst({
+          where: {
+            profile: { userId },
+            active: { not: true },
+          },
+          orderBy: {
+            createdAt: 'desc',
+          },
+        });
+
+        return previousPerformedWorkout;
+      },
+    });
+    /**
+     *
+     * exercise history
+     */
+    t.field('performedWorkoutFromId', {
+      type: nullable('PerformedWorkout'),
+      args: { id: 'String' },
+      resolve: async (_root, { id }, { prisma }) => {
+        const performedWorkout = await prisma.performedWorkout.findUnique({
+          where: { id },
+        });
+
+        return performedWorkout;
+      },
+    });
   },
 });
