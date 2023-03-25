@@ -104,6 +104,7 @@ export const StaticExercise: React.FC<StaticExerciseProps> = ({ route, navigatio
                 {muscle}
               </MuscleChip>
             ))}
+            {/* <Text style={{ marginTop: 10 }}>Movement: {data.staticExercise.movement}</Text> */}
           </View>
           <View style={{ marginTop: 28, marginBottom: 208 }}>
             <Heading as="h3">Description</Heading>

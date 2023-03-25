@@ -47,6 +47,7 @@ export const TabBar: React.FC<BottomTabBarProps> = ({ descriptors, navigation, s
   );
 
   const translationY = useSharedValue(0);
+  const translationY2 = useSharedValue(0);
 
   const gestureHandler = useAnimatedGestureHandler({
     onStart: (_, ctx: { startingY: number }) => {
@@ -104,14 +105,14 @@ export const TabBar: React.FC<BottomTabBarProps> = ({ descriptors, navigation, s
   const visibleMinimizedPlayerAnimatedStyle = useAnimatedStyle(() => {
     // translationY.value = !activeWorkout ? TABBAR_HEIGHT + MINIMIZED_PLAYER_HEIGHT : 0;
     return {
-      transform: [{ translateY: translationY.value }],
+      transform: [{ translateY: translationY2.value }],
     };
   });
 
   const hideMinimizedPlayerAnimatedStyle = useAnimatedStyle(() => {
     // translationY.value = !activeWorkout ? TABBAR_HEIGHT + MINIMIZED_PLAYER_HEIGHT : 0;
     return {
-      transform: [{ translateY: translationY.value }],
+      transform: [{ translateY: translationY2.value }],
     };
   });
 
@@ -140,8 +141,8 @@ export const TabBar: React.FC<BottomTabBarProps> = ({ descriptors, navigation, s
     };
   });
 
-  translationY.value = withTiming(hideBar ? TABBAR_HEIGHT + MINIMIZED_PLAYER_HEIGHT : 0);
-  translationY.value = withTiming(!activeWorkout ? TABBAR_HEIGHT + MINIMIZED_PLAYER_HEIGHT : 0);
+  translationY2.value = withTiming(hideBar ? TABBAR_HEIGHT + MINIMIZED_PLAYER_HEIGHT : 0);
+  translationY2.value = withTiming(!activeWorkout ? TABBAR_HEIGHT + MINIMIZED_PLAYER_HEIGHT : 0);
 
   useEffect(() => {
     setHideBar(TAB_BAR_HIDDEN_ROUTES.includes(routeName as typeof TAB_BAR_HIDDEN_ROUTES[0]));

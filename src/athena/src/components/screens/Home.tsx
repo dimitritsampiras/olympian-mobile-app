@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { ScreenView } from '../containers/ScreenView';
 import { StyleSheet, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
@@ -18,14 +18,16 @@ import { UserContext } from '../../lib/context';
 import { ChevronRightIcon } from 'react-native-heroicons/solid';
 import { Calendar } from '../elements/display/Calendar';
 import { BellIcon } from 'react-native-heroicons/outline';
+import { useIsFocused } from '@react-navigation/native';
 
-interface HomeProps extends NativeStackScreenProps<HomeParamList & TabParamList, 'Home'> { }
+interface HomeProps extends NativeStackScreenProps<HomeParamList & TabParamList, 'Home'> {}
 
 export const Home: React.FC<HomeProps> = ({ navigation }) => {
   const { user } = useContext(UserContext);
   const { data } = useStaticExercisesQuery();
+  const isFocused = useIsFocused();
 
-  const { data: lastData } = useLastPerformedWorkoutQuery();
+  const { data: lastData, refetch } = useLastPerformedWorkoutQuery();
 
   const [visible, setVisible] = useState(false);
 
@@ -36,6 +38,10 @@ export const Home: React.FC<HomeProps> = ({ navigation }) => {
   const handleOnDismiss = () => {
     setVisible(false);
   };
+
+  useEffect(() => {
+    (async () => await refetch())();
+  }, [isFocused]);
 
   return (
     <ScreenView>

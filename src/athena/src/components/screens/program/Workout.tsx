@@ -70,8 +70,8 @@ export const Workout: React.FC<WorkoutProps> = ({ route, navigation }) => {
             <View>
               <View style={{ flex: 1, flexDirection: 'row' }}>
                 <Heading as="h2">{data?.workout?.name}</Heading>
-                <TouchableOpacity onPress={() => navigation.navigate('WorkoutEdit', {workoutId})}>
-                <PencilIcon style={{marginLeft:5}}size={24} fill={'black'}/>
+                <TouchableOpacity onPress={() => navigation.navigate('WorkoutEdit', { workoutId })}>
+                  <PencilIcon style={{ marginLeft: 9 }} size={14} fill={theme.colors.gray[400]} />
                 </TouchableOpacity>
               </View>
 
