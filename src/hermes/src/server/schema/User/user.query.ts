@@ -86,24 +86,6 @@ export const UserQuery = extendType({
           workoutsQuery,
           exercisesQuery,
         ]);
-
-        // const sorted = [
-        //   ...profiles.map((p) => ({ ...p, r: 4, type: 'profile' })),
-        //   ...programs.map((p) => ({ ...p, r: 3, type: 'program' })),
-        //   ...workouts.map((p) => ({ ...p, r: 2, type: 'workout' })),
-        //   ...exercises.map((p) => ({ ...p, r: 1, type: 'exercise' })),
-        // ].sort((_a, _b) => {
-        //   // sort by relevance value first
-        //   // if (a.r < b.r) return -1;
-        //   // if (a.r > b.r) return 1;
-        //   // // sort by name if relevance is equal
-        //   // if (a.name < b.name) return -1;
-        //   // if (a.name > b.name) return 1;
-        //   // else return 0
-        //   return 0;
-        // });
-        console.log([...profiles, ...programs, ...workouts, ...exercises]);
-
         return [...profiles, ...programs, ...workouts, ...exercises];
       },
     });

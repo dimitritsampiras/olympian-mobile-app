@@ -11,6 +11,7 @@ import Animated, {
   useSharedValue,
   withSpring,
   withTiming,
+  runOnJS,
 } from 'react-native-reanimated';
 import { MiniPlayer } from './MiniPlayer';
 import { Player } from './Player';
@@ -20,7 +21,6 @@ import { HomeParamList } from '../navigation/HomeNavigator';
 import { ProgramParamList } from '../navigation/ProgramNavigator';
 import { DiscoverParamList, TabParamList } from '../navigation';
 import { MyProgramsParamList } from '../navigation/MyProgramsNavigator';
-import { Fader } from 'react-native-ui-lib';
 
 const { height, width } = Dimensions.get('window');
 const TABBAR_HEIGHT = 98;
@@ -53,10 +53,12 @@ export const TabBar: React.FC<BottomTabBarProps> = ({ descriptors, navigation, s
       ctx.startingY = translationY.value;
     },
     onActive: (event, ctx: { startingY: number }) => {
-      const activeValue = ctx.startingY + event.translationY;
-      translationY.value = Math.min(Math.max(SNAP_TOP, activeValue), SNAP_BOTTOM);
-      // console.log('active', translationY.value);
+      translationY.value = Math.min(
+        Math.max(SNAP_TOP, ctx.startingY + event.translationY),
+        SNAP_BOTTOM
+      );
     },
+
     onEnd: (event) => {
       const swipeDistance = event.translationY;
       const currentY = translationY.value;
@@ -71,7 +73,6 @@ export const TabBar: React.FC<BottomTabBarProps> = ({ descriptors, navigation, s
         // Snap to the nearest snap point
         targetY = currentY > (SNAP_TOP + SNAP_BOTTOM) / 2 ? SNAP_BOTTOM : SNAP_TOP;
       }
-
       translationY.value = withSpring(targetY, {
         overshootClamping: true,
         damping: 20,
@@ -91,6 +92,8 @@ export const TabBar: React.FC<BottomTabBarProps> = ({ descriptors, navigation, s
   };
 
   const hideTabBarAnimatedStyle = useAnimatedStyle(() => {
+    // translationY.value = hideBar ? TABBAR_HEIGHT + MINIMIZED_PLAYER_HEIGHT : 0;
+
     return {
       transform: [
         { translateY: withTiming(hideBar ? TABBAR_HEIGHT + MINIMIZED_PLAYER_HEIGHT : 0) },
@@ -98,11 +101,17 @@ export const TabBar: React.FC<BottomTabBarProps> = ({ descriptors, navigation, s
     };
   });
 
-  const hideMinimizedPlayerAnimatedStyle = useAnimatedStyle(() => {
+  const visibleMinimizedPlayerAnimatedStyle = useAnimatedStyle(() => {
+    // translationY.value = !activeWorkout ? TABBAR_HEIGHT + MINIMIZED_PLAYER_HEIGHT : 0;
     return {
-      transform: [
-        { translateY: withTiming(!activeWorkout ? TABBAR_HEIGHT + MINIMIZED_PLAYER_HEIGHT : 0) },
-      ],
+      transform: [{ translateY: withTiming(0) }],
+    };
+  });
+
+  const hideMinimizedPlayerAnimatedStyle = useAnimatedStyle(() => {
+    // translationY.value = !activeWorkout ? TABBAR_HEIGHT + MINIMIZED_PLAYER_HEIGHT : 0;
+    return {
+      transform: [{ translateY: withTiming(TABBAR_HEIGHT + MINIMIZED_PLAYER_HEIGHT) }],
     };
   });
 
@@ -133,7 +142,6 @@ export const TabBar: React.FC<BottomTabBarProps> = ({ descriptors, navigation, s
 
   useEffect(() => {
     setHideBar(TAB_BAR_HIDDEN_ROUTES.includes(routeName as typeof TAB_BAR_HIDDEN_ROUTES[0]));
-    console.log('setting', routeName);
   }, [routeName]);
 
   return (
@@ -150,7 +158,13 @@ export const TabBar: React.FC<BottomTabBarProps> = ({ descriptors, navigation, s
               ]}>
               <Player />
             </Animated.View>
-            <Animated.View style={[miniPlayerOpacityStyle, hideMinimizedPlayerAnimatedStyle]}>
+            <Animated.View
+              style={[
+                miniPlayerOpacityStyle,
+                activeWorkout
+                  ? hideMinimizedPlayerAnimatedStyle
+                  : visibleMinimizedPlayerAnimatedStyle,
+              ]}>
               <MiniPlayer
                 style={{ height: MINIMIZED_PLAYER_HEIGHT, bottom: TABBAR_HEIGHT }}
                 activeWorkout={activeWorkout}

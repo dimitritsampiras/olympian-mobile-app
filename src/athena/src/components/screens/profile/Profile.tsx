@@ -107,7 +107,6 @@ export const Profile: React.FC<ProfileProps> = ({ navigation, route }) => {
                   key={program.id}
                   style={{ flexDirection: 'row', alignItems: 'center' }}
                   onPress={() => {
-                    console.log('hereeeee', program.id);
                     navigation.navigate('ProgramNavigator', { programId: program.id });
                   }}>
                   <ProgramImage />

@@ -32,7 +32,11 @@ export const ProfileNavigator: React.FC<ProfileNavigatorProps> = () => {
       <ProfileStack.Screen name="FollowingList" component={FollowingList} />
       <ProfileStack.Screen name="FollowersList" component={FollowersList} />
       <ProfileStack.Screen name="Profile" component={Profile} />
-      <ProfileStack.Screen name="ProgramNavigator" component={ProgramNavigator} />
+      <ProfileStack.Screen
+        name="ProgramNavigator"
+        component={ProgramNavigator}
+        initialParams={{ back: true }}
+      />
     </ProfileStack.Navigator>
   );
 };

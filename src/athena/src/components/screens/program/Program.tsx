@@ -54,10 +54,6 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
     navigation.navigate('Workout', { workoutId: workout.id });
   };
 
-  const handleDone = async () => {
-    navigation.navigate('Home');
-  };
-
   const handleOnMenuPress = () => {
     setMenuVisible(true);
   };
@@ -150,14 +146,6 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
                 Add Workout
               </Button>
             )}
-            <Button
-              colorScheme="primary"
-              variant="flat"
-              onPress={handleDone}
-              loading={cwLoading}
-              style={{ paddingTop: 10 }}>
-              Done
-            </Button>
             {/*
              *
              *
