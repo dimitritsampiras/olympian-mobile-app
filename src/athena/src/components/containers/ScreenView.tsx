@@ -59,7 +59,12 @@ export const ScreenView: React.FC<ScreenViewProps> = ({
         paddingTop: insets.top,
         paddingBottom: insets.bottom,
       }}>
-      {children}
+      <View
+        style={{
+          paddingBottom: 150,
+        }}>
+        {children}
+      </View>
     </ScrollView>
   );
 };
