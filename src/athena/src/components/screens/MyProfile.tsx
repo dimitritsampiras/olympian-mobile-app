@@ -12,6 +12,7 @@ import {
   ChartBarIcon,
   ChevronRightIcon,
   UserCircleIcon,
+  TrophyIcon,
 } from 'react-native-heroicons/solid';
 
 import theme from '../../theme';
@@ -30,12 +31,12 @@ interface ProfileProps extends NativeStackScreenProps<ProfileParamList, 'MyProfi
 
 const profileOptions = [
   {
-    option: 'Statistics and Goals',
+    option: 'Goals',
     screen: 'Goals',
-    Icon: ChartBarIcon,
+    Icon: TrophyIcon,
   },
   {
-    option: 'Social',
+    option: 'Socials',
     screen: 'Socials',
     Icon: UsersIcon,
   },
