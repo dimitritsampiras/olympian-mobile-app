@@ -52,8 +52,8 @@ model Program {
   trainingLevel            TrainingLevel?
   publicity                Publicity
   likes                    Int?
-  profileImageDefaultColor String             @default("e0e7ff") @db.VarChar(7)
-  profileImageDefaultEmoji String             @default("1F93C") @db.VarChar(5)
+  programImageDefaultColor String             @default("e0e7ff") @db.VarChar(7)
+  programImageDefaultEmoji String             @default("1F93C") @db.VarChar(5)
   createdAt                DateTime           @default(now())
   updatedAt                DateTime           @updatedAt
   workouts                 Workout[]

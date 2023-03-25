@@ -4,7 +4,7 @@ import argon2 from 'argon2';
 import config from '../../../../config';
 import { NexusGenInputs } from '../../../../lib/types/nexus';
 import { PrismaClient, User } from '@prisma/client';
-import { getRandomDefaultProfileColor } from './getRandomDefaultProfileColor';
+import { getRandomColor } from '../../../../lib/utils/getRandomColor';
 
 type LoginInput = NexusGenInputs['LoginInput'];
 type SignUpInput = NexusGenInputs['SignUpInput'];
@@ -90,7 +90,7 @@ export const loginUser = async (
 export const signUpUser = async (prisma: PrismaClient, input: SignUpInput) => {
   const { username, password, name, email } = input;
 
-  const profileInitialsDefaultColor = getRandomDefaultProfileColor();
+  const profileInitialsDefaultColor = getRandomColor();
 
   const user = await prisma.user.create({
     data: {

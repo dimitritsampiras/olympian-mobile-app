@@ -11,6 +11,7 @@ query ProgramFromId($programId: String!) {
       id
       username
       name
+      profileInitialsDefaultColor
     }
   }
 }
@@ -124,5 +125,3 @@ query ExerciseHistory($exerciseId: String!, $currentPerformedExercise: String) {
     }
   }
 }
-
-

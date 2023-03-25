@@ -15,7 +15,10 @@ export const InlineProgram: React.FC<InlineProgramProps> = ({ program, onPress }
       key={program.id}
       style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 4 }}
       onPress={onPress}>
-      <ProgramImage />
+      <ProgramImage
+        bgColor={program.programImageDefaultColor}
+        emojiCode={program.programImageDefaultEmoji}
+      />
       <View style={{ marginLeft: 12 }}>
         <Heading as="h4">{program.name}</Heading>
         <Text style={{ color: theme.colors.gray[700], marginTop: 2, fontSize: 12 }}>

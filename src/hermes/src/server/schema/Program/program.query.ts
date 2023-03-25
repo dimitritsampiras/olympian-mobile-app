@@ -123,7 +123,6 @@ export const ProgramQuery = extendType({
             },
           },
         });
-        console.log(profile?.authoredPrograms);
 
         return profile?.authoredPrograms || [];
       },

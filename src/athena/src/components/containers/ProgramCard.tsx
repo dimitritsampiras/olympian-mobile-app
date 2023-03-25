@@ -33,7 +33,12 @@ export const ProgramCard: React.FC<ProgramCardProps> = ({
       style={[{ justifyContent: 'space-between' }, style]}
       {...props}>
       <View>
-        <ProgramImage size="md" style={{ marginBottom: 8 }} />
+        <ProgramImage
+          bgColor={program.programImageDefaultColor}
+          emojiCode={program.programImageDefaultEmoji}
+          size="md"
+          style={{ marginBottom: 8 }}
+        />
         <Heading as={square ? 'h4' : 'h3'}>{_.truncate(program.name, { length: 25 })}</Heading>
       </View>
 

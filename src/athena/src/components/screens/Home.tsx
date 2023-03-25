@@ -9,7 +9,7 @@ import { ActionSheet } from 'react-native-ui-lib';
 import { HomeParamList } from '../navigation/HomeNavigator';
 import { TabParamList } from '../navigation';
 import { HorizontalCardScroller } from '../containers/HorizontalCardScroller';
-import { useStaticExercisesQuery } from '../../lib/graphql';
+import { useStaticExercisesQuery, useUserProgramsQuery } from '../../lib/graphql';
 import { Card } from '../containers/Card';
 import WeightIcon from '../../../assets/weight.svg';
 import WeightIconPurple from '../../../assets/weight2.svg';
@@ -32,6 +32,8 @@ export const Home: React.FC<HomeProps> = ({ navigation }) => {
     setVisible(false);
   };
 
+  const programData = useUserProgramsQuery({ fetchPolicy: 'no-cache' });
+
   return (
     <ScreenView>
       <Header>
@@ -42,14 +44,25 @@ export const Home: React.FC<HomeProps> = ({ navigation }) => {
       </Header>
 
       {/* TODO: render most recent Performed Workout instead this if there is one */}
-      <View style={[styles.infoContainer]}>
-        <BodyText style={{ marginBottom: 12 }}>
-          You have no active programs. Click the button to get started.
-        </BodyText>
-        <Button variant="ghost" colorScheme="info" onPress={handleOnGetStartedPress}>
-          Get Started
+
+      {programData.data && programData.data.userPrograms.length <= 0 ? (
+        <View style={[styles.infoContainer]}>
+          <BodyText style={{ marginBottom: 12 }}>
+            You have no active programs. Click the button to get started.
+          </BodyText>
+          <Button variant="ghost" colorScheme="info" onPress={handleOnGetStartedPress}>
+            Get Started
+          </Button>
+        </View>
+      ) : (
+        <Button
+          style={{ paddingBottom: 20 }}
+          colorScheme="primary"
+          variant="flat"
+          onPress={handleOnGetStartedPress}>
+          Create Program
         </Button>
-      </View>
+      )}
 
       <SubHeading>Trending Exercises</SubHeading>
       <HorizontalCardScroller>

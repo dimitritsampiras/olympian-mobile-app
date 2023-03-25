@@ -54,6 +54,10 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
     navigation.navigate('Workout', { workoutId: workout.id });
   };
 
+  const handleIconPress = () => {
+    navigation.navigate('IconSelect', { programId: programId });
+  };
+
   const handleOnMenuPress = () => {
     setMenuVisible(true);
   };
@@ -76,14 +80,21 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
   if (loading) {
     return <ActivityIndicator />;
   }
-
   return (
     <ScreenView>
       {data?.program && (
         <>
           <View>
             <Header navigation={route.params.back ? navigation : undefined}>
-              <ProgramImage size="lg" style={{ marginBottom: 14 }} />
+              <View onTouchStart={handleIconPress}>
+                <ProgramImage
+                  bgColor={data.program.programImageDefaultColor}
+                  emojiCode={data.program.programImageDefaultEmoji}
+                  size="lg"
+                  style={{ marginBottom: 14 }}
+                />
+              </View>
+
               <Heading as="h2" onPress={async () => await refetch()}>
                 {data?.program?.name}
               </Heading>

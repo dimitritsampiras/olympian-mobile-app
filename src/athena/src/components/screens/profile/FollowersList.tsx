@@ -47,7 +47,12 @@ export const FollowersList: React.FC<FollowersListProps> = ({ navigation }) => {
             style={styles.followProfile}
             onPress={() => navigation.navigate('Profile', { profileId: follower.id })}>
             <View style={{ flexDirection: 'row' }}>
-              <Avatar size={34} name={follower.name} containerStyle={{ marginRight: 12 }} />
+              <Avatar
+                size={34}
+                name={follower.name}
+                backgroundColor={follower.profileInitialsDefaultColor}
+                containerStyle={{ marginRight: 12 }}
+              />
               <View>
                 <Text>{follower.username}</Text>
                 <Text style={{ marginTop: 4, fontSize: 12, color: theme.colors.gray[500] }}>
