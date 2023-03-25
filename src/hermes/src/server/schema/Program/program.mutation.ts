@@ -1,5 +1,6 @@
 import { Prisma } from '@prisma/client';
 import { extendType, inputObjectType, list, nullable } from 'nexus';
+import { getRandomColor } from '../../../lib/utils/getRandomColor';
 
 // All mutations for User graphql object type
 export const ProgramMutation = extendType({
@@ -28,11 +29,26 @@ export const ProgramMutation = extendType({
             name,
             publicity,
             trainingType,
+            programImageDefaultColor: getRandomColor(),
             authors: { connect: { userId } },
           },
         });
 
         return createdProgram;
+      },
+    });
+    /**
+     *
+     * updates the icon of a program
+     */
+    t.field('updateProgramIcon', {
+      type: nullable('Program'),
+      args: { programId: 'String', programImageDefaultEmoji: 'String' },
+      resolve: async (_root, { programId, programImageDefaultEmoji }, { prisma }) => {
+        return await prisma.program.update({
+          where: { id: programId },
+          data: { programImageDefaultEmoji },
+        });
       },
     });
     /**

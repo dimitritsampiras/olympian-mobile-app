@@ -10,8 +10,8 @@ const programs: Prisma.ProgramCreateInput[] = [
     tags: ['full body', 'beginner', 'strength', 'hypertrophy'],
     publicity: 'public',
     likes: 10,
-    profileImageDefaultColor: 'e0e7ff',
-    profileImageDefaultEmoji: '1F93C',
+    programImageDefaultColor: 'e0e7ff',
+    programImageDefaultEmoji: '1F93C',
     workouts: {
       create: [
         {

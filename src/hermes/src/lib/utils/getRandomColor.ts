@@ -1,6 +1,6 @@
-import { colors } from '../../../../lib/utils/colors';
+import { colors } from './colors';
 
-export const getRandomDefaultProfileColor = (): string => {
+export const getRandomColor = (): string => {
   const keys = Object.keys(colors);
   const colorCategory = colors[keys[100]];
 
