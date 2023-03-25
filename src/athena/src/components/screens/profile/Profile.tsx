@@ -11,6 +11,7 @@ import { Header } from '../../containers/Header';
 import theme from '../../../theme';
 import { Heading, ProgramImage, SubHeading } from '../../elements';
 import {
+  Program,
   useFollowMutation,
   useMyProfileQuery,
   useProfileFromIdQuery,
@@ -22,6 +23,7 @@ import { CheckCircleIcon } from 'react-native-heroicons/solid';
 import { useIsFocused } from '@react-navigation/native';
 import { MyProgramsParamList } from '../../navigation/MyProgramsNavigator';
 import { ProgramParamList } from '../../navigation/ProgramNavigator';
+import { InlineProgram } from '../../containers/InlineProgram';
 
 interface ProfileProps
   extends NativeStackScreenProps<
@@ -103,20 +105,25 @@ export const Profile: React.FC<ProfileProps> = ({ navigation, route }) => {
             <SubHeading as="h2">Authored Programs</SubHeading>
             {pgData?.profilePrograms && pgData?.profilePrograms.length > 0 ? (
               pgData?.profilePrograms.map((program) => (
-                <TouchableOpacity
+                // <TouchableOpacity
+                //   key={program.id}
+                //   style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 4 }}
+                //   onPress={() => {
+                //     navigation.navigate('ProgramNavigator', { programId: program.id });
+                //   }}>
+                //   <ProgramImage />
+                //   <View style={{ marginLeft: 12 }}>
+                //     <Heading as="h4">{program.name}</Heading>
+                //     <Text style={{ color: theme.colors.gray[700], marginTop: 2, fontSize: 12 }}>
+                //       {program.inLibraryOf.length} users · {program.likes || 0} likes
+                //     </Text>
+                //   </View>
+                // </TouchableOpacity>
+                <InlineProgram
                   key={program.id}
-                  style={{ flexDirection: 'row', alignItems: 'center' }}
-                  onPress={() => {
-                    navigation.navigate('ProgramNavigator', { programId: program.id });
-                  }}>
-                  <ProgramImage />
-                  <View style={{ marginLeft: 12 }}>
-                    <Heading as="h4">{program.name}</Heading>
-                    <Text style={{ color: theme.colors.gray[700], marginTop: 2, fontSize: 12 }}>
-                      {program.inLibraryOf.length} users · {program.likes || 0} likes
-                    </Text>
-                  </View>
-                </TouchableOpacity>
+                  program={program as Program}
+                  onPress={() => navigation.navigate('ProgramNavigator', { programId: program.id })}
+                />
               ))
             ) : (
               <View>

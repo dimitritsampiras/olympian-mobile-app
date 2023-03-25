@@ -10,7 +10,7 @@ export const ExerciseOrder: React.FC<ExerciseOrderProps> = ({ order }) => {
   return (
     <View
       style={{
-        backgroundColor: exerciseOrderToColor[(order % 7) as 1 | 2][50],
+        backgroundColor: exerciseOrderToColor[(order % 7) as 1][50],
         height: 30,
         width: 30,
         alignItems: 'center',

@@ -12,10 +12,11 @@ import {
 } from 'react-native';
 import { MagnifyingGlassIcon, XMarkIcon } from 'react-native-heroicons/solid';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { BrowseSearchQuery, useBrowseSearchLazyQuery } from '../../../lib/graphql';
+import { BrowseSearchQuery, Program, useBrowseSearchLazyQuery } from '../../../lib/graphql';
 import theme from '../../../theme';
 import { DiscoverParamList } from '../../navigation';
 import { HorizontalCardScroller } from '../HorizontalCardScroller';
+import { InlineProgram } from '../InlineProgram';
 import { ProfileFollowCard } from '../ProfileFollowCard';
 
 const searchParams = ['top', 'programs', 'profiles', 'workouts', 'exercises'] as const;
@@ -139,9 +140,14 @@ export const BrowseModal: React.FC<BrowseModalProps> = ({ isOpen, close, navigat
 
                   if (searchResult.__typename === 'Program') {
                     return (
-                      <View key={i}>
-                        <Text>{searchResult.name}</Text>
-                      </View>
+                      <InlineProgram
+                        key={i}
+                        program={searchResult as Program}
+                        onPress={() => {
+                          navigation.navigate('Profile', { profileId: searchResult.id });
+                          close();
+                        }}
+                      />
                     );
                   }
                   if (searchResult.__typename === 'Workout') {
