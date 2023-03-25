@@ -104,14 +104,14 @@ export const TabBar: React.FC<BottomTabBarProps> = ({ descriptors, navigation, s
   const visibleMinimizedPlayerAnimatedStyle = useAnimatedStyle(() => {
     // translationY.value = !activeWorkout ? TABBAR_HEIGHT + MINIMIZED_PLAYER_HEIGHT : 0;
     return {
-      transform: [{ translateY: withTiming(0) }],
+      transform: [{ translateY: translationY.value }],
     };
   });
 
   const hideMinimizedPlayerAnimatedStyle = useAnimatedStyle(() => {
     // translationY.value = !activeWorkout ? TABBAR_HEIGHT + MINIMIZED_PLAYER_HEIGHT : 0;
     return {
-      transform: [{ translateY: withTiming(TABBAR_HEIGHT + MINIMIZED_PLAYER_HEIGHT) }],
+      transform: [{ translateY: translationY.value }],
     };
   });
 
@@ -139,6 +139,9 @@ export const TabBar: React.FC<BottomTabBarProps> = ({ descriptors, navigation, s
       opacity: interpolate(translationY.value, [0, -(MINIMIZED_PLAYER_HEIGHT * 2)], [0, 1]),
     };
   });
+
+  translationY.value = withTiming(hideBar ? TABBAR_HEIGHT + MINIMIZED_PLAYER_HEIGHT : 0);
+  translationY.value = withTiming(!activeWorkout ? TABBAR_HEIGHT + MINIMIZED_PLAYER_HEIGHT : 0);
 
   useEffect(() => {
     setHideBar(TAB_BAR_HIDDEN_ROUTES.includes(routeName as typeof TAB_BAR_HIDDEN_ROUTES[0]));
