@@ -52,6 +52,8 @@ export const SetCard: React.FC<SetCardProps> = ({ set, style }) => {
       <Text>Set {set.number}</Text>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <TextInput
+          keyboardType="numeric"
+          maxLength={2}
           style={{
             backgroundColor: theme.colors.gray[100],
             padding: 6,
@@ -68,6 +70,7 @@ export const SetCard: React.FC<SetCardProps> = ({ set, style }) => {
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <TextInput
           keyboardType="numeric"
+          maxLength={2}
           style={{
             backgroundColor: theme.colors.gray[100],
             padding: 6,
