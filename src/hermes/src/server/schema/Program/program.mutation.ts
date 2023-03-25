@@ -33,7 +33,6 @@ export const ProgramMutation = extendType({
             authors: { connect: { userId } },
           },
         });
-
         return createdProgram;
       },
     });

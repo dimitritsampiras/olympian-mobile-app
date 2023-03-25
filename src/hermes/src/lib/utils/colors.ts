@@ -1,4 +1,4 @@
-export const colors: Record<string, Record<string, string>> = {
+export const colors: Record<string, Record<number, string>> = {
   rose: {
     50: '#fff1f2',
     100: '#ffe4e6',
