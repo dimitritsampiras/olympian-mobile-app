@@ -59,6 +59,7 @@ query UserPrograms {
   userPrograms {
     ...Program
     authors {
+      id
       username
     }
     workouts {

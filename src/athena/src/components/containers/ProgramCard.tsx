@@ -1,14 +1,13 @@
 import React from 'react';
 import { Text, View, ViewProps } from 'react-native';
-import { HeartIcon } from 'react-native-heroicons/solid';
 
 import _, { sample } from 'lodash';
 
-import { ProgramFragment } from '../../lib/graphql';
-import theme from '../../theme';
+import { Profile, ProgramFragment } from '../../lib/graphql';
 import { Heading } from '../elements';
 import { ProgramImage } from '../elements/display/ProgramImage';
 import { Card } from './Card';
+import { ProfileName } from '../elements/display/ProfileName';
 
 interface ProgramCardProps extends ViewProps {
   program: ProgramFragment;
@@ -26,8 +25,6 @@ export const ProgramCard: React.FC<ProgramCardProps> = ({
   onPress,
   ...props
 }) => {
-  console.log('color', program.programImageDefaultColor);
-
   return (
     <Card
       square={square}
@@ -45,22 +42,7 @@ export const ProgramCard: React.FC<ProgramCardProps> = ({
       </View>
 
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        {!userOwned ? (
-          <>
-            <HeartIcon width={16} fill={theme.colors.rose[600]} />
-            <Text style={{ marginLeft: 5 }}>{sample([4, 15, 65, 23, 45, 26, 23, 12])}</Text>
-          </>
-        ) : (
-          <>
-            {/* {program.specificity.map((spec) => {
-              return (
-                <Badge key={spec} colorScheme={specificityColor(spec)} style={{ marginRight: 6 }}>
-                  {spec}
-                </Badge>
-              );
-            })} */}
-          </>
-        )}
+        {userOwned ? <></> : <ProfileName profile={program.authors[0] as Profile} />}
       </View>
     </Card>
   );

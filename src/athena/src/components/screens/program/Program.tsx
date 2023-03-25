@@ -1,7 +1,7 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useContext, useEffect, useState } from 'react';
 import { ActivityIndicator, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
-import { ActionSheet, ButtonProps } from 'react-native-ui-lib';
+import { ActionSheet, ButtonProps, Incubator } from 'react-native-ui-lib';
 import {
   useAddProgramToLibraryMutation,
   useCreateWorkoutMutation,
@@ -24,6 +24,7 @@ import {
   ShareIcon,
   DocumentDuplicateIcon,
   BookOpenIcon,
+  GlobeAltIcon,
 } from 'react-native-heroicons/outline';
 import { useIsFocused } from '@react-navigation/native';
 import { UserContext } from '../../../lib/context';
@@ -62,7 +63,7 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
   };
 
   const handleIconPress = () => {
-    navigation.navigate('IconSelect', { programId: programId });
+    if (canEdit) navigation.navigate('IconSelect', { programId: programId });
   };
 
   const handleOnMenuPress = () => {
@@ -102,9 +103,7 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
                 />
               </View>
 
-              <Heading as="h2" onPress={async () => await refetch()}>
-                {data?.program?.name}
-              </Heading>
+              <Heading as="h2">{data?.program?.name}</Heading>
               <BodyText style={{ fontSize: 12, width: 200 }}>
                 A sample program description since it was not implemented in the program form.
               </BodyText>
@@ -113,20 +112,31 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
               <View
                 style={{
                   flexDirection: 'row',
-                  alignItems: 'center',
+                  alignItems: 'flex-end',
                   justifyContent: 'space-between',
                   marginTop: 16,
                 }}>
-                {data.program.authors[0]?.id && (
-                  <ProfileName
-                    profile={data.program.authors[0]}
-                    onPress={() => {
-                      navigation.navigate('Profile', {
-                        profileId: data.program?.authors[0]?.id || '',
-                      });
-                    }}
-                  />
-                )}
+                <View>
+                  {data.program.authors[0]?.id && (
+                    <ProfileName
+                      profile={data.program.authors[0]}
+                      onPress={() => {
+                        navigation.navigate('Profile', {
+                          profileId: data.program?.authors[0]?.id || '',
+                        });
+                      }}
+                    />
+                  )}
+
+                  {!canEdit && (
+                    <View style={{ marginTop: 10, flexDirection: 'row', alignItems: 'center' }}>
+                      <GlobeAltIcon color={theme.colors.gray[500]} size={14} />
+                      <Text style={{ fontSize: 12, color: theme.colors.gray[500] }}>
+                        {'  '}• {data.program.inLibraryOf.length} users
+                      </Text>
+                    </View>
+                  )}
+                </View>
 
                 <TouchableOpacity onPress={handleOnMenuPress}>
                   <EllipsisHorizontalIcon fill="black" />
@@ -207,10 +217,17 @@ export const Program: React.FC<ProgramProps> = ({ route, navigation }) => {
                 },
                 {
                   label: 'Add to Library',
-                  onPress: () => {},
+                  onPress: async () => {
+                    if (!data.program?.id) return;
+                    await addProgramToLibrary({
+                      variables: { programId: data.program.id },
+                    });
+                  },
                 },
               ].filter(({ label }) =>
-                !canEdit ? !['Edit', 'Add Collaborators', 'Duplicate'].includes(label) : true
+                !canEdit
+                  ? !['Edit', 'Add Collaborators', 'Duplicate'].includes(label)
+                  : !['Add to Library'].includes(label)
               )}
             />
           </View>

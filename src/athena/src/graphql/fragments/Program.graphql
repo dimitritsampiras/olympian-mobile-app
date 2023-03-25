@@ -8,6 +8,11 @@ fragment Program on Program {
   likes
   programImageDefaultColor
   programImageDefaultEmoji
+  authors {
+    id
+    username
+    name
+  }
   inLibraryOf {
     id
   }
