@@ -6,8 +6,8 @@ fragment Program on Program {
   trainingLevel
   trainingType
   likes
-  programImageDefaultColor
-  programImageDefaultEmoji
+  defaultImageColor
+  defaultEmojiHex
   authors {
     id
     username

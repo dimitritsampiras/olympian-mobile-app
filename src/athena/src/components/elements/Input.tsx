@@ -1,7 +1,16 @@
 import React, { useRef } from 'react';
-import { View } from 'react-native';
-import { Animated, Easing, StyleSheet, TextInput, TextInputProps, TextStyle } from 'react-native';
+import { Pressable, TextInputProps } from 'react-native';
+import { StyleSheet, TextInput, TextStyle } from 'react-native';
+
+import Animated, {
+  interpolateColor,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
+
 import * as Haptics from 'expo-haptics';
+
 import theme from '../../theme';
 import { HeroIcon } from '../../lib/types';
 
@@ -16,6 +25,10 @@ interface InputProps extends TextInputProps {
   iconProps?: React.ComponentProps<HeroIcon>;
 }
 
+const SHIFT_DISTANCE = 4;
+const BASE_COLOR = theme.colors.gray[50];
+const FOCUSED_COLOR = theme.colors.gray[100];
+
 export const Input: React.FC<InputProps> = ({
   style,
   placeholder,
@@ -23,66 +36,89 @@ export const Input: React.FC<InputProps> = ({
   iconProps = { size: '18', fill: theme.colors.gray[400] },
   ...props
 }) => {
-  const animatedTranslationX = useRef(new Animated.Value(1)).current;
+  const inputRef = useRef<TextInput>(null);
+  const translationX = useSharedValue(0);
 
-  const handleOnPressIn = () => {
+  const handleFocus = () => {
     Haptics.selectionAsync();
-    Animated.timing(animatedTranslationX, {
-      toValue: 14,
-      duration: 3,
-      easing: Easing.cubic,
-      useNativeDriver: true,
-    }).start();
+    translationX.value = withSpring(SHIFT_DISTANCE, {
+      overshootClamping: true,
+      damping: 20,
+      stiffness: 150,
+      mass: 1,
+    });
   };
 
-  const handleUnFocus = () => {
+  const handleBlur = () => {
     Haptics.selectionAsync();
-    Animated.timing(animatedTranslationX, {
-      toValue: 1,
-      duration: 3,
-      easing: Easing.cubic,
-      useNativeDriver: true,
-    }).start();
+    translationX.value = withSpring(0, {
+      overshootClamping: true,
+      damping: 20,
+      stiffness: 150,
+      mass: 1,
+    });
   };
+
+  const handlePress = () => {
+    inputRef.current?.focus();
+  };
+
+  const shiftTextInput = useAnimatedStyle(() => ({
+    transform: [{ translateX: translationX.value }],
+  }));
+
+  const fadeBackgroundColor = useAnimatedStyle(() => ({
+    backgroundColor: interpolateColor(
+      translationX.value,
+      [0, SHIFT_DISTANCE],
+      [BASE_COLOR, FOCUSED_COLOR]
+    ),
+  }));
 
   return (
-    <Animated.View
-      style={{
-        ...styles.container,
-        ...style,
-        ...(props.error ? styles.error : {}),
-      }}>
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        {Icon && <Icon size={iconProps.size} {...{ fill: iconProps.fill }} />}
-        <TextInput
-          {...props}
-          style={{ ...styles.input }}
-          selectionColor={theme.colors.gray[900]}
-          onPressIn={handleOnPressIn}
-          onSubmitEditing={handleUnFocus}
-          placeholder={placeholder}
-          placeholderTextColor={theme.colors.gray[400]}
-          // autoCapitalize={'none'}
-        />
-      </View>
-    </Animated.View>
+    <Pressable style={[styles.pressble, style]} onPress={handlePress}>
+      <Animated.View style={[styles.outerView, fadeBackgroundColor]}>
+        <Animated.View
+          style={[
+            styles.innerView,
+            shiftTextInput,
+            // ...(props.error ? styles.error : {}),
+          ]}>
+          {/* {Icon && <Icon size={iconProps.size} {...{ color: iconProps.color }} />} */}
+          <TextInput
+            ref={inputRef}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            style={{ ...styles.input }}
+            selectionColor={theme.colors.gray[900]}
+            // onPressIn={handleOnPressIn}
+            // onSubmitEditing={handleUnFocus}
+            placeholder={placeholder}
+            placeholderTextColor={theme.colors.gray[400]}
+            {...props}
+          />
+        </Animated.View>
+      </Animated.View>
+    </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    paddingVertical: 3,
-    paddingLeft: 10,
-    borderRadius: 18,
-    backgroundColor: theme.colors.gray[100],
+  pressble: {
     width: '100%',
-    zIndex: 1,
+  },
+  outerView: {
+    paddingVertical: 18,
+    paddingHorizontal: 17,
+    borderRadius: 16,
+    width: '100%',
+  },
+  innerView: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   input: {
-    padding: 13,
     flex: 1,
-    borderRadius: 18,
-    zIndex: 10,
     fontWeight: '300',
   },
   error: {

@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { useContext } from 'react';
-import { SignUpContext } from './SignUp';
 import { Input } from '../../../elements/Input';
 import theme from '../../../../theme';
 import { Formik } from 'formik';
@@ -13,8 +12,16 @@ import { UserCircleIcon } from 'react-native-heroicons/solid';
 import { useUserExistsLazyQuery } from '../../../../lib/graphql';
 import { Heading } from '../../../elements/typography/Heading';
 import { BodyText } from '../../../elements/typography/BodyText';
+import { SignUpContext } from '../../../../lib/context';
 
-interface SignUpUsernameProps {}
+interface SignUpUsernameProps {
+  handleChange: {
+    (e: React.ChangeEvent<unknown>): void;
+    <T = string | React.ChangeEvent<unknown>>(field: T): T extends React.ChangeEvent<any>
+      ? void
+      : (e: string | React.ChangeEvent<unknown>) => void;
+  };
+}
 
 export const SignUpUsername: React.FC<SignUpUsernameProps> = () => {
   const [findusername] = useUserExistsLazyQuery();

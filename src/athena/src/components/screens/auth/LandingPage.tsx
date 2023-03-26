@@ -1,10 +1,10 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button } from '../../elements/Button';
 import { AuthParamList } from '../../navigation/AuthNavigation';
 import TorchLogo from '../../../../assets/TorchLogo.svg';
+import { ScreenView } from '../../containers/ScreenView';
 
 type LandingPageNav = NativeStackScreenProps<AuthParamList, 'LandingPage'>;
 
@@ -12,7 +12,7 @@ interface LandingPageProps extends LandingPageNav {}
 
 export const LandingPage: React.FC<LandingPageProps> = ({ navigation }) => {
   return (
-    <SafeAreaView style={styles.container}>
+    <ScreenView type="form" style={styles.container}>
       <View style={styles.innerContainer}>
         {/* heading section */}
         <View style={{ alignItems: 'center' }}>
@@ -28,7 +28,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ navigation }) => {
           <Button onPress={() => navigation.navigate('Login')}>Log In</Button>
         </View>
       </View>
-    </SafeAreaView>
+    </ScreenView>
   );
 };
 

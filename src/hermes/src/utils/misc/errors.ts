@@ -1,10 +1,10 @@
 import { DateTime } from 'luxon';
-import { NexusGenAllTypes } from '../types/nexus';
+import { NexusGenAllTypes } from '../../types/nexus';
 
 export const createAppError = (message: string): NexusGenAllTypes['AppError'] => {
   return {
     name: 'App Error',
     message,
-    createdAt: DateTime.now().toISO()
+    createdAt: DateTime.now().toISO(),
   };
 };

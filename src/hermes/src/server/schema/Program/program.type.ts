@@ -31,8 +31,8 @@ export const ProgramType = objectType({
     t.field(Program.inLibraryOf);
     t.field(Program.performedWorkouts);
     t.field(Program.likes);
-    t.field(Program.programImageDefaultColor);
-    t.field(Program.programImageDefaultEmoji);
+    t.field(Program.defaultImageColor);
+    t.field(Program.defaultEmojiHex);
   },
 });
 

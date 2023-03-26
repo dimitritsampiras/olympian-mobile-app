@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Exercise, Profile, Program, Workout } from '@prisma/client';
 import { isNil } from 'lodash';
-import { extendType, list, nullable, objectType, unionType } from 'nexus';
+import { extendType, list, nullable, unionType } from 'nexus';
 
 export const UserQuery = extendType({
   type: 'Query',
@@ -98,18 +98,10 @@ export const BrowseResponseTypeUnion = unionType({
     t.members('Profile', 'Program', 'Workout', 'Exercise');
   },
   resolveType: (res) => {
-    if ((res as Profile).gender) return 'Profile';
+    if ((res as Profile).username) return 'Profile';
     if ((res as Program).name) return 'Program';
     if ((res as Exercise).staticExerciseId) return 'Exercise';
     if ((res as Workout).trainingType) return 'Workout';
     return null;
   },
 });
-
-// export const BrowseResponse = objectType({
-//   name: 'BrowseResponse',
-//   definition(t) {
-//     t.field('user', { type: nullable('User') });
-//     t.field('error', { type: nullable('AppError') });
-//   },
-// });

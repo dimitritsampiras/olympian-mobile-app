@@ -1,5 +1,11 @@
 import { createContext } from 'react';
-import { ActiveWorkoutQuery, ActiveWorkoutQueryResult, MeQuery, MeQueryResult } from './graphql';
+import {
+  ActiveWorkoutQuery,
+  ActiveWorkoutQueryResult,
+  MeQuery,
+  MeQueryResult,
+  SignUpInput,
+} from './graphql';
 import { CreateProgramInputWithoutUserId } from './types';
 
 /**
@@ -27,6 +33,13 @@ export const CreateProgramContext = createContext({
   setStep: (() => {}) as React.Dispatch<React.SetStateAction<number>>,
   program: {} as CreateProgramInputWithoutUserId,
   setProgram: (() => {}) as React.Dispatch<React.SetStateAction<CreateProgramInputWithoutUserId>>,
+});
+
+export const SignUpContext = createContext({
+  step: 0,
+  setStep: (() => {}) as React.Dispatch<React.SetStateAction<number>>,
+  signUpInput: {} as Partial<SignUpInput>,
+  setSignUpInput: (() => {}) as React.Dispatch<React.SetStateAction<Partial<SignUpInput>>>,
 });
 
 /**

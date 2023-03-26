@@ -1,11 +1,10 @@
 import { ApolloServer } from 'apollo-server-express';
+import { applyMiddleware } from 'graphql-middleware';
 
 import { schema } from './schema/makeSchema';
 import { AppContext } from './context';
-import { authenticateUser } from './schema/User/helpers/authentication';
 import { permissions } from './permissions';
-import { applyMiddleware } from 'graphql-middleware';
-// import { authenticateUser } from './schema/User';
+import { authenticateUserFromRequest } from '../utils/auth';
 
 type ApolloServerConfig = Omit<AppContext, 'req' | 'res' | 'user'>;
 
@@ -16,7 +15,7 @@ const schemaWithMiddleware = applyMiddleware(schema, permissions);
  * Apollo server init function
  *
  * @param server Http server instance
- * @returns Apollo server
+ * @returns Apollo server instance
  */
 export const createApolloServer = ({ prisma }: ApolloServerConfig) => {
   // Apollo server object
@@ -27,7 +26,7 @@ export const createApolloServer = ({ prisma }: ApolloServerConfig) => {
         req,
         res,
         prisma,
-        userId: authenticateUser(req.headers.authorization),
+        userId: authenticateUserFromRequest(req.headers.authorization),
       };
     },
   });

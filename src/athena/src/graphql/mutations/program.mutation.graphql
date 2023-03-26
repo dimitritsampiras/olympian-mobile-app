@@ -4,8 +4,8 @@ mutation CreateProgram($input: CreateProgramInput!) {
   }
 }
 
-mutation UpdateProgramIcon($programId: String!, $programImageDefaultEmoji: String!) {
-  updateProgramIcon(programId: $programId, programImageDefaultEmoji: $programImageDefaultEmoji) {
+mutation UpdateProgramIcon($programId: String!, $defaultEmojiHex: String!) {
+  updateProgramIcon(programId: $programId, defaultEmojiHex: $defaultEmojiHex) {
     ...Program
   }
 }

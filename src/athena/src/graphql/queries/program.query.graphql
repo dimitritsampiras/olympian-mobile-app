@@ -11,7 +11,7 @@ query ProgramFromId($programId: String!) {
       id
       username
       name
-      profileInitialsDefaultColor
+      defaultColor
     }
   }
 }
@@ -154,8 +154,8 @@ query PerformedWorkoutFromId($id: String!) {
       inLibraryOf {
         id
       }
-      programImageDefaultColor
-      programImageDefaultEmoji
+      defaultImageColor
+      defaultEmojiHex
     }
     workout {
       name

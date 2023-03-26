@@ -16,11 +16,14 @@ import { LoginInput, useLoginMutation } from '../../../lib/graphql';
 import { AUTH_TOKEN } from '../../../lib/constants';
 import { Input } from '../../elements/Input';
 import { Button } from '../../elements/Button';
-import { UserCircleIcon, LockClosedIcon } from 'react-native-heroicons/solid';
+import { UserCircleIcon, LockClosedIcon } from 'react-native-heroicons/outline';
 import theme from '../../../theme';
 import { UserContext } from '../../../lib/context';
 import TorchLogo from '../../../../assets/TorchLogo.svg';
 import { ArrowLongLeftIcon } from 'react-native-heroicons/solid';
+import { ScreenView } from '../../containers/ScreenView';
+import { Header } from '../../containers/Header';
+import { Heading } from '../../elements';
 type ParamList = NativeStackScreenProps<AuthParamList, 'Login'>;
 interface LoginProps extends ParamList {}
 
@@ -92,22 +95,13 @@ export const Login: React.FC<LoginProps> = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView>
+    <ScreenView type="form">
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <View style={styles.screen}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('LandingPage')}
-            style={{ marginBottom: 0, paddingTop: 0 }}>
-            <ArrowLongLeftIcon stroke={theme.colors.gray[700]} />
-          </TouchableOpacity>
+        <View style={(styles.screen, { flex: 1 })}>
+          <Header navigation={navigation} style={{ marginBottom: 16 }}>
+            <Heading>Login</Heading>
+          </Header>
           <View style={styles.keyboardView}>
-            <TorchLogo
-              width={56}
-              height={65}
-              fill={'black'}
-              style={{ marginBottom: 24 }}></TorchLogo>
-
-            <Text style={{ ...styles.heading2, marginBottom: 20 }}>Login</Text>
             <Formik initialValues={initialValues} onSubmit={onSubmit} validate={clearErrors}>
               {({ handleChange, handleSubmit, values }) => (
                 <>
@@ -122,7 +116,7 @@ export const Login: React.FC<LoginProps> = ({ navigation }) => {
                     Icon={UserCircleIcon}
                     iconProps={{
                       size: 20,
-                      fill: errors.username ? 'red' : theme.colors.gray[400],
+                      color: errors.username ? 'red' : theme.colors.gray[400],
                     }}
                   />
                   <Input
@@ -138,7 +132,7 @@ export const Login: React.FC<LoginProps> = ({ navigation }) => {
                     Icon={LockClosedIcon}
                     iconProps={{
                       size: 20,
-                      fill: errors.password ? 'red' : theme.colors.gray[400],
+                      color: errors.password ? 'red' : theme.colors.gray[400],
                     }}
                   />
                   <View style={{ minHeight: 16, marginBottom: 30 }}>
@@ -153,26 +147,20 @@ export const Login: React.FC<LoginProps> = ({ navigation }) => {
           </View>
         </View>
       </TouchableWithoutFeedback>
-    </SafeAreaView>
+    </ScreenView>
   );
 };
 
 const styles = StyleSheet.create({
   screen: {
-    backgroundColor: theme.colors.gray[50],
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
     justifyContent: 'space-between',
-    padding: '10%',
+    paddingHorizontal: 10,
   },
   keyboardView: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 150,
-    flex: 1,
     width: '100%',
   },
   heading2: {

@@ -23,7 +23,7 @@ query BrowseSearch($keyword: String!) {
       id
       name
       username
-      profileInitialsDefaultColor
+      defaultColor
       followedBy {
         id
       }

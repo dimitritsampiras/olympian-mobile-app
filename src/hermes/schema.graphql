@@ -120,7 +120,7 @@ type Mutation {
   startWorkout(workoutId: String!): PerformedWorkout
   unfollow(profileId: String!): Profile
   updateCompletionStatus(currentStatus: Boolean!, performedSetId: String!): PerformedSet
-  updateProgramIcon(programId: String!, programImageDefaultEmoji: String!): Program
+  updateProgramIcon(defaultEmojiHex: String!, programId: String!): Program
   updateSetReps(reps: Int!, setId: String!): Set
   updateSetRpe(rpe: Int!, setId: String!): Set
   updateWorkoutName(name: String!, workoutId: String!): Workout
@@ -162,6 +162,7 @@ type Profile {
   authoredPrograms: [Program!]!
   createdAt: DateTime!
   dateOfBirth: DateTime
+  defaultColor: String!
   followedBy: [Profile!]!
   following: [Profile!]!
   gender: Gender
@@ -170,7 +171,6 @@ type Profile {
   id: ID!
   name: String!
   performedWorkouts: [PerformedWorkout!]!
-  profileInitialsDefaultColor: String!
   programLibrary: [Program!]!
   trainingAge: TrainingLevel
   updatedAt: DateTime!
@@ -182,13 +182,13 @@ type Profile {
 type Program {
   authors: [Profile!]!
   complimentary: Boolean
+  defaultEmojiHex: String!
+  defaultImageColor: String!
   id: ID!
   inLibraryOf: [Profile!]!
   likes: Int
   name: String!
   performedWorkouts: [PerformedWorkout!]!
-  programImageDefaultColor: String!
-  programImageDefaultEmoji: String!
   publicity: Publicity!
   trainingLevel: TrainingLevel
   trainingType: [TrainingType!]!
@@ -279,7 +279,6 @@ enum TrainingType {
   hypertrophy
   martial_arts
   olympic_weightlifting
-  pilates
   recovery
   rowing
   running

@@ -22,7 +22,7 @@ export const schema = makeSchema({
   // output paths of schema
   outputs: {
     schema: path.join(__dirname, '../../../schema.graphql'),
-    typegen: path.join(__dirname, '../../lib/types/nexus.ts'),
+    typegen: path.join(__dirname, '../../types/nexus.ts'),
   },
 
   // assumes all types are not null

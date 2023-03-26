@@ -45,7 +45,6 @@ export const CreateProgram: React.FC<CreateProgramProps> = ({ navigation, route 
   //
   const handleSubmit = async () => {
     if (!program.name || !program.publicity) return;
-    console.log('submitting', program, user?.id);
 
     if (!user) return;
     const { data } = await createProgram({

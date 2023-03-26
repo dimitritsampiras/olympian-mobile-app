@@ -2,7 +2,6 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { AuthParamList } from '../../../navigation';
 import { StyleSheet, Text, View } from 'react-native';
 import { useContext } from 'react';
-import { SignUpContext } from './SignUp';
 import { Input } from '../../../elements/Input';
 import theme from '../../../../theme';
 import { Formik } from 'formik';
@@ -15,6 +14,7 @@ import { ClipboardDocumentCheckIcon, LockClosedIcon } from 'react-native-heroico
 import { useSignUpMutation } from '../../../../lib/graphql';
 import { Heading } from '../../../elements/typography/Heading';
 import { BodyText } from '../../../elements/typography/BodyText';
+import { SignUpContext } from '../../../../lib/context';
 
 // This page will be doing navigating
 type ParamList = NativeStackScreenProps<AuthParamList, 'SignUp'>;

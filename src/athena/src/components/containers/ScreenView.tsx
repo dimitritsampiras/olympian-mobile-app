@@ -34,13 +34,14 @@ export const ScreenView: React.FC<ScreenViewProps> = ({
       <View
         style={[
           {
-            flex: 1,
+            // flex: 1,
+            height: '100%',
             paddingHorizontal: 24,
             paddingTop: insets.top,
             paddingBottom: insets.bottom,
             backgroundColor: 'white',
           },
-          type === 'form' && spaced && { justifyContent: 'space-between' },
+          spaced && { justifyContent: 'space-between' },
           style,
         ]}>
         {children}

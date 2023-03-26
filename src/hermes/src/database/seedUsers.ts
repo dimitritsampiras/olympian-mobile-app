@@ -1,5 +1,5 @@
 import { Prisma, PrismaClient, Profile, Program, User } from '@prisma/client';
-import { createPassword } from '../server/schema/User/helpers/authentication';
+import { createPassword } from '../utils/authentication';
 
 const users: Prisma.UserCreateInput[] = [
   {
