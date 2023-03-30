@@ -23,7 +23,7 @@ import { DiscoverParamList, TabParamList } from '../navigation';
 import { MyProgramsParamList } from '../navigation/MyProgramsNavigator';
 
 const { height, width } = Dimensions.get('window');
-const TABBAR_HEIGHT = 98;
+const TABBAR_HEIGHT = 100;
 const MINIMIZED_PLAYER_HEIGHT = 45;
 const SNAP_BOTTOM = 0;
 const SNAP_TOP = -(height - TABBAR_HEIGHT - MINIMIZED_PLAYER_HEIGHT);

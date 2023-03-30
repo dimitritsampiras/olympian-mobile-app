@@ -33,13 +33,13 @@ model Profile {
   updatedAt         DateTime           @updatedAt
   defaultColor      String             @default("#e0f2fe") @db.VarChar(7)
   trainingAge       TrainingLevel?
-  goals             TrainingType[]
   // relations
   authoredPrograms  Program[]          @relation("ProgramAuthor")
   programLibrary    Program[]          @relation("ProgramUser")
   followedBy        Profile[]          @relation("UserFollows")
   following         Profile[]          @relation("UserFollows")
   performedWorkouts PerformedWorkout[]
+  goals             Goal[]
   user              User               @relation(fields: [userId], references: [id])
   userId            String             @unique
 }
@@ -153,7 +153,7 @@ model StaticExercise {
   createdAt             DateTime   @default(now())
   updatedAt             DateTime   @updatedAt
   exercise              Exercise[]
-  Goal                  Goal[]
+  goal                  Goal[]
 }
 
 model Goal {
@@ -161,6 +161,8 @@ model Goal {
   targetWeight     Float
   staticExericse   StaticExercise @relation(fields: [staticExerciseId], references: [id])
   staticExerciseId String
+  Profile          Profile?       @relation(fields: [profileId], references: [id])
+  profileId        String?
 }
 
 enum Gender {

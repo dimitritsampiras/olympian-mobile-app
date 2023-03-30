@@ -17,7 +17,6 @@ export const ProfileType = objectType({
     t.field(Profile.trainingAge);
     t.field(Profile.updatedAt);
     t.field(Profile.weight);
-    t.field(Profile.goals);
     t.field(Profile.user);
     t.field(Profile.followedBy);
     t.field(Profile.following);

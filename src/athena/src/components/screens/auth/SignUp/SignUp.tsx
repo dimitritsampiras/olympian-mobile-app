@@ -1,19 +1,11 @@
 import { AuthParamList } from '../../../navigation';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { SignUpInput, useSignUpMutation } from '../../../../lib/graphql';
-import React, { createContext, useState } from 'react';
-import {
-  Pressable,
-  StyleSheet,
-  View,
-  TouchableWithoutFeedback,
-  Keyboard,
-  TouchableOpacity,
-  TextInputProps,
-} from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React, { useState } from 'react';
+import { Pressable, StyleSheet, View, Keyboard } from 'react-native';
+
 import theme from '../../../../theme';
-import { ArrowLongLeftIcon } from 'react-native-heroicons/solid';
+
 import { SignUpName } from './SignUpName';
 import { SignUpUsername } from './SignUpUsername';
 import { SignUpPassword } from './SignUpPassword';
@@ -74,17 +66,7 @@ export const SignUp: React.FC<SignUpProps> = ({ navigation, route }) => {
   const [signup, { loading }] = useSignUpMutation();
 
   const handleOnNext = async (values: SignUpFormInput) => {
-    if (step < PAGES.length) {
-      setStep(step + Number(step < 4));
-    }
-    const signUpCreds = {
-      name: signUpInput.name,
-      email: signUpInput.email,
-      username: signUpInput.username,
-      // No need to update state with password before submission
-      password: values.password,
-    };
-    console.log(`Creating user: ${signUpCreds}`);
+    if (step < PAGES.length) setStep(step + Number(step < 4));
 
     await signup({
       variables: {

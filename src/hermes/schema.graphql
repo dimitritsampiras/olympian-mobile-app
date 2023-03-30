@@ -166,7 +166,6 @@ type Profile {
   followedBy: [Profile!]!
   following: [Profile!]!
   gender: Gender
-  goals: [TrainingType!]!
   height: Int
   id: ID!
   name: String!

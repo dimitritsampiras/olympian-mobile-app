@@ -11,7 +11,7 @@ import { HomeNavigator } from './HomeNavigator';
 import { DiscoverNavigator } from './DiscoverNavigator';
 import { MyProgramsNavigator } from './MyProgramsNavigator';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { AuthParamList } from './AuthNavigation';
+import { AuthParamList } from './AuthNavigator';
 import { TabBar } from '../containers/TabBar';
 import { ProfileNavigator } from './ProfileNavigator';
 

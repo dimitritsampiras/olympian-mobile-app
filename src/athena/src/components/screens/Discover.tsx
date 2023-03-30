@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 
 import {
   useTrendingProgramsQuery,

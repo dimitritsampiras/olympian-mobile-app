@@ -3,10 +3,12 @@ import { Pressable, TextInputProps } from 'react-native';
 import { StyleSheet, TextInput, TextStyle } from 'react-native';
 
 import Animated, {
+  interpolate,
   interpolateColor,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
+  withTiming,
 } from 'react-native-reanimated';
 
 import * as Haptics from 'expo-haptics';
@@ -25,7 +27,7 @@ interface InputProps extends TextInputProps {
   iconProps?: React.ComponentProps<HeroIcon>;
 }
 
-const SHIFT_DISTANCE = 4;
+const SHIFT_DISTANCE = 6;
 const BASE_COLOR = theme.colors.gray[50];
 const FOCUSED_COLOR = theme.colors.gray[100];
 
@@ -50,7 +52,7 @@ export const Input: React.FC<InputProps> = ({
   };
 
   const handleBlur = () => {
-    Haptics.selectionAsync();
+    // Haptics.selectionAsync();
     translationX.value = withSpring(0, {
       overshootClamping: true,
       damping: 20,
@@ -75,6 +77,10 @@ export const Input: React.FC<InputProps> = ({
     ),
   }));
 
+  const placeholderStyle = useAnimatedStyle(() => ({
+    opacity: interpolate(translationX.value, [0, SHIFT_DISTANCE / 2], [1, 0]),
+  }));
+
   return (
     <Pressable style={[styles.pressble, style]} onPress={handlePress}>
       <Animated.View style={[styles.outerView, fadeBackgroundColor]}>
@@ -85,6 +91,16 @@ export const Input: React.FC<InputProps> = ({
             // ...(props.error ? styles.error : {}),
           ]}>
           {/* {Icon && <Icon size={iconProps.size} {...{ color: iconProps.color }} />} */}
+          {/* <Animated.Text
+            style={[
+              {
+                position: 'absolute',
+                color: theme.colors.gray[400],
+              },
+              placeholderStyle,
+            ]}>
+            {placeholder}
+          </Animated.Text> */}
           <TextInput
             ref={inputRef}
             onFocus={handleFocus}

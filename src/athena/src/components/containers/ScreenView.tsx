@@ -34,7 +34,6 @@ export const ScreenView: React.FC<ScreenViewProps> = ({
       <View
         style={[
           {
-            // flex: 1,
             height: '100%',
             paddingHorizontal: 24,
             paddingTop: insets.top,

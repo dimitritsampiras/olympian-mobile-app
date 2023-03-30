@@ -171,7 +171,6 @@ export interface NexusGenObjects {
     dateOfBirth?: NexusGenScalars['DateTime'] | null; // DateTime
     defaultColor: string; // String!
     gender?: NexusGenEnums['Gender'] | null; // Gender
-    goals: NexusGenEnums['TrainingType'][]; // [TrainingType!]!
     height?: number | null; // Int
     id: string; // ID!
     name: string; // String!
@@ -324,7 +323,6 @@ export interface NexusGenFieldTypes {
     followedBy: NexusGenRootTypes['Profile'][]; // [Profile!]!
     following: NexusGenRootTypes['Profile'][]; // [Profile!]!
     gender: NexusGenEnums['Gender'] | null; // Gender
-    goals: NexusGenEnums['TrainingType'][]; // [TrainingType!]!
     height: number | null; // Int
     id: string; // ID!
     name: string; // String!
@@ -504,7 +502,6 @@ export interface NexusGenFieldTypeNames {
     followedBy: 'Profile';
     following: 'Profile';
     gender: 'Gender';
-    goals: 'TrainingType';
     height: 'Int';
     id: 'ID';
     name: 'String';
