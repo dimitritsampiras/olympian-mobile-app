@@ -4,4 +4,4 @@
 *.bbl
 *.synctex.gz
 *.out
-node_modules/
+.vscode

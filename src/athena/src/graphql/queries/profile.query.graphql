@@ -1,0 +1,164 @@
+query MyProfile {
+  myProfile {
+    ...Profile
+    following {
+      id
+      username
+    }
+  }
+}
+
+query ProfileFromId($id: String!) {
+  profileFromId(id: $id) {
+    ...Profile
+    followedBy {
+      id
+    }
+  }
+}
+
+query MyFollowersCount {
+  myFollowersCount
+}
+
+query MyFollowsCount {
+  myFollowsCount
+}
+
+query MyFollows {
+  myFollows {
+    ...Profile
+    followedBy {
+      ...Profile
+    }
+  }
+}
+
+query MyFollowers {
+  myFollowers {
+    ...Profile
+    followedBy {
+      ...Profile
+    }
+  }
+}
+
+query ProfilePrograms($profileId: String!) {
+  profilePrograms(profileId: $profileId) {
+    ...Program
+  }
+}
+
+query ActiveFollowers {
+  activeFollowers {
+    workout {
+      ...Workout
+    }
+    program {
+      name
+    }
+    active
+    createdAt
+    duration
+    id
+    notes
+    profile {
+      username
+      name
+    }
+    performedExercises {
+      ...PerformedExercise
+      exercise {
+        authorNotes
+        id
+        order
+        supersetOrder
+        staticExercise {
+          ...StaticExercise
+        }
+      }
+      performedSets {
+        ...PerformedSet
+        set {
+          ...Set
+        }
+      }
+    }
+  }
+}
+
+query FollowerWorkoutActivity {
+  followerWorkoutActivity {
+    workout {
+      ...Workout
+    }
+    program {
+      name
+    }
+    active
+    createdAt
+    duration
+    id
+    notes
+    profile {
+      username
+      name
+    }
+    performedExercises {
+      ...PerformedExercise
+      exercise {
+        authorNotes
+        id
+        order
+        supersetOrder
+        staticExercise {
+          ...StaticExercise
+        }
+      }
+      performedSets {
+        ...PerformedSet
+        set {
+          ...Set
+        }
+      }
+    }
+  }
+}
+
+query ProgramActivity($programId: String!) {
+  programActivity(programId: $programId) {
+    workout {
+      ...Workout
+    }
+    program {
+      name
+    }
+    active
+    createdAt
+    duration
+    id
+    notes
+    profile {
+      username
+      name
+    }
+    performedExercises {
+      ...PerformedExercise
+      exercise {
+        authorNotes
+        id
+        order
+        supersetOrder
+        staticExercise {
+          ...StaticExercise
+        }
+      }
+      performedSets {
+        ...PerformedSet
+        set {
+          ...Set
+        }
+      }
+    }
+  }
+}

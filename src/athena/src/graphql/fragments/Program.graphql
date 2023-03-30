@@ -1,0 +1,79 @@
+fragment Program on Program {
+  complimentary
+  id
+  name
+  publicity
+  trainingLevel
+  trainingType
+  likes
+  programImageDefaultColor
+  programImageDefaultEmoji
+  authors {
+    id
+    username
+    name
+  }
+  inLibraryOf {
+    id
+  }
+  workouts {
+    id
+  }
+}
+
+fragment Workout on Workout {
+  id
+  name
+  programId
+  trainingLevel
+  trainingType
+}
+
+fragment Exercise on Exercise {
+  authorNotes
+  id
+  order
+  supersetOrder
+}
+
+fragment StaticExercise on StaticExercise {
+  equipment
+  id
+  name
+  primaryTargetMuscle
+  secondaryTargetMuscle
+  tertiaryTargetMuscle
+  name
+  movement
+  description
+}
+
+fragment Set on Set {
+  id
+  number
+  reps
+  rpe
+}
+
+fragment PerfomedWorkout on PerformedWorkout {
+  active
+  createdAt
+  duration
+  id
+  notes
+  tonnage
+}
+
+fragment PerformedExercise on PerformedExercise {
+  id
+  notes
+}
+
+fragment PerformedSet on PerformedSet {
+  completedAt
+  completed
+  duration
+  id
+  reps
+  weight
+}

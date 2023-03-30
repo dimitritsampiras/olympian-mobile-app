@@ -1,0 +1,265 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator nexusPrisma {
+  provider = "nexus-prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String   @id @default(cuid())
+  email    String   @unique
+  password String
+  profile  Profile?
+}
+
+model Profile {
+  id                          String             @id @default(cuid())
+  name                        String
+  username                    String             @unique
+  dateOfBirth                 DateTime?
+  gender                      Gender?
+  weight                      Int?
+  height                      Int?
+  createdAt                   DateTime           @default(now())
+  updatedAt                   DateTime           @updatedAt
+  profileInitialsDefaultColor String             @default("#45818e") @db.VarChar(7)
+  trainingAge                 TrainingLevel?
+  goals                       TrainingType[]
+  // relations
+  authoredPrograms            Program[]          @relation("ProgramAuthor")
+  programLibrary              Program[]          @relation("ProgramUser")
+  followedBy                  Profile[]          @relation("UserFollows")
+  following                   Profile[]          @relation("UserFollows")
+  user                        User               @relation(fields: [userId], references: [id])
+  userId                      String             @unique
+  performedWorkouts           PerformedWorkout[]
+}
+
+model Program {
+  id                       String             @id @default(cuid())
+  name                     String
+  complimentary            Boolean?
+  trainingType             TrainingType[]
+  trainingLevel            TrainingLevel?
+  publicity                Publicity
+  likes                    Int?
+  programImageDefaultColor String             @default("e0e7ff") @db.VarChar(7)
+  programImageDefaultEmoji String             @default("1F93C") @db.VarChar(5)
+  createdAt                DateTime           @default(now())
+  updatedAt                DateTime           @updatedAt
+  workouts                 Workout[]
+  authors                  Profile[]          @relation("ProgramAuthor")
+  inLibraryOf              Profile[]          @relation("ProgramUser")
+  performedWorkouts        PerformedWorkout[]
+}
+
+model Workout {
+  id                String             @id @default(cuid())
+  name              String
+  trainingType      TrainingType[]
+  trainingLevel     TrainingLevel?
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  exercises         Exercise[]
+  program           Program?           @relation(fields: [programId], references: [id], onDelete: Cascade)
+  programId         String?
+  performedWorkouts PerformedWorkout[]
+}
+
+model Exercise {
+  id                String              @id @default(cuid())
+  order             Int                 @default(1)
+  supersetOrder     String?             @db.VarChar(1)
+  authorNotes       String?
+  staticExercise    StaticExercise      @relation(fields: [staticExerciseId], references: [id])
+  staticExerciseId  String
+  workout           Workout             @relation(fields: [workoutId], references: [id], onDelete: Cascade)
+  workoutId         String
+  sets              Set[]
+  performedExercise PerformedExercise[]
+
+  @@unique([id, order])
+}
+
+model Set {
+  id           String         @id @default(cuid())
+  number       Int
+  reps         Int
+  rpe          Int
+  exercise     Exercise       @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+  exerciseId   String
+  performedSet PerformedSet[]
+}
+
+model PerformedWorkout {
+  id                 String              @id @default(cuid())
+  active             Boolean
+  duration           Int
+  notes              String
+  tonnage            Float               @default(0)
+  createdAt          DateTime            @default(now())
+  // relations
+  workout            Workout             @relation(fields: [workoutId], references: [id], onDelete: Cascade)
+  workoutId          String
+  program            Program             @relation(fields: [programId], references: [id])
+  programId          String
+  profile            Profile             @relation(fields: [profileId], references: [id])
+  performedExercises PerformedExercise[]
+  profileId          String
+}
+
+model PerformedExercise {
+  id                 String           @id @default(cuid())
+  notes              String
+  updatedAt          DateTime?        @updatedAt
+  performedSets      PerformedSet[]
+  exercise           Exercise         @relation(fields: [exerciseId], references: [id])
+  exerciseId         String
+  performedWorkout   PerformedWorkout @relation(fields: [performedWorkoutId], references: [id], onDelete: Cascade)
+  performedWorkoutId String
+}
+
+model PerformedSet {
+  id                  String             @id @default(cuid())
+  completed           Boolean            @default(false)
+  completedAt         DateTime?
+  weight              Float?
+  reps                Int?
+  duration            Int?
+  set                 Set                @relation(fields: [setId], references: [id])
+  setId               String
+  performedExercise   PerformedExercise? @relation(fields: [performedExerciseId], references: [id], onDelete: Cascade)
+  performedExerciseId String?
+}
+
+model StaticExercise {
+  id                    String     @id @default(cuid())
+  name                  String
+  movement              Movement
+  primaryTargetMuscle   Muscle
+  secondaryTargetMuscle Muscle?
+  tertiaryTargetMuscle  Muscle?
+  equipment             Equipment?
+  description           String
+  createdAt             DateTime   @default(now())
+  updatedAt             DateTime   @updatedAt
+  exercise              Exercise[]
+}
+
+enum Gender {
+  male
+  female
+}
+
+enum TrainingLevel {
+  beginner
+  intermediate
+  advanced
+}
+
+enum Publicity {
+  private
+  public
+  friends
+}
+
+enum Muscle {
+  trapezius
+  upper_back
+  lower_back
+  chest
+  biceps
+  triceps
+  forearm
+  back_deltoids
+  middle_deltoids
+  front_deltoids
+  abs
+  obliques
+  adductor
+  hamstring
+  quadriceps
+  abductors
+  calves
+  gluteal
+  head
+  neck
+}
+
+enum Movement {
+  vertical_push
+  horizontal_push
+  vertical_pull
+  horizontal_pull
+  knee_dominant
+  hip_dominant
+  carry
+  isolation
+  flexion
+  extension
+  internal_rotation
+  external_rotation
+  elevation
+  rotation
+  anti_extension
+  anti_rotation
+  anti_lateral_flexion
+  explosive
+}
+
+enum Equipment {
+  barbell
+  dumbbell
+  machine
+  band
+  ball
+  cable
+  kettlebell
+  resistance_band
+  suspension_trainer
+  bodyweight
+  bench
+  box
+  foam_roller
+  medicine_ball
+  sandbag
+  sled
+  trap_bar
+  weighted_vest
+}
+
+enum TrainingType {
+  cardio
+  // yoga
+  olympic_weightlifting
+  sports_performance
+  calisthenics
+  crossfit
+  boxing
+  // dance
+  swimming
+  cycling
+  running
+  martial_arts
+  rowing
+  gymnastics
+  aerobics
+  // zumba
+  functional_training
+  recovery
+  pilates
+  hiit
+  hypertrophy
+  strength
+  wellness
+  stretching
+}

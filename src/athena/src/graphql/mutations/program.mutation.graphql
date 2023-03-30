@@ -1,0 +1,71 @@
+mutation CreateProgram($input: CreateProgramInput!) {
+  createProgram(input: $input) {
+    ...Program
+  }
+}
+
+mutation UpdateProgramIcon($programId: String!, $programImageDefaultEmoji: String!) {
+  updateProgramIcon(programId: $programId, programImageDefaultEmoji: $programImageDefaultEmoji) {
+    ...Program
+  }
+}
+
+mutation CreateWorkout($programId: String!) {
+  createWorkout(programId: $programId) {
+    ...Workout
+  }
+}
+
+mutation UpdateWorkoutName($name: String!, $workoutId: String!) {
+  updateWorkoutName(name: $name, workoutId: $workoutId) {
+    ...Workout
+  }
+}
+
+mutation CreateExercise($workoutId: String!, $staticExerciseId: String!) {
+  createExercise(workoutId: $workoutId, staticExerciseId: $staticExerciseId) {
+    ...Exercise
+  }
+}
+
+mutation UpdateSetRpe($setId: String!, $rpe: Int!) {
+  updateSetRpe(setId: $setId, rpe: $rpe) {
+    number
+  }
+}
+
+mutation UpdateSetReps($setId: String!, $reps: Int!) {
+  updateSetReps(setId: $setId, reps: $reps) {
+    number
+  }
+}
+
+mutation CreateSet($exerciseId: String!) {
+  createSet(exerciseId: $exerciseId) {
+    number
+  }
+}
+
+mutation StartWorkout($workoutId: String!) {
+  startWorkout(workoutId: $workoutId) {
+    id
+  }
+}
+
+mutation FinishWorkout($performedWorkoutId: String!) {
+  finishWorkout(performedWorkoutId: $performedWorkoutId) {
+    id
+  }
+}
+
+mutation UpdateCompletionStatus($performedSetId: String!, $currentStatus: Boolean!) {
+  updateCompletionStatus(performedSetId: $performedSetId, currentStatus: $currentStatus) {
+    id
+  }
+}
+
+mutation AddProgramToLibrary($programId: String!) {
+  addProgramToLibrary(programId: $programId) {
+    id
+  }
+}

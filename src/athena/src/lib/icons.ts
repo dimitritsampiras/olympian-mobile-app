@@ -1,0 +1,15 @@
+export const icons = {
+  hypertrophy: '26F9',
+  cardio: '1F3C3',
+  olympic_weightlifting: '1F3CB',
+  calisthenics: '1F938',
+  boxing: '1F94A',
+  swimming: '1F3CA',
+  cycling: '1F6B4',
+  running: '1F3C3',
+  martial_arts: '1F94B',
+  rowing: '1F6A3',
+  functional_training: '1F9D7',
+  sports_performance: '26BD',
+  recovery: '1FA79',
+};

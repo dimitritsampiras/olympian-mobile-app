@@ -1,0 +1,186 @@
+query ProgramFromId($programId: String!) {
+  program(programId: $programId) {
+    ...Program
+    workouts {
+      ...Workout
+      exercises {
+        id
+      }
+    }
+    authors {
+      id
+      username
+      name
+      profileInitialsDefaultColor
+    }
+  }
+}
+
+query WorkoutFromId($workoutId: String!) {
+  workout(workoutId: $workoutId) {
+    ...Workout
+    exercises {
+      ...Exercise
+      sets {
+        ...Set
+      }
+      staticExercise {
+        ...StaticExercise
+      }
+    }
+  }
+}
+
+query ExerciseFromId($exerciseId: String!) {
+  exercise(exerciseId: $exerciseId) {
+    ...Exercise
+    sets {
+      ...Set
+    }
+    staticExercise {
+      ...StaticExercise
+    }
+  }
+}
+
+query StaticExerciseFromId($staticExerciseId: String!) {
+  staticExercise(staticExerciseId: $staticExerciseId) {
+    ...StaticExercise
+  }
+}
+
+query StaticExercises {
+  staticExercises {
+    ...StaticExercise
+  }
+}
+
+query UserPrograms {
+  userPrograms {
+    ...Program
+    authors {
+      id
+      username
+    }
+    workouts {
+      ...Workout
+    }
+  }
+}
+
+query TrendingPrograms($skip: Int!, $take: Int!, $trainingType: [TrainingType!]) {
+  trendingPrograms(skip: $skip, take: $take, trainingType: $trainingType) {
+    ...Program
+  }
+}
+
+query PopularPrograms($skip: Int!, $take: Int!, $trainingType: [TrainingType!]) {
+  popularPrograms(skip: $skip, take: $take, trainingType: $trainingType) {
+    ...Program
+  }
+}
+
+query TrainingTypes {
+  trainingTypes
+}
+
+query ActiveWorkout {
+  activeWorkout {
+    workout {
+      ...Workout
+    }
+    program {
+      name
+    }
+    active
+    createdAt
+    duration
+    id
+    notes
+    performedExercises {
+      ...PerformedExercise
+      exercise {
+        authorNotes
+        id
+        order
+        supersetOrder
+        staticExercise {
+          ...StaticExercise
+        }
+      }
+      performedSets {
+        ...PerformedSet
+        set {
+          ...Set
+        }
+      }
+    }
+  }
+}
+
+query ExerciseHistory($exerciseId: String!, $currentPerformedExercise: String) {
+  exerciseHistory(exerciseId: $exerciseId, currentPerformedExercise: $currentPerformedExercise) {
+    ...PerformedExercise
+    performedSets {
+      ...PerformedSet
+    }
+  }
+}
+
+query LastPerformedWorkout {
+  lastPerformedWorkout {
+    workout {
+      name
+    }
+    active
+    createdAt
+    duration
+    id
+    notes
+    performedExercises {
+      id
+    }
+    program {
+      name
+    }
+  }
+}
+
+query PerformedWorkoutFromId($id: String!) {
+  performedWorkoutFromId(id: $id) {
+    program {
+      id
+      name
+      inLibraryOf {
+        id
+      }
+      programImageDefaultColor
+      programImageDefaultEmoji
+    }
+    workout {
+      name
+    }
+    active
+    createdAt
+    duration
+    id
+    performedExercises {
+      performedSets {
+        reps
+        weight
+        set {
+          number
+        }
+      }
+      exercise {
+        staticExercise {
+          name
+          primaryTargetMuscle
+          secondaryTargetMuscle
+          tertiaryTargetMuscle
+        }
+        order
+      }
+    }
+  }
+}
