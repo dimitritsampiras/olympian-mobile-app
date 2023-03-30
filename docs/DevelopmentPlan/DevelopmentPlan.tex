@@ -1,0 +1,141 @@
+\documentclass{article}
+
+\usepackage{tabularx}
+\usepackage{booktabs}
+\setlength\parindent{0pt}
+\title{Development Plan\\\progname}
+
+\author{\authname}
+
+\date{}
+
+\input{../Comments}
+\input{../Common}
+
+\begin{document}
+	
+	\maketitle
+	
+	\begin{table}[hp]
+		\caption{Revision History} \label{TblRevisionHistory}
+		\begin{tabularx}{\textwidth}{|X|X|X|}
+			\toprule
+			\textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
+			\midrule
+			24/09/22 & Jared Bentvelsen, Yuvraj Randhawa, Bassel Rezkalla & Initial draft of Problem Statement\\
+			\midrule
+			30/03/23 & Jared Bentvelsen, Yuvraj Randhawa, Bassel Rezkalla & Edits to Properly align with feedback and issues\\
+			\bottomrule
+		\end{tabularx}
+	\end{table}
+	
+	
+	\section{Team meeting plan}
+	Team meetings will be conducted weekly on non-holiday Mondays at 4:30pm.
+	Further meetings can be scheduled if needed.
+	Meetings will be conducted in person at a McMaster bookable room or library unless specified otherwise.\\
+	All Team members are expected to attend the Monday meeting unless specified on timely notice.\\
+	Meetings will follow the meeting plan (agenda) created by Matthew McCracken. And adjustments to this plan may be recommended by other team members by giving Matthew Notice. It is Matthews responsibility to ensure high priority topics are covered during meetings.
+	
+	\section{Team communication plan}
+	Common team communication and questions will be conducted on \textbf{Microsoft Teams}.\\
+	Any online meetings will be conducted on \textbf{Microsoft Teams}. \\
+	
+	\section{Workflow plan}
+	GitHub will be used for all workflow and version control.
+	
+	\subsection{Task Scheduling}
+	The \textbf{Github Kanban} project board will be used to plan and assign upcoming and ongoing tasks to team developers. \\
+	If a task is large or general, sub-tasks will be created and assigned accordingly.\\
+	Upcoming project deliverables must include deadlines.\\
+	
+	\subsection{Git Branch Usage}
+	All features, documents and file changes require a named branch describing the change.
+	Branches will follow a similar format to:
+	
+	\begin{center}
+		$topic\_or\_type/section/branch\_description$
+	\end{center}
+	
+	\subsection{Git Commits}
+	\textbf{Tags} will be attached to commits as needed to further display the change description.\\
+	Commit Squashing may be used prior to creating pull requests to clean up unnecessary commits.
+	
+	\subsection{Git Branch Merging and Pull Requests}
+	The main or centered branch will be protected such that new features and additions will require a pull request in order to be merged. \\
+	Pull Requests require a minimum of 2 approvals to be accepted.
+	
+	\subsection{Technial Issues}
+	For all technical questions, concerns and issues, the \textbf{Github Issues} feature will be used to open an issue or concern accordingly.
+	
+	\section{Team Roles}
+	\begin{tabular}{ |p{5cm}|p{8cm}| }
+		\hline
+		\multicolumn{2}{|c|}{Team Role Descriptions} \\
+		\hline
+		Meeting Organizer & William \\
+		\hline
+		Front End Expert & Dimitri \\
+		\hline
+		Database Experts  & Jared, Bassel \\
+		\hline
+		UX/UI Expert & Matthew, Dimitri \\
+		\hline
+		Networking Protocols Expert & Bassel \\
+		\hline
+		Backend Expert & Jared, William \\
+		\hline
+		Lead Testers & Yuvi, Bassel \\
+		\hline
+		Team Liason & Jared \\
+		\hline
+		Backup-Team Liason & William \\
+		\hline
+		Git Experts & Yuvi, Matthew\\
+		\hline
+		Scrum Leader & William \\
+		\hline
+		Mobile Development Expert & Dimitri, Matthew \\
+		\hline
+		Latex Expert & Yuvi \\
+		\hline
+		Hardware Expert & Bassel \\
+		\hline
+	\end{tabular}
+	
+	\section{Coding Style and Standards}
+	The \textbf{Google Coding Style} will be used as a standard for all code in the project. \\
+	The style guide for this can be found \hyperlink{https://google.github.io/styleguide/}{here.}
+	A language specific linter will be enforced.
+	
+	\section{Testing}
+	
+	\subsection {Unit Testing}
+	\textbf{\href{https://jestjs.io/}{Jest}} will be used for this app's unit testing. Jest offers mocking and code coverage insights which will be useful for unit testing.
+	
+	\subsection {Simulation / Integration Testing}
+	\textbf{\href{https://testcafe.io/}{TestCafe}} will be used for this app's integration testing. TestCafe is a cross-browser integration testing framework that will be used to verify proper integration between the app's various components (back-end, front-end, database, etc). TestCafe also offers end-to-end testing which includes automatic simulation of many common web-app components such as forms and buttons.
+	
+	\section {Proof of Concept Demonstration Plan}
+	The risks associated with the project are:
+	\begin{enumerate}
+		\item Implementing a workflow for users to add workouts and for other users to discover those workouts. If this interaction does not work, then our application will not fulfill its goals.
+		\item Building a back-end server capable of interfacing with front-end clients and storing user information in a secure database. This back-end is essential for our application to meet the social networking aspect of our proposed project. 
+		\item Achieving \%70 code test coverage. This is a challenge because unit tests alone will not cover most code. View code will need integration / end-to-end tests for full coverage. This will involve our team working with TestCafe which may be time consuming to learn and write.
+		\item Developing a cohesive UI/UX for our application. All user interactions must be mapped out. We must use group meetings to discuss how each interaction should look and map out user navigation.
+		\item Using git branches for up to 6 people to do simultaneous development and avoiding pushes to main or unsafe merges. Our group has varying levels of Git experience and so we must work together to ensure smooth development.
+	\end{enumerate}
+	
+	During the Proof of Concept Demonstration we will prove that these risks have been overcome by showing:
+	\begin{enumerate}
+		\item A working demonstration of a test user creating a workout and another test user discovering the created workout. Viewers will be walked through the process of
+		creating their own workout and can see how these workouts are then displayed to the general userbase.
+		\item A demo of a new user signing up for the application and manipulating their own data. Viewers can then see this new user and their custom data in the database
+		to prove that the back-end and server are cohesive with the frontend.
+		\item End-to-end / integration tests written in TestCafe that simulate the user experience across the application. This will include testing for user sign-in, workout creation, and workout discovery.
+		\item Designs created in Figma that describe desired user interactions and portray a cohesive application-wide theme.
+		\item A conflict-free Git history with even contributions from all members of the team.
+	\end{enumerate}
+	
+	
+\end{document}
