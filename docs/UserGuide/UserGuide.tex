@@ -35,5 +35,117 @@ March 31 2023 & Jared Bentvelsen, Matthew McCracken & Description of changes\\
 
 This document serves to go over the usage details of the Olympian application, allowing any potential reader to familiarize themselves with all functionality.
 
+\section{Reference Material}
+
+This section records information for easy reference.
+
+\subsection{Definitions}
+
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l l} 
+  \toprule		
+  \textbf{symbol} & \textbf{description}\\
+  \midrule   
+  Exercise & Exercises are individual movements that people will do during a workout in order to develop the strength of certain muscle groups.\\
+  Workout & Workouts are collections of Exercises strung together in order to build one cohesive trip to the gym. Often workouts will be a collection of exercises that target one specific muscle group such as a chest day.\\
+  Program & A Program is a series of workouts that a user adds to their collection. A user will follow the schedule of a program to do workouts on selected days.\\
+  \bottomrule
+\end{tabular}\\
+
+\section{Installation}
+
+\section{Usage}
+
+\subsection{Starting the application}
+
+Starting the Server
+
+In a terminal in the src/hermes folder, run:
+    \begin{verbatim}
+    npm run dev
+    \end{verbatim}
+\\
+Wait for the following message:
+    \begin{verbatim}
+    🚀 Server ready at port http://localhost:4000/graphql
+    \end{verbatim}
+\\
+
+Starting the Client\\
+
+In a WSL terminal in the src/athena folder, run:
+    \begin{verbatim}
+    npm run start
+    \end{verbatim}
+\\
+Wait for a QR code to appear in the terminal. Scan the QR code using the Expo application and wait for the app to bundle and open.\\
+For first time users, the app will open to the Sign Up Screen shown in Figure \ref{Fig1}:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.1\textwidth,height=0.6\textwidth]{SignUpScreen.png}
+    \caption{Sign Up Screen}
+    \label{Fig1}
+    \end{figure}
+
+
+\subsection{Using the Application}
+
+\subsubsection{Sign Up}
+
+From the screen shown in Figure \ref{Fig1} users will enter their name, email, and intended username and password. If any of these details do not meet our criteria the user will be informed of the error and prevent from progressing.\\
+After entering all information then a new user is created in the database and the user is redirected to the Log In Screen.
+
+\subsubsection{Login}
+
+Users must enter in the information of a user that exists within the database in order to access their account. When they do this, they will be redirected to the app home screen. For first time users this will look like the screen shown in Figure \ref{FigHomeScreen} 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.1\textwidth,height=0.6\textwidth]{HomeScreen.png}
+    \caption{Home Screen}
+    \label{FigHomeScreen}
+    \end{figure}
+
+\subsubsection{Program Creation}
+
+From the home screen as shown in \ref{FigHomeScreen} users can select 'Add Program' or select 'Get Started' and add a program in order to access the program creation page.\\
+Users will select a name, the publicity settings for their created workout, and any tags that they want applied. They can then see the overview of their created program on the program screen.\\
+When on the program screen as shown in \ref{FigProgramScreen} users can select what icon they want and begin adding workouts to their program.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.1\textwidth,height=0.6\textwidth]{ProgramScreen.png}
+    \caption{Program Screen}
+    \label{FigProgramScreen}
+    \end{figure}
+
+\subsubsection{Workout Addition}
+
+After pressing 'Add Workout' users will be taken to the 'Edit Workout' page as shown in \ref{FigEditWorkout}. From here, users can edit the name of their workouts and add exercises by pressing 'Add Exercise'.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.1\textwidth,height=0.6\textwidth]{EditWorkout.png}
+    \caption{Edit Workout Screen}
+    \label{FigEditWorkout}
+    \end{figure}
+
+\subsubsection{Exercise Addition}
+
+When on the Add Exercise Page, users can select from a list of common exercises and add these to their workouts. Players will be able to customize the number of reps and rpes that should be achieved for each set. This is shown in Figure \ref{FigAddExercises}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.1\textwidth,height=0.6\textwidth]{AddExercises.png}
+    \caption{Add Exercises Screen}
+    \label{FigAddExercises}
+    \end{figure}
+
+\subsubsection{Program Discovery}
+
+From the home page, press the Globe Icon on the bottom tab bar to visit the Discovery Page. From this page users can view popular programs by selecting tags as well as search for any Programs or Users.
+
+\subsubsection{Programs View}
+
 
 \end{document}
