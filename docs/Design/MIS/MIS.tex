@@ -53,8 +53,8 @@ urlcolor=cyan          % color of external links
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+Date 1 & 1.0 & Initial Draft\\
+Date 2 & 1.1 & Added followers and updated modules to align with previous documents better \\
 \bottomrule
 \end{tabularx}
 
@@ -400,15 +400,15 @@ DatabaseCommunicator = ?
 		\hline
 		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 		\hline
-		DatabaseCommunicator & String & DatabaseCommunicator &  \\
-		getExercise & String & seq of Exercise &  \\
-		getWorkout & String & seq of Workout &  \\
-		getRoutine & String & seq of Routine &  \\
-		getUser & String & seq of User &  \\
-		addExercise & Exercise &  &  \\
-		addWorkout & Workout &  &  \\
-		addRoutine & Routine &  &  \\
-		addUser & User &  &  \\
+		DatabaseCommunicator & String & DatabaseCommunicator & BadConnectionRequest \\
+		getExercise & String & seq of Exercise & BadDataRequest \\
+		getWorkout & String & seq of Workout & BadDataRequest \\
+		getRoutine & String & seq of Routine & BadDataRequest \\
+		getUser & String & seq of User & BadDataRequest \\
+		addExercise & Exercise &  & BadSendRequest \\
+		addWorkout & Workout &  & BadSendRequest \\
+		addRoutine & Routine &  & BadSendRequest \\
+		addUser & User &  & BadSendRequest \\
 		\hline
 	\end{tabular}
 \end{center}
@@ -428,56 +428,56 @@ DatabaseCommunicator(URL):
 \begin{itemize}
 	\item transition: $databaseURL, database := URL, database.connect(URL, databaseKey)$
 	\item output: $out := self$
-	\item exception: None
+	\item exception: BadConnectionRequest
 \end{itemize}
 
 getExercise(query):
 \begin{itemize}
 	\item output: $out := db.exercises.select(query)$
-	\item exception: None
+	\item exception: BadDataRequest
 \end{itemize}
 
 getWorkout(query):
 \begin{itemize}
 	\item output: $out := db.workouts.select(query)$
-	\item exception: None
+	\item exception: BadDataRequest
 \end{itemize}
 
 getRoutine(query):
 \begin{itemize}
 	\item output: $out := db.routines.select(query)$
-	\item exception: None
+	\item exception: BadDataRequest
 \end{itemize}
 
 getUser(query):
 \begin{itemize}
 	\item output: $out := db.users.select(query)$
-	\item exception: None
+	\item exception: BadDataRequest
 \end{itemize}
 
 
 addExercise(e):
 \begin{itemize}
 	\item output: $out := db.exercises.insert(e)$
-	\item exception: None
+	\item exception: BadSendRequest
 \end{itemize}
 
 addWorkout(w):
 \begin{itemize}
 	\item output: $out := db.workouts.insert(w)$
-	\item exception: None
+	\item exception: BadSendRequest
 \end{itemize}
 
 addRoutine(r):
 \begin{itemize}
 	\item output: $out := db.routines.insert(r)$
-	\item exception: None
+	\item exception: BadSendRequest
 \end{itemize}
 
 addUser(u):
 \begin{itemize}
 	\item output: $out := db.users.insert(u)$
-	\item exception: None
+	\item exception: BadSendRequest
 \end{itemize}
 
 
@@ -651,11 +651,19 @@ User = ?
  		password &  & String &  \\
  		email &  & String &  \\
  		nickname &  & String &  \\
+ 		followers &  & seq of User &  \\
+ 		following &  & seq of User &  \\
+ 		currentWorkout &  & Workout &  \\
  		fitness Goals &  & seq of FitnessGoal &  \\
  		created Workouts &  & seq of Workout &  \\
  		created Routines &  & seq of Routine &  \\
  		saved Workouts &  & seq of Workout &  \\
  		saved Routines &  & seq of Routine &  \\
+ 		getCurrentWorkout &  & Workout &  \\
+ 		startWorkout & Workout &  &  \\
+ 		endWorkout & &  &  \\
+ 		addFollower & User & &  \\
+ 		Follow & User & & UserNotFound \\
 		\hline
 	\end{tabular}
 \end{center}
@@ -667,6 +675,9 @@ username: $String$ \\
 password: $String$ \\
 email: $String$ \\
 nickname: $String$ \\
+followers: $User[]$ \\
+following: $User[]$ \\
+currentWorkout: $Workout$\\
 fitnessGoals: $seq of FitnessGoal$ \\
 created Workouts: $Workout[]$ \\
 created Routines: $Routine[]$ \\
@@ -686,88 +697,131 @@ User(username, pass, email, nickname):
 	\item exception: None
 \end{itemize}
 
-username():
+
+\noindent username():
 \begin{itemize}
 	\item output: $out := username$
 	\item exception: None
 \end{itemize}
 
-email():
+\noindent email():
 \begin{itemize}
 	\item output: $out := email$
 	\item exception: PremissionException
 \end{itemize}
 
-password():
+\noindent password():
 \begin{itemize}
 	\item output: $out := password$
 	\item exception: PremissionException
 \end{itemize}
 
-nickname():
+\noindent nickname():
 \begin{itemize}
 	\item output: $out := nickname$
 	\item exception: None
 \end{itemize}
 
-fitnessGoals():
+\noindent followers():
+\begin{itemize}
+	\item output: $out := followers$
+	\item exception: None
+\end{itemize}
+
+\noindent following():
+\begin{itemize}
+	\item output: $out := following$
+	\item exception: None
+\end{itemize}
+
+\noindent fitnessGoals():
 \begin{itemize}
 	\item output: $out := fitnessGoals$
 	\item exception: None
 \end{itemize}
 
-createdWorkouts():
+\noindent createdWorkouts():
 \begin{itemize}
 	\item output: $out := createdWorkouts$
 	\item exception: None
 \end{itemize}
 
-createdRoutines():
+\noindent createdRoutines():
 \begin{itemize}
 	\item output: $out := createdRoutines$
 	\item exception: None
 \end{itemize}
 
-savedWorkouts():
+\noindent savedWorkouts():
 \begin{itemize}
 	\item output: $out := savedWorkouts$
 	\item exception: None
 \end{itemize}
 
-savedRoutines():
+\noindent savedRoutines():
 \begin{itemize}
 	\item output: $out := savedRoutines$
 	\item exception: None
 \end{itemize}
 
-createGoal(g):
+\noindent createGoal(g):
 \begin{itemize}
 	\item transition: $ fitnessGoals.put(g) $
 	\item exception: None
 \end{itemize}
 
-createWorkout(workout):
+\noindent createWorkout(workout):
 \begin{itemize}
 	\item transition: $ createdWorkouts.put(w), \ savedWorkouts.put(w) $
 	\item exception: None
 \end{itemize}
 
-createRoutine(routine):
+\noindent createRoutine(routine):
 \begin{itemize}
 	\item transition: $ createdRoutine.put(r), \ savedRoutines.put(r) $
 	\item exception: None
 \end{itemize}
 
-saveWorkout(w):
+\noindent saveWorkout(w):
 \begin{itemize}
 	\item transition: $ savedWorkouts.put(w) $
 	\item exception: None
 \end{itemize}
 
-saveRoutine(r):
+\noindent saveRoutine(r):
 \begin{itemize}
 	\item transition: $ savedRoutines.put(r) $
 	\item exception: None
+\end{itemize}
+
+\noindent getCurrentWorkout():
+\begin{itemize}
+	\item output: $out := currentWorkout$
+	\item exception: None
+\end{itemize}
+
+\noindent startWorkout(w):
+\begin{itemize}
+	\item transition: $ currentWorkout := w $
+	\item exception: None
+\end{itemize}
+
+\noindent endWorkout(w):
+\begin{itemize}
+	\item transition: $ currentWorkout := none $
+	\item exception: None
+\end{itemize}
+
+\noindent addFollower(u):
+\begin{itemize}
+	\item transition: $ followers.put(u) $
+	\item exception: None
+\end{itemize}
+
+\noindent follow(u):
+\begin{itemize}
+	\item transition: $ following.put(u) $
+	\item exception: $DatabaseCommunicator.getUser(u) \rightarrow BadDataRequest \Rightarrow UserNotFound$
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -1055,6 +1109,7 @@ Creator(T) = ?
 		\hline
 		Creator &  & Creator &  \\
 		create & Any & T &  \\
+		edit & Any & T &  \\
 		\hline
 	\end{tabular}
 \end{center}
@@ -1077,6 +1132,12 @@ None
 \end{itemize}
 
 \noindent create():
+\begin{itemize}
+	\item output: $out := T$
+	\item exception: None
+\end{itemize}
+
+\noindent edit():
 \begin{itemize}
 	\item output: $out := T$
 	\item exception: None
@@ -1134,6 +1195,12 @@ None
 	\item exception: None
 \end{itemize}
 
+\noindent edit():
+\begin{itemize}
+	\item output: $out := Exercise$
+	\item exception: None
+\end{itemize}
+
 \subsubsection{Local Functions}
 
 \newpage
@@ -1186,6 +1253,12 @@ None
 	\item exception: None
 \end{itemize}
 
+\noindent edit():
+\begin{itemize}
+	\item output: $out := Workout$
+	\item exception: None
+\end{itemize}
+
 \subsubsection{Local Functions}
 
 \newpage
@@ -1232,6 +1305,12 @@ None
 \end{itemize}
 
 \noindent create():
+\begin{itemize}
+	\item output: $out := Routine$
+	\item exception: None
+\end{itemize}
+
+\noindent edit():
 \begin{itemize}
 	\item output: $out := Routine$
 	\item exception: None
