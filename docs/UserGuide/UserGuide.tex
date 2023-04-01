@@ -2,6 +2,8 @@
 
 \usepackage{booktabs}
 \usepackage{tabularx}
+\usepackage{float}
+\usepackage{hyperref}
 
 \input{../Comments}
 \input{../Common}
@@ -42,7 +44,7 @@ This section records information for easy reference.
 \subsection{Definitions}
 
 \renewcommand{\arraystretch}{1.2}
-\begin{tabular}{l l} 
+\begin{tabular}{|l|p{1\linewidth}|}
   \toprule		
   \textbf{symbol} & \textbf{description}\\
   \midrule   
@@ -64,12 +66,11 @@ In a terminal in the src/hermes folder, run:
     \begin{verbatim}
     npm run dev
     \end{verbatim}
-\\
+
 Wait for the following message:
     \begin{verbatim}
-    🚀 Server ready at port http://localhost:4000/graphql
+    Server ready at port http://localhost:4000/graphql
     \end{verbatim}
-\\
 
 Starting the Client\\
 
@@ -77,12 +78,12 @@ In a WSL terminal in the src/athena folder, run:
     \begin{verbatim}
     npm run start
     \end{verbatim}
-\\
+
 Wait for a QR code to appear in the terminal. Scan the QR code using the Expo application and wait for the app to bundle and open.\\
 For first time users, the app will open to the Sign Up Screen shown in Figure \ref{Fig1}:
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.1\textwidth,height=0.6\textwidth]{SignUpScreen.png}
+    % \includegraphics[width=1.1\textwidth,height=0.6\textwidth]{SignUpScreen.png}
     \caption{Sign Up Screen}
     \label{Fig1}
     \end{figure}
@@ -101,7 +102,7 @@ Users must enter in the information of a user that exists within the database in
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.1\textwidth,height=0.6\textwidth]{HomeScreen.png}
+    % \includegraphics[width=1.1\textwidth,height=0.6\textwidth]{HomeScreen.png}
     \caption{Home Screen}
     \label{FigHomeScreen}
     \end{figure}
@@ -114,7 +115,7 @@ When on the program screen as shown in \ref{FigProgramScreen} users can select w
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.1\textwidth,height=0.6\textwidth]{ProgramScreen.png}
+    % \includegraphics[width=1.1\textwidth,height=0.6\textwidth]{ProgramScreen.png}
     \caption{Program Screen}
     \label{FigProgramScreen}
     \end{figure}
@@ -125,7 +126,7 @@ After pressing 'Add Workout' users will be taken to the 'Edit Workout' page as s
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.1\textwidth,height=0.6\textwidth]{EditWorkout.png}
+    % \includegraphics[width=1.1\textwidth,height=0.6\textwidth]{EditWorkout.png}
     \caption{Edit Workout Screen}
     \label{FigEditWorkout}
     \end{figure}
@@ -136,7 +137,7 @@ When on the Add Exercise Page, users can select from a list of common exercises 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.1\textwidth,height=0.6\textwidth]{AddExercises.png}
+    % \includegraphics[width=1.1\textwidth,height=0.6\textwidth]{AddExercises.png}
     \caption{Add Exercises Screen}
     \label{FigAddExercises}
     \end{figure}
@@ -146,6 +147,47 @@ When on the Add Exercise Page, users can select from a list of common exercises 
 From the home page, press the Globe Icon on the bottom tab bar to visit the Discovery Page. From this page users can view popular programs by selecting tags as well as search for any Programs or Users.
 
 \subsubsection{Programs View}
+
+From the home page, press the Book Icon on the bottom tab bar to visit the Programs View. On this page users can view their existing Programs or return to the Create/Edit Program screen for individual programs by clicking on them.
+
+\subsubsection{Profile}
+
+From the home page, press the Avatar Icon on the bottom tab bar to visit the Profile Page. It can be seen in Figure \ref{FigProfile}.
+
+\begin{figure}[H]
+    \centering
+    % \includegraphics[width=1.1\textwidth,height=0.6\textwidth]{ProfileScreen.png}
+    \caption{Profile Screen}
+    \label{FigProfile}
+    \end{figure}
+
+\subsubsection{Goals}
+
+From the Profile Page, users can tap the "Goals" button to be redirected to the Goals page as shown in Figure \ref{FigGoals}. Users can use this page to set new goals and track existing ones. When setting goals users can set a weight and number of reps of a given exercise that they would like to work towards.
+
+\begin{figure}[H]
+    \centering
+    % \includegraphics[width=1.1\textwidth,height=0.6\textwidth]{GoalsScreen.png}
+    \caption{Goals Screen}
+    \label{FigGoals}
+    \end{figure}
+
+\subsubsection{Socials}
+
+From the Profile Page, users can tap the "Socials" button to be redirected to the Socials page. On this page they can view the Status of users that they follow and see any of their active workouts. Adding Followers will be covered in a future section.
+    
+\subsubsection{Adding Friends}
+
+Users can add users by navigating to a users profile page in one of 2 ways:\\
+\begin{enumerate}
+    \item Search for a user on the Discover page in the search bar.
+    \item Click on a users icon on any publicly visible workout that they created.
+\end{enumerate}
+Once on a users profile they can request to follow them.\\
+
+\subsubsection{Start a Workout}
+
+Users can start their workout by navigating to the Workout page as shown in Figure \ref{FigEditWorkout} and tapping the big blue play button. Once a workout is started, users can use the miniplayer at the bottom of the screen to progress their workout and check off completed exercises.
 
 
 \end{document}
