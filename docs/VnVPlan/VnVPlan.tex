@@ -417,7 +417,7 @@
 		
 		Initial State: The application is running and a public workout routine is created.
 		
-		Input: An edit or addition to a workout routine to make is private.
+		Input: The user sets the workout routine's publicity setting to "private".
 		
 		Output: The workout routine is declared private in the database and is no longer visible to any user except the creator.
 		
@@ -452,7 +452,7 @@
 		
 		Initial State: The application is running and multiple workout routines are created.
 		
-		Input: navigation movements to view the public workout routines.
+		Input: The user navigates to view a public workout routine.
 		
 		Output: Multiple public workout routines should be displayed. 
 		
@@ -468,7 +468,7 @@
 		
 		Initial State: The application is running and multiple workout routines are created.
 		
-		Input: Search string inputs to view the public workout routines.
+		Input: The user inputs a search string to view matching public workout routines.
 		
 		Output: Public workout routines that match the search criteria should be displayed. 
 		
@@ -485,7 +485,7 @@
 		
 		Initial State: The application is running.
 		
-		Input: The required parameters for creating a profile.
+		Input: \ref{UP-1-input}
 		
 		Output: The created profile is stored in a user database and the user should be logged into their profile.
 		
@@ -501,7 +501,7 @@
 		
 		Initial State: The application is running and there exists another user profile.
 		
-		Input: Search criteria for the searched user profile.
+		Input: A search string for other profiles.
 		
 		Output: A user profile is displayed with their public routines, fitness goals, and other public profile data.
 		
@@ -519,7 +519,7 @@
 		
 		Initial State: The application is running and a profile has been created or is in the process of creation.
 		
-		Input: A string parameter for a fitness goal and publicity options for the goal.
+		Input: \ref{FG-1-input}
 		
 		Output: The fitness goal for the user is now updated in the database and is saved under their profile.
 		
@@ -535,7 +535,7 @@
 		
 		Initial State: The application is running and a fitness goal is created.
 		
-		Input: Progress points towards a given fitness goal at a given date.
+		Input: The user enters the weight / reps that they managed to achieve for their chosen exercise during a given workout.
 		
 		Output: The progress displayed towards a fitness goal should be visually updated and numerically updated in the database with a date.
 		
@@ -1129,6 +1129,21 @@
 		\item List of sets
 		\item Number of reps for each set
 		\item RPE for each set
+	\end{itemize}
+
+	\subsubsection{User Profile Input\label{UP-1-input}}
+	\begin{itemize}
+		\item User's first and last name
+		\item User's email
+		\item User's chosen display username
+		\item User's chosen password
+	\end{itemize}
+
+	\subsubsection{Fitness Goal Input\label{FG-1-input}}
+	\begin{itemize}
+		\item Exercise name
+		\item Goal weight
+		\item Goal repetition count
 	\end{itemize}
 
 	\subsection{Usability Survey Questions}
