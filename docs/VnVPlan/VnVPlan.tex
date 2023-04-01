@@ -40,6 +40,34 @@
 	
 	\newpage
 	
+	\section{Reference Material}
+	
+	This section records information for easy reference.
+	
+	\subsection{Abbreviations and Acronyms}
+	
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{l l} 
+		\toprule		
+		\textbf{symbol} & \textbf{description}\\
+		\midrule 
+		AC & Anticipated Change\\
+		DAG & Directed Acyclic Graph \\
+		M & Module \\
+		MG & Module Guide \\
+		MIS & Module Interface Specification \\
+		OS & Operating System \\
+		R & Requirement\\
+		RPE & \href{https://en.wikipedia.org/wiki/Rating_of_perceived_exertion}{Rating of Perceived Exertion} \\
+		SC & Scientific Computing \\
+		SRS & Software Requirements Specification\\
+		\progname & The Capstone course this project belongs to \\
+		UC & Unlikely Change \\
+		\bottomrule
+	\end{tabular}\\
+	
+	\newpage
+	
 	\tableofcontents
 	
 	\listoftables
@@ -86,9 +114,9 @@
 	\subsection{Relevant Documentation}
 
 	\begin{enumerate}
-		\item SRS
-		\item MG
-		\item MIS
+		\item \href{https://github.com/dimitritsampiras/olympian/blob/main/docs/SRS/SRS.pdf}{SRS} 
+		\item \href{https://github.com/dimitritsampiras/olympian/blob/main/docs/Design/MG/MG.pdf}{MG} 
+		\item \href{https://github.com/dimitritsampiras/olympian/blob/main/docs/Design/MIS/MIS.pdf}{MIS} 
 	\end{enumerate}
 	
 	%\wss{Reference relevant documentation.  This will definitely include your SRS
@@ -115,13 +143,13 @@
 				\hline
 				\textbf{Team Member} & \textbf{Role} \\
 				\hline
-				Jared Bentvelsen & Integration Testing \\
+				Jared Bentvelsen & Integration Testing for final mobile app end-to-end testing \\
 				\hline 
-				Yuvraj Randhawa & Integration Testing \\
+				Yuvraj Randhawa & Integration Testing for final mobile app end-to-end testingg \\
 				\hline
-				Bassel Rezkalla & Functional Unit Testing \\
+				Bassel Rezkalla & Functional Unit Testing for mobile app back-end and React front-end \\
 				\hline
-				Matthew McCracken & Non Functional Unit Testing \\
+				Matthew McCracken & Non Functional Unit Testing for both back-end server to front-end \\
 				\hline
 				Dimitri Tsampiras & UI/UX Verification Testing \\
 				\hline 
@@ -235,13 +263,13 @@
 	\begin{enumerate}
 		
 		\subsubsection{Workout Routine Tests}
-		\item{\textbf{test-WR-1}}:A Workout Routine can be created
+		\item{\textbf{test-WR-1}}: A Workout Routine can be created
 		
 		Control: Manual
 		
 		Initial State: Application is running.
 		
-		Input: User inputs required data for a workout routine.
+		Input: \ref{WR-1-input}
 		
 		Output: A workout routine is stored in the database and is accessible to the user that created it. If the user determined that the workout to be public then it should be publicly visible.
 		
@@ -257,7 +285,7 @@
 		
 		Initial State: Application is running with an existing workout routine.
 		
-		Input: User edits a workout routine with new values.
+		Input: \ref{WR-1-input}
 		
 		Output: A workout routine is updated with new values in the database and new values are visible to accessible users.
 		
@@ -268,7 +296,7 @@
 		Requirement(s): R1
 		
 		\subsubsection{Exercise Tests}
-		\item{\textbf{test-EX-1}}:Adding an Exercise to a Workout Routine
+		\item{\textbf{test-EX-1}}: Adding an Exercise to a Workout Routine
 
 		Control: Manual
 		
@@ -285,7 +313,7 @@
 		Requirement(s): R2
 		
 		
-		\item{\textbf{test-EX-2}}:Removing an Exercise from a Workout Routine
+		\item{\textbf{test-EX-2}}: Removing an Exercise from a Workout Routine
 		
 		Control: Manual
 		
@@ -302,13 +330,13 @@
 		Requirement(s): R2
 		
 		
-		\item{\textbf{test-EX-3}}:Limiting Exercises to a Workout Routine
+		\item{\textbf{test-EX-3}}: Limiting Exercises to a Workout Routine
 		
 		Control: Manual
 		
 		Initial State: Application is running and a workout routine is in the process of being created or edited.
 		
-		Input: The number of exercises required to reach the limit of exercises per workout routine. 
+		Input: The number of exercises required to reach the limit of exercises per workout routine (the limit is set to 10 exercises). 
 		
 		Output: A notification to the user, before the limiting exercise notifying them of the limit, and preventing them from adding another exercise.
 		
@@ -319,15 +347,15 @@
 		Requirement(s): R2
 		
 		\subsubsection{Quantifier Tests}
-		\item{\textbf{test-QT-1}}:Adding Quantifiers to an Exercise
+		\item{\textbf{test-QT-1}}: Adding Quantifiers to an Exercise
 		
 		Control: Manual
 		
 		Initial State: The application is running and an exercise is in the process of being created or edited.
 		
-		Input: A number and unit of measurement describing an exercise.
+		Input: \ref{QT-1-input}
 		
-		Output: The exercise now holds the given quantifier and is displayed to the user.
+		Output: The exercise now stores the inputted sets, along with their associated number of sets and RPE.
 		
 		Test Case Derivation: On adding a quantifier to an exercise, there should be a unit of measurement and value associated with it.
 		
@@ -335,7 +363,7 @@
 		
 		Requirement(s): R3
 		
-		\item{\textbf{test-QT-2}}:Removing Quantifiers from an Exercise
+		\item{\textbf{test-QT-2}}: Removing Quantifiers from an Exercise
 		
 		Control: Manual
 		
@@ -350,13 +378,13 @@
 		How test will be performed: This test will be executed by removing a quantifier from an exercises to ensure it does not display any quantifying information.
 		
 		Requirement(s): R3
-		\item{\textbf{test-QT-3}}:Editing Quantifiers of an Exercise
+		\item{\textbf{test-QT-3}}: Editing Quantifiers of an Exercise
 		
 		Control: Manual
 		
 		Initial State: The application is running and an exercise is in the process of being created or edited.
 		
-		Input: A number and unit of measurement describing an exercise.
+		Input: \ref{QT-1-input}
 		
 		Output: The exercise now holds the updated quantifier.
 		
@@ -367,13 +395,13 @@
 		Requirement(s): R3
 		
 		\subsubsection{Publicity Tests}
-		\item{\textbf{test-PB-1}}:Publicizing a Workout Routine
+		\item{\textbf{test-PB-1}}: Publicizing a Workout Routine
 		
 		Control: Manual
 		
 		Initial State: The application is running and a private workout routine is created.
 		
-		Input: An edit or addition to a workout routine to make it public.
+		Input: The user sets the workout routine's publicity setting to "public".
 		
 		Output: The workout routine is declared public in the database and is now visible to all users.
 		
@@ -383,7 +411,7 @@
 		
 		Requirement(s): R4
 		
-		\item{\textbf{test-PB-2}}:Privatizing a Workout Routine
+		\item{\textbf{test-PB-2}}: Privatizing a Workout Routine
 		
 		Control: Manual
 		
@@ -401,7 +429,7 @@
 		
 		\subsubsection{Workout Routine Saving Tests}
 	
-		\item{\textbf{test-WS-1}}:Saving a Public Workout Routine
+		\item{\textbf{test-WS-1}}: Saving a Public Workout Routine
 		
 		Control: Manual
 		
@@ -418,7 +446,7 @@
 		Requirement(s): R5
 		
 		\subsubsection{Browsing Workout Routine Tests}
-		\item{\textbf{test-BS-1}}:Browsing Workout Routines
+		\item{\textbf{test-BS-1}}: Browsing Workout Routines
 		
 		Control: Manual
 		
@@ -434,7 +462,7 @@
 		
 		Requirement(s): R6
 		
-		\item{\textbf{test-BS-2}}:Search Workout Routines
+		\item{\textbf{test-BS-2}}: Search Workout Routines
 		
 		Control: Manual
 		
@@ -451,7 +479,7 @@
 		Requirement(s): R6
 		
 		\subsubsection{User Profile Tests}
-		\item{\textbf{test-UP-1}}:Creating a User Profile
+		\item{\textbf{test-UP-1}}: Creating a User Profile
 		
 		Control: Manual
 		
@@ -467,7 +495,7 @@
 		
 		Requirement(s): R7
 		
-		\item{\textbf{test-UP-2}}:Viewing Other User Profile
+		\item{\textbf{test-UP-2}}: Viewing Other User Profile
 		
 		Control: Manual
 		
@@ -485,7 +513,7 @@
 		
 		\subsubsection{Fitness Goal Tests}
 		
-		\item{\textbf{test-FG-1}}:Creating a Fitness Goal
+		\item{\textbf{test-FG-1}}: Creating a Fitness Goal
 		
 		Control: Manual
 		
@@ -501,7 +529,7 @@
 		
 		Requirement(s): R9
 		
-		\item{\textbf{test-FG-2}}:Progressing a Fitness Goal
+		\item{\textbf{test-FG-2}}: Progressing a Fitness Goal
 		
 		Control: Manual
 		
@@ -1088,15 +1116,23 @@
 	The definition of the test cases will call for SYMBOLIC\_CONSTANTS.
 	Their values are defined in this section for easy maintenance.
 	
-	\subsection{Usability Survey Questions?}
-	
-	\wss{This is a section that would be appropriate for some projects.}
-	
-	\newpage{}
-	\section*{Appendix --- Reflection}
-	
-	The information in this section will be used to evaluate the team members on the
-	graduate attribute of Lifelong Learning.  Please answer the following questions:
+	\subsection{Test Inputs / Outputs}
+	\subsubsection{Workout Routine Input\label{WR-1-input}}
+	\begin{itemize}
+		\item Workout name
+		\item Workout description
+		\item List of static exercises
+	\end{itemize}
+
+	\subsubsection{Exercise Quantifier Input\label{QT-1-input}}
+	\begin{itemize}
+		\item List of sets
+		\item Number of reps for each set
+		\item RPE for each set
+	\end{itemize}
+
+	\subsection{Usability Survey Questions}
+	\wss{add surveys here}
 	
 	\newpage{}
 	\section*{Appendix --- Reflection}
