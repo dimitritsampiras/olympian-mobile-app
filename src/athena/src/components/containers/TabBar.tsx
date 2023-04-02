@@ -11,7 +11,6 @@ import Animated, {
   useSharedValue,
   withSpring,
   withTiming,
-  runOnJS,
 } from 'react-native-reanimated';
 import { MiniPlayer } from './MiniPlayer';
 import { Player } from './Player';
