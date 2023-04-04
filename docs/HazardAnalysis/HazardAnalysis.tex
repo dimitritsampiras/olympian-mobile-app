@@ -142,7 +142,7 @@
 		User Login \& Authentication& User cannot log in to application & User cannot utilize site functionality & 
 			a. User uses incorrect login credentials.
 			& 
-			Reset user credentials.
+			User is prompted to re-enter login credentials.
 			& PRR1 & H1-1\\
 		\hline
 		User Private Data Access & Data that is meant to be kept private is displayed publicly & 
@@ -151,10 +151,10 @@
 				\newline
 				b. Malicious third party gains access to user data.
 			& 
-				User data will be backed up daily to avoid error. Utilize stringent AWS admin permissions.
-			& ACR1, ACR2, IR1, ADR1 & H2-1\\
+				User data will be stored in a secure database. User data will be backed up frequently and hashed to keep secure.
+			& ACR1, ACR2, IR1, IR2, ADR1 & H2-1\\
 		\hline
-		Workout Suggestion Algorithm& Workouts are incorrectly or illegally accessed by users& Users are able to access unavailable, restricted or un-catered routines & a. Database failure \newline b. Privacy system failure \newline c. Suggestion algorithm failure & Display detailed message to user on attempt to access restricted routine & PRR1 &H3-1\\
+		Workout Suggestion Algorithm& Workouts are incorrectly or illegally accessed by users& Users are able to access unavailable, restricted or un-catered routines & Suggestion algorithm failure & Display detailed message to user on attempt to access restricted routine & PRR1 &H3-1\\
 		\hline
 		Application Server& Application Server terminates unexpectedly & Current data transactions and communication will cease& a. Host failure \newline b. server exceeds data limit& Communicate server issues to users and store unsaved data locally on the user device & IR3, IR4, IR5 & H4-1 \\
 		\hline
@@ -183,38 +183,60 @@
 	\begin{itemize}
 		\item[ACR\refstepcounter{ACRnum}\theACRnum:]
 		The application must not display other users private details to the user.
+		\\Rationale: User data should be private and only visible to the user themself.
+		\\Associated Hazard: H2-1
 		\item[ACR\refstepcounter{ACRnum}\theACRnum:]
 		Only the developers and system administrators will be able to access all user details except their passwords.
+		\\Rationale: Developers require user details in order to accurately track and manage the application database.
+		\\Associated Hazard: H2-1
 	\end{itemize}
 	\subsection{Integrity Requirements}
 	\noindent 
 	\begin{itemize}
 		\item[IR\refstepcounter{IRnum}\theIRnum:]
 		Passwords must be encrypted with SHA-256 when stored.
+		\\Rationale: Password encryption increases user information security.
+		\\Associated Hazard: H2-1
 		\item[IR\refstepcounter{IRnum}\theIRnum:]
 		User data will not be modified void of user permission.
+		\\Rationale: Users control the modifying of any and all user information.
+		\\Associated Hazard: H2-1
 		\item[IR\refstepcounter{IRnum}\theIRnum:]
 		User data will be automatically backed up to the database upon connection to the internet.
+		\\Rationale: User data will be backed up to ensure databases correspond to local user information.
+		\\Associated Hazard: H4-1, H5-2, H5-3
 		\item[IR\refstepcounter{IRnum}\theIRnum:]
 		User data transactions will be stored locally when user device is offline.
+		\\Rationale: User data will be stored locally to ensure that no data is lost when users are offline.
+		\\Associated Hazard: H4-1, H5-2, H5-3
 		\item[IR\refstepcounter{IRnum}\theIRnum:]
 		Database will be backed up daily.
+		\\Rationale: Database will be backed up daily to ensure all information is safe and updated at all times.
+		\\Associated Hazard: H4-1, H5-1, 
 	\end{itemize}
 	\subsection{Privacy Requirements}
 	\noindent 
 	\begin{itemize}
 		\item[PRR\refstepcounter{PRRnum}\thePRRnum:]
 		The application must use OAuth protocols to verify communication between the client and server.
+		\\Rationale: Application utilizes OAuth to ensure communication between client and server is accurate and corret.
+		\\Associated Hazard: H1-1, H3-1
 		\item[PRR\refstepcounter{PRRnum}\thePRRnum:]
 		The application will ensure users are aware of data collection practices before collecting any data from them.
+		\\Rationale: Users will be made aware of data collection to ensure consent to all data collection practices.
+		\\Associated Hazard: H6-1
 		\item[PRR\refstepcounter{PRRnum}\thePRRnum:]
 		The application will communicate any changes to the privacy policy with the users.	
+		\\Rationale: Users will be notified of changes to privacy policies to ensure they are kept informed about all changes relating to their information.
+		\\Associated Hazard: H6-1
 	\end{itemize}
 	\subsection{Audit Requirements}
 	\noindent
 	\begin{itemize}
 		\item[ADR\refstepcounter{ADRnum}\theADRnum:]
 		Data will be stored in a secure database. When data is deleted or edited a record of this data will be kept for up to 30 days.
+		\\Rationale: Data records will be kept for 30 days to ensure deleted data can be referenced if needed after deletion.
+		\\Associated Hazard: H2-1, H5-1
 	\end{itemize}
 	\subsection{Immunity Requirements}
 	\noindent 
