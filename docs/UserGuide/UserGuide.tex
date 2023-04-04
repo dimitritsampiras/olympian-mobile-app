@@ -56,11 +56,46 @@ This section records information for easy reference.
 
 \section{Installation}
 
+\subsection{Database Setup}
+
+Steps to setup Database:
+\begin{enumerate}
+    \item Download the pgAdmin 4 postgres SQL tool
+    \item Setup a database called olympian
+\end{enumerate}
+
+\subsection{Git Repo Setup}
+    Clone the repo and navigate to `src/hermes`.\\
+    Create a .env file in hermes and fill it with the following data:
+
+    \begin{verbatim}
+        PORT=4000
+        DATABASE_URL="{$YOUR_DATABASE_USER_HERE}://postgres:{$YOUR_DATABASE_PASSWORD_HERE}@localhost:5432/olympian?schema=public"
+        JWT_SECRET={$YOUR_JWT_SECRET_HERE}
+    \end{verbatim}
+
+    Run:
+    \begin{verbatim}
+    npm i && npm run migrate && npm run generate && npm run dev
+    \end{verbatim}
+
+    navigate to `src/athena`. 
+    
+    Create a .env file in athena and fill it with the following data:
+
+    \begin{verbatim}
+        IP_ADDRESS={$YOUR_IP_ADDRESS_HERE}
+        PORT=4000
+    \end{verbatim}
+
+    Run:
+    \begin{verbatim}
+    npm i && npm run gen
+    \end{verbatim}
+
 \section{Usage}
 
 \subsection{Starting the application}
-
-Starting the Server
 
 In a terminal in the src/hermes folder, run:
     \begin{verbatim}
@@ -71,8 +106,6 @@ Wait for the following message:
     \begin{verbatim}
     Server ready at port http://localhost:4000/graphql
     \end{verbatim}
-
-Starting the Client\\
 
 In a WSL terminal in the src/athena folder, run:
     \begin{verbatim}
