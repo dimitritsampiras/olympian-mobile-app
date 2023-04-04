@@ -104,11 +104,11 @@ export const ProgramMutation = extendType({
           where: { id: workoutId },
           include: { exercises: true },
         });
+        // static exercise
         const staticExercise = await prisma.staticExercise.findUnique({
           where: { id: staticExerciseId },
         });
 
-        // TODO: handle error
         if (!workout || !staticExercise) return null;
 
         return await prisma.exercise.create({
@@ -169,7 +169,7 @@ export const ProgramMutation = extendType({
     });
     /**
      *
-     * updates the reps of a set
+     * updates the completion status
      */
     t.field('updateCompletionStatus', {
       type: nullable('PerformedSet'),
@@ -183,7 +183,7 @@ export const ProgramMutation = extendType({
     });
     /**
      *
-     * updates the reps of a set
+     * updates the rpe of a set
      */
     t.field('updateSetRpe', {
       type: nullable('Set'),
@@ -197,7 +197,7 @@ export const ProgramMutation = extendType({
     });
     /**
      *
-     * when the user starts a workout
+     * mutation the occurs when a user starts a workout
      */
     t.field('startWorkout', {
       type: nullable('PerformedWorkout'),

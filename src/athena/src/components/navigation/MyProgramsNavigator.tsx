@@ -1,5 +1,4 @@
 import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Profile } from '../screens/profile/Profile';
 import { Programs } from '../screens/Programs';
 
 import { ProgramNavigator } from './ProgramNavigator';
@@ -15,6 +14,9 @@ const MyProgramsStack = createNativeStackNavigator<MyProgramsParamList>();
 
 type MyProgramsStackNavigatorProps = NativeStackScreenProps<TabParamList, 'MyProgramsNavigator'>;
 
+/**
+ * navigator for programs
+ */
 export const MyProgramsNavigator: React.FC<MyProgramsStackNavigatorProps> = ({ route }) => {
   // const {  } = route.params;
   return (

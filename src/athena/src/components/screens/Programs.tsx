@@ -5,12 +5,16 @@ import { useUserProgramsQuery } from '../../lib/graphql';
 import { Header } from '../containers/Header';
 import { ProgramCard } from '../containers/ProgramCard';
 import { ScreenView } from '../containers/ScreenView';
-import { Button, Heading } from '../elements';
+import { Heading } from '../elements';
 import { MyProgramsParamList } from '../navigation/MyProgramsNavigator';
 import { UserContext } from '../../lib/context';
 
 type ProgramsProps = NativeStackScreenProps<MyProgramsParamList, 'MyPrograms'>;
 
+/**
+ *
+ * screen for displaying all the programs a user has
+ */
 export const Programs: React.FC<ProgramsProps> = ({ navigation }) => {
   const { user } = useContext(UserContext);
   const { data, refetch } = useUserProgramsQuery({ fetchPolicy: 'no-cache' });
@@ -20,6 +24,7 @@ export const Programs: React.FC<ProgramsProps> = ({ navigation }) => {
     navigation.navigate('ProgramNavigator', { programId, back: true });
   };
 
+  // when screen is focused update changes
   useEffect(() => {
     isFocused && (async () => await refetch())();
   }, [isFocused]);

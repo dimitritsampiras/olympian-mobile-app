@@ -27,6 +27,10 @@ interface BrowseModalProps {
   navigation: NativeStackNavigationProp<DiscoverParamList, 'Discover', undefined>;
 }
 
+/**
+ * browse modal
+ * instead of rendering a new screen, the browse is a full screen pop up
+ */
 export const BrowseModal: React.FC<BrowseModalProps> = ({ isOpen, close, navigation }) => {
   const insets = useSafeAreaInsets();
 

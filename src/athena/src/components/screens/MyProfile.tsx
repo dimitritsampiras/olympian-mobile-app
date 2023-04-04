@@ -52,6 +52,10 @@ const profileOptions = [
   },
 ] as const;
 
+/**
+ *
+ * screen for user's profile
+ */
 export const MyProfile: React.FC<ProfileProps> = ({ navigation }) => {
   const isFocused = useIsFocused();
   const { user, refetch } = useContext(UserContext);

@@ -4,6 +4,9 @@ import { extendType, list, nullable } from 'nexus';
 export const ProgramQuery = extendType({
   type: 'Query',
   definition(t) {
+    /**
+     * retrieves trending programs
+     */
     t.field('trendingPrograms', {
       type: list('Program'),
       args: { skip: 'Int', take: 'Int', trainingType: nullable(list('TrainingType')) },
@@ -15,6 +18,9 @@ export const ProgramQuery = extendType({
         });
       },
     });
+    /**
+     * retrieves popular programs
+     */
     t.field('popularPrograms', {
       type: list('Program'),
       args: { skip: 'Int', take: 'Int', trainingType: nullable(list('TrainingType')) },
@@ -26,7 +32,9 @@ export const ProgramQuery = extendType({
         });
       },
     });
-    // create program mutation
+    /**
+     * retrieves a program from an id
+     */
     t.field('program', {
       type: nullable('Program'),
       args: { programId: 'String' },
@@ -69,7 +77,7 @@ export const ProgramQuery = extendType({
     });
     /**
      *
-     * returns the workout
+     * returns a workout from an id
      */
     t.field('workout', {
       type: nullable('Workout'),

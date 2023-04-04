@@ -6,6 +6,9 @@ import { createApolloServer } from './server/createServer';
 
 const prisma = new PrismaClient();
 
+/**
+ * entry point to the app
+ */
 const main = async () => {
   // main
   // express app
@@ -28,6 +31,7 @@ const main = async () => {
   });
 };
 
+// catch errors and log to console
 main().catch((e) => {
-  // console.log(e);
+  console.log(e);
 });

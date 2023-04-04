@@ -1,10 +1,12 @@
+// react contexts used throughout app
+
 import { createContext } from 'react';
 import { ActiveWorkoutQuery, ActiveWorkoutQueryResult, MeQuery, MeQueryResult } from './graphql';
 import { CreateProgramInputWithoutUserId } from './types';
 
 /**
  *
- * user context
+ * active workout context
  */
 export const ActiveWorkoutContext = createContext({
   activeWorkout: {} as ActiveWorkoutQuery['activeWorkout'],
@@ -17,11 +19,18 @@ export const ActiveWorkoutContext = createContext({
   setIndex: (() => {}) as React.Dispatch<React.SetStateAction<number>>,
 });
 
+/**
+ *
+ * user context
+ */
 export const UserContext = createContext({
   user: {} as MeQuery['me'],
   refetch: (async () => ({})) as MeQueryResult['refetch'],
 });
 
+/**
+ * create program context for multi step program context
+ */
 export const CreateProgramContext = createContext({
   step: 0,
   setStep: (() => {}) as React.Dispatch<React.SetStateAction<number>>,
@@ -31,7 +40,7 @@ export const CreateProgramContext = createContext({
 
 /**
  *
- * user context
+ * route context for current route of app
  */
 export const RouteContext = createContext({
   routeName: '' as string | undefined,
