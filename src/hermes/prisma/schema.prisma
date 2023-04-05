@@ -33,7 +33,7 @@ model Profile {
   updatedAt                   DateTime           @updatedAt
   profileInitialsDefaultColor String             @default("#45818e") @db.VarChar(7)
   trainingAge                 TrainingLevel?
-  goals                       TrainingType[]
+  goals                       Goal[]            
   // relations
   authoredPrograms            Program[]          @relation("ProgramAuthor")
   programLibrary              Program[]          @relation("ProgramUser")
@@ -42,6 +42,16 @@ model Profile {
   user                        User               @relation(fields: [userId], references: [id])
   userId                      String             @unique
   performedWorkouts           PerformedWorkout[]
+}
+
+model Goal {
+  id                          String             @id @default(cuid())
+  profile                     Profile            @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId                   String
+  staticExercise              StaticExercise     @relation(fields: [staticExerciseId], references: [id], onDelete: Cascade)
+  staticExerciseId            String
+  reps                        Int
+  weight                      Int
 }
 
 model Program {
@@ -144,6 +154,7 @@ model PerformedSet {
 model StaticExercise {
   id                    String     @id @default(cuid())
   name                  String
+  inGoals               Goal[]
   movement              Movement
   primaryTargetMuscle   Muscle
   secondaryTargetMuscle Muscle?

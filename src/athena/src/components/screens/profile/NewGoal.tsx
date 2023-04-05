@@ -13,14 +13,18 @@ import { ChevronRightIcon } from 'react-native-heroicons/solid';
 interface NewGoalExerciseSearchProps extends NativeStackScreenProps<ProfileParamList, 'NewGoal'> {}
 
 export const NewGoalExerciseSearch: React.FC<NewGoalExerciseSearchProps> = ({
-  navigation,
   route,
+  navigation,
 }) => {
   const { data } = useStaticExercisesQuery({
     fetchPolicy: 'no-cache',
   });
-  const handleSetGoal = (staticExerciseId: string) => {
-    navigation.navigate('SetGoal');
+  const handleSetGoal = (exerciseId : string, exerciseName : string) => {
+    navigation.navigate('SetGoal', {
+      profileId: route.params.profileId,
+      staticExerciseId: exerciseId,
+      staticExerciseName: exerciseName,
+    });
   };
   return (
     <ScreenView>
@@ -38,7 +42,7 @@ export const NewGoalExerciseSearch: React.FC<NewGoalExerciseSearchProps> = ({
           return (
             <TouchableOpacity
               key={exercise.id}
-              onPress={() => handleSetGoal(exercise.id)}
+              onPress={() => handleSetGoal(exercise.id, exercise.name)}
               style={{
                 backgroundColor: 'white',
                 borderRadius: 18,

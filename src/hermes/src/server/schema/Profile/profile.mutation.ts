@@ -43,5 +43,20 @@ export const ProfileMutation = extendType({
         });
       },
     });
+
+    t.field('setGoal', {
+      type: nullable('Goal'),
+      args: { profileId: 'String', staticExerciseId: 'String', reps: 'Int', weight: 'Int' },
+      resolve: async (_root, { profileId, staticExerciseId, reps, weight }, { prisma }) => {
+        return await prisma.goal.create({
+          data: {
+            profileId,
+            staticExerciseId,
+            reps,
+            weight
+          },
+        });
+      },
+    });
   },
 });

@@ -40,16 +40,16 @@ const profileOptions = [
     screen: 'Socials',
     Icon: UsersIcon,
   },
-  {
-    option: 'Activity',
-    screen: 'Activity',
-    Icon: ClockIcon,
-  },
-  {
-    option: 'Account',
-    screen: 'Account',
-    Icon: UserCircleIcon,
-  },
+  // {
+  //   option: 'Activity',
+  //   screen: 'Activity',
+  //   Icon: ClockIcon,
+  // },
+  // {
+  //   option: 'Account',
+  //   screen: 'Account',
+  //   Icon: UserCircleIcon,
+  // },
 ] as const;
 
 export const MyProfile: React.FC<ProfileProps> = ({ navigation }) => {
@@ -114,6 +114,10 @@ export const MyProfile: React.FC<ProfileProps> = ({ navigation }) => {
           <TouchableOpacity
             key={i}
             onPress={() => {
+              if (screen == 'Goals'){
+                navigation.navigate(screen, {profileId:user!.profile!.id});
+                return
+              }
               navigation.navigate(screen);
             }}
             style={styles.optionCard}>

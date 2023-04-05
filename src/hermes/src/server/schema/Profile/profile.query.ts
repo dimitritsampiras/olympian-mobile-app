@@ -103,5 +103,17 @@ export const ProfileQuery = extendType({
         return programActivity;
       },
     });
+
+    t.field('myGoals', {
+      type: list('Goal'),
+      args: { profileId: 'String' },
+      resolve: async (_root, { profileId }, { prisma }) => {
+        const profileGoals = await prisma.goal.findMany({
+          where: { profileId },
+          include: { staticExercise: true }
+        });
+        return profileGoals || []
+      },
+    });
   },
 });

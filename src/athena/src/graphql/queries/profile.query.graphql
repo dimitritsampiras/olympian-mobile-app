@@ -162,3 +162,12 @@ query ProgramActivity($programId: String!) {
     }
   }
 }
+
+query myGoals($profileId: String!){
+  myGoals(profileId: $profileId){
+    ...Goal
+    staticExercise{
+      ...StaticExercise
+    }
+  }
+}
