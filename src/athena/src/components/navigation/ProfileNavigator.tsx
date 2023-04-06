@@ -31,6 +31,9 @@ const ProfileStack = createNativeStackNavigator<ProfileParamList>();
 
 type ProfileNavigatorProps = NativeStackScreenProps<TabParamList, 'ProfileNavigator'>;
 
+/**
+ * navigator for profile screen and profile options options
+ */
 export const ProfileNavigator: React.FC<ProfileNavigatorProps> = () => {
   return (
     <ProfileStack.Navigator initialRouteName="MyProfile" screenOptions={{ headerShown: false }}>

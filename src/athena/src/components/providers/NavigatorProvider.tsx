@@ -8,6 +8,11 @@ interface NavigatorProviderProps {
 
 const ref = createNavigationContainerRef();
 
+/**
+ *
+ * tracks the top level route of the stack
+ * used primarily to hide the nav bar on certain routes
+ */
 export const NavigatorProvider: React.FC<NavigatorProviderProps> = ({ children }) => {
   const [routeName, setRouteName] = useState<string>();
 

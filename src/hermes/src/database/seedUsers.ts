@@ -1,6 +1,10 @@
-import { Prisma, PrismaClient, Profile, Program, User } from '@prisma/client';
+import { Prisma, PrismaClient } from '@prisma/client';
 import { createPassword } from '../server/schema/User/helpers/authentication';
 
+/**
+ *
+ * seed function to provide mock data to users table
+ */
 const users: Prisma.UserCreateInput[] = [
   {
     email: 'johndoe@example.com',

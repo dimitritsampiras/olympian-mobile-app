@@ -22,6 +22,10 @@ import { useIsFocused } from '@react-navigation/native';
 
 interface HomeProps extends NativeStackScreenProps<HomeParamList & TabParamList, 'Home'> {}
 
+/**
+ *
+ * home screen
+ */
 export const Home: React.FC<HomeProps> = ({ navigation }) => {
   const { user } = useContext(UserContext);
   const { data } = useStaticExercisesQuery();
@@ -62,7 +66,7 @@ export const Home: React.FC<HomeProps> = ({ navigation }) => {
       {!lastData?.lastPerformedWorkout ? (
         <View style={[styles.infoContainer]}>
           <BodyText style={{ marginBottom: 12 }}>
-            You have no active programs. Click the button to get started.
+            You don't have any programs! Click the button to get started.
           </BodyText>
           <Button variant="ghost" colorScheme="info" onPress={handleOnGetStartedPress}>
             Get Started
@@ -177,11 +181,3 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
 });
-
-const toWeekday = (iso: string) => {
-  return new Date(iso).toLocaleString('en-US', { weekday: 'short' });
-};
-
-const toDay = (iso: string) => {
-  return new Date(iso).toLocaleString('en-US', { day: 'numeric' });
-};

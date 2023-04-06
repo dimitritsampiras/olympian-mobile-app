@@ -45,10 +45,12 @@
 \section{Revision History}
 
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
-\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\toprule
+\textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+January 10 2023 & Matthew McCracken, Jared Bentvelsen, Bassel Rezkalla, Yuvraj Randhawa, William Lee, and Dimitri Tsampiras & Initial Draft\\
+\midrule
+March 31 2023 & Matthew McCracken & Updated modules to align with end of term codebase\\
 \bottomrule
 \end{tabularx}
 
@@ -157,10 +159,11 @@ adapted here is called design for
 change.
 
 \begin{description}
-\item[\refstepcounter{acnum} \actheacnum \label{acLayout}:] The layout and order of prompts or screens that are presented during the user registration process.
 \item[\refstepcounter{acnum} \actheacnum \label{acDiscovery}:] The process by which users discover new content / other users.
-\item[\refstepcounter{acnum} \actheacnum \label{acStorage}:] Leverage local storage for exercises and workouts instead of storing all data on database. 
 \item[\refstepcounter{acnum} \actheacnum \label{acStyling}:] Visual styling and color design choices.
+ \item[\refstepcounter{acnum} \actheacnum \label{acGoals}:] Connect goals feature up to database.
+\item[\refstepcounter{acnum} \actheacnum \label{acMultimedia}:] Further multimedia options including custom profile pictures and the option to embed images and videos into workouts.
+\item[\refstepcounter{acnum} \actheacnum \label{acQuantifiers}:] Track exercise progress with more metrics than just reps and sets. Include quantifiers such as time.
 \end{description}
 
 \subsection{Unlikely Changes} \label{SecUchange}
@@ -189,17 +192,16 @@ actually be implemented.
 \item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding Module
 \item [\refstepcounter{mnum} \mthemnum \label{mExercise}:] Exercise Module
 \item [\refstepcounter{mnum} \mthemnum \label{mWorkout}:] Workout Module
-\item [\refstepcounter{mnum} \mthemnum \label{mWR}:] Workout Routine Module
+\item [\refstepcounter{mnum} \mthemnum \label{mProgram}:] Program Module
 \item [\refstepcounter{mnum} \mthemnum \label{mUL}:] User Login Module
-\item [\refstepcounter{mnum} \mthemnum \label{mUR}:] User Registration Module
+\item [\refstepcounter{mnum} \mthemnum \label{mUR}:] User Sign Up Module
 \item [\refstepcounter{mnum} \mthemnum \label{mUP}:] User Profile Module
 \item [\refstepcounter{mnum} \mthemnum \label{mUFG}:] User Fitness Goal Module
 \item [\refstepcounter{mnum} \mthemnum \label{mWB}:] User Workout Browser Module
 \item [\refstepcounter{mnum} \mthemnum \label{mCreation}:] Creation Module
 \item [\refstepcounter{mnum} \mthemnum \label{mWC}:] Workout Creation Module
-\item [\refstepcounter{mnum} \mthemnum \label{mWRC}:] Workout Routine Creation Module
+\item [\refstepcounter{mnum} \mthemnum \label{mProgramC}:] Program Creation Module
 \item [\refstepcounter{mnum} \mthemnum \label{mEC}:] Exercise Creation Module
-\item [\refstepcounter{mnum} \mthemnum \label{mTS}:] Timed Sequence Module
 \item [\refstepcounter{mnum} \mthemnum \label{mQuantifier}:] Quantifier Module
 \item [\refstepcounter{mnum} \mthemnum \label{mDatabase}:] Database Communicator Module
 \end{description}
@@ -217,18 +219,17 @@ actually be implemented.
 \multirow{12}{0.3\textwidth}{Behaviour-Hiding Module}
 & exercise\\
 & workout\\
-& workout routine\\
+& program\\
 & user login\\
-& user registration\\
+& user sign up\\
 & user profile\\ 
 & user fitness goal\\
 & workout browser\\
 & creation\\
 & workout creation\\
-& workout routine creation\\
+& program creation\\
 & exercise creation\\
-& timed sequence\\
-& DatabaseCommunicator\\
+& database communicator\\
 \midrule
 
 \multirow{1}{0.3\textwidth}{Software Decision Module}
@@ -249,13 +250,14 @@ between requirements and modules is listed in Table \ref{TblRT}.
 
 \newpage
 
+\begin{table}[h!]
 \begin{tabular}{ | m{20em} | m{20em} | } 
   \hline
   Requirement & Design \\
   \hline
   The product shall appear minimal and straightforward & The application will contain an interface that only presents information that is necessary as to prevent cluttering and reduce minimality \\
   \hline
-  The product shall use fonts of readable size to the target user group & Fonts of size 10-12 will be used across the application \\
+  The product shall use fonts of readable size to the target user group & Only black and dark colored fonts will be used to display information. Font sizes of 12 and larger will be standard. All industry best practices for font style will be followed. \\
   \hline
   The product shall be able to be used by untrained fitness enthusiasts and amateurs alike, who receive no training before using it & UI will be simplistic and consistent throughout, reducing the learning curve for users \\
   \hline
@@ -267,6 +269,9 @@ between requirements and modules is listed in Table \ref{TblRT}.
   \hline
 
 \end{tabular}
+\caption{Requirements to Design Mapping}
+\label{TblD}
+\end{table}
 
 \section{Module Decomposition} \label{SecMD}
 
@@ -312,7 +317,7 @@ to be implemented.
 \begin{description}
 \item[Secrets:] The values of quantifiers and descriptions for each exercise.
 \item[Services:] Provides read and write (get and set) capability for individual exercises.
-\item[Implemented By:] exercise.ts
+\item[Implemented By:] Exercise.tsx
 \item[Type of Module:] Abstract Object
 \end{description}
 
@@ -321,16 +326,16 @@ to be implemented.
 \begin{description}
 \item[Secrets:] The exercises that make up each workout.
 \item[Services:] Manage (read and write) which exercises comprise a workout.
-\item[Implemented By:] workout.ts
+\item[Implemented By:] Workout.tsx
 \item[Type of Module:] Abstract Object
 \end{description}
 
-\subsubsection{Workout Routine Module (\mref{mWR})}
+\subsubsection{Program Module (\mref{mProgram})}
 
 \begin{description}
-\item[Secrets:] The workouts and scheduling to make up a workout routine.
-\item[Services:] Manage the scheduling and contents of a workout routine.
-\item[Implemented By:] workout-routine.ts
+\item[Secrets:] The workouts and scheduling to make up a program.
+\item[Services:] Manage the scheduling and contents of a program.
+\item[Implemented By:] Program.tsx
 \item[Type of Module:] Abstract Object
 \end{description}
 
@@ -339,15 +344,15 @@ to be implemented.
 \begin{description}
 \item[Secrets:] The functions needed to verify a users identity. 
 \item[Services:] Accepts user credentials and, if correct, provides a token to log user in.
-\item[Implemented By:] user-login.ts
+\item[Implemented By:] Login.tsx
 \end{description}
 
-\subsubsection{User Registration Module (\mref{mUR})}
+\subsubsection{User Sign Up Module (\mref{mUR})}
 
 \begin{description}
 \item[Secrets:] The functions needed to create a new user in the application database. 
 \item[Services:] Accepts user credential data and, if valid, creates a new user in the database with the provided data.
-\item[Implemented By:] user-registration.ts
+\item[Implemented By:] SignUp.tsx
 \end{description}
 
 \subsubsection{User Profile Module (\mref{mUP})}
@@ -355,7 +360,7 @@ to be implemented.
 \begin{description}
 \item[Secrets:] The personal data for a user.
 \item[Services:] Manage all personal user data.
-\item[Implemented By:] user-profile.ts
+\item[Implemented By:] Profile.tsx
 \end{description}
 
 \subsubsection{User Fitness Goal Module (\mref{mUFG})}
@@ -363,7 +368,7 @@ to be implemented.
 \begin{description}
 \item[Secrets:] The quantifiers that users set for their fitness goals.
 \item[Services:] Manage fitness goals for a specific user.
-\item[Implemented By:] user-fitness-goals.ts
+\item[Implemented By:] Goals.tsx
 \end{description}
 
 \subsubsection{Workout Browser Module (\mref{mWB})}
@@ -371,15 +376,7 @@ to be implemented.
 \begin{description}
 \item[Secrets:] The data structure for filtering and displaying public workouts.
 \item[Services:] Display public workouts and allow user to search and filter options.
-\item[Implemented By:] workout-browser.ts
-\end{description}
-
-\subsubsection{Creation Module (\mref{mCreation})}
-
-\begin{description}
-\item[Secrets:] Abstract data type that provides children with methods for adding entries to the database.
-\item[Services:] Provides general append functionality to database.
-\item[Implemented By:] creation.ts
+\item[Implemented By:] Discover.tsx
 \end{description}
 
 \subsubsection{Workout Creation Module (\mref{mWC})}
@@ -387,15 +384,15 @@ to be implemented.
 \begin{description}
 \item[Secrets:] The verification of new workout data.
 \item[Services:] Uses creation module to add new workout to database.
-\item[Implemented By:] workout-creation.ts
+\item[Implemented By:] WorkoutEdit.tsx
 \end{description}
 
-\subsubsection{Workout Routine Creation Module (\mref{mWRC})}
+\subsubsection{Program Creation Module (\mref{mProgramC})}
 
 \begin{description}
-\item[Secrets:] The verification of new workout routine data.
-\item[Services:] Uses creation module to add new workout routine to database.
-\item[Implemented By:] workout-routine-creation.ts
+\item[Secrets:] The verification of new program data.
+\item[Services:] Uses creation module to add new program to database.
+\item[Implemented By:] CreateProgram.tsx
 \end{description}
 
 \subsubsection{Exercise Creation Module (\mref{mEC})}
@@ -403,15 +400,7 @@ to be implemented.
 \begin{description}
 \item[Secrets:] The verification of new exercise data.
 \item[Services:] Uses creation module to add new exercise to database.
-\item[Implemented By:] exercise-creation.ts
-\end{description}
-
-\subsubsection{Timed Sequence Module (\mref{mTS})}
-
-\begin{description}
-\item[Secrets:] A general format and structure of sequence data
-\item[Services:] Provides methods to access and create timed sequences.
-\item[Implemented By:] timed-sequence.ts
+\item[Implemented By:] Exercise.tsx
 \end{description}
 
 \subsection{Software Decision Module}
@@ -448,12 +437,12 @@ requirements and between the modules and the anticipated changes.
 \toprule
 \textbf{Req.} & \textbf{Modules}\\
 \midrule
-FR1 & \mref{mWRC}\\
-FR2 & \mref{mExercise}, \mref{mWR}, \mref{mEC}\\
+FR1 & \mref{mProgramC}\\
+FR2 & \mref{mExercise}, \mref{mProgram}, \mref{mEC}\\
 FR3 & \mref{mExercise}, \mref{mQuantifier}\\
-FR4 & \mref{mWR}, \mref{mUP}\\
-FR5 & \mref{mWR}\\
-FR6 & \mref{mWR}, \mref{mWB}\\
+FR4 & \mref{mProgram}, \mref{mUP}\\
+FR5 & \mref{mProgram}\\
+FR6 & \mref{mProgram}, \mref{mWB}\\
 FR7 & \mref{mUP}\\
 FR8 & \mref{mUP}\\
 FR9 & \mref{mExercise}, \mref{mUFG}, \mref{mEC}, \mref{mQuantifier}\\
@@ -463,11 +452,11 @@ FR11 & \mref{mUFG}, \mref{mWB}\\
 NFR1 & \mref{mUP}\\
 NFR2 & \mref{mUP}\\
 NFR3 & \mref{mUP}\\
-NFR4 & \mref{mExercise}, \mref{mWorkout}, \mref{mWR}, \mref{mUL}, \mref{mUR}, \mref{mUP}, \mref{mUFG}, \mref{mWB}, \mref{mCreation}\\
-NFR5 & \mref{mExercise}, \mref{mWorkout}, \mref{mWR}, \mref{mUP}, \mref{mUFG}, \mref{mWB}\\
-NFR6 & \mref{mExercise}, \mref{mWorkout}, \mref{mWR}, \mref{mUP}, \mref{mUFG}, \mref{mWB}\\
-NFR7 & \mref{mExercise}, \mref{mWorkout}, \mref{mWR}, \mref{mUP}, \mref{mUFG}, \mref{mWB}\\
-NFR8 & \mref{mExercise}, \mref{mWorkout}, \mref{mWR}, \mref{mWC}, \mref{mWRC}, \mref{mEC}\\
+NFR4 & \mref{mExercise}, \mref{mWorkout}, \mref{mProgram}, \mref{mUL}, \mref{mUR}, \mref{mUP}, \mref{mUFG}, \mref{mWB}, \mref{mCreation}\\
+NFR5 & \mref{mExercise}, \mref{mWorkout}, \mref{mProgram}, \mref{mUP}, \mref{mUFG}, \mref{mWB}\\
+NFR6 & \mref{mExercise}, \mref{mWorkout}, \mref{mProgram}, \mref{mUP}, \mref{mUFG}, \mref{mWB}\\
+NFR7 & \mref{mExercise}, \mref{mWorkout}, \mref{mProgram}, \mref{mUP}, \mref{mUFG}, \mref{mWB}\\
+NFR8 & \mref{mExercise}, \mref{mWorkout}, \mref{mProgram}, \mref{mWC}, \mref{mProgramC}, \mref{mEC}\\
 NFR9 & \mref{mWB}\\
 NFR10 & \mref{mDatabase}\\
 NFR11 & \mref{mDatabase}\\
@@ -495,10 +484,11 @@ NFR22 & \mref{mDatabase}\\
 \toprule
 \textbf{AC} & \textbf{Modules}\\
 \midrule
-\acref{acLayout} & \mref{mUR}\\
 \acref{acDiscovery} & \mref{mWB}\\
-\acref{acStorage} & \mref{mHH}\\
 \acref{acStyling} & \mref{mWorkout}\\
+\acref{acGoals} & \mref{mUFG}\\
+\acref{acMultimedia} & \mref{mWorkout}\\
+\acref{acQuantifiers} & \mref{mEC}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Anticipated Changes and Modules}

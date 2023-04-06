@@ -21,7 +21,6 @@ export const BROWSE_CATGEORIES: Record<TrainingType, TrainingTypeTuple> = {
   functional_training: ['amber', '1F9D7'],
   sports_performance: ['blue', '26BD'],
   recovery: ['green', '1FA79'],
-  pilates: ['slate', '26F9'],
   hiit: ['cyan', '26F9'],
   wellness: ['green', '26F9'],
   stretching: ['amber', '26F9'],

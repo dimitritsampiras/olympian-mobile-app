@@ -51,6 +51,8 @@
 		\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 		\midrule
 		January 13 2023 & 1.0 & Initial Draft\\
+		\midrule
+		March 30 2023 & 2.0 & Revision 1\\
 		\bottomrule
 	\end{tabularx}
 	
@@ -133,17 +135,24 @@
 		\hline
 		Requirement & Design \\
 		\hline
-		The product shall appear minimal and straightforward & The application will contain an interface that only presents information that is necessary as to prevent cluttering and reduce minimality \\
+		NFR1 - The product shall appear minimal and straightforward & The application will contain an interface that only presents information that is necessary as to prevent cluttering and promote minimalism. Brief descriptions are used when necessary, with large utilization of symbols and icons. \\
 		\hline
-		The product shall use fonts of readable size to the target user group & Fonts of size 10-12 will be used across the application \\
+		NFR2 - The product shall use fonts of readable size to the target user group & Fonts of size 12 or larger will be used across the application. \\
 		\hline
-		The product shall be able to be used by untrained fitness enthusiasts and amateurs alike, who receive no training before using it & UI will be simplistic and consistent throughout, reducing the learning curve for users \\
+		NFR4 - The product shall be able to be used by untrained fitness enthusiasts and amateurs alike, who receive no training before using it & UI will be simplistic and consistent throughout. Specifically, a small set of fonts, colours, and interactive components (e.g. buttons) will be used to minimize the cognitive load for the users to learn and interact with the application. \\
 		\hline
-		The product shall be usable by users with hearing loss or partial blindness & The application will rely on both audio and visual cues to indicate correct inputs or application events \\
+		NFR5: The product shall use symbols and pictures to provide users with an intuitive and
+		efficient experience. & Icons are used in input fields and options to help the user instantly recognize information. \\
 		\hline
-		The application must inform users when maintenance is taking place and must warn them at least 1 day in advance & The application will utilize pop up screens to display important notifications to the user \\
+		NFR6 - The product shall be usable by users with hearing loss or partial blindness & The application will rely on audio, visual, and haptic cues to indicate correct inputs or application events. \\
 		\hline
-		The applicaiton will allow users to report offensive content and remove it from their feed & There will be a button on each post that gives user the option to report offensive content \\
+		NFR14 - The application must inform users when maintenance is taking place and must warn them at least 1 day in advance & The application will utilize pop up screens to display important notifications to the user. \\
+		\hline
+		NFR16 - Passwords must be encrypted with SHA-256 when stored & The system does not store plaintext passwords. Passwords entered by the user (during login or account creation) are instantly hashed (using \href{https://argon2.online/}{Argon2}) before being sent to the database. \\
+		\hline
+		NFR13 - The application shall operate on iOS devices and Android devices. & Olympian is being developed in React Native, which is device agnostic. \\
+		\hline
+		NFR20 - The application will allow users to report offensive content and remove it from their feed & There will be a button on each post that gives user the option to report offensive content. \\
 		\hline
 
 	\end{tabular}
@@ -205,10 +214,16 @@
 	
 	\section{Design of Communication Protocols}
 	
-	Communication between client and server will be done with HTTP requests.
-
-	There is no custom communication protocol used.
+	Currently, all user information is stored in the remote database - no data is stored locally on the mobile device.\\
 	
+	Communication between client and server will be done with HTTP requests. Specifically, the following technologies are used in client-server communication:
+	
+	\begin{enumerate}
+
+	\item The query language \href{https://graphql.org/}{GraphQL} is used as a communication layer between the client and server. GraphQL aids in type checking and reduces the need for multiple endpoints (and thus requests made by the client) in the server. See \url{https://graphql.org/faq/} for more information.
+	
+	\item \href{https://www.prisma.io/}{Prisma} is used to abstract away SQL queries to the database, and define the database schema for all Olympian data. See \url{https://www.prisma.io/docs/concepts/overview/what-is-prisma} for more information.
+	\end{enumerate}
 	\section{Timeline}
 
   Below is a timeline of the major milestones and the developers responsible for completing them.

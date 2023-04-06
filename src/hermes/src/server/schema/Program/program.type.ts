@@ -16,7 +16,9 @@ import {
   PerformedSet,
 } from 'nexus-prisma';
 
-// Session object type from prisma
+/**
+ * graphql type from Program db model
+ */
 export const ProgramType = objectType({
   name: Program.$name,
   definition(t) {
@@ -36,7 +38,9 @@ export const ProgramType = objectType({
   },
 });
 
-// Session object type from prisma
+/**
+ * graphql type from workout db model
+ */
 export const WorkoutType = objectType({
   name: Workout.$name,
   definition(t) {
@@ -50,6 +54,9 @@ export const WorkoutType = objectType({
   },
 });
 
+/**
+ * graphql type from Exercise db model
+ */
 export const ExerciseType = objectType({
   name: Exercise.$name,
   definition(t) {
@@ -62,6 +69,9 @@ export const ExerciseType = objectType({
   },
 });
 
+/**
+ * graphql type from Set db model
+ */
 export const SetType = objectType({
   name: Set.$name,
   definition(t) {
@@ -73,7 +83,9 @@ export const SetType = objectType({
   },
 });
 
-// Session object type from prisma
+/**
+ * graphql type from PerformedWorkout db model
+ */
 export const PerformedWorkoutType = objectType({
   name: PerformedWorkout.$name,
   definition(t) {
@@ -90,6 +102,9 @@ export const PerformedWorkoutType = objectType({
   },
 });
 
+/**
+ * graphql type from PerformedExercise db model
+ */
 export const PerformedExerciseType = objectType({
   name: PerformedExercise.$name,
   definition(t) {
@@ -102,6 +117,9 @@ export const PerformedExerciseType = objectType({
   },
 });
 
+/**
+ * graphql type from PerformedSet db model
+ */
 export const PerformedSetType = objectType({
   name: PerformedSet.$name,
   definition(t) {

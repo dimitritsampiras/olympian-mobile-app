@@ -24,6 +24,9 @@ export type TabParamList = {
 const Tabs = createBottomTabNavigator<TabParamList>();
 type TabStackNavigatorProps = NativeStackScreenProps<AuthParamList, 'Tabs'>;
 
+/**
+ * navigator for the tab bar
+ */
 export const TabNavigator: React.FC<TabStackNavigatorProps> = ({ route }) => {
   return (
     <Tabs.Navigator
