@@ -27,7 +27,7 @@
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-March 31 2023 & Jared Bentvelsen, Matthew McCracken & Description of changes\\
+March 31 2023 & Jared Bentvelsen, Matthew McCracken & New document to guide unfamiliar users with how to run and use the Olympian application.\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -55,7 +55,7 @@ This section records information for easy reference.
   \midrule   
   Exercise & Exercises are individual movements that people will do during a workout in order to develop the strength of certain muscle groups.\\
   Workout & Workouts are collections of Exercises strung together in order to build one cohesive trip to the gym. Often workouts will be a collection of exercises that target one specific muscle group such as a chest day.\\
-  Program & A Program is a series of workouts that a user adds to their collection. A user will follow the schedule of a program to do workouts on selected days.\\
+  Program & A Program is a series of workouts that a user adds to their collection. A user will follow the schedule of a program to do workouts.\\
   \bottomrule
 \end{tabular}\\
 
@@ -66,7 +66,7 @@ This section records information for easy reference.
 Steps to setup Database:
 \begin{enumerate}
     \item Download the pgAdmin 4 postgres SQL tool
-    \item Setup a database called olympian
+    \item Setup a database named olympian
 \end{enumerate}
 
 \subsection{Git Repo Setup}
@@ -102,7 +102,7 @@ Steps to setup Database:
 
 \subsection{Starting the application}
 
-In a terminal in the src/hermes folder, run:
+In a separate terminal in the src/hermes folder, run:
     \begin{verbatim}
     npm run dev
     \end{verbatim}
@@ -184,6 +184,13 @@ When on the Add Exercise Page, users can select from a list of common exercises 
 
 From the home page, press the Globe Icon on the bottom tab bar to visit the Discovery Page. From this page users can view popular programs by selecting tags as well as search for any Programs or Users.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=0.6\textwidth]{imgs/DiscoverCategories.jpg}
+    \caption{Discover Browse Screen}
+    \label{FigDiscoverBrowse}
+    \end{figure}
+
 \subsubsection{Programs View}
 
 From the home page, press the Book Icon on the bottom tab bar to visit the Programs View. On this page users can view their existing Programs or return to the Create/Edit Program screen for individual programs by clicking on them.
@@ -214,7 +221,7 @@ From the Profile Page, users can tap the "Goals" button to be redirected to the 
 
 From the Profile Page, users can tap the "Socials" button to be redirected to the Socials page. On this page they can view the Status of users that they follow and see any of their active workouts. Adding Followers will be covered in a future section.
     
-\subsubsection{Adding Friends}
+\subsubsection{Adding Followers}
 
 Users can add users by navigating to a users profile page in one of 2 ways:\\
 \begin{enumerate}
@@ -225,6 +232,14 @@ Once on a users profile they can request to follow them.\\
 
 \subsubsection{Start a Workout}
 
-Users can start their workout by navigating to the Workout page as shown in Figure \ref{FigEditWorkout} and tapping the big blue play button. Once a workout is started, users can use the miniplayer at the bottom of the screen to progress their workout and check off completed exercises.
+Users can start their workout by navigating to the Workout page as shown in Figure \ref{FigEditWorkout} and tapping the big blue play button. Once a workout is started, users can use the miniplayer at the bottom of the screen to progress their workout and check off completed exercises.\\
+In the miniplayer that appears users can track their workout set by set. Figure \ref{FigMiniplayer} displays this miniplayer.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=0.6\textwidth]{imgs/Miniplayer.jpg}
+    \caption{Workout Miniplayer Screen}
+    \label{FigMiniplayer}
+    \end{figure}
 
 \end{document}
