@@ -62,7 +62,7 @@ export const Home: React.FC<HomeProps> = ({ navigation }) => {
       {!lastData?.lastPerformedWorkout ? (
         <View style={[styles.infoContainer]}>
           <BodyText style={{ marginBottom: 12 }}>
-            You have no active programs. Click the button to get started.
+            You don't have any programs! Click the button to get started.
           </BodyText>
           <Button variant="ghost" colorScheme="info" onPress={handleOnGetStartedPress}>
             Get Started
