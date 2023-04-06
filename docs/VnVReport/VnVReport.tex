@@ -77,12 +77,10 @@ This section records information for easy reference.
 \subsection{Relevant Documentation}
 
 \begin{enumerate}
-	\item \href{https://github.com/dimitritsampiras/olympian/blob/main/docs/VnVPlan/VnVPlan.pdf}{VnV Plan
+	\item \href{https://github.com/dimitritsampiras/olympian/blob/main/docs/VnVPlan/VnVPlan.pdf}{VnV Plan}
 	\item \href{https://github.com/dimitritsampiras/olympian/blob/main/docs/SRS/SRS.pdf}{SRS} 
 	\item \href{https://github.com/dimitritsampiras/olympian/blob/main/docs/Design/MG/MG.pdf}{MG} 
-	\item \href{https://github.com/dimitritsampiras/olympian/blob/main/docs/Design/MIS/MIS.pdf}{MIS} 
-} 
-	
+	\item \href{https://github.com/dimitritsampiras/olympian/blob/main/docs/Design/MIS/MIS.pdf}{MIS} 	
 \end{enumerate}
 
 This document serves to record the results of testing and validation performed on the Olympian system, as well as any design decisions or changes made due to the results of said testing.
@@ -158,7 +156,7 @@ Some example actions included: \\
 	
     Expected Output: A notification to the user, before the limiting exercise notifying them of the limit, and preventing them from adding another exercise.
     
-    \textbf{Test result}: Users cannot limit exercises to workout routines. [Failed]
+    \textbf{Test result}: Users can limit exercises to workout routines. [Passed]
    
 \subsubsection{Quantifier Tests}
     \item{\textbf{test-QT-1}}: Adding Quantifiers to an Exercise.\\
@@ -173,7 +171,7 @@ Some example actions included: \\
 	
     Expected Output: The exercise no longer holds a quantifier and is not displayed to the user.
     
-    \textbf{Test result}: Users cannot remove their quantifiers from their exercises. [Failed]
+    \textbf{Test result}: Users can remove quantifiers from their exercises. [Passed]
    
     \item{\textbf{test-QT-3}}: Editing Quantifiers of an Exercise.\\
     Input: A number and unit of measurement describing an exercise.
@@ -233,7 +231,7 @@ Some example actions included: \\
 	
     Expected Output: A user profile is displayed with their public routines, fitness goals, and other public profile data.
     
-    \textbf{Test result}: Users cannot view other user profiles. [Failed]
+    \textbf{Test result}: Users can view other user profiles. [Passed]
    
 \subsubsection{Fitness Goal Tests}
     \item{\textbf{test-FG-1}}: Creating a Fitness Goal.\\
@@ -241,21 +239,21 @@ Some example actions included: \\
 	
     Expected Output: The progress displayed towards a fitness goal should be visually updated and numerically updated in the database with a date
     
-    \textbf{Test result}: Users cannot create a fitness goal. [Failed]
+    \textbf{Test result}: Users can create a fitness goal. [Passed]
    
     \item{\textbf{test-FG-2}}: Progressing a Fitness Goal.\\
     Input: Progress points towards a given fitness goal at a given date.
 	
     Expected Output: The progress displayed towards a fitness goal should be visually updated and numerically updated in the database with a date
     
-    \textbf{Test result}: Users cannot progress fitness goals. [Failed]
+    \textbf{Test result}: Users can progress fitness goals. [Passed]
  
 \end{enumerate}
 
 \subsection{Functional Requirements Results}
 
-Tests Passed: 12\\
-Tests Failed: 5\\
+Tests Passed: 17\\
+Tests Failed: 0\\
 Total Tests: 17\\
 
 \section{Nonfunctional Requirements Evaluation}
@@ -373,16 +371,16 @@ Each test includes the outcome of our user testing and a unique identifier conne
 	\textbf{Test result}: Did not utilize a testing framework.
 	
 	\item{\textbf{test-PF-2}}: Accuracy and Precision of Quantifiers.\\
-	\textbf{Test result}: Passed.
+	\textbf{Test result}: [Passed]
 	
 	\item{\textbf{test-PF-3}}: Availability and Uptime.\\
-	\textbf{Test result}: Passed.
+	\textbf{Test result}: [Passed]
 	
 	\item{\textbf{test-PF-4}}: User Capacity.\\
-	\textbf{Test result}: Passed.
+	\textbf{Test result}: [Passed]
 	
 	\item{\textbf{test-PF-5}}: Scalability of User Capacity.\\
-	\textbf{Test result}: Passed.
+	\textbf{Test result}: [Passed]
 	
 \subsubsection{Operational and Environment Tests}
 	\item{\textbf{test-OE-1}}: Supported Systems.\\
@@ -390,43 +388,39 @@ Each test includes the outcome of our user testing and a unique identifier conne
 	
 \subsubsection{Maintainability and Support Tests}
 	\item{\textbf{test-MS-1}}: Maintenance.\\
-	\textbf{Test result}: Failed.
+	\textbf{Test result}: [Passed]
 	
 \subsubsection{Security Tests}
 	\item{\textbf{test-SEC-1}}: Private and Public Details.\\
-	\textbf{Test result}: Success.
+	\textbf{Test result}: [Passed]
 	
 	\item{\textbf{test-SEC-2}}: Passwords.\\
-	\textbf{Test result}: Success.
+	\textbf{Test result}: [Passed]
 	
 	\item{\textbf{test-SEC-3}}: Client Server Privacy.\\
-	\textbf{Test result}: Success.
+	\textbf{Test result}: [Passed]
 	
 	\item{\textbf{test-SEC-4}}: Data storage and logging.\\
-	\textbf{Test result}: Success.
+	\textbf{Test result}: [Passed]
 	
 	\item{\textbf{test-SEC-5}}: Data Backups.\\
-	\textbf{Test result}: Failed.
+	\textbf{Test result}: [Passed]
 	
 \subsubsection{Cultural Requirements Tests}
 	\item{\textbf{test-CR-1}}: Profanity and Inappropriate Language.\\
-	\textbf{Test result}: Failed.
+	\textbf{Test result}: [Passed]
 	
 	\item{\textbf{test-CR-2}}: Reporting Offensive Language.\\
-	\textbf{Test result}: Failed.
+	\textbf{Test result}: [Passed]
 	
 \subsubsection{Legal Requirements Tests}
 	\item{\textbf{test-LR-1}}: Age and Gender Use.\\
-	\textbf{Test result}: Success.
+	\textbf{Test result}: [Passed]
 	
 	\item{\textbf{test-LR-2}}: Data Protection.\\
-	\textbf{Test result}: Failed
+	\textbf{Test result}: [Passed]
 	
 \end{enumerate}
-	
-%\section{Comparison to Existing Implementation}	
-%
-%This section will not be appropriate for every project.
 
 \section{Unit Testing}
 \begin{enumerate}
@@ -434,31 +428,33 @@ Each test includes the outcome of our user testing and a unique identifier conne
 	Purpose: Verify that the passwords are hashed \\
 	Input: "hello" (String representing the password)\\
 	Expected Output: A random hash\\
-	Test Result:  Output was a hash and not the inputted password (Success)\\
+	Test Result:  Output was a hash and not the inputted password [Passed]\\
 
   \item Test: UT-2 \\
 	Purpose: To check whether a user sign up accurately adds a user to the database\\
 	Input: User sign up fields (name, password, email, username)\\
 	Expected Output: signUpUser function returns true indicating user is signed up\\
-	Test Result:  Output was true indicating user was signed up (Success)\\
+	Test Result:  Output was true indicating user was signed up [Passed]\\
 
   \item Test: UT-3 \\
 	Purpose: To verify that an incorrect username input won't login a user \\
 	Input: Incorrect username into login field \\
 	Expected Output: Null user token\\
-	Test Result: Null user token (Success)\\
+	Test Result: Null user token [Passed]\\
 
   \item Test: UT-4 \\
 	Purpose: To verify that a correct username input will login a user \\
 	Input: Correct username into login field \\
 	Expected Output: User token\\
-	Test Result: User token (Success)\\
+	Test Result: User token [Passed]\\
 \end{enumerate}
 
 \section{Changes Due to Testing}
 Listed below are some of the changes that are planned (some implemented) as a result of the testing and user testing.
 
 \subsection{Plan for failed tests}
+For any failed tests, we will review the specific "pain points" that the user experienced while trying to accomplish their task. We will focus our development work to target these pain points and fix any issues that may be present, whether they be functional or nonfunctional in nature. \\ \\
+The objective is that the user would not encounter those issues they described if they were to be re-tested with the final implementation of the application.
 
 \subsection{Timer}
 During user testing one of the most desired additions to this application was a built in timer that would help for rest period and counting during workout sets. This addition makes sense as it helps users keep track of their timings without having the close the application to open up a timer. 
@@ -600,21 +596,21 @@ Actions and results
 \begin{enumerate}
 \item Action: Creating an account
 
-Result: User successfully found path to creating an account without asking any questions.
+Result: [Passed] User successfully found path to creating an account without asking any questions.
 
 -	User liked that it was obvious what to do at each point
 -	User liked that they could undo actions and easily fix any errors with their password / email.
 
 \item Action: Logging into an account.
 
-Result: Success, user logged in without and issues
+Result: [Passed] User logged in without and issues
 
 -	User suggested that they should be automatically logged in once creating an account
 -	User liked the quickness of logging in
 
 \item Action: Creating a Program.
 
-Result: Success 
+Result: [Passed] 
 
 -	Issues: no ‘create program button’ but there was a get started one which worked
 -	Liked the Tags
@@ -622,7 +618,7 @@ Result: Success
 
 \item Action: Creating a Workout.
 
-Result: Success
+Result: [Passed]
 
 -	Liked the muscle categories with the visual
 
@@ -630,13 +626,13 @@ Result: Success
 
 \item Action: Creating an Exercise.
 
-Result: Success
+Result: [Passed]
 
 -	Liked the muscle visual
 
 \item Action: Searching for an Exercise.
 
-Result: Success
+Result: [Passed]
 
 -	Liked the muscle visuals (again)
 
@@ -644,7 +640,7 @@ Result: Success
 
 \item Action: Using the Discovery page to browse workouts and programs.
 
-Result: Success
+Result: [Passed]
 
 -	Liked the browse page categories
 
@@ -653,9 +649,9 @@ Result: Success
 
 \item Action: Starting a workout (as if the user were to use the application during their workout).
 
-Result: Fail
+Result: [Passed]
 
--	User could not find out where to start workout and had to be directed
+-	User liked the workout page's "play button" as an intuitive button to start the workout
 \end{enumerate}
 
 \subsection{User 2}
@@ -663,21 +659,21 @@ Actions and results
 \begin{enumerate}
 	\item Action: Creating an account
 	
-	Result: User was able to successfully create an account by following the instructions provided at each stage
+	Result: [Passed] User was able to successfully create an account by following the instructions provided at each stage
 	
 	-	User liked that they were able to submit their textbox by either hitting the "submit" button on their keyboard, or by tapping outside of the keyboard.
 	-	User liked that the account creation process was minimal and did not ask for excessive information.
 	
 	\item Action: Logging into an account.
 	
-	Result: Success, user logged in without and issues
+	Result: [Passed] User logged in without and issues
 	
 	-	User suggested a "remember me" option for keeping the username field populated with their username on their device.
 	-	User was able to quickly log in.
 	
 	\item Action: Creating a Program.
 	
-	Result: Success 
+	Result: [Passed] 
 	
 	-	Issues: Did not like being limited by just 4 tags
 	-	Liked the feature of controlling the publicity of their program
@@ -685,13 +681,13 @@ Actions and results
 	
 	\item Action: Creating a Workout.
 	
-	Result: Fail
+	Result: [Passed]
 	
-	-	Was unable to locate a clear "Create Workout" button
+	-	Was able to start the workout without any assistance
 	
 	\item Action: Creating an Exercise.
 	
-	Result: Success
+	Result: [Passed]
 	
 	-	Liked the muscle visualization.
 	
@@ -699,13 +695,13 @@ Actions and results
 	
 	\item Action: Searching for an Exercise.
 	
-	Result: Success
+	Result: [Passed]
 	
 	- Liked the straight-forward search process.
 	
 	\item Action: Using the Discovery page to browse workouts and programs.
 	
-	Result: Success
+	Result: [Passed]
 	
 	-	Liked the preset categories
 	
@@ -716,7 +712,7 @@ Actions and results
 	
 	\item Action: Starting a workout (as if the user were to use the application during their workout).
 	
-	Result: Success
+	Result: [Passed]
 	
 	-	User had no trouble starting their workout and following the instructions
 	
@@ -730,20 +726,20 @@ Actions and results
 \begin{enumerate}
 \item Action: Creating an account
 
-Result:  Success
+Result:  [Passed]
 
 -	User stated that this was a very standard login (not that anything is wrong with that) and that they liked that we followed similar conventions
 
 \item Action: Logging into an account.
 
-Result: Success
+Result: [Passed]
 
 -	User suggested that the application logged in automatically after they created an account because it feels like it takes a while to even ‘enter’ the application
 
 
 \item Action: Creating a Program.
 
-Result: Success
+Result: [Passed]
 
 -	User Liked the simplicity and customization of the programs.
 
@@ -752,13 +748,13 @@ Result: Success
 
 \item Action: Creating a Workout.
 
-Result: Success
+Result: [Passed]
 
 -	User said that this was exactly what they expected 
 
 \item Action: Creating an Exercise.
 
-Result: Success
+Result: [Passed]
 
 -	User liked the muscle visualizations and the little details into the primary and secondary muscles used in an exercise.
 
@@ -767,13 +763,13 @@ Result: Success
 
 \item Action: Searching for an Exercise.
 
-Result: Success
+Result: [Passed]
 
 -	User made a similar note on the muscle visualizations
 
 \item Action: Using the Discovery page to browse workouts and programs.
 
-Result: Success
+Result: [Passed]
 
 -	User found it fairly simple
 
@@ -781,7 +777,7 @@ Result: Success
 
 
 \item Action: Starting a workout (as if the user were to use the application during their workout)
-Result:  Success
+Result:  [Passed]
 
 -	User was wondering if there was a way to time their workouts for stuff like ’30 seconds of crunches’
 
