@@ -14,10 +14,6 @@ const colors = Object.entries(theme.colors).reduce<string[]>((accum, current) =>
   return [...accum, value[200]];
 }, []);
 
-/**
- *
- *
- */
 export const WorkoutImage: React.FC<WorkoutImageProps> = ({
   size = 'medium',
   placeholder = '🏋🏻‍♀️',

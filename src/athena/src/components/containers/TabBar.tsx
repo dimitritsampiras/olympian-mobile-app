@@ -11,7 +11,6 @@ import Animated, {
   useSharedValue,
   withSpring,
   withTiming,
-  runOnJS,
 } from 'react-native-reanimated';
 import { MiniPlayer } from './MiniPlayer';
 import { Player } from './Player';
@@ -37,6 +36,13 @@ const TAB_BAR_HIDDEN_ROUTES: Array<
   | keyof MyProgramsParamList
 > = ['CreateProgram'];
 
+/**
+ *
+ * tab bar
+ * important controller for app
+ * will render the player and miniplayer when a workout is active
+ * will disappear on certain screens (see TAB_BAR_HIDDEN_ROUTES)
+ */
 export const TabBar: React.FC<BottomTabBarProps> = ({ descriptors, navigation, state }) => {
   const { routeName } = useContext(RouteContext);
   const { activeWorkout, completed, toComplete, finishWorkout, index } =

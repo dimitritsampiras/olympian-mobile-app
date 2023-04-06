@@ -19,6 +19,11 @@ const DisoverStack = createNativeStackNavigator<DiscoverParamList>();
 
 type DiscoverStackNavigatorProps = NativeStackScreenProps<TabParamList, 'DiscoverNavigator'>;
 
+/**
+ *
+ * tracks the top level route of the stack
+ * used primarily to hide the nav bar on certain routes
+ */
 export const DiscoverNavigator: React.FC<DiscoverStackNavigatorProps> = ({ route }) => {
   // const {  } = route.params;
   return (

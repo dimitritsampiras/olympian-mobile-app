@@ -1,6 +1,10 @@
 import { Prisma, PrismaClient } from '@prisma/client';
 import { DateTime } from 'luxon';
 
+/**
+ *
+ * seed function to provide mock data to programs table
+ */
 const programs: Prisma.ProgramCreateInput[] = [
   {
     name: 'Beginner Push Pull Legs',

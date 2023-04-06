@@ -16,7 +16,7 @@ import { WorkoutEdit } from '../screens/program/WorkoutEdit';
 export type ProgramParamList = {
   Program: { programId: string; back?: boolean };
   Workout: { workoutId: string };
-  WorkoutEdit: {workoutId: string};
+  WorkoutEdit: { workoutId: string };
   ExerciseSearch: { workoutId: string };
   StaticExercise: { workoutId: string; staticExerciseId: string };
   Exercise: { exerciseId: string };
@@ -32,6 +32,9 @@ type ProgramStackNavigatorProps = NativeStackScreenProps<
 
 const ProgramStack = createNativeStackNavigator<ProgramParamList>();
 
+/**
+ * navigator for a program. includes workout screens, exercise screens, etc.
+ */
 export const ProgramNavigator: React.FC<ProgramStackNavigatorProps> = ({ route }) => {
   const { programId, back } = route.params;
   return (

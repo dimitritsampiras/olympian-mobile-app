@@ -15,6 +15,10 @@ import { TabParamList } from '../navigation';
 
 type ProgramsProps = NativeStackScreenProps<MyProgramsParamList & TabParamList, 'MyPrograms'>;
 
+/**
+ *
+ * screen for displaying all the programs a user has
+ */
 export const Programs: React.FC<ProgramsProps> = ({ navigation }) => {
   const { user } = useContext(UserContext);
   const { data, refetch } = useUserProgramsQuery({ fetchPolicy: 'no-cache' });
@@ -35,6 +39,7 @@ export const Programs: React.FC<ProgramsProps> = ({ navigation }) => {
     navigation.navigate('ProgramNavigator', { programId, back: true });
   };
 
+  // when screen is focused update changes
   useEffect(() => {
     isFocused && (async () => await refetch())();
   }, [isFocused]);

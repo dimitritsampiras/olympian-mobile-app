@@ -1,3 +1,7 @@
+/**
+ *
+ * a list of colors that the front end uses
+ */
 export const colors: Record<string, Record<number, string>> = {
   rose: {
     50: '#fff1f2',

@@ -17,6 +17,9 @@ const MyProgramsStack = createNativeStackNavigator<MyProgramsParamList>();
 
 type MyProgramsStackNavigatorProps = NativeStackScreenProps<TabParamList, 'MyProgramsNavigator'>;
 
+/**
+ * navigator for programs
+ */
 export const MyProgramsNavigator: React.FC<MyProgramsStackNavigatorProps> = ({ route }) => {
   // const {  } = route.params;
   return (
