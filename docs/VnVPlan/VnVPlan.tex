@@ -35,6 +35,7 @@
 		\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 		\midrule
 		02-11-2022 & 1.0 & Initial Draft\\
+		05-04-2023 & 2.0 & Final Draft\\
 		\bottomrule
 	\end{tabularx}
 	
@@ -52,14 +53,13 @@
 		\textbf{symbol} & \textbf{description}\\
 		\midrule 
 		AC & Anticipated Change\\
-		DAG & Directed Acyclic Graph \\
+		iOS & \href{https://en.wikipedia.org/wiki/IOS}{Apple's proprietary operating system} \\
 		M & Module \\
 		MG & Module Guide \\
 		MIS & Module Interface Specification \\
 		OS & Operating System \\
 		R & Requirement\\
 		RPE & \href{https://en.wikipedia.org/wiki/Rating_of_perceived_exertion}{Rating of Perceived Exertion} \\
-		SC & Scientific Computing \\
 		SRS & Software Requirements Specification\\
 		\progname & The Capstone course this project belongs to \\
 		UC & Unlikely Change \\
@@ -84,9 +84,6 @@
 	
 	\subsection{Summary}
 	
-	%\wss{Say what software is being tested.  Give its name and a brief overview of
-	%	its general functions.}
-	
 	The software being tested is a mobile application called Olympian. It is a workout application with a social component.
 	Important components of the software that will be getting tested are:
 
@@ -97,12 +94,6 @@
 	\end{itemize}
 	
 	\subsection{Objectives}
-	
-	%\wss{State what is intended to be accomplished.  The objective will be around
-	%	the qualities that are most important for your project.  You might have
-	%	something like: ``build confidence in the software correctness,''
-	%	``demonstrate adequate usability.'' etc.  You won't list all of the qualities,
-	%	just those that are most important.}
 
 		\begin{itemize}
 			\item Demonstrate ease of use for new users to sign in.
@@ -119,23 +110,11 @@
 		\item \href{https://github.com/dimitritsampiras/olympian/blob/main/docs/Design/MIS/MIS.pdf}{MIS} 
 	\end{enumerate}
 	
-	%\wss{Reference relevant documentation.  This will definitely include your SRS
-	%	and your other project documents (design documents, like MG, MIS, etc).  You
-	%	can include these even before they are written, since by the time the project
-	%	is done, they will be written.}
-	
 	\section{Plan}
 
 	This section contains the criteria for reviewing and verifying the various artifacts involved with the project.
-	
-	% \wss{Introduce this section.   You can provide a roadmap of the sections to
-	% 	come.}
-	
-	\subsection{Verification and Validation Team}
 
-	% \wss{Your teammates.  Maybe your supervisor.
-	% 	You shoud do more than list names.  You should say what each person's role is
-	% 	for the project's verification.  A table is a good way to summarize this information.}
+	\subsection{Verification and Validation Team}
 
 	\begin{table}
 		\begin{center}
@@ -161,10 +140,6 @@
 	\end{table}
 	
 	\subsection{SRS Verification Plan}
-	% \wss{List any approaches you intend to use for SRS verification.  This may include
-	% 	ad hoc feedback from reviewers, like your classmates, or you may plan for 
-	% 	something more rigorous/systematic.}
-	% \wss{Maybe create an SRS checklist?}
 
 	The SRS will be evaluated by team members and classmates as the project progresses. It will also be verified through testing with a traceability matrix.
 	GitHub issues left by other groups will be carefully considered and addressed.
@@ -176,10 +151,7 @@
 	\end{todolist}
 	
 	\subsection{Design Verification Plan}
-	% \wss{Plans for design verification}
-	% \wss{The review will include reviews by your classmates}
-	% \wss{Create a checklists?}
-
+	
 	The project design will be manually reviewed by each team member and classmates. The following checklist will be used:
 	\begin{todolist}
 		\item Does the system design allow for each functional and non functional requirement to be met?
@@ -188,9 +160,6 @@
 	\end{todolist}
 	
 	\subsection{Verification and Validation Plan Verification Plan}
-	% \wss{The verification and validation plan is an artifact that should also be verified.}
-	% \wss{The review will include reviews by your classmates}
-	% \wss{Create a checklists?}
 
 	The Verification and Validation Plan artifact will be read and reviewed by each team member according to the following checklist:
 	\begin{todolist}
@@ -204,13 +173,6 @@
 	GitHub issues left by other groups will be carefully considered and addressed.
 	
 	\subsection{Implementation Verification Plan}
-	
-	% \wss{You should at least point to the tests listed in this document and the unit
-	% 	testing plan.}
-	
-	% \wss{In this section you would also give any details of any plans for static verification of
-	% 	the implementation.  Potential techniques include code walkthroughs, code
-	% 	inspection, static analyzers, etc.}
 
 	Implementation Verification will be done according to the functional and non-functional tests listed in this document.
 	Code additions will be thoroughly reviewed by team members in feature branches before merging with the main branch.
@@ -219,46 +181,15 @@
 	\subsection{Automated Testing and Verification Tools}
 	
 	See Section 3.5 of Problem Statement.
-	% \wss{What tools are you using for automated testing.  Likely a unit testing
-	% 	framework and maybe a profiling tool, like ValGrind.  Other possible tools
-	% 	include a static analyzer, make, continuous integration tools, test coverage
-	% 	tools, etc.  Explain your plans for summarizing code coverage metrics.
-	% 	Linters are another important class of tools.  For the programming language
-	% 	you select, you should look at the available linters.  There may also be tools
-	% 	that verify that coding standards have been respected, like flake9 for
-	% 	Python.}
-	% \wss{If you have already done this in the development plan, you can point to
-	% 	that document.}
-	% \wss{The details of this section will likely evolve as you get closer to the
-	% 	implementation.}
 	
 	\subsection{Software Validation Plan}
-	% \wss{If there is any external data that can be used for validation, you should
-	% 	point to it here.  If there are no plans for validation, you should state that
-	% 	here.}
-	% \wss{You might want to use review sessions with the stakeholder to check that
-	% 	the requirements document captures the right requirements.  Maybe task based
-	% 	inspection?}
-	% \wss{This section might reference back to the SRS verification section.}
 	No external data will be used for validation. In addition to the SRS verification checklist, meetings will be held with stakeholders to ensure
 	requirements cover all desired tests.
 	\section{System Test Description}
 	
 	\subsection{Tests for Functional Requirements}
-	
-	% \wss{Subsets of the tests may be in related, so this section is divided into
-	% 	different areas.  If there are no identifiable subsets for the tests, this
-	% 	level of document structure can be removed.}
-	
-	% \wss{Include a blurb here to explain why the subsections below
-	% 	cover the requirements.  References to the SRS would be good here.}
 
 	The following tests correspond to functional requirements outlined in the SRS.
-	
-	% \wss{It would be nice to have a blurb here to explain why the subsections below
-	% 	cover the requirements.  References to the SRS would be good here.  If a section
-	% 	covers tests for input constraints, you should reference the data constraints
-	% 	table in the SRS.}
 	
 	\begin{enumerate}
 		
@@ -551,41 +482,17 @@
 	
 	\subsection{Tests for Nonfunctional Requirements}
 	
-	% \wss{The nonfunctional requirements for accuracy will likely just reference the
-	% 	appropriate functional tests from above.  The test cases should mention
-	% 	reporting the relative error for these tests.  Not all projects will
-	% 	necessarily have nonfunctional requirements related to accuracy}
-	
-	% \wss{Tests related to usability could include conducting a usability test and
-	% 	survey.  The survey will be in the Appendix.}
-	
-	% \wss{Static tests, review, inspections, and walkthroughs, will not follow the
-	% 	format for the tests given below.}
-	
 	\subsubsection{Look and Feel Testing}
 	
-	
 	\begin{enumerate}
-		
-		% \item{\textbf{test-id-1}}: TEMPLATE
-		
-		% Type: Functional, Dynamic, Manual, Static etc.
-		
-		% Initial State: 
-		
-		% Input/Condition: 
-		
-		% Output/Result: 
-		
-		% How test will be performed: 
-		
-		% Requirement(s):
 			
 		\item{\textbf{test-LF-1}}: Style
 
 		Type: Manual.
 		
 		Initial State: The application is running.
+		
+		Survey: [\ref{style-survey}]
 		
 		Input/Condition: A survey is conducted with various user interactions with the application. 
 		
@@ -594,9 +501,6 @@
 		How test will be performed: This test will be preformed by conducting a survey to determine if test users think that the products appearance is minimal and straight forward.
 		
 		Requirement(s): NFR1
-		
-		
-
 	
 	\subsubsection{Usability and Humanity Tests}
 		\item{\textbf{test-UH-1}}: Text Sizing and Visibility.
@@ -606,6 +510,8 @@
 		Initial State: The application is running.
 		
 		Input/Condition: Various application screens are shown to users of diverse demographics.
+		
+		Survey: [\ref{visibility-survey}]
 		
 		Output/Result: The survey results will give an indication for how visible application text is, and if any specific text needs adjustment.
 		
@@ -633,6 +539,8 @@
 		
 		Initial State: The application is running.
 		
+		Survey: [\ref{learnability-survey}]
+		
 		Input/Condition: The system is given to a group of users to use for a predetermined time period.
 		
 		Output/Result: The survey will give an indication of how easy or hard the system is to learn.
@@ -649,6 +557,8 @@
 		
 		Input/Condition: Various system outputs are shown to a group of users in a survey.
 		
+		Survey: [\ref{understandability-survey}]
+		
 		Output/Result: The survey will give an indication of how easy or hard system output is to understand.
 		
 		How test will be performed: Each user in the survey is shown various system outputs and asked how easy the outputs are to understand.
@@ -660,6 +570,8 @@
 		Type: Manual
 		
 		Initial State: The application is running.
+		
+		Survey: [\ref{sound-survey}]
 		
 		Input/Condition: Each system sound is played to a group of users in a survey.
 		
@@ -677,6 +589,8 @@
 		
 		Input/Condition: Users are shown images of various application views.
 		
+		Survey: [\ref{colour-survey}]
+		
 		Output/Result: The survey will give an indication of how visible application views are with respect to colour and contrast.
 		
 		How test will be performed: Users will be shown images of various application views in a survey and asked to judge the visibility based on colour and contrast.
@@ -685,7 +599,7 @@
 	\subsubsection{Performance Tests}
 		\item{\textbf{test-PF-1}}: Speed and Latency.
 		
-		Type: Dynamic
+		Type: Manual, Dynamic
 		
 		Initial State: Application will be running.
 		
@@ -699,7 +613,7 @@
 		
 		\item{\textbf{test-PF-2}}: Accuracy and Precision of Quantifiers.
 		
-		Type: Manual
+		Type: Manual, Dynamic
 		
 		Initial State: The application will be running and on the post search page.
 		
@@ -801,9 +715,9 @@
 		
 		Initial State: User is logged out (i.e. not authenticated and is forbidden from accessing account).
 		
-		Input: String parameter as password alongside corresponding account.
+		Input: On attempt 1, a password string that is registered, and on attempt 2, an unregistered password.
 		
-		Output: Assuming username exists - inputted password is tested against hashed version of actual user password. If verification is successful, user is logged in. 
+		Output: The inputted password is tested against hashed version of actual user password. For the valid case (attempt 1) - verification is successful and user is logged in. For the invalid case (attempt 2) - verification is unsuccessful and user is notified of unsuccessful login attempt.
 		
 		Test Case Derivation: The user is redirected to indicate a successful login. User is notified in the case of an unsuccessful login (e.g. wrong password).
 		
@@ -821,7 +735,7 @@
 		
 		Output: Server process authorization token. If authorized, server request will continue. If not, server returns 403 server error (forbidden).
 		
-		Test Case Derivation: Test authencation token against server token secret. 
+		Test Case Derivation: Test authentication token against server token secret. 
 		
 		How test will be performed: Extract authorization token from header. If header exists, run token verification function.
 	
@@ -833,7 +747,7 @@
 		
 		Initial State: Application is running 
 		
-		Input/Condition: A valid data entry for a workout routine or user is entered into the database.
+		Input/Condition: A valid data entry for a workout routine [\ref{WR-1-input}] is entered into the database.
 		
 		Output/Result: The entry is successfully added and there is a database recorded log of the interaction.
 		
@@ -896,7 +810,7 @@
 		
 		How test will be performed: The profile personalization process will be manually simulated, and an attempt will be made to specify a sample gender, age, and race.
 		
-		Requirement(s):NFR21
+		Requirement(s): NFR21
 		\item{\textbf{test-LR-2}}: Data Protection.
 		
 		Type: Static
@@ -905,16 +819,12 @@
 		
 		Input/Condition: N/A
 		
-		Output/Result: All usage and storage of user data is compliant with the Data Protection Act.
+		Output/Result: All usage and storage of user data is compliant with the Digital Privacy Act [\ref{digital-privacy-act}].
 		
 		How test will be performed: The logic used to store data will be analyzed to ensure that no user data is stored unlawfully or unfairly, data will be kept only as long as the user consents, and that no sensitive data is transferred across networks in an unencrypted state.
 		
 		Requirement(s): NFR22
 	\end{enumerate}
-	\subsection{Traceability Between Test Cases and Requirements}
-	
-	% \wss{Provide a table that shows which test cases are supporting which
-	% 	requirements.}
 	\newpage
 		\section{Traceability Matrices and Graphs}
 	
@@ -985,136 +895,9 @@
 		\label{Table:R_trace}
 	\end{adjustwidth}
 	\end{table}
-	\section{Unit Test Description}
-	
-	\wss{Reference your MIS (detailed design document) and explain your overall
-		philosophy for test case selection.}  
-	\wss{This section should not be filled in until after the MIS (detailed design
-		document) has been completed.}
-	
-	\subsection{Unit Testing Scope}
-	
-	\wss{What modules are outside of the scope.  If there are modules that are
-		developed by someone else, then you would say here if you aren't planning on
-		verifying them.  There may also be modules that are part of your software, but
-		have a lower priority for verification than others.  If this is the case,
-		explain your rationale for the ranking of module importance.}
-	
-	\subsection{Tests for Functional Requirements}
-	
-	\wss{Most of the verification will be through automated unit testing.  If
-		appropriate specific modules can be verified by a non-testing based
-		technique.  That can also be documented in this section.}
-	
-	\subsubsection{Module 1}
-	
-	\wss{Include a blurb here to explain why the subsections below cover the module.
-		References to the MIS would be good.  You will want tests from a black box
-		perspective and from a white box perspective.  Explain to the reader how the
-		tests were selected.}
-	
-	\begin{enumerate}
-		
-		\item{test-id1\\}
-		
-		Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-			be automatic}
-		
-		Initial State: 
-		
-		Input: 
-		
-		Output: \wss{The expected result for the given inputs}
-		
-		Test Case Derivation: \wss{Justify the expected value given in the Output field}
-		
-		How test will be performed: 
-		
-		\item{test-id2\\}
-		
-		Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-			be automatic}
-		
-		Initial State: 
-		
-		Input: 
-		
-		Output: \wss{The expected result for the given inputs}
-		
-		Test Case Derivation: \wss{Justify the expected value given in the Output field}
-		
-		How test will be performed: 
-		
-		\item{...\\}
-		
-	\end{enumerate}
-	
-	\subsubsection{Module 2}
-	
-	...
-	
-	\subsection{Tests for Nonfunctional Requirements}
-	
-	\wss{If there is a module that needs to be independently assessed for
-		performance, those test cases can go here.  In some projects, planning for
-		nonfunctional tests of units will not be that relevant.}
-	
-	\wss{These tests may involve collecting performance data from previously
-		mentioned functional tests.}
-	
-	\subsubsection{Module ?}
-	
-	\begin{enumerate}
-		
-		\item{test-id1\\}
-		
-		Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-			be automatic}
-		
-		Initial State: 
-		
-		Input/Condition: 
-		
-		Output/Result: 
-		
-		How test will be performed: 
-		
-		\item{test-id2\\}
-		
-		Type: Functional, Dynamic, Manual, Static etc.
-		
-		Initial State: 
-		
-		Input: 
-		
-		Output: 
-		
-		How test will be performed: 
-		
-	\end{enumerate}
-	
-	\subsubsection{Module ?}
-	
-	...
-	
-	\subsection{Traceability Between Test Cases and Modules}
-	
-	\wss{Provide evidence that all of the modules have been considered.}
-	
-	\bibliographystyle{plainnat}
-	
-	\bibliography{../../refs/References}
 	
 	\newpage
-	
 	\section{Appendix}
-	
-	This is where you can place additional information.
-	
-	\subsection{Symbolic Parameters}
-	
-	The definition of the test cases will call for SYMBOLIC\_CONSTANTS.
-	Their values are defined in this section for easy maintenance.
 	
 	\subsection{Test Inputs / Outputs}
 	\subsubsection{Workout Routine Input\label{WR-1-input}}
@@ -1146,8 +929,38 @@
 		\item Goal repetition count
 	\end{itemize}
 
+	\newpage
 	\subsection{Usability Survey Questions}
-	\wss{add surveys here}
+	The usability survey will be conducted by presenting a sample of at least 10 users with the mobile application, started from the home page. The users will then be asked to do their best to use the application naturally, using an unguided questionnaire technique. \\ \\
+	The users will be asked to attempt completing a set of tasks. After attempting each task, the user will be asked to rate the application on a scale of 1 - 10 in a set of usability categories.
+	
+	\subsubsection{Use of survey results}
+	The results of the survey will allow us to focus our development time into improving those areas of our application that users would most like to see improved. This can allow us to be efficient and precise with our improvements and targeted improvements.
+	
+	\subsubsection{Tasks}
+	\begin{enumerate}
+		\item Creating an account
+		\item Logging into an account
+		\item Creating a program
+		\item Creating a workout
+		\item Creating an exercise
+		\item Searching for an exercise
+		\item Using the discovery page to browse workouts and programs
+		\item Starting a workout
+	\end{enumerate}
+	
+	\subsubsection{Categories}
+	\begin{enumerate}
+		\item Overall style (simplicity, cleanliness, aesthetic) \label{style-survey}
+		\item Visibility of text and figures \label{visibility-survey}
+		\item Overall learnability \label{learnability-survey}
+		\item Overall understandability \label{understandability-survey}
+		\item Rating of how audible / pleasant system sounds are \label{sound-survey}
+		\item Colour visibility / contrast \label{colour-survey}
+	\end{enumerate}
+
+	\subsection{Digital Privacy Act} \label{digital-privacy-act}
+	Here is where readers may learn more about Canada's \href{https://laws-lois.justice.gc.ca/eng/annualstatutes/2015_32/FullText.html}{Digital Privacy Act}, which Olympian will be using to enforce digital privacy for its users.
 	
 	\newpage{}
 	\section*{Appendix --- Reflection}
@@ -1219,7 +1032,7 @@
 			\\Verdict: Matthew will use Approach 2 to learn about load testing because this will give a broad range of knowledge to complete many different types of mobile tests.
 			
 			\item Skill: \textbf{UI/UX Testing Knowledge}
-			\\Approach 1: Utilize user testing to determine if actual user experience is as intended. Tools such as surveys and questionaires can be used.
+			\\Approach 1: Utilize user testing to determine if actual user experience is as intended. Tools such as surveys and questionnaires can be used.
 			\\Approach 2: Use UI testing libraries learn how to verify and validate the system's UI components.
 			\\Verdict: Dimitri will use Approach 2 to ensure proper data and component states are being displayed correctly, and at correct times. 
 			
