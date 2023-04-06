@@ -32,8 +32,8 @@
 	urlcolor=cyan           % color of external links
 }
 
-\input{../Comments}
-\input{../Common}
+% \input{../Comments}
+% \input{../Common}
 
 % For easy change of table widths
 \newcommand{\colZwidth}{1.0\textwidth}
@@ -149,10 +149,34 @@
 \midrule
 October 1, 2022 & 1.0 & Volere template outline, Functional Requirements\\
 October 5, 2022 & 1.1 & Completed and submitted SRS document\\
+April 4, 2023 & 2.0 & Revision 1
 \bottomrule
 \end{tabularx}
 
 ~\newpage
+\section{Abbreviations and Acronyms}
+\begin{tabular}{l l} 
+	\toprule		
+	\textbf{symbol} & \textbf{description}\\
+	\midrule 
+	A & Assumption\\
+	API & Application Programming Interface\\
+	DD & Data Definition\\
+	% GD & General Definition\\
+	GS & Goal Statement\\
+	% IM & Instance Model\\
+	LC & Likely Change\\
+	NFR & Non-Functional Requirement\\
+	PS & Physical System Description\\
+	R & Requirement\\
+	SRS & Software Requirements Specification\\
+	%\progname{} & \plt{put an expanded version of your program name here (as
+		%	appropriate)}\\
+	T & Theoretical Model\\
+	UI & User Interface\\
+	UX & User Experience\\
+	\bottomrule
+\end{tabular}\\
 
 \section{Project Drivers}
 \subsection{The Purpose of the Project}
@@ -459,13 +483,13 @@ Description: The product shall be able to visually display fitness progress towa
 	\\ Fit Criterion: Application will increase understandability through the usage of text, symbols, and images.
 \end{itemize}
 \subsubsection{Accessibility Requirements}
-% \noindent \begin{itemize}
-% 	% \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-% 	% The product shall be usable by users with hearing loss or partial blindness.
-% 	% \\ Rationale: 
-% 	% \\ Fit Criterion: 
-% 	\item N/A
-% \end{itemize}
+\noindent \begin{itemize}
+	% \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+	% The product shall be usable by users with hearing loss or partial blindness.
+	% \\ Rationale: 
+	% \\ Fit Criterion: 
+	\item N/A
+\end{itemize}
 \noindent \begin{itemize}
 	\item[NFR\refstepcounter{nfrnum}\thenfrnum:]
 	The product shall make use of sufficiently contrasting colours.
@@ -534,9 +558,9 @@ Description: The product shall be able to visually display fitness progress towa
   \subsubsection{Requirements for Interfacing with Adjacent Systems}
     \noindent\begin{itemize}
       \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
-        The application shall operate on iOS and Android devices 
-		\\ Rationale: Users on i0S and Android devices will be able to utilize the application.
-		\\ Fit Criterion: The application will be completely tailored to i0S and Android devices.
+        The application shall operate on iOS devices 
+		\\ Rationale: Users on i0S devices will be able to utilize the application.
+		\\ Fit Criterion: The application will be completely tailored to i0S devices.
     \end{itemize}  
   \subsubsection{Productization Requirements}
     \noindent\begin{itemize}
@@ -765,31 +789,9 @@ Description: The product shall be able to visually display fitness progress towa
 	This section records information for easy reference.
 	
 	
-	\subsection{Abbreviations and Acronyms}
+	
 	
 	\renewcommand{\arraystretch}{1.2}
-	\begin{tabular}{l l} 
-		\toprule		
-		\textbf{symbol} & \textbf{description}\\
-		\midrule 
-		A & Assumption\\
-		API & Application Programming Interface\\
-		DD & Data Definition\\
-		% GD & General Definition\\
-		GS & Goal Statement\\
-		% IM & Instance Model\\
-		LC & Likely Change\\
-		NFR & Non-Functional Requirement\\
-		PS & Physical System Description\\
-		R & Requirement\\
-		SRS & Software Requirements Specification\\
-		%\progname{} & \plt{put an expanded version of your program name here (as
-		%	appropriate)}\\
-		T & Theoretical Model\\
-		UI & User Interface\\
-		UX & User Experience\\
-		\bottomrule
-	\end{tabular}\\
 	
 	\newpage{}
 	\section{Reflection Appendix}
