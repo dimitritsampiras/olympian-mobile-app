@@ -149,10 +149,34 @@
 \midrule
 October 1, 2022 & 1.0 & Volere template outline, Functional Requirements\\
 October 5, 2022 & 1.1 & Completed and submitted SRS document\\
+April 4, 2023 & 2.0 & Revision 1 \\
 \bottomrule
 \end{tabularx}
 
 ~\newpage
+\section{Abbreviations and Acronyms}
+\begin{tabular}{l l} 
+	\toprule		
+	\textbf{symbol} & \textbf{description}\\
+	\midrule 
+	A & Assumption\\
+	API & Application Programming Interface\\
+	DD & Data Definition\\
+	% GD & General Definition\\
+	GS & Goal Statement\\
+	% IM & Instance Model\\
+	LC & Likely Change\\
+	NFR & Non-Functional Requirement\\
+	PS & Physical System Description\\
+	R & Requirement\\
+	SRS & Software Requirements Specification\\
+	%\progname{} & \plt{put an expanded version of your program name here (as
+		%	appropriate)}\\
+	T & Theoretical Model\\
+	UI & User Interface\\
+	UX & User Experience\\
+	\bottomrule
+\end{tabular}\\
 
 \section{Project Drivers}
 \subsection{The Purpose of the Project}
@@ -165,6 +189,7 @@ October 5, 2022 & 1.1 & Completed and submitted SRS document\\
 	\item Personal Trainers - Olympian provides the ideal platform for trainers to share routines and goals with their clients.
 	\item Fitness Advertisers - One avenue of monetization that Olympian could take is running advertisements. Although these advertisements could fall into any category, the largest stakeholders will be Fitness Advertisers,
 	as the users of Olympian will be heavily involved with fitness, and thus most likely to buy fitness products.
+	\item Dr. Smith and Course Teaching Assistants - Dr. Smith and the course TAs (Teaching Assistants) are invested in the application in terms of tracking its progress and completion along with its scope and complexity.
 \end{enumerate} 
 
 \section{Project Constraints}
@@ -237,28 +262,31 @@ Below is a glossary of terms, acronyms and abbreviations used by stakeholders in
 	\item \textbf{Routine: } A routine (or workout routine) is composed of a sequence of exercises performed in order.
 \end{itemize}
 \subsection{Relevant Facts and Assumptions}
-N/A
+\begin{itemize}
+	\item Users understand how to operate a mobile device
+	\item Users are able to search for interests (cycling, weightlifting, cardio, etc.)
+\end{itemize}
 \section{Functional Requirements}
 \subsection{The Scope of the Work}
 \subsubsection{The Current Situation}
 N/A
 \subsubsection{The Context of the Work}
-N/A
+Refer to Figure 1 in ``System Design'' document for System Context Diagram
 \subsubsection{Work Partitioning}
 \begin{center}
 \begin{tabular}{ |p{5cm}|p{5cm}|p{5cm}| } 
  \hline
  \textbf{Event Name} & \textbf{Input and Output} & \textbf{Summary} \\ 
- Creating a Program  & Program Creation \(input\) & Finalizing all program creation inputs from user  \\ 
- Leaving a review on a user's post & Writing a review \(input\) & Commenting and proving a numeric value for program value \\
- Searching for a Program & Program Search \(input\) & Searching and browsing for a specific program or type of program based on search parameters  \\ 
+ Creating a Program  & Program Creation including Program Name (string), Program Tags, Program Viewing (public, private, friends) \(input\) & Finalizing all program creation inputs from user  \\ 
+ %Leaving a review on a user's post & Writing a review  \(input\) & Commenting and proving a numeric value for program value \\
+ Searching for a Program & Program name string/Program type string/Program creator string \(input\) & Searching and browsing for a specific program or type of program based on search parameters  \\ 
  Sorting search results & Results sorted and displayed \(output\) & Sorting search results in a relevant way that is useful to the user \\ 
- Adding performed sets and reps for exercise & Entering rep and set information \(input\) & Tracking workout information by adding sets and reps performed during exercise \\ 
- Registering an account & Creating a new account \(input\) & This creates a new user and appends it to the database \\ 
+ Adding performed sets and reps for exercise & Entering rep and set information as integers \(input\) & Tracking workout information by adding sets and reps performed during exercise \\ 
+ Registering an account & Creating a new account with user's name, user's email, user's username, and user's password \(input\) & This creates a new user and appends it to the database \\ 
  Adding program to profile  & Appending a program to personal profile \(input\) & Users can add programs they find to their profiles to use a later time or immediately \\ 
- Logging into account & Entering account information \(input\) & This authenticates and authorizes the user to access their account  \\ 
+ Logging into account & Entering username and password as strings \(input\) & This authenticates and authorizes the user to access their account  \\ 
  Providing users with suggested programs and workouts & Generating and displaying programs and workouts tailored to individual users \(output\) & Using specific algorithms that find programs that suit the users needs \\ 
- Providing user with statistics & Generating and displaying statistics \(output\) & This will show users statistics they wouldn't otherwise know about. \\ 
+ %Providing user with statistics & Generating and displaying statistics \(output\) & This will show users statistics they wouldn't otherwise know about. \\ 
  \hline
 \end{tabular}
 \end{center}
@@ -266,7 +294,7 @@ N/A
 N/A
 \subsection{The Scope of the Product}
 \subsubsection{Product Boundary}
-N/A
+The application will allow users to create workout programs, follow other users, and track workouts.
 \subsubsection{Use cases}
 
 \begin{itemize}
@@ -364,7 +392,7 @@ Description: The product shall allow a user to browse and search for workout rou
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
 Description: The system should allow a user to create a profile, with a username between 1 and 25 characters.
 \\ Rationale: To display social, informational content to other users.
-\\ Fit Criterion: The user is able to create a profile.
+\\ Fit Criterion: The user is able to create a profile. If the user does not meet the character requirements or includes symbols or characters that aren't allowed they will be informed of the username requirements through a text output.
 
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
@@ -379,7 +407,7 @@ Description: The system shall allow the user to create and view a goal in the fo
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]
 Description: The system shall allow the user to create progress points towards a specific goal.
-A progress point must be associated with a one specific goal, and must exist as a date metric pair. For example, ``09/04/22 - 96kg" under a ``Bench Press - 100kg" goal. The metric type must match the goal metric type, for example kg.
+A progress point must be associated with a specific goal, and must exist as a date metric pair. For example, ``09/04/22 - 96kg" under a ``Bench Press - 100kg" goal. The metric type must match the goal metric type, for example kg.
 \\ Rationale: Being able to track progress towards set goals can help encourage more progression until the goal is reached.
 \\ Fit Criterion: The user is able to create progress points towards specific goals.
 
@@ -420,57 +448,82 @@ Description: The product shall be able to visually display fitness progress towa
 \subsubsection{Style Requirements}
 \noindent \begin{itemize}
 	\item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-	The product shall be appear minimal and straightforward.
+	The product shall be minimalistic in appearance.
+	\\ Rationale:  Users will have an easier time learning how to utilize the app. The minimalistic look will aid users in navigating the app effectively.
+	\\ Fit Criterion: The application shouldn't contain more than five clashing colours on one page. The application shouldn't contain large amounts of text scattered throughout pages (text should be coheisve and grouped).
 \end{itemize}
 \subsection{Usability and Humanity Requirements}
 \subsubsection{Ease of Use Requirements}
 \noindent \begin{itemize}
 	\item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-	The product shall use fonts of readable size to the target user group.
+	The product shall use fonts of readable size (no less than size 12) to the target user group.
+	\\ Rationale: Users will have an easier time navigating the application and reading instructions/information displayed.
+	\\ Fit Criterion: Application will utilize at minimum fonts of size 12.
 \end{itemize}
 \subsubsection{Personalization and Internationalization Requirements}
 \noindent \begin{itemize}
-	\item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-	The product shall allow the user to select a chosen language.
+%	\item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+%	The product shall allow the user to select a chosen language.
+%	\\ Rationale: 
+%	\\ Fit Criterion: 
+	\item N/A
 \end{itemize}
 \subsubsection{Learning Requirements}
 \noindent \begin{itemize}
 	\item[NFR\refstepcounter{nfrnum}\thenfrnum:]
 	The product shall be able to be used by untrained fitness enthusiasts and amateurs alike, who receive no training before using it.
+	\\ Rationale: Users of differing athletic backgrounds will be able to utilize the app for their required purposes.
+	\\ Fit Criterion: Application will ensure a small learning curve, enforced by the minimalistic look and provided text prompts.
 \end{itemize}
 \subsubsection{Understandability and Politeness Requirements}
 \noindent \begin{itemize}
 	\item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-	The product shall use symbols and pictures to provide users with an intuitive and efficient experience.
+	The product shall use symbols, text, and picture prompts and instructions to provide users with an intuitive and efficient experience.
+	\\ Rationale: Users will be able to follow text prompts and images to navigate the application for their required purposes. 
+	\\ Fit Criterion: Application will increase understandability through the usage of text, symbols, and images.
 \end{itemize}
 \subsubsection{Accessibility Requirements}
 \noindent \begin{itemize}
-	\item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-	The product shall be usable by users with hearing loss or partial blindness.
+	% \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+	% The product shall be usable by users with hearing loss or partial blindness.
+	% \\ Rationale: 
+	% \\ Fit Criterion: 
+	\item N/A
 \end{itemize}
 \noindent \begin{itemize}
 	\item[NFR\refstepcounter{nfrnum}\thenfrnum:]
 	The product shall make use of sufficiently contrasting colours.
+	\\ Rationale: Contrasting colours will make it easier to navigate through the application and identify different pages and prompts.
+	\\ Fit Criterion: Applicaiton will utilize colours that are easily distinguishable from one another.
 \end{itemize}
 \subsection{Performance Requirements}
   \subsubsection{Speed and Latency Requirements}
     \noindent\begin{itemize}
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
-        Users shall be able to input or update a program within 10 seconds.
+    %   \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
+    %     Users shall be able to input or update a program within 10 seconds.
+	% 	\\ Rationale: 
+	% 	\\ Fit Criterion: 
+		\item N/A
     \end{itemize}
   \subsubsection{Safety-Critical Requirements}
     \noindent\begin{itemize}
-      \item NA
+      \item N/A
     \end{itemize}
   \subsubsection{Precision or Accuracy Requirements}
     \noindent\begin{itemize}
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
-        The average of the ratings per post shall be accurate to 2 decimal places.
+    %   \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
+    %     The average of the ratings per post shall be accurate to 2 decimal places.
+	% 	\\ Rationale: 
+	% 	\\ Fit Criterion: 
+		\item N/A
     \end{itemize}
   \subsubsection{Reliability and Availability Requirements}
     \noindent\begin{itemize}
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
-        The application shall achieve a 95 percent uptime.
+    %   \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
+    %     The application shall achieve a 95 percent uptime.
+	% 	\\ Rationale: 
+	% 	\\ Fit Criterion: 
+		\item N/A
     \end{itemize}
   \subsubsection{Robustness or Fault-Tolerance Requirements}
     \noindent\begin{itemize}
@@ -478,13 +531,19 @@ Description: The product shall be able to visually display fitness progress towa
     \end{itemize}
   \subsubsection{Capacity Requirements}
     \noindent\begin{itemize}
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
-        The application shall support 100 simultaneous users per hour. 
+    %   \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
+    %     The application shall support 100 simultaneous users per hour. 
+	% 	\\ Rationale: 
+	% 	\\ Fit Criterion: 
+		\item N/A
     \end{itemize}
   \subsubsection{Scalability or Extensibility Requirements}
     \noindent\begin{itemize}
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
-        The application should be able to support 1000 users per hour within a year of its creation.
+    %   \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
+    %     The application should be able to support 1000 users per hour within a year of its creation.
+	% 	\\ Rationale: 
+	% 	\\ Fit Criterion: 
+		\item N/A
     \end{itemize}
   \subsubsection{Longevity Requirements}
     \noindent\begin{itemize}
@@ -499,7 +558,9 @@ Description: The product shall be able to visually display fitness progress towa
   \subsubsection{Requirements for Interfacing with Adjacent Systems}
     \noindent\begin{itemize}
       \item[NFR\refstepcounter{nfrnum}\thenfrnum:] 
-        The application shall operate on iOS devices and Android devices.
+        The application shall operate on iOS devices 
+		\\ Rationale: Users on i0S devices will be able to utilize the application.
+		\\ Fit Criterion: The application will be completely tailored to i0S devices.
     \end{itemize}  
   \subsubsection{Productization Requirements}
     \noindent\begin{itemize}
@@ -513,8 +574,11 @@ Description: The product shall be able to visually display fitness progress towa
 \subsection{Maintainability and Support Requirements}
   \subsubsection{Maintenance Requirements}
     \noindent \begin{itemize}
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-        The application must inform users when maintenance is taking place and must warn them at least 1 day in advance. 
+    %   \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+    %     The application must inform users when maintenance is taking place and must warn them at least 1 day in advance. 
+	% 	\\ Rationale: 
+	% 	\\ Fit Criterion: 
+		\item N/A
     \end{itemize}
   \subsubsection{Supportability Requirements}
     \noindent \begin{itemize}
@@ -530,23 +594,33 @@ Description: The product shall be able to visually display fitness progress towa
     \noindent \begin{itemize}
       \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
         The application must not display other users private details to the user.
+		\\ Rationale: Private user information such as the account password must be kept private to prevent account hacking.
+		\\ Fit Criterion: Application will not display sensitive user information to other users.
     \end{itemize}
   \subsubsection{Integrity Requirements}
     \noindent \begin{itemize}
       \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
        Passwords must be encrypted with SHA-256 when stored.
+	   \\ Rationale: Passwords must be encrypted to ensure they are not easily hackable or discoverable.
+	   \\ Fit Criterion: Passwords will be encrypted when they are stored in the database. 
     \end{itemize}
 
   \subsubsection{Privacy Requirements}
     \noindent \begin{itemize}
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-        The application must use OAuth protocols to verify communication between the client and server.
+    %   \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+    %     The application must use OAuth protocols to verify communication between the client and server.
+	% 	\\ Rationale: 
+	% 	\\ Fit Criterion: 
+		\item N/A
     \end{itemize}
 
   \subsubsection{Audit Requirements}
     \noindent \begin{itemize}
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-        Data will be stored in a secure database. When data is deleted or edited a record of this data will be kept for up to 30 days.
+    %   \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+    %     Data will be stored in a secure database. When data is deleted or edited a record of this data will be kept for up to 30 days.
+	% 	\\ Rationale: 
+	% 	\\ Fit Criterion: 
+		\item N/A
     \end{itemize}
   \subsubsection{Immunity Requirements}
     \noindent \begin{itemize}
@@ -558,22 +632,34 @@ Description: The product shall be able to visually display fitness progress towa
 \subsection{Cultural Requirements}
   \subsubsection{Cultural Market Requirements}
     \noindent \begin{itemize}
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-        The application will filter out profanities and flag repeat offenders for suspension.
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-        The application will allow users to report offensive content and remove it from their feed.
+    %   \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+        % The application will filter out profanities and flag repeat offenders for suspension.
+		% \\ Rationale: 
+		% \\ Fit Criterion: 
+		
+    %   \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+    %     The application will allow users to report offensive content and remove it from their feed.
+	% 	\\ Rationale: 
+	% 	\\ Fit Criterion: 
+		\item N/A
     \end{itemize}
   \subsubsection{Cultural Diversity and Inclusion Requirements}
     \noindent \begin{itemize}
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-        Users can optionally specify their gender, age, and race. Gender and age will be used to cater the content for individuals feeds.
+    %   \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+    %     Users can optionally specify their gender, age, and race. Gender and age will be used to cater the content for individuals feeds.
+	% 	\\ Rationale: 
+	% 	\\ Fit Criterion: 
+		\item N/A
     \end{itemize}
 
 \subsection{Legal Requirements}
   \subsubsection{Legal Compliance Requirements}
     \noindent \begin{itemize}
-      \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
-        The use of data will comply with the Data Protection Act.
+    %   \item[NFR\refstepcounter{nfrnum}\thenfrnum:]
+    %     The use of data will comply with the Data Protection Act.
+	% 	\\ Rationale: 
+	% 	\\ Fit Criterion: 
+		\item N/A
     \end{itemize}
   \subsubsection{Standards Compliance Requirements}
     \noindent \begin{itemize}
@@ -587,17 +673,11 @@ Description: The product shall be able to visually display fitness progress towa
 			\hline
 			& R1 & R2 & R3 & R4 & R5 & R6 & R7 & R8 & R9 & R10 & R11 \\ \hline
 			NFR4 &X & & & & & & & & & & \\ \hline
-			NFR8 &X &X &X & & & & & & & & \\ \hline
-			NFR9 & & & & & & &X & & & & \\ \hline % 6
-			NFR10 & & & & & & &X &X & & & \\ \hline % 7,8
-			NFR11 & & & & & & &X &X & & &\\ \hline % 7,8
-			NFR12 & & & & & & &X &X & & & \\ \hline % 7,8
-			NFR13 &X & & & & &X &X & & & & \\ \hline % 1,7,8
-			NFR18 &X & & & &X & &X & &X &X &X \\ \hline % 11,10,9,7,5,1
-			NFR20 & & & & & &X & &X & & & \\ \hline % 6,8
-			NFR22 &X & & & &X & &X & &X &X &X \\ \hline % 11,10,9,7,5,1	
+			NFR7 & & & & & & & &X & & & \\ \hline
+			NFR8 & & & & & & &X & & & & \\ \hline
+			
 		\end{tabular}
-		\caption{NonFunctional to Functional Requirement Dependency Matrix}
+		\caption{Non-Functional to Functional Requirement Dependency Matrix}
 		\label{Table:R_trace}
 	\end{table}
 
@@ -659,7 +739,7 @@ Description: The product shall be able to visually display fitness progress towa
 				\end{itemize}
 		
 		\subsection{New Problems}
-			Not applicable.
+			N/A
 		\subsection{Tasks}
 			\begin{itemize}
 			\item Determine which technologies will be used for the creation of this project (frontend framework, server language).
@@ -685,7 +765,7 @@ Description: The product shall be able to visually display fitness progress towa
 			\item The cost of an Individual Developer Account needed to host all apps on the Apple App Store. This will cost USD\$99.
 			\end{itemize}
 		\subsection{User Documentation and Training}
-			N/A
+			A user guide will be provided so that users are able to understand the intricacies of the application and how to navigate it.
 		\subsection{Waiting Room}
 			\begin{itemize}
 			\item The product must allow users to track their diet information and recommend diets based on calory intake.
@@ -703,27 +783,9 @@ Description: The product shall be able to visually display fitness progress towa
 	This section records information for easy reference.
 	
 	
-	\subsection{Abbreviations and Acronyms}
+	
 	
 	\renewcommand{\arraystretch}{1.2}
-	\begin{tabular}{l l} 
-		\toprule		
-		\textbf{symbol} & \textbf{description}\\
-		\midrule 
-		A & Assumption\\
-		DD & Data Definition\\
-		GD & General Definition\\
-		GS & Goal Statement\\
-		IM & Instance Model\\
-		LC & Likely Change\\
-		PS & Physical System Description\\
-		R & Requirement\\
-		SRS & Software Requirements Specification\\
-		%\progname{} & \plt{put an expanded version of your program name here (as
-		%	appropriate)}\\
-		T & Theoretical Model\\
-		\bottomrule
-	\end{tabular}\\
 	
 	\newpage{}
 	\section{Reflection Appendix}
