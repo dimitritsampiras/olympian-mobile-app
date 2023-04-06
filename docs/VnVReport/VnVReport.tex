@@ -271,7 +271,8 @@ Some example questions included: \\
 \noindent As for the non-user tests, user tests were preformed in order to measure metrics based on the application performance.
 Ratings given were on a 5 point scale.
 
-\noindent The summary of the test cases are displayed below:
+\noindent The summary of the test cases are displayed below.\\
+Each test includes the outcome of our user testing and a unique identifier connecting these results to the tests outlined in the VnV Plan.\\
 
 \subsection{Look and Feel Testing}
 \begin{enumerate}
@@ -372,16 +373,16 @@ Ratings given were on a 5 point scale.
 	\textbf{Test result}: Did not utilize a testing framework.
 	
 	\item{\textbf{test-PF-2}}: Accuracy and Precision of Quantifiers.\\
-	\textbf{Test result}: Success.
+	\textbf{Test result}: Passed.
 	
 	\item{\textbf{test-PF-3}}: Availability and Uptime.\\
-	\textbf{Test result}: Success.
+	\textbf{Test result}: Passed.
 	
 	\item{\textbf{test-PF-4}}: User Capacity.\\
-	\textbf{Test result}: Success.
+	\textbf{Test result}: Passed.
 	
 	\item{\textbf{test-PF-5}}: Scalability of User Capacity.\\
-	\textbf{Test result}: Success.
+	\textbf{Test result}: Passed.
 	
 \subsubsection{Operational and Environment Tests}
 	\item{\textbf{test-OE-1}}: Supported Systems.\\
@@ -582,9 +583,14 @@ graduate attribute of Lifelong Learning.  Please answer the following questions:
 	
 	\item \textbf{Answer}
 	
-	The VnV plan differed from the actual activities that were performed in many ways, most notably the user testing. During user testing some actions that were a part of the test plan e.g. create a workout, the user may not know where to go. This seemed to be from a lack of software to user communications but this caused some of the testing to be performed a little differently. Occasionally we as testers would have to step in and assist the user (which is not what we wanted) to help them out.
+	The VnV plan differed from the actual activities that were performed in many ways, most notably the user testing. We underestimated the amount of knowledge that our application actually conveyed to the user. This oversight was likely due to the common pitfall of failing to explain details that the developers were very familiar with. As a result, testers often had to direct users and answer questions regarding the performance of specific tasks, that were otherwise meant to be unguided. Knowing the application lacked intuitive flow was valuable information, sparked further revisions to the UX.
 	 
-	In the VnV plan we stated that we would conduct surveys on some of the 'Aesthetics' of the design, however this was very tedious to do as a tester so we ended up asking the individuals we tested on about the look and feel of the application. As for looking at modifications towards the VnV plan and future plans, we should focus on the feasibility of what we say we are going to do vs what will actually be done. To give our team the benefit of the doubt there were many midterms and course work load build ups during this time that we did not anticipate for as well. Another way we deviated from the VnV plan was that large data-management testing is very difficult and takes some time. We were not able to complete certain tests such as data backups due to the complexity that this requires. 
+	In the VnV plan we stated that we would conduct surveys on some of the 'Aesthetics' of the design, however this was very tedious to do as a tester so we ended up asking the individuals we tested on about the look and feel of the application. Another way we deviated from the VnV plan was that large data-management testing is very difficult and takes some time. We were not able to complete certain tests such as data backups due to the complexity that this requires.
+	
+	To improve future verification and validation, more user testing can be done. Opinions of people are subjective, and often vary wildly. In order to be convinced that given functionality meets criteria on effectiveness, ease of use etc, a significant number of data points (in the form of user tests) are required.
+	
+	 One of the major lessons learned was that verification and validation takes time. It is easy to fall into the trap of thinking something you wrote should work and function as intended, but this is hardly ever the case over the scope of an entire project. Deviations from the VnV Plan in the form of shortcuts could be avoided with better planning and time allocation.
+	
 \end{enumerate}
 
 \newpage{}
