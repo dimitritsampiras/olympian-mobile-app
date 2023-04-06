@@ -1,9 +1,14 @@
 \documentclass{article}
 
+\usepackage{fullpage}
+\usepackage[round]{natbib}
+\usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{tabularx}
+\usepackage{graphicx}
 \usepackage{float}
 \usepackage{hyperref}
+\usepackage{array}
 
 \input{../Comments}
 \input{../Common}
@@ -113,12 +118,12 @@ In a WSL terminal in the src/athena folder, run:
     \end{verbatim}
 
 Wait for a QR code to appear in the terminal. Scan the QR code using the Expo application and wait for the app to bundle and open.\\
-For first time users, the app will open to the Sign Up Screen shown in Figure \ref{Fig1}:
+For first time users, the app will open to the Landing Screen shown in Figure \ref{FigLanding}:
 \begin{figure}[H]
     \centering
-    % \includegraphics[width=1.1\textwidth,height=0.6\textwidth]{SignUpScreen.png}
-    \caption{Sign Up Screen}
-    \label{Fig1}
+    \includegraphics[height=0.6\textwidth]{imgs/Landing.jpg}
+    \caption{Landing Screen}
+    \label{FigLanding}
     \end{figure}
 
 
@@ -126,7 +131,7 @@ For first time users, the app will open to the Sign Up Screen shown in Figure \r
 
 \subsubsection{Sign Up}
 
-From the screen shown in Figure \ref{Fig1} users will enter their name, email, and intended username and password. If any of these details do not meet our criteria the user will be informed of the error and prevent from progressing.\\
+From the screen shown in Figure \ref{FigLanding} users will enter their name, email, and intended username and password. If any of these details do not meet our criteria the user will be informed of the error and prevent from progressing.\\
 After entering all information then a new user is created in the database and the user is redirected to the Log In Screen.
 
 \subsubsection{Login}
@@ -135,7 +140,7 @@ Users must enter in the information of a user that exists within the database in
 
 \begin{figure}[H]
     \centering
-    % \includegraphics[width=1.1\textwidth,height=0.6\textwidth]{HomeScreen.png}
+    \includegraphics[height=0.6\textwidth]{imgs/LastWorkout.jpg}
     \caption{Home Screen}
     \label{FigHomeScreen}
     \end{figure}
@@ -148,7 +153,7 @@ When on the program screen as shown in \ref{FigProgramScreen} users can select w
 
 \begin{figure}[H]
     \centering
-    % \includegraphics[width=1.1\textwidth,height=0.6\textwidth]{ProgramScreen.png}
+    \includegraphics[height=0.6\textwidth]{imgs/Programs.jpg}
     \caption{Program Screen}
     \label{FigProgramScreen}
     \end{figure}
@@ -159,7 +164,7 @@ After pressing 'Add Workout' users will be taken to the 'Edit Workout' page as s
 
 \begin{figure}[H]
     \centering
-    % \includegraphics[width=1.1\textwidth,height=0.6\textwidth]{EditWorkout.png}
+    \includegraphics[height=0.6\textwidth]{imgs/ActiveWorkout.jpg}
     \caption{Edit Workout Screen}
     \label{FigEditWorkout}
     \end{figure}
@@ -170,7 +175,7 @@ When on the Add Exercise Page, users can select from a list of common exercises 
 
 \begin{figure}[H]
     \centering
-    % \includegraphics[width=1.1\textwidth,height=0.6\textwidth]{AddExercises.png}
+    \includegraphics[height=0.6\textwidth]{imgs/SetExercise.jpg}
     \caption{Add Exercises Screen}
     \label{FigAddExercises}
     \end{figure}
@@ -189,7 +194,7 @@ From the home page, press the Avatar Icon on the bottom tab bar to visit the Pro
 
 \begin{figure}[H]
     \centering
-    % \includegraphics[width=1.1\textwidth,height=0.6\textwidth]{ProfileScreen.png}
+    \includegraphics[height=0.6\textwidth]{imgs/Profile.jpg}
     \caption{Profile Screen}
     \label{FigProfile}
     \end{figure}
@@ -200,7 +205,7 @@ From the Profile Page, users can tap the "Goals" button to be redirected to the 
 
 \begin{figure}[H]
     \centering
-    % \includegraphics[width=1.1\textwidth,height=0.6\textwidth]{GoalsScreen.png}
+    \includegraphics[height=0.6\textwidth]{imgs/Goals2.jpg}
     \caption{Goals Screen}
     \label{FigGoals}
     \end{figure}
@@ -221,6 +226,5 @@ Once on a users profile they can request to follow them.\\
 \subsubsection{Start a Workout}
 
 Users can start their workout by navigating to the Workout page as shown in Figure \ref{FigEditWorkout} and tapping the big blue play button. Once a workout is started, users can use the miniplayer at the bottom of the screen to progress their workout and check off completed exercises.
-
 
 \end{document}
