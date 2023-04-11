@@ -24,4 +24,5 @@ export const BROWSE_CATGEORIES: Record<TrainingType, TrainingTypeTuple> = {
   hiit: ['cyan', '26F9'],
   wellness: ['green', '26F9'],
   stretching: ['amber', '26F9'],
+  pilates: ['green', '26F8'],
 };
