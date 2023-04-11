@@ -8,17 +8,21 @@ import { Text, TouchableOpacity, View, TextInput } from 'react-native';
 import theme from '../../../theme';
 import { useSetGoalMutation } from '../../../lib/graphql';
 import { UserContext } from '../../../lib/context';
+import { Input } from '../../elements/Input';
+import { Formik } from 'formik';
+import { values } from 'lodash';
+import { ArrowPathIcon, CubeIcon } from 'react-native-heroicons/solid';
 
 interface SetGoalProps extends NativeStackScreenProps<ProfileParamList, 'SetGoal'> {
 }
 
 export const SetGoal: React.FC<SetGoalProps> = ({ navigation, route }) => {
 
-  const { profileId, staticExerciseId, staticExerciseName} = route.params
+  const { profileId, staticExerciseId, staticExerciseName } = route.params
   const [setGoal] = useSetGoalMutation();
-  const handleSetGoal = () => {
-    setGoal({ variables: { profileId, staticExerciseId, reps: 5, weight: 215 } });
-    navigation.navigate('Goals',{profileId})
+  const handleSetGoal = (values: { weight: string, reps: string }) => {
+    setGoal({ variables: { profileId, staticExerciseId, reps: parseInt(values.reps), weight: parseInt(values.weight) } });
+    navigation.navigate('Goals', { profileId })
   };
 
   return (
@@ -26,50 +30,40 @@ export const SetGoal: React.FC<SetGoalProps> = ({ navigation, route }) => {
       <Header navigation={navigation}>
         <Heading as="h2">Set Goal</Heading>
       </Header>
-      <SubHeading>Choose the Weight and Reps to work towards for {staticExerciseName}:</SubHeading>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-around',
-          alignItems: 'center',
-          width: '100%',
-          borderRadius: 16,
-        }}>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <TextInput
-            keyboardType="numeric"
-            maxLength={3}
-            style={{
-              backgroundColor: theme.colors.gray[100],
-              padding: 6,
-              width: 50,
-              borderRadius: 4,
-              textAlign: 'right',
-              marginRight: 8,
-            }}
-          />
-          <Text>lbs</Text>
-        </View>
-        <Text>x</Text>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <TextInput
-            keyboardType="numeric"
-            maxLength={2}
-            style={{
-              backgroundColor: theme.colors.gray[100],
-              padding: 6,
-              width: 50,
-              borderRadius: 4,
-              textAlign: 'right',
-              marginRight: 8,
-            }}
-          />
-          <Text>reps</Text>
-        </View>
-      </View>
-      <Button style={{ marginTop: 100 }} variant="flat" colorScheme="info" onPress={handleSetGoal}>
-        Add Goal
-      </Button>
-    </ScreenView>
+      <SubHeading>Set a goal for {staticExerciseName}:</SubHeading>
+      <Formik initialValues={{ weight: '', reps: '' }} onSubmit={handleSetGoal}>
+        {({ handleSubmit, handleChange, values }) => {
+          return (
+            <>
+              <Text style={{ marginBottom: 10 }}>Weight (lbs):</Text>
+              <Input
+                style={{ marginBottom: 24 }}
+                placeholder="Enter target weight in lbs"
+                onChangeText={handleChange('weight')}
+                value={values.weight.toString()
+                }
+                Icon={CubeIcon}
+              >
+
+              </Input>
+              <Text style={{ marginBottom: 10 }}>Repetitions:</Text>
+              <Input
+                onChangeText={handleChange('reps')}
+                placeholder="Enter target repetitions"
+                value={values.reps.toString()
+                }
+                Icon={ArrowPathIcon}
+              >
+
+              </Input>
+              <Button style={{ marginTop: 40 }} variant="flat" colorScheme="primary" onPress={handleSubmit as () => void}>
+                Add Goal
+              </Button>
+            </>)
+        }}
+
+      </Formik>
+
+    </ScreenView >
   );
 };
