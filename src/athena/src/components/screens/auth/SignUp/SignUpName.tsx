@@ -38,11 +38,9 @@ export const SignUpName: React.FC<SignUpNameProps> = () => {
             <View style={styles.container}>
               <View style={styles.innerContainer}>
                 {/* Sample SVG to be replaced with the actual torch once we have it*/}
-                <TorchLogo width={56} height={82}></TorchLogo>
-                <Heading noMargin style={{ textAlign: 'center' }}>
-                  Sign Up
-                </Heading>
-                <BodyText style={{ textAlign: 'center' }}>
+                {/* <TorchLogo width={56} height={82}></TorchLogo> */}
+                <Heading style={{ textAlign: 'left' }}>Sign Up</Heading>
+                <BodyText style={{ marginBottom: 45 }}>
                   {"Why don't you start by telling us your name? This won't be displayed publicly."}
                 </BodyText>
                 <Input
@@ -88,7 +86,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    // alignItems: 'center',
     width: '100%',
     height: '100%',
   },
@@ -96,8 +94,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    height: '50%',
+    // alignItems: 'center',
     width: '100%',
   },
   nameField: {
@@ -115,6 +112,7 @@ const styles = StyleSheet.create({
   errorMessageStyle: {
     fontSize: 14,
     color: 'red',
+    marginTop: 14,
     // Fix the lineHeight to prevent bumping when the text comes in
     lineHeight: 13,
   },

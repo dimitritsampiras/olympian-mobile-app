@@ -54,7 +54,6 @@ export const SignUpPassword: React.FC<SignUpPasswordProps> = ({ navigation }) =>
       // No need to update state with password before submission
       password: values.password,
     };
-    console.log(`Creating user: ${signUpCreds}`);
 
     await signup({ variables: { input: signUpCreds as SignUpInput } });
     navigation.navigate('Login');
@@ -71,12 +70,9 @@ export const SignUpPassword: React.FC<SignUpPasswordProps> = ({ navigation }) =>
             <View style={styles.container}>
               <View style={styles.innerContainer}>
                 {/* Sample SVG to be replaced with the actual torch once we have it*/}
-                <TorchLogo width={56} height={82} fill={'black'}></TorchLogo>
-                <Heading noMargin style={{ textAlign: 'center' }}>
-                  Password...Shhh
-                </Heading>
-                <BodyText style={{ textAlign: 'center' }}>
-                  {"Enter a strong password. Don't worry, you can recover it if you forget."}
+                <Heading>Password</Heading>
+                <BodyText>
+                  Enter a strong password. Don't worry, you can recover it if you forget.
                 </BodyText>
                 <Input
                   placeholder="password"
@@ -153,14 +149,13 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    height: '60%',
     width: '100%',
   },
   passwordField: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
+    // display: 'flex',
+    // flexDirection: 'row',
+    // alignItems: 'center',
+    marginTop: 22,
   },
   footer: {
     display: 'flex',

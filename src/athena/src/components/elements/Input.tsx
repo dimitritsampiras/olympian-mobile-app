@@ -31,6 +31,9 @@ const SHIFT_DISTANCE = 6;
 const BASE_COLOR = theme.colors.gray[50];
 const FOCUSED_COLOR = theme.colors.gray[100];
 
+const BASE_COLOR_ERROR = theme.colors.rose[100];
+const FOCUSED_COLOR_ERROR = theme.colors.rose[200];
+
 export const Input: React.FC<InputProps> = ({
   style,
   placeholder,
@@ -80,13 +83,21 @@ export const Input: React.FC<InputProps> = ({
     ),
   }));
 
+  const errorBackgroundColor = useAnimatedStyle(() => ({
+    backgroundColor: interpolateColor(
+      translationX.value,
+      [0, SHIFT_DISTANCE],
+      [BASE_COLOR_ERROR, FOCUSED_COLOR_ERROR]
+    ),
+  }));
+
   const placeholderStyle = useAnimatedStyle(() => ({
     opacity: interpolate(translationX.value, [0, SHIFT_DISTANCE / 2], [1, 0]),
   }));
 
   return (
     <Pressable style={[styles.pressble, style]} onPress={handlePress}>
-      <Animated.View style={[styles.outerView, fadeBackgroundColor]}>
+      <Animated.View style={[styles.outerView, fadeBackgroundColor, error && errorBackgroundColor]}>
         <Animated.View
           style={[
             styles.innerView,

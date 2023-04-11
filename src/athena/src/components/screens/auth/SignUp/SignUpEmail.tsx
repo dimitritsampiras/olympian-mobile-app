@@ -44,13 +44,9 @@ export const SignUpEmail: React.FC<SignUpEmailProps> = () => {
             <View style={styles.container}>
               <View style={styles.innerContainer}>
                 {/* Sample SVG to be replaced with the actual torch once we have it*/}
-                <TorchLogo width={56} height={82} fill={'black'}></TorchLogo>
-                <Heading noMargin style={{ textAlign: 'center' }}>
-                  {' '}
-                  Hello, {signUpInput.name}{' '}
-                </Heading>
-                <BodyText style={{ textAlign: 'center' }}>
-                  {' '}
+                {/* <TorchLogo width={56} height={82} fill={'black'}></TorchLogo> */}
+                <Heading> Hello, {signUpInput.name} </Heading>
+                <BodyText style={{ marginBottom: 24 }}>
                   Please enter your email address, just in case you forget your password.{' '}
                 </BodyText>
                 <Input
@@ -98,7 +94,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    // alignItems: 'center',
     width: '100%',
     height: '100%',
   },
@@ -106,8 +102,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    height: '50%',
+    // alignItems: 'center',
     width: '100%',
   },
   emailField: {
@@ -125,6 +120,7 @@ const styles = StyleSheet.create({
   errorMessageStyle: {
     fontSize: 14,
     color: 'red',
+    marginBottom: 14,
     // Fix the lineHeight to prevent bumping when the text comes in
     lineHeight: 13,
   },
