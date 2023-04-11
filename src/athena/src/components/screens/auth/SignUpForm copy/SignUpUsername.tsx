@@ -8,35 +8,49 @@ import TorchLogo from '../../../../../assets/TorchLogo.svg';
 import { PageControl } from 'react-native-ui-lib';
 import { object, string } from 'yup';
 import { SignUpInput } from '../../../../lib/graphql';
-import { AtSymbolIcon } from 'react-native-heroicons/solid';
-import { useEmailExistsLazyQuery } from '../../../../lib/graphql';
+import { UserCircleIcon } from 'react-native-heroicons/solid';
+import { useUserExistsLazyQuery } from '../../../../lib/graphql';
 import { Heading } from '../../../elements/typography/Heading';
 import { BodyText } from '../../../elements/typography/BodyText';
 import { SignUpContext } from '../../../../lib/context';
-import { SignUpFormProps } from './SignUp';
 
-export const SignUpEmail: React.FC<SignUpFormProps> = () => {
-  const { signUpInput, setSignUpInput, step, setStep } = useContext(SignUpContext);
-  const [findemail] = useEmailExistsLazyQuery();
-  const maxLength = 32;
-  const emailSchema = object({
-    email: string()
-      .required('Cannot have an empty email address.')
-      .email('Please enter a valid email address.')
+interface SignUpUsernameProps {
+  handleChange: {
+    (e: React.ChangeEvent<unknown>): void;
+    <T = string | React.ChangeEvent<unknown>>(field: T): T extends React.ChangeEvent<any>
+      ? void
+      : (e: string | React.ChangeEvent<unknown>) => void;
+  };
+}
+
+export const SignUpUsername: React.FC<SignUpUsernameProps> = () => {
+  const [findusername] = useUserExistsLazyQuery();
+  const { setSignUpInput, step, setStep } = useContext(SignUpContext);
+  const maxLength = 16;
+  const usernameSchema = object({
+    username: string()
+      .required('Cannot have an empty username.')
+      .matches(
+        /^[a-zA-Z0-9_]+$/,
+        'Username can only be composed of letters, numbers, and underscores.'
+      )
       .max(maxLength, `Please enter a maximum of ${maxLength} characters.`)
-      .test('', 'Email is already used on another account.', async (email) => {
-        const { data } = await findemail({ variables: { email: email || '' } });
-        return !data?.emailExists;
+      .test('', 'Username is already in use.', async (username) => {
+        const { data } = await findusername({ variables: { username: username || '' } });
+        return !data?.usernameExists;
       }),
   });
 
   const handleOnNext = (values: Partial<SignUpInput>) => {
-    setSignUpInput((previousValues) => ({ ...previousValues, email: values.email }));
+    setSignUpInput((previousValues) => ({ ...previousValues, username: values.username }));
     setStep(step + Number(step + 1 < 4));
   };
 
   return (
-    <Formik initialValues={{ email: '' }} onSubmit={handleOnNext} validationSchema={emailSchema}>
+    <Formik
+      initialValues={{ username: '' }}
+      onSubmit={handleOnNext}
+      validationSchema={usernameSchema}>
       {({ handleSubmit, handleChange, values, errors, touched }) => {
         return (
           <>
@@ -45,30 +59,27 @@ export const SignUpEmail: React.FC<SignUpFormProps> = () => {
                 {/* Sample SVG to be replaced with the actual torch once we have it*/}
                 <TorchLogo width={56} height={82} fill={'black'}></TorchLogo>
                 <Heading noMargin style={{ textAlign: 'center' }}>
-                  {' '}
-                  Hello, {signUpInput.name}{' '}
+                  Username Time
                 </Heading>
                 <BodyText style={{ textAlign: 'center' }}>
-                  {' '}
-                  Please enter your email address, just in case you forget your password.{' '}
+                  This will be the name you display publicly. Make it uniquely yours!
                 </BodyText>
+
                 <Input
-                  placeholder="email"
-                  value={values.email}
-                  onChangeText={handleChange('email')}
+                  placeholder="username"
+                  value={values.username}
+                  onChangeText={handleChange('username')}
                   autoCorrect={false}
                   autoCapitalize="none"
-                  error={touched.email && !!errors.email}
-                  style={styles.emailField}
-                  Icon={AtSymbolIcon}
+                  error={touched.username && !!errors.username}
+                  style={styles.usernameField}
+                  Icon={UserCircleIcon}
                   iconProps={{
                     size: 20,
-                    fill: touched.email && !!errors.email ? 'red' : theme.colors.gray[400],
+                    fill: touched.username && !!errors.username ? 'red' : theme.colors.gray[400],
                   }}
                 />
-                <Text style={styles.errorMessageStyle}>
-                  {(touched.email && errors.email) || ''}
-                </Text>
+                <Text style={styles.errorMessageStyle}>{touched.username && errors.username}</Text>
               </View>
               <View style={styles.footer}>
                 <PageControl
@@ -109,7 +120,7 @@ const styles = StyleSheet.create({
     height: '50%',
     width: '100%',
   },
-  emailField: {
+  usernameField: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
