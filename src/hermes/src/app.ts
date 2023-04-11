@@ -2,6 +2,7 @@ import { PrismaClient } from '@prisma/client';
 import express from 'express';
 
 import config from './config';
+import { seedStaticExercises } from './database/seedStaticExercises';
 import { createApolloServer } from './server/createServer';
 
 const prisma = new PrismaClient();
@@ -26,6 +27,7 @@ const main = async () => {
 
   server.applyMiddleware({ app });
 
+  //seedStaticExercises(prisma)
   app.listen({ port: config.port }, () => {
     console.log(`🚀 Server ready at port http://localhost:${config.port}${server.graphqlPath}`);
   });

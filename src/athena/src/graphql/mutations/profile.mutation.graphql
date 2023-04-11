@@ -9,3 +9,9 @@ mutation Follow($profileId: String!) {
    ...Profile 
   }
 }
+
+mutation SetGoal($profileId: String!, $staticExerciseId: String!, $reps: Int!, $weight: Int!) {
+  setGoal(profileId: $profileId, staticExerciseId: $staticExerciseId, reps: $reps, weight: $weight){
+    id
+  }
+}

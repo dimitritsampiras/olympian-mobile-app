@@ -58,6 +58,16 @@ enum Gender {
   male
 }
 
+type Goal {
+  id: ID!
+  profile: Profile!
+  profileId: String!
+  reps: Int!
+  staticExercise: StaticExercise!
+  staticExerciseId: String!
+  weight: Int!
+}
+
 input LoginInput {
   password: String!
   username: String!
@@ -116,6 +126,7 @@ type Mutation {
   finishWorkout(performedWorkoutId: String!): PerformedWorkout
   follow(profileId: String!): Profile
   login(input: LoginInput!): String
+  setGoal(profileId: String!, reps: Int!, staticExerciseId: String!, weight: Int!): Goal
   signup(input: SignUpInput!): Boolean
   startWorkout(workoutId: String!): PerformedWorkout
   unfollow(profileId: String!): Profile
@@ -165,7 +176,7 @@ type Profile {
   followedBy: [Profile!]!
   following: [Profile!]!
   gender: Gender
-  goals: [TrainingType!]!
+  goals: [Goal!]!
   height: Int
   id: ID!
   name: String!
@@ -215,6 +226,7 @@ type Query {
   myFollowersCount: Int!
   myFollows: [Profile!]!
   myFollowsCount: Int!
+  myGoals(profileId: String!): [Goal!]!
   myProfile: Profile
   performedWorkoutFromId(id: String!): PerformedWorkout
   popularPrograms(skip: Int!, take: Int!, trainingType: [TrainingType!]): [Program!]!
@@ -252,6 +264,7 @@ type StaticExercise {
   equipment: Equipment
   exercise: [Exercise!]!
   id: ID!
+  inGoals: [Goal!]!
   movement: Movement!
   name: String!
   primaryTargetMuscle: Muscle!

@@ -148,6 +148,7 @@ export const StaticExerciseType = objectType({
     t.field(StaticExercise.secondaryTargetMuscle);
     t.field(StaticExercise.tertiaryTargetMuscle);
     t.field(StaticExercise.updatedAt);
+    t.field(StaticExercise.inGoals)
   },
 });
 

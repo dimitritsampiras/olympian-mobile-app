@@ -13,11 +13,9 @@ import { SetGoal } from '../screens/profile/SetGoal';
 
 export type ProfileParamList = {
   MyProfile: undefined;
-  Goals: undefined;
-  // Choose the exercise
-  NewGoal: undefined;
-  // Set the reps & units
-  SetGoal: undefined;
+  Goals: {profileId: string};
+  NewGoal: {profileId: string};
+  SetGoal: {profileId : string, staticExerciseId : string, staticExerciseName: string};
   Socials: undefined;
   Activity: undefined;
   Account: undefined;
