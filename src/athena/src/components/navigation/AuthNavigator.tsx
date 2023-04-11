@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { LandingPage } from '../screens/auth/LandingPage';
 import { Login } from '../screens/auth/Login';
 
-import { SignUp } from '../screens/auth/SignUpForm/SignUp';
+import { SignUp } from '../screens/auth/SignUp/SignUp';
 import { TabNavigator } from './TabNavigator';
 import { UserContext } from '../../lib/context';
 

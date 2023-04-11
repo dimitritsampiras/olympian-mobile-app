@@ -8,67 +8,58 @@ import TorchLogo from '../../../../../assets/TorchLogo.svg';
 import { PageControl } from 'react-native-ui-lib';
 import { object, string } from 'yup';
 import { SignUpInput } from '../../../../lib/graphql';
-import { AtSymbolIcon } from 'react-native-heroicons/solid';
-import { useEmailExistsLazyQuery } from '../../../../lib/graphql';
+import { UserIcon } from 'react-native-heroicons/solid';
 import { Heading } from '../../../elements/typography/Heading';
 import { BodyText } from '../../../elements/typography/BodyText';
 import { SignUpContext } from '../../../../lib/context';
-import { SignUpFormProps } from './SignUp';
+interface SignUpNameProps {}
 
-export const SignUpEmail: React.FC<SignUpFormProps> = () => {
-  const { signUpInput, setSignUpInput, step, setStep } = useContext(SignUpContext);
-  const [findemail] = useEmailExistsLazyQuery();
-  const maxLength = 32;
-  const emailSchema = object({
-    email: string()
-      .required('Cannot have an empty email address.')
-      .email('Please enter a valid email address.')
-      .max(maxLength, `Please enter a maximum of ${maxLength} characters.`)
-      .test('', 'Email is already used on another account.', async (email) => {
-        const { data } = await findemail({ variables: { email: email || '' } });
-        return !data?.emailExists;
-      }),
+export const SignUpName: React.FC<SignUpNameProps> = () => {
+  const { setSignUpInput, step, setStep } = useContext(SignUpContext);
+  const maxLength = 16;
+  const nameSchema = object({
+    // We may opt to make this optional in the future.
+    name: string()
+      .required('Cannot have an empty name.')
+      .matches(/^[a-zA-Z]+$/, 'Name must only be composed of letters.')
+      .max(maxLength, `Please enter a maximum of ${maxLength} characters.`),
   });
 
   const handleOnNext = (values: Partial<SignUpInput>) => {
-    setSignUpInput((previousValues) => ({ ...previousValues, email: values.email }));
-    setStep(step + Number(step + 1 < 4));
+    setSignUpInput((previousValues) => ({ ...previousValues, name: values.name }));
+    setStep(step + Number(step < 4));
   };
 
   return (
-    <Formik initialValues={{ email: '' }} onSubmit={handleOnNext} validationSchema={emailSchema}>
+    <Formik initialValues={{ name: '' }} onSubmit={handleOnNext} validationSchema={nameSchema}>
       {({ handleSubmit, handleChange, values, errors, touched }) => {
         return (
           <>
             <View style={styles.container}>
               <View style={styles.innerContainer}>
                 {/* Sample SVG to be replaced with the actual torch once we have it*/}
-                <TorchLogo width={56} height={82} fill={'black'}></TorchLogo>
+                <TorchLogo width={56} height={82}></TorchLogo>
                 <Heading noMargin style={{ textAlign: 'center' }}>
-                  {' '}
-                  Hello, {signUpInput.name}{' '}
+                  Sign Up
                 </Heading>
                 <BodyText style={{ textAlign: 'center' }}>
-                  {' '}
-                  Please enter your email address, just in case you forget your password.{' '}
+                  {"Why don't you start by telling us your name? This won't be displayed publicly."}
                 </BodyText>
                 <Input
-                  placeholder="email"
-                  value={values.email}
-                  onChangeText={handleChange('email')}
+                  placeholder="name"
+                  value={values.name}
+                  onChangeText={handleChange('name')}
                   autoCorrect={false}
-                  autoCapitalize="none"
-                  error={touched.email && !!errors.email}
-                  style={styles.emailField}
-                  Icon={AtSymbolIcon}
+                  autoCapitalize="words"
+                  error={touched.name && !!errors.name}
+                  style={styles.nameField}
+                  Icon={UserIcon}
                   iconProps={{
                     size: 20,
-                    fill: touched.email && !!errors.email ? 'red' : theme.colors.gray[400],
+                    fill: touched.name && !!errors.name ? 'red' : theme.colors.gray[400],
                   }}
                 />
-                <Text style={styles.errorMessageStyle}>
-                  {(touched.email && errors.email) || ''}
-                </Text>
+                <Text style={styles.errorMessageStyle}>{touched.name && errors.name}</Text>
               </View>
               <View style={styles.footer}>
                 <PageControl
@@ -109,7 +100,7 @@ const styles = StyleSheet.create({
     height: '50%',
     width: '100%',
   },
-  emailField: {
+  nameField: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
