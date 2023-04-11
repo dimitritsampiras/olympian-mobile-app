@@ -9,7 +9,6 @@ import {
   ArrowLeftOnRectangleIcon,
   UsersIcon,
   ClockIcon,
-  ChartBarIcon,
   ChevronRightIcon,
   UserCircleIcon,
   TrophyIcon,
@@ -56,8 +55,6 @@ export const MyProfile: React.FC<ProfileProps> = ({ navigation }) => {
   const isFocused = useIsFocused();
   const { user, refetch } = useContext(UserContext);
   const { data: profileData, refetch: refetchProfile } = useMyProfileQuery();
-  const profileInitialsDefaultColor =
-    profileData?.myProfile?.profileInitialsDefaultColor || '#000000';
 
   const { data: followersCount, refetch: fsRefetch } = useMyFollowersCountQuery();
   const { data: followCount, refetch: fRefetch } = useMyFollowsCountQuery();
@@ -80,7 +77,7 @@ export const MyProfile: React.FC<ProfileProps> = ({ navigation }) => {
       <Header style={{ flexDirection: 'row', marginBottom: 20 }}>
         <Avatar
           size={60}
-          backgroundColor={profileInitialsDefaultColor}
+          backgroundColor={profileData?.myProfile?.defaultColor || '#e2d1d1'}
           name={user?.profile?.name}
         />
         <View style={{ marginLeft: 14, paddingVertical: 10 }}>

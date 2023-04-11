@@ -4,6 +4,8 @@ import express from 'express';
 import config from './config';
 
 import { createApolloServer } from './server/createServer';
+import { seedUsers } from './database/seedUsers';
+import { seedStaticExercises } from './database/seedStaticExercises';
 
 const prisma = new PrismaClient();
 
@@ -21,6 +23,8 @@ const main = async () => {
 
   // needed by apollo server
   await server.start();
+
+  // await seedStaticExercises(prisma);
 
   server.applyMiddleware({ app });
 

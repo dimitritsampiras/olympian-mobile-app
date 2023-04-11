@@ -8,7 +8,7 @@ interface ProfileNameProps {
   profile: {
     name: ProfileFragment['name'];
     username: ProfileFragment['username'];
-    profileInitialsDefaultColor: ProfileFragment['profileInitialsDefaultColor'];
+    defaultColor: ProfileFragment['defaultColor'];
   };
   onPress?: () => void;
 }
@@ -19,7 +19,7 @@ export const ProfileName: React.FC<ProfileNameProps> = ({ profile, onPress }) =>
       style={{ flexDirection: 'row', alignItems: 'center' }}
       disabled={!onPress}
       onPress={onPress}>
-      <Avatar size={24} name={profile.name} backgroundColor={profile.profileInitialsDefaultColor} />
+      <Avatar size={24} name={profile.name} backgroundColor={profile.defaultColor} />
       <Text
         style={{
           marginLeft: 4,

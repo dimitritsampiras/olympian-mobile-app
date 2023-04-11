@@ -50,7 +50,7 @@ export const FollowingList: React.FC<FollowingListProps> = ({ navigation }) => {
               <Avatar
                 size={34}
                 name={follower.name}
-                backgroundColor={follower.profileInitialsDefaultColor}
+                backgroundColor={follower.defaultColor}
                 containerStyle={{ marginRight: 12 }}
               />
               <View>

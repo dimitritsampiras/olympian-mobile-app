@@ -12,6 +12,17 @@ const users: Prisma.UserCreateInput[] = [
       },
     },
   },
+  {
+    email: 'adonis.tsampiras@gmail.com',
+    password: 'test',
+    profile: {
+      create: {
+        name: 'Adonis',
+        username: 'adonis123',
+        defaultColor: '#ffe4e6',
+      },
+    },
+  },
 ];
 
 export const seedUsers = async (prisma: PrismaClient) => {

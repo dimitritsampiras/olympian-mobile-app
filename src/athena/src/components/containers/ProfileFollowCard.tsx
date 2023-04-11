@@ -13,7 +13,7 @@ interface ProfileFollowCardProps {
         name: string;
         username: string;
         followedBy: { id: string }[];
-        profileInitialsDefaultColor: string;
+        defaultColor: string;
       };
   styles?: ViewProps['style'];
   onPress?: () => void;
@@ -24,7 +24,7 @@ export const ProfileFollowCard: React.FC<ProfileFollowCardProps> = ({ profile, o
     <TouchableOpacity style={styles.followProfile} onPress={onPress}>
       <View style={{ flexDirection: 'row' }}>
         <Avatar
-          backgroundColor={profile.profileInitialsDefaultColor}
+          backgroundColor={profile.defaultColor}
           size={34}
           name={profile.name}
           containerStyle={{ marginRight: 12 }}
