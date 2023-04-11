@@ -34,6 +34,7 @@ const FOCUSED_COLOR = theme.colors.gray[100];
 export const Input: React.FC<InputProps> = ({
   style,
   placeholder,
+  error,
   Icon,
   iconProps = { size: '18', fill: theme.colors.gray[400] },
   ...props
@@ -50,6 +51,8 @@ export const Input: React.FC<InputProps> = ({
       mass: 1,
     });
   };
+
+  console.log('error', error);
 
   const handleBlur = () => {
     // Haptics.selectionAsync();

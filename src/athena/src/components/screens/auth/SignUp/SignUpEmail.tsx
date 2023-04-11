@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { useContext } from 'react';
-import { SignUpContext } from './SignUp';
 import { Input } from '../../../elements/Input';
 import theme from '../../../../theme';
 import { Formik } from 'formik';
@@ -13,6 +12,7 @@ import { AtSymbolIcon } from 'react-native-heroicons/solid';
 import { useEmailExistsLazyQuery } from '../../../../lib/graphql';
 import { Heading } from '../../../elements/typography/Heading';
 import { BodyText } from '../../../elements/typography/BodyText';
+import { SignUpContext } from '../../../../lib/context';
 
 interface SignUpEmailProps {}
 

@@ -91,23 +91,11 @@ export const SignUp: React.FC<SignUpProps> = ({ navigation, route }) => {
               <BodyText style={{ width: 300 }}>{PAGES[step]?.description}</BodyText>
             </Header>
 
-            <Formik
-              initialValues={signUpInput}
-              onSubmit={handleOnNext}
-              validationSchema={nameSchema}>
-              {({ handleSubmit, handleChange, values, errors, touched }) => (
-                <Swiper index={step} disableScrollViewPanResponder>
-                  {PAGES.map(({ page: Page }, i) => (
-                    <Page
-                      handleChange={handleChange}
-                      navigation={navigation}
-                      route={route}
-                      key={i}
-                    />
-                  ))}
-                </Swiper>
-              )}
-            </Formik>
+            <Swiper index={step} pagingEnabled={true} showsPagination={false} loop={false}>
+              {PAGES.map(({ page: Page }, i) => (
+                <Page navigation={navigation} route={route} key={i} />
+              ))}
+            </Swiper>
           </>
         </Pressable>
 
